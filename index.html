@@ -166,7 +166,7 @@
   <div class="app">
     <div class="hero">
       <h1 class="title">Greenroom Fantasy Drag Race Simulator</h1>
-      <p class="subtitle">Release v1.1 - Last Updated 10/4/26.</p>
+      <p class="subtitle">Release v1.1.1 - Last Updated 11/4/26.</p>
     </div>
 
     <section id="setupView" class="panel">
@@ -364,8 +364,8 @@
 
     function getMiniChallenge(epNum, remaining) {
       if (Math.random() > 0.7) return { none: true };
+      
       let pool = miniChallenges.filter(c => !state.usedMinis.includes(c.name));
-      if (pool.length === 0) pool = miniChallenges;
       
       const isLate = remaining <= 6;
       const isEarly = epNum <= 2;
@@ -375,7 +375,14 @@
         if (c.req === "early" && !isEarly) return false;
         return true;
       });
+      
+      // Fallback 1: If no valid timing challenges, use remaining "none" challenges
       if (!valid.length) valid = pool.filter(c => c.req === "none");
+      
+      // Fallback 2: If we've used ALL "none" challenges (longer seasons), reuse all "none" challenges
+      if (!valid.length) {
+        valid = miniChallenges.filter(c => c.req === "none");
+      }
       
       const chosen = pick(valid);
       state.usedMinis.push(chosen.name);
