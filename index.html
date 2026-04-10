@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drag Race Simulator</title>
+  <style>
+    :root {
+      --bg: #eefbe7;
+      --card: #ffffff;
+      --card-2: #f8fff3;
+      --ink: #20311f;
+      --muted: #61705e;
+      --lime: #9be564;
+      --lime-2: #c5f29b;
+      --lime-3: #e8ffd8;
+      --border: #d8efc9;
+      --shadow: 0 12px 34px rgba(76, 110, 50, 0.12);
+      --danger: #ef6b6b;
+      --gold: #d7b45a;
+      --low: #f2c95d;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(180deg, #f4ffe9 0%, var(--bg) 100%);
+      color: var(--ink);
+    }
+
+    .app { max-width: 1320px; margin: 0 auto; padding: 24px; }
+
+    .hero {
+      background: linear-gradient(135deg, #f7fff0, #e6ffd0);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .title { margin: 0 0 6px; font-size: clamp(28px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.03em; }
+    .subtitle { margin: 0; color: var(--muted); max-width: 900px; }
+
+    .panel {
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-header { padding: 18px 20px; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, #fafff5, #f2ffe7); }
+    .panel-header h2, .panel-header h3 { margin: 0; font-size: 22px; }
+    .panel-header .meta { margin-top: 6px; color: var(--muted); font-size: 14px; }
+    .panel-body { padding: 20px; }
+    .hidden { display: none !important; }
+
+    .setup-layout { display: grid; grid-template-columns: minmax(320px, 420px) 1fr; gap: 16px; align-items: start; }
+    @media (max-width: 900px) { .setup-layout { grid-template-columns: 1fr; } }
+
+    .control-panel, .preview-panel, .section-card, .track-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 14px; box-shadow: 0 6px 18px rgba(76, 110, 50, 0.07);
+    }
+
+    .control-panel { position: sticky; top: 18px; }
+    .panel-title { margin: 0 0 10px; font-size: 18px; font-weight: 800; }
+    .subtle { color: var(--muted); font-size: 13px; line-height: 1.45; margin: 0 0 14px; }
+
+    .form-grid { display: grid; gap: 10px; }
+    .field { display: grid; gap: 6px; font-size: 12px; color: var(--muted); }
+    .field input { width: 100%; border: 1px solid var(--border); border-radius: 12px; padding: 10px 11px; font-size: 14px; background: #fbfff8; color: var(--ink); outline: none; }
+    .stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+
+    .button-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    button {
+      border: none; border-radius: 16px; padding: 12px 16px; font-size: 15px; font-weight: 700; cursor: pointer; transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease; box-shadow: 0 8px 18px rgba(80, 125, 48, 0.16);
+    }
+    button:hover { transform: translateY(-1px); }
+    button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+    .primary { background: linear-gradient(180deg, var(--lime), #76d939); color: #14380e; }
+    .secondary { background: #ffffff; color: var(--ink); border: 1px solid var(--border); box-shadow: none; }
+    .danger { background: linear-gradient(180deg, #ffb3b3, #ff8e8e); color: #5a1010; }
+    .ghost { background: transparent; border: 1px solid var(--border); box-shadow: none; color: var(--ink); }
+
+    .note-box { margin-top: 12px; padding: 10px 12px; border-radius: 14px; background: #f8fff3; border: 1px dashed var(--border); color: var(--muted); font-size: 13px; line-height: 1.5; }
+
+    .cast-topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+    .pill { display: inline-flex; align-items: center; border-radius: 999px; padding: 6px 10px; border: 1px solid var(--border); background: #f9fff5; font-size: 12px; color: var(--muted); }
+
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+    .right-side-empty { padding: 18px; border-radius: 18px; border: 1px dashed var(--border); background: #fbfff7; color: var(--muted); text-align: center; min-height: 160px; display: grid; place-items: center; }
+
+    .queen-card { background: var(--card-2); border: 1px solid var(--border); border-radius: 18px; padding: 12px; box-shadow: 0 6px 14px rgba(76, 110, 50, 0.06); }
+    .queen-card .topline { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .queen-name { font-weight: 900; font-size: 16px; margin: 0; line-height: 1.2; }
+    .queen-mini { font-size: 12px; color: var(--muted); line-height: 1.4; }
+    .tiny-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-start; margin-top: 12px; }
+
+    input[type="file"] { display: none; }
+
+    .phase-wrap { display: grid; gap: 14px; }
+    .label-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+    .screen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+
+    .section-card h4 { margin: 0 0 8px; font-size: 16px; }
+    .list { display: grid; gap: 8px; }
+    .item { display: flex; justify-content: space-between; gap: 10px; padding: 10px 12px; border-radius: 14px; background: var(--card-2); border: 1px solid var(--border); font-size: 14px; }
+    .item strong { font-weight: 800; }
+
+    /* Updated track record styling user requested */
+    .item.win { background: #0a53a8; color: white; }
+    .item.high { background: #bfe1f6; color: black; }
+    .item.safe { background: #ffffff; color: black; }
+    .item.low { background: #ffaea4; color: black; }
+    .item.btm { background: #d30000; color: black; }
+    .item.elim { background: #883131; color: white; }
+    .item.win strong, .item.elim strong { color: white; }
+
+    .big-message { font-size: clamp(20px, 2.6vw, 28px); font-weight: 900; letter-spacing: -0.03em; margin: 0 0 8px; }
+    .muted { color: var(--muted); margin: 0; }
+    .center-text { text-align: center; }
+
+    .footer-actions { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-top: 16px; flex-wrap: wrap; }
+    .note { font-size: 13px; color: var(--muted); line-height: 1.45; }
+    .winner-crown { display: inline-block; margin-left: 6px; font-size: 18px; }
+
+    .champion-banner { padding: 18px; border-radius: 22px; border: 1px solid var(--border); background: linear-gradient(135deg, #f7ffe8, #efffd9); box-shadow: var(--shadow); }
+
+    /* Track Record Spreadsheet Styles */
+    .track-table-container { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); margin-top: 10px; }
+    .tr-table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: center; background: var(--card); }
+    .tr-table th, .tr-table td { border: 1px solid var(--border); padding: 10px 6px; white-space: nowrap; }
+    .tr-table th { background: #f2ffe7; font-weight: 800; color: var(--ink); }
+    .tr-name { text-align: left; font-weight: 800; min-width: 120px; }
+    
+    .pl-WIN { background-color: #0a53a8 !important; color: white !important; font-weight: 900; }
+    .pl-HIGH { background-color: #bfe1f6 !important; color: black !important; font-weight: 700; }
+    .pl-SAFE { background-color: #ffffff !important; color: black !important; }
+    .pl-LOW { background-color: #ffaea4 !important; color: black !important; font-weight: 700; }
+    .pl-BTM2 { background-color: #d30000 !important; color: black !important; font-weight: 900; }
+    .pl-ELIM { background-color: #883131 !important; color: white !important; font-weight: 900; }
+    .pl-WINNER { background-color: #f1c232 !important; color: black !important; font-weight: 900; }
+    .pl-RUNNER_UP { background-color: #c3c3c3 !important; color: black !important; font-weight: 900; }
+
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="hero">
+      <h1 class="title">Drag Race Simulator</h1>
+      <p class="subtitle">Simple, clean, one-screen-at-a-time season play. Enter 10–14 queens, run the episodes, and crown a winner at Top 4.</p>
+    </div>
+
+    <section id="setupView" class="panel">
+      <div class="panel-header">
+        <h2>Cast Setup</h2>
+        <div class="meta">Create your cast manually or import from JSON.</div>
+      </div>
+      <div class="panel-body">
+        <div class="setup-layout">
+          <div class="control-panel">
+            <div class="panel-title">Control Panel</div>
+            <p class="subtle">Create one queen at a time, or load a full cast. Minimum cast size is 10 queens.</p>
+
+            <div class="form-grid">
+              <label class="field">
+                Input Queen Name
+                <input id="queenNameInput" type="text" placeholder="Coral" />
+              </label>
+
+              <div class="stat-grid">
+                <label class="field">Comedy<input id="comedyInput" type="number" min="1" max="10" value="5" /></label>
+                <label class="field">Design<input id="designInput" type="number" min="1" max="10" value="5" /></label>
+                <label class="field">Performance<input id="performanceInput" type="number" min="1" max="10" value="5" /></label>
+                <label class="field">Acting<input id="actingInput" type="number" min="1" max="10" value="5" /></label>
+                <label class="field">Lip Sync<input id="lipSyncInput" type="number" min="1" max="10" value="5" /></label>
+              </div>
+
+              <div class="button-row">
+                <button id="randomizeQueenBtn" class="secondary">Randomize</button>
+                <button id="addQueenBtn" class="primary">Add Queen</button>
+              </div>
+
+              <div class="button-row">
+                <label for="importCastInput" class="secondary" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer; padding:12px 16px; border-radius:16px; border:1px solid var(--border); background:#fff; font-weight:700;">
+                  Import Cast JSON
+                </label>
+                <input id="importCastInput" type="file" accept="application/json" />
+                <button id="exportCastBtn" class="ghost">Export Cast JSON</button>
+              </div>
+
+              <button id="startBtn" class="primary" disabled>Start Season</button>
+            </div>
+          </div>
+
+          <div class="preview-panel">
+            <div class="cast-topbar">
+              <div>
+                <div class="panel-title" style="margin-bottom:4px;">Cast Preview</div>
+                <div class="subtle" id="castCountText">0 queens added</div>
+              </div>
+            </div>
+            <div id="castPreview" class="cards-grid"></div>
+            <div id="castEmptyState" class="right-side-empty">No queens added yet.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gameView" class="panel hidden" style="margin-top:18px;">
+      <div class="panel-header">
+        <h2 id="gameHeader">Episode</h2>
+        <div id="gameMeta" class="meta"></div>
+      </div>
+      <div class="panel-body">
+        <div id="gameContent" class="phase-wrap"></div>
+        <div class="footer-actions">
+          <div id="phaseHint" class="note"></div>
+          <button id="nextPhaseBtn" class="primary">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="finaleView" class="panel hidden" style="margin-top:18px;">
+      <div class="panel-header">
+        <h2>Top 4 Finale</h2>
+        <div id="finaleMeta" class="meta"></div>
+      </div>
+      <div class="panel-body">
+        <div id="finaleContent" class="phase-wrap"></div>
+        <div class="footer-actions">
+          <div id="finaleHint" class="note"></div>
+          <button id="finaleBtn" class="primary">Next</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const MIN_CAST = 10;
+    const MAX_CAST = 14;
+
+    const miniChallengeNames = ["Reading Mini Challenge", "Balloon Pop Relay", "Quick Drag Bracket", "Photoshoot Sprint", "Mascara Memory Game", "Runway Dash", "Snatch the Crown"];
+    const challengeTypes = ["Acting", "Comedy", "Dance", "Improv"];
+    const lipSongs = ["A fierce pop anthem", "A camp classic", "A heartbreak power ballad", "A high-energy club banger", "A dramatic diva mix"];
+
+    const state = {
+      mode: "setup",
+      queens: [],
+      episodeNumber: 0,
+      phase: 0,
+      episodeData: null,
+      finaleData: null,
+    };
+
+    const el = {
+      setupView: document.getElementById("setupView"),
+      gameView: document.getElementById("gameView"),
+      finaleView: document.getElementById("finaleView"),
+      queenNameInput: document.getElementById("queenNameInput"),
+      comedyInput: document.getElementById("comedyInput"),
+      designInput: document.getElementById("designInput"),
+      performanceInput: document.getElementById("performanceInput"),
+      actingInput: document.getElementById("actingInput"),
+      lipSyncInput: document.getElementById("lipSyncInput"),
+      randomizeQueenBtn: document.getElementById("randomizeQueenBtn"),
+      addQueenBtn: document.getElementById("addQueenBtn"),
+      importCastInput: document.getElementById("importCastInput"),
+      exportCastBtn: document.getElementById("exportCastBtn"),
+      startBtn: document.getElementById("startBtn"),
+      castPreview: document.getElementById("castPreview"),
+      castEmptyState: document.getElementById("castEmptyState"),
+      castCountText: document.getElementById("castCountText"),
+      gameHeader: document.getElementById("gameHeader"),
+      gameMeta: document.getElementById("gameMeta"),
+      gameContent: document.getElementById("gameContent"),
+      phaseHint: document.getElementById("phaseHint"),
+      nextPhaseBtn: document.getElementById("nextPhaseBtn"),
+      finaleMeta: document.getElementById("finaleMeta"),
+      finaleContent: document.getElementById("finaleContent"),
+      finaleHint: document.getElementById("finaleHint"),
+      finaleBtn: document.getElementById("finaleBtn"),
+    };
+
+    function rand(min, max) { return min + Math.random() * (max - min); }
+    function intRand(min, max) { return Math.floor(rand(min, max + 1)); }
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
+    function escapeHtml(text) {
+      return String(text).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+    }
+
+    function normalizeStat(v) {
+      const n = parseInt(v ?? 5, 10);
+      return clamp(Number.isFinite(n) ? n : 5, 1, 10);
+    }
+
+    function randomizeQueenForm() {
+      el.comedyInput.value = intRand(1, 10); el.designInput.value = intRand(1, 10); el.performanceInput.value = intRand(1, 10);
+      el.actingInput.value = intRand(1, 10); el.lipSyncInput.value = intRand(1, 10);
+      if (!el.queenNameInput.value.trim()) el.queenNameInput.value = `Queen ${state.queens.length + 1}`;
+    }
+
+    function clearQueenForm() {
+      el.queenNameInput.value = ""; el.comedyInput.value = 5; el.designInput.value = 5; el.performanceInput.value = 5; el.actingInput.value = 5; el.lipSyncInput.value = 5;
+    }
+
+    function makeQueenFromForm() {
+      return {
+        name: (el.queenNameInput.value || "").trim(), comedy: normalizeStat(el.comedyInput.value), design: normalizeStat(el.designInput.value),
+        performance: normalizeStat(el.performanceInput.value), acting: normalizeStat(el.actingInput.value), lip_sync: normalizeStat(el.lipSyncInput.value),
+        track_record: []
+      };
+    }
+
+    function updateSetupUI() {
+      const count = state.queens.length;
+      el.castCountText.textContent = `${count} queen${count === 1 ? "" : "s"} added`;
+      el.startBtn.disabled = count < MIN_CAST;
+      el.startBtn.textContent = count < MIN_CAST ? `Start Season (${MIN_CAST} minimum)` : "Start Season";
+      el.castEmptyState.classList.toggle("hidden", count > 0);
+      el.castPreview.innerHTML = state.queens.map((q, index) => `
+        <div class="queen-card">
+          <div class="topline">
+            <div><div class="queen-name">${escapeHtml(q.name || `Queen ${index + 1}`)}</div><div class="queen-mini">${q.comedy}/10 comedy • ${q.design}/10 design</div></div>
+            <span class="pill">#${index + 1}</span>
+          </div>
+          <div class="queen-mini">Performance ${q.performance}/10<br>Acting ${q.acting}/10<br>Lip Sync ${q.lip_sync}/10</div>
+          <div class="tiny-actions"><button class="ghost" data-action="remove-queen" data-index="${index}">Remove</button></div>
+        </div>
+      `).join("");
+    }
+
+    function addQueenFromForm() {
+      const q = makeQueenFromForm();
+      if (!q.name) return alert("Please input a queen name.");
+      state.queens.push(q);
+      updateSetupUI(); clearQueenForm(); el.queenNameInput.focus();
+    }
+
+    function exportCast() {
+      const castName = prompt("Name this cast (for example CAST1 or Season 1):", "Season 1");
+      if (!castName) return;
+      const blob = new Blob([JSON.stringify({ queens: state.queens })], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a"); a.href = url; a.download = `${castName.trim().replace(/[\\/:*?"<>|]+/g, "_") || "cast"}.json`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }
+
+    function importCastFromFile(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(String(reader.result || "{}"));
+          const queens = Array.isArray(parsed.queens) ? parsed.queens : [];
+          if (!queens.length) return alert("That JSON does not contain a queens array.");
+          state.queens = queens.map((q, i) => ({
+            name: String(q.name || `Queen ${i + 1}`).trim(), comedy: normalizeStat(q.comedy), design: normalizeStat(q.design),
+            performance: normalizeStat(q.performance), acting: normalizeStat(q.acting), lip_sync: normalizeStat(q.lip_sync),
+            track_record: Array.isArray(q.track_record) ? q.track_record : [],
+          })).filter(q => q.name);
+          updateSetupUI();
+        } catch { alert("Could not read that JSON file."); }
+      };
+      reader.readAsText(file);
+    }
+
+    function activeQueens() { return state.queens.filter(q => !q.eliminated); }
+
+    function toGameQueen(src, id) {
+      return {
+        id, name: src.name,
+        stats: { comedy: normalizeStat(src.comedy), design: normalizeStat(src.design), performance: normalizeStat(src.performance), acting: normalizeStat(src.acting), lipSync: normalizeStat(src.lip_sync) },
+        track_record: [], record: { WIN: 0, HIGH: 0, SAFE: 0, LOW: 0, BTM2: 0, ELIM: 0 }, eliminated: false,
+      };
+    }
+
+    function startSeason() {
+      if (state.queens.length < MIN_CAST) return alert(`Input minimum ${MIN_CAST} queens`);
+      if (state.queens.length > MAX_CAST) return alert(`Please keep the cast between ${MIN_CAST} and ${MAX_CAST} queens.`);
+      state.queens = state.queens.map((q, i) => toGameQueen(q, i));
+      state.episodeNumber = 1; state.phase = 1; state.mode = "game"; state.episodeData = null; state.finaleData = null;
+      prepareEpisode(); renderAll();
+    }
+
+    function challengeRelevantStat(type) {
+      return { Acting: "acting", Comedy: "comedy", Dance: "performance", Improv: "comedy" }[type] || "performance";
+    }
+
+    function prepareEpisode() {
+      const actives = activeQueens();
+      const challengeType = pick(challengeTypes);
+      const relevantStatKey = challengeRelevantStat(challengeType);
+
+      let mini = { none: true };
+      if (Math.random() >= 0.5) {
+        const winners = [pick(actives)];
+        if (Math.random() < 0.12 && actives.length > 1) {
+          const second = actives.filter(q => q.id !== winners[0].id)[Math.floor(Math.random() * (actives.length - 1))];
+          if (second) winners.push(second);
+        }
+        mini = { none: false, challenge: pick(miniChallengeNames), winners };
+      }
+
+      const maxScores = actives.map(q => {
+        const score = rand(1, 10) + q.stats[relevantStatKey] * rand(0.8, 1.5) + rand(-0.8, 0.8);
+        return { queen: q, score };
+      }).sort((a, b) => b.score - a.score);
+
+      const n = maxScores.length;
+      const highCount = n >= 6 ? 3 : 2;
+      const lowCount = n >= 6 ? 3 : 2;
+      const highQueens = maxScores.slice(0, highCount).map(x => x.queen);
+      const lowQueens = maxScores.slice(n - lowCount).map(x => x.queen);
+      const savedLow = n >= 6 ? lowQueens[0] : null;
+      const bottomTwo = n >= 6 ? lowQueens.slice(1) : lowQueens.slice(0, 2);
+      const pureSafe = actives.filter(q => !highQueens.some(h => h.id === q.id) && !lowQueens.some(l => l.id === q.id));
+      const winner = highQueens[0];
+
+      // Screen 2 Grouping
+      const performanceGroups = { "Slayed the challenge": [], "Had a good performance": [], "Had an okay performance": [], "Had a bad performance": [], "Flopped": [] };
+      maxScores.forEach((entry, idx) => {
+        let label = "Had an okay performance";
+        if (idx === 0) label = "Slayed the challenge";
+        else if (idx < Math.max(2, Math.ceil(n * 0.22))) label = "Had a good performance";
+        else if (idx >= n - Math.max(1, Math.round(n * 0.1)) && idx < n - Math.max(1, Math.round(n * 0.04))) label = "Had a bad performance";
+        else if (idx >= n - Math.max(1, Math.round(n * 0.04))) label = entry.score < 6 || Math.random() < 0.5 ? "Flopped" : "Had a bad performance";
+        performanceGroups[label].push(entry.queen);
+      });
+
+      state.episodeData = {
+        mini, challengeType, relevantStatKey, performanceGroups,
+        placements: { winner, highQueens: highQueens.slice(1), savedLow, lowQueens, bottomTwo, pureSafe },
+        lipSync: null, elimination: null, historyApplied: false,
+      };
+    }
+
+    function finalizeEpisodeHistory() {
+      if (!state.episodeData || state.episodeData.historyApplied) return;
+      const data = state.episodeData;
+      const { winner, highQueens, savedLow, pureSafe } = data.placements;
+      
+      if (winner) { winner.record.WIN++; winner.track_record.push("WIN"); }
+      highQueens.forEach(q => { q.record.HIGH++; q.track_record.push("HIGH"); });
+      if (savedLow) { savedLow.record.LOW++; savedLow.track_record.push("LOW"); }
+      pureSafe.forEach(q => { q.record.SAFE++; q.track_record.push("SAFE"); });
+
+      const e = data.elimination;
+      if (e.mode === "doubleElim") {
+        e.eliminated.forEach(q => { q.record.BTM2++; q.record.ELIM++; q.track_record.push("ELIM"); q.eliminated = true; });
+      } else if (e.mode === "doubleShantay") {
+        data.placements.bottomTwo.forEach(q => { q.record.BTM2++; q.track_record.push("BTM2"); });
+      } else {
+        if (e.survivor) { e.survivor.record.BTM2++; e.survivor.track_record.push("BTM2"); }
+        if (e.eliminated[0]) { e.eliminated[0].record.BTM2++; e.eliminated[0].record.ELIM++; e.eliminated[0].track_record.push("ELIM"); e.eliminated[0].eliminated = true; }
+      }
+      
+      // Ensure all active and elim queens have an entry for this episode index to align table
+      state.queens.forEach(q => {
+         if (q.track_record.length < state.episodeNumber) {
+            q.track_record.push(""); // empty string for eliminated queens passing by
+         }
+      });
+      state.episodeData.historyApplied = true;
+    }
+
+    function rollLipEvent() {
+      const r = Math.random() * 105;
+      if (r < 50) return { type: "outfit", text: "Outfit reveal" };
+      if (r < 80) return { type: "prop", text: "Prop" };
+      if (r < 95) return { type: "fall", text: "Fall" };
+      return { type: "words", text: "Forgets words" };
+    }
+
+    function getLipSyncCategory(score, event) {
+      if (event.type === "words") return "Flopped";
+      if (score >= 12) return "Slayed";
+      if (score >= 10) return "Great";
+      if (score >= 8) return "Okay";
+      if (score >= 6) return "Bad";
+      return "Flopped";
+    }
+
+    function prepareLipSync() {
+      if (!state.episodeData || state.episodeData.lipSync) return;
+      const bottomTwo = state.episodeData.placements.bottomTwo;
+      const performances = bottomTwo.map(q => {
+        const event = rollLipEvent();
+        let score = rand(1, 10) + q.stats.lipSync * rand(0.95, 1.35) + rand(-0.75, 0.75);
+        if (event.type === "outfit") score += 1.1;
+        if (event.type === "prop") score += 0.5;
+        if (event.type === "fall") score -= 1.1;
+        if (event.type === "words") score -= 999;
+        return { queen: q, event, score };
+      });
+
+      let winner = performances[0]; let loser = performances[1];
+      if (performances[1].score > performances[0].score) { winner = performances[1]; loser = performances[0]; }
+      if (performances[0].event.type === "words" && performances[1].event.type !== "words") { winner = performances[1]; loser = performances[0]; }
+      if (performances[1].event.type === "words" && performances[0].event.type !== "words") { winner = performances[0]; loser = performances[1]; }
+      
+      state.episodeData.lipSync = { song: pick(lipSongs), performances, winner, loser };
+    }
+
+    function resolveElimination() {
+      if (!state.episodeData || state.episodeData.elimination) return;
+      const perf = state.episodeData.lipSync;
+      const canDoubleElim = activeQueens().length > 5;
+      let mode = "single";
+
+      // Trigger rare double outcomes based on score quality behind the scenes
+      if (canDoubleElim) {
+         if (perf.winner.score > 10 && perf.loser.score > 10 && Math.random() < 0.05) mode = "doubleShantay";
+         else if (perf.winner.score < 7 && perf.loser.score < 7 && Math.random() < 0.02) mode = "doubleElim";
+      }
+
+      if (mode === "doubleElim") {
+        state.episodeData.elimination = { mode, text: "Double sashay! Both queens failed to impress and are eliminated.", eliminated: state.episodeData.placements.bottomTwo, survivor: null };
+      } else if (mode === "doubleShantay") {
+        state.episodeData.elimination = { mode, text: "Double shantay! Both queens put up an incredible fight and get to stay.", eliminated: [], survivor: null };
+      } else {
+        state.episodeData.elimination = { mode, text: `${perf.winner.queen.name} shantays, ${perf.loser.queen.name} sashays away.`, eliminated: [perf.loser.queen], survivor: perf.winner.queen };
+      }
+    }
+
+    function trackScore(q) {
+      let score = 0;
+      q.track_record.forEach(p => {
+        if (p === "WIN") score += 5;
+        if (p === "HIGH") score += 3;
+        if (p === "SAFE") score += 1;
+        if (p === "LOW") score -= 1;
+        if (p === "BTM2") score -= 2;
+      });
+      return score;
+    }
+
+    function getPlacementClass(pl) { return pl ? "pl-" + pl.replace(" ", "_") : ""; }
+
+    function renderTrackTable() {
+      const episodes = Math.max(state.episodeNumber, ...state.queens.map(q => q.track_record.length));
+      return `
+        <div class="track-table-container">
+          <table class="tr-table">
+            <thead>
+              <tr>
+                <th>Queen</th>
+                ${Array.from({length: episodes}).map((_, i) => `<th>Ep ${i+1}</th>`).join("")}
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${state.queens.slice().sort((a,b) => trackScore(b) - trackScore(a)).map(q => `
+                <tr>
+                  <td class="tr-name">${escapeHtml(q.name)}</td>
+                  ${Array.from({length: episodes}).map((_, i) => {
+                     const pl = q.track_record[i] || "";
+                     return `<td class="${getPlacementClass(pl)}">${pl}</td>`;
+                  }).join("")}
+                  <td><strong>${trackScore(q)}</strong></td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderAll() {
+      el.setupView.classList.toggle("hidden", state.mode !== "setup");
+      el.gameView.classList.toggle("hidden", state.mode !== "game");
+      el.finaleView.classList.toggle("hidden", state.mode !== "finale");
+      if (state.mode === "setup") updateSetupUI();
+      else if (state.mode === "game") renderEpisode();
+      else renderFinale();
+    }
+
+    function renderEpisode() {
+      const active = activeQueens();
+      el.gameHeader.textContent = `Episode ${state.episodeNumber}`;
+      el.gameMeta.textContent = `${active.length} queens remaining • ${state.queens.length} in cast`;
+      el.phaseHint.textContent = `Screen ${state.phase} of 7`;
+      el.nextPhaseBtn.textContent = state.phase === 7 ? (active.length === 4 ? "Start Finale" : "Next Episode") : "Next";
+
+      const data = state.episodeData;
+      let content = "";
+
+      if (state.phase === 1) {
+        content = `
+          <div class="section-card">
+            <div class="label-row"><span class="pill">Screen 1</span><span class="pill">Mini Challenge</span></div>
+            <p class="big-message">${data.mini.none ? "No mini challenge today." : data.mini.challenge}</p>
+            <p class="muted">${data.mini.none ? "The queens head straight to the main event." : `Mini challenge winners: ${data.mini.winners.map(q => `<strong>${escapeHtml(q.name)}</strong>`).join(data.mini.winners.length === 2 ? " and " : ".")}`}</p>
+          </div>
+        `;
+      }
+      else if (state.phase === 2) {
+        const catOrder = ["Slayed the challenge", "Had a good performance", "Had an okay performance", "Had a bad performance", "Flopped"];
+        let groupsHtml = catOrder.map(cat => {
+           if (data.performanceGroups[cat].length > 0) {
+              return `
+                <div class="screen-grid" style="margin-bottom: 8px;">
+                  ${data.performanceGroups[cat].map(q => `<div class="section-card center-text" style="margin:0;"><h4 style="margin:0;">${escapeHtml(q.name)}</h4></div>`).join("")}
+                </div>
+                <div class="center-text" style="font-weight:700; color:var(--muted); margin-bottom: 24px; font-size:14px;">${cat}</div>
+              `;
+           }
+           return "";
+        }).join("");
+
+        content = `
+          <div class="section-card">
+            <div class="label-row"><span class="pill">Screen 2</span><span class="pill">Maxi Challenge</span><span class="pill">${data.challengeType}</span></div>
+            <p class="big-message">${data.challengeType} challenge</p>
+            ${groupsHtml}
+          </div>
+        `;
+      }
+      else if (state.phase === 3) {
+        const { winner, highQueens, savedLow, bottomTwo } = data.placements;
+        const topsAndBottoms = [winner, ...highQueens, savedLow, ...bottomTwo].filter(Boolean);
+        
+        content = `
+          <div class="section-card">
+            <div class="label-row"><span class="pill">Screen 3</span><span class="pill">Tops & Bottoms</span></div>
+            <div class="screen-grid" style="margin-bottom: 8px;">
+              ${topsAndBottoms.map(q => `<div class="section-card center-text" style="margin:0;"><h4 style="margin:0;">${escapeHtml(q.name)}</h4></div>`).join("")}
+            </div>
+            <div class="center-text" style="font-weight:700; font-size:16px; margin-bottom: 24px;">You represent the Tops and Bottoms of the week</div>
+            
+            ${data.placements.pureSafe.length ? `
+              <div class="screen-grid" style="margin-bottom: 8px;">
+                ${data.placements.pureSafe.map(q => `<div class="section-card center-text" style="margin:0;"><h4 style="margin:0; font-weight:normal;">${escapeHtml(q.name)}</h4></div>`).join("")}
+              </div>
+              <div class="center-text muted" style="font-size:14px;">Ladies, you are safe. You may leave the stage.</div>
+            ` : ""}
+          </div>
+        `;
+      }
+      else if (state.phase === 4) {
+        const { winner, highQueens, savedLow, bottomTwo } = data.placements;
+        content = `
+          <div class="section-card">
+            <div class="label-row"><span class="pill">Screen 4</span><span class="pill">Results</span></div>
+            <p class="big-message">Placement reveal</p>
+            <div class="screen-grid">
+              <div>
+                <h4>Winner</h4>
+                <div class="list"><div class="item win"><span><strong>${escapeHtml(winner.name)}</strong></span><span>WIN</span></div></div>
+              </div>
+              <div>
+                <h4>High</h4>
+                <div class="list">${highQueens.map(q => `<div class="item high"><span><strong>${escapeHtml(q.name)}</strong></span><span>HIGH</span></div>`).join("") || `<div class="item safe"><span>None</span><span>—</span></div>`}</div>
+              </div>
+              <div>
+                <h4>Low</h4>
+                <div class="list">${savedLow ? `<div class="item low"><span><strong>${escapeHtml(savedLow.name)}</strong></span><span>You are safe</span></div>` : `<div class="item safe"><span>None</span><span>—</span></div>`}</div>
+              </div>
+              <div>
+                <h4>Bottom 2</h4>
+                <div class="list">${bottomTwo.map(q => `<div class="item btm"><span><strong>${escapeHtml(q.name)}</strong></span><span>BTM2</span></div>`).join("")}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      else if (state.phase === 5) {
+        prepareLipSync();
+        const ls = data.lipSync;
+        content = `
+          <div class="section-card">
+            <div class="label-row"><span class="pill">Screen 5</span><span class="pill">Lip Sync</span></div>
+            <p class="big-message">Song: ${escapeHtml(ls.song)}</p>
+            <div class="screen-grid">
+              ${ls.performances.map((p) => `
+                <div class="section-card center-text" style="margin:0;">
+                  <h4 style="margin-bottom:4px;">${escapeHtml(p.queen.name)}</h4>
+                  <div style="font-size:15px; font-weight:800; color:var(--ink); margin: 10px 0;">${getLipSyncCategory(p.score, p.event)} the lip sync</div>
+                  <p class="muted" style="margin-top:4px; font-size:13px;">
+                    ${p.event.type !== "normal" && p.event.type !== "words" && p.event.type !== "fall" ? `Pulled a ${p.event.text}.<br>` : ""}
+                    ${p.event.type === "words" ? "Forgot the words!" : p.event.type === "fall" ? "Fell over!" : p.event.type === "prop" ? "Great energy." : ""}
+                  </p>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `;
+      }
+      else if (state.phase === 6) {
+        resolveElimination();
+        const e = data.elimination;
+        content = `
+          <div class="section-card">
+            <div class="label-row"><span class="pill">Screen 6</span><span class="pill">Elimination</span></div>
+            <p class="big-message">${escapeHtml(e.text)}</p>
+            <div class="screen-grid">
+              ${e.mode === "doubleElim" ? e.eliminated.map(q => `
+                <div class="section-card" style="margin:0; background:#fff1f1;">
+                  <h4>${escapeHtml(q.name)}</h4>
+                  <div class="item elim"><span>Sashay away</span><span>ELIM</span></div>
+                </div>
+              `).join("") : e.mode === "doubleShantay" ? data.placements.bottomTwo.map(q => `
+                <div class="section-card" style="margin:0;">
+                  <h4>${escapeHtml(q.name)}</h4>
+                  <div class="item safe"><span>Shantay you stay</span><span>SAFE</span></div>
+                </div>
+              `).join("") : `
+                <div class="section-card" style="margin:0;">
+                  <h4>${escapeHtml(e.survivor ? e.survivor.name : "")}</h4>
+                  <div class="item safe"><span>Shantay you stay</span><span>SAFE</span></div>
+                </div>
+                <div class="section-card" style="margin:0; background:#fff1f1;">
+                  <h4>${escapeHtml(e.eliminated[0]?.name || "")}</h4>
+                  <div class="item elim"><span>Sashay away</span><span>ELIM</span></div>
+                </div>
+              `}
+            </div>
+          </div>
+        `;
+      }
+      else if (state.phase === 7) {
+        finalizeEpisodeHistory();
+        content = `
+          <div class="section-card">
+            <div class="label-row"><span class="pill">Screen 7</span><span class="pill">Track Record</span></div>
+            <p class="big-message">Season standings</p>
+            ${renderTrackTable()}
+          </div>
+        `;
+      }
+      el.gameContent.innerHTML = content;
+    }
+
+    function advanceEpisode() {
+      if (state.phase < 7) { state.phase++; renderAll(); }
+      else {
+        if (activeQueens().length === 4) startFinale();
+        else { state.episodeNumber++; state.phase = 1; state.episodeData = null; prepareEpisode(); renderAll(); }
+      }
+    }
+
+    function makeMatch(q1, q2, isFinal = false) {
+      const base1 = rand(1, 10) + trackScore(q1) + rand(0, isFinal ? 4 : 3);
+      const base2 = rand(1, 10) + trackScore(q2) + rand(0, isFinal ? 4 : 3);
+      return { q1, q2, base1, base2, winner: base1 >= base2 ? q1 : q2, loser: base1 >= base2 ? q2 : q1, isFinal };
+    }
+
+    function startFinale() {
+      const finalists = activeQueens().slice(0, 4);
+      const semi1 = makeMatch(finalists[0], finalists[1]);
+      const semi2 = makeMatch(finalists[2], finalists[3]);
+      state.mode = "finale";
+      state.finaleData = { step: 1, finalists, semi1, semi2, final: makeMatch(semi1.winner, semi2.winner, true), historyApplied: false };
+      renderAll();
+    }
+
+    function renderFinale() {
+      const f = state.finaleData;
+      el.finaleMeta.textContent = `4 queens • finale format`;
+      el.finaleBtn.textContent = f.step < 3 ? "Next" : "Restart";
+      let content = "";
+
+      if (f.step === 1) {
+        content = `
+          <div class="section-card">
+            <div class="label-row"><span class="pill">Finale</span><span class="pill">Round 1</span></div>
+            <p class="big-message">Semifinal lip syncs</p>
+            <div class="screen-grid">
+              ${[f.semi1, f.semi2].map((m, idx) => `
+                <div class="section-card" style="margin:0;">
+                  <h4>Match ${idx + 1}</h4>
+                  <div class="list">
+                    <div class="item ${m.winner === m.q1 ? "safe" : "low"}"><span><strong>${escapeHtml(m.q1.name)}</strong></span></div>
+                    <div class="item ${m.winner === m.q2 ? "safe" : "low"}"><span><strong>${escapeHtml(m.q2.name)}</strong></span></div>
+                  </div>
+                  <p class="muted" style="margin-top:10px;">Winner: <strong>${escapeHtml(m.winner.name)}</strong></p>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `;
+      }
+      else if (f.step === 2) {
+        content = `
+          <div class="section-card">
+            <div class="label-row"><span class="pill">Finale</span><span class="pill">Round 2</span></div>
+            <p class="big-message">Final lip sync</p>
+            <div class="screen-grid">
+              <div class="section-card center-text" style="margin:0;">
+                <h4>${escapeHtml(f.semi1.winner.name)}</h4>
+              </div>
+              <div class="section-card center-text" style="margin:0;">
+                <h4>${escapeHtml(f.semi2.winner.name)}</h4>
+              </div>
+            </div>
+            <p class="muted" style="margin-top:12px;">Better track record gives a higher chance to win, but the final still has a big randomness boost.</p>
+          </div>
+        `;
+      }
+      else if (f.step === 3) {
+        if (!f.historyApplied) {
+          f.final.winner.track_record.push("WINNER");
+          f.final.loser.track_record.push("RUNNER UP");
+          f.semi1.loser.track_record.push("ELIM");
+          f.semi2.loser.track_record.push("ELIM");
+          
+          state.queens.forEach(q => {
+             if (q.track_record.length < state.episodeNumber + 1) q.track_record.push("");
+          });
+          f.historyApplied = true;
+          state.episodeNumber++; // Step up for the final column header
+        }
+
+        content = `
+          <div class="champion-banner">
+            <div class="label-row"><span class="pill">Finale</span><span class="pill">Crown</span></div>
+            <p class="big-message">${escapeHtml(f.final.winner.name)} is your winner<span class="winner-crown">👑</span></p>
+            <p class="muted">Finalists: ${escapeHtml(f.final.q1.name)} vs ${escapeHtml(f.final.q2.name)}</p>
+          </div>
+          <div class="section-card">
+            <h4>Final Season Standings</h4>
+            ${renderTrackTable()}
+          </div>
+        `;
+      }
+
+      el.finaleContent.innerHTML = content;
+      el.finaleHint.textContent = f.step < 3 ? `Finale screen ${f.step} of 3` : "Season complete.";
+    }
+
+    function advanceFinale() {
+      if (state.finaleData.step < 3) { state.finaleData.step++; renderAll(); }
+      else {
+        state.mode = "setup"; state.queens = []; state.episodeNumber = 0; state.phase = 0; state.episodeData = null; state.finaleData = null;
+        clearQueenForm(); renderAll();
+      }
+    }
+
+    el.randomizeQueenBtn.addEventListener("click", randomizeQueenForm);
+    el.addQueenBtn.addEventListener("click", addQueenFromForm);
+    el.startBtn.addEventListener("click", startSeason);
+    el.exportCastBtn.addEventListener("click", exportCast);
+    el.importCastInput.addEventListener("change", (e) => { const file = e.target.files?.[0]; if (file) importCastFromFile(file); e.target.value = ""; });
+    el.castPreview.addEventListener("click", (e) => {
+      const target = e.target; if (target.dataset.action === "remove-queen") { state.queens.splice(Number(target.dataset.index), 1); updateSetupUI(); }
+    });
+    el.nextPhaseBtn.addEventListener("click", advanceEpisode);
+    el.finaleBtn.addEventListener("click", advanceFinale);
+
+    clearQueenForm(); updateSetupUI(); renderAll();
+  </script>
+</body>
+</html>
