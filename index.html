@@ -72,7 +72,8 @@
     .subtle { color: var(--muted); font-size: 13px; line-height: 1.45; margin: 0 0 14px; }
     .form-grid { display: grid; gap: 10px; }
     .field { display: grid; gap: 6px; font-size: 12px; color: var(--muted); }
-    .field input { width: 100%; border: 1px solid var(--border); border-radius: 12px; padding: 10px 11px; font-size: 14px; background: #fbfff8; color: var(--ink); outline: none; }
+    .field input, .field select { width: 100%; border: 1px solid var(--border); border-radius: 12px; padding: 10px 11px; font-size: 14px; background: #fbfff8; color: var(--ink); outline: none; }
+    .field select { cursor: pointer; -webkit-appearance: none; appearance: none; }
     .stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 
     .button-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
@@ -165,7 +166,7 @@
   <div class="app">
     <div class="hero">
       <h1 class="title">Greenroom Fantasy Drag Race Simulator</h1>
-      <p class="subtitle">Release v1.00 - Last Updated 10/4/26.</p>
+      <p class="subtitle">Release v1.1 - Last Updated 10/4/26.</p>
     </div>
 
     <section id="setupView" class="panel">
@@ -196,6 +197,14 @@
                 <input id="importCastInput" type="file" accept="application/json" />
                 <button id="exportCastBtn" class="ghost">Export Cast JSON</button>
               </div>
+              
+              <label class="field" style="margin-top: 4px;">Finale Format
+                <select id="finaleFormatSelect">
+                  <option value="top4">Top 4 Finale (Lip Sync Smackdown)</option>
+                  <option value="top3">Top 3 Finale (Cut to Top 2)</option>
+                </select>
+              </label>
+
               <button id="startBtn" class="primary" disabled>Start Season</button>
             </div>
           </div>
@@ -231,7 +240,7 @@
 
     <section id="finaleView" class="panel hidden" style="margin-top:18px;">
       <div class="panel-header">
-        <h2>Top 4 Finale</h2>
+        <h2>Grand Finale</h2>
         <div id="finaleMeta" class="meta"></div>
       </div>
       <div class="panel-body">
@@ -279,6 +288,7 @@
 
     const state = {
       mode: "setup",
+      finaleFormat: "top4",
       queens: [],
       episodeNumber: 0,
       phase: 0,
@@ -291,7 +301,7 @@
     const el = {
       setupView: document.getElementById("setupView"), gameView: document.getElementById("gameView"), finaleView: document.getElementById("finaleView"),
       queenNameInput: document.getElementById("queenNameInput"), comedyInput: document.getElementById("comedyInput"), designInput: document.getElementById("designInput"), performanceInput: document.getElementById("performanceInput"), actingInput: document.getElementById("actingInput"), lipSyncInput: document.getElementById("lipSyncInput"),
-      randomizeQueenBtn: document.getElementById("randomizeQueenBtn"), addQueenBtn: document.getElementById("addQueenBtn"), importCastInput: document.getElementById("importCastInput"), exportCastBtn: document.getElementById("exportCastBtn"), startBtn: document.getElementById("startBtn"), castPreview: document.getElementById("castPreview"), castEmptyState: document.getElementById("castEmptyState"), castCountText: document.getElementById("castCountText"),
+      randomizeQueenBtn: document.getElementById("randomizeQueenBtn"), addQueenBtn: document.getElementById("addQueenBtn"), importCastInput: document.getElementById("importCastInput"), exportCastBtn: document.getElementById("exportCastBtn"), finaleFormatSelect: document.getElementById("finaleFormatSelect"), startBtn: document.getElementById("startBtn"), castPreview: document.getElementById("castPreview"), castEmptyState: document.getElementById("castEmptyState"), castCountText: document.getElementById("castCountText"),
       gameHeader: document.getElementById("gameHeader"), gameMeta: document.getElementById("gameMeta"), gameContent: document.getElementById("gameContent"), nextPhaseBtn: document.getElementById("nextPhaseBtn"), screenCounterText: document.getElementById("screenCounterText"),
       finaleMeta: document.getElementById("finaleMeta"), finaleContent: document.getElementById("finaleContent"), finaleBtn: document.getElementById("finaleBtn"),
     };
@@ -316,7 +326,7 @@
       const count = state.queens.length;
       el.castCountText.textContent = `${count} queen${count === 1 ? "" : "s"} added`;
       el.startBtn.disabled = count < MIN_CAST;
-      el.startBtn.textContent = count < MIN_CAST ? `Start Season (${MIN_CAST} min)` : "Start Season";
+      el.startBtn.textContent = count < MIN_CAST ? `Start Season (${MIN_CAST} minimum)` : "Start Season";
       el.castEmptyState.classList.toggle("hidden", count > 0);
       el.castPreview.innerHTML = state.queens.map((q, index) => `
         <div class="queen-card">
@@ -339,6 +349,7 @@
 
     function startSeason() {
       if (state.queens.length < MIN_CAST || state.queens.length > MAX_CAST) return alert(`Cast must be between ${MIN_CAST} and ${MAX_CAST} queens.`);
+      state.finaleFormat = el.finaleFormatSelect.value;
       state.queens = state.queens.map((q, i) => ({
         id: i, name: q.name, stats: { comedy: q.comedy, design: q.design, performance: q.performance, acting: q.acting, lipSync: q.lip_sync },
         record: { WIN: 0, HIGH: 0, SAFE: 0, LOW: 0, BTM2: 0, ELIM: 0 },
@@ -638,8 +649,7 @@
           const s2 = data.lipSync.s2;
           
           let isDoubleShantay = (s1 >= 13 && s2 >= 13 && Math.random() < 0.05); 
-          // Disable double sashay when 5 or less remaining to protect Top 4 finale transition
-          let isDoubleSashay = (s1 <= 7 && s2 <= 7 && Math.random() < 0.02 && activeQueens().length > 5);
+          let isDoubleSashay = (s1 <= 7 && s2 <= 7 && Math.random() < 0.02 && activeQueens().length > (state.finaleFormat === "top3" ? 4 : 5));
 
           if (isDoubleShantay) {
               data.elimination = { doubleShantay: true, q1: data.lipSync.performances[0].queen, q2: data.lipSync.performances[1].queen };
@@ -744,7 +754,8 @@
 
       el.gameContent.innerHTML = content;
       if (state.phase === 7) {
-        el.nextPhaseBtn.textContent = activeQueens().length === 4 ? "Start Finale" : "Next Episode";
+        const finaleThreshold = state.finaleFormat === "top3" ? 3 : 4;
+        el.nextPhaseBtn.textContent = activeQueens().length === finaleThreshold ? "Start Finale" : "Next Episode";
       } else {
         el.nextPhaseBtn.textContent = "Next";
       }
@@ -753,7 +764,8 @@
     el.nextPhaseBtn.addEventListener("click", () => {
       if (state.phase < 7) { state.phase++; renderEpisode(); }
       else {
-        if (activeQueens().length === 4) startFinale();
+        const finaleThreshold = state.finaleFormat === "top3" ? 3 : 4;
+        if (activeQueens().length === finaleThreshold) startFinale();
         else { state.episodeNumber++; state.phase = 1; prepareEpisode(); renderEpisode(); }
       }
     });
@@ -766,24 +778,50 @@
 
     function startFinale() {
       const finalists = activeQueens().sort((a, b) => trackScore(b) - trackScore(a));
-      const semi1 = makeMatch(finalists[0], finalists[3]);
-      const semi2 = makeMatch(finalists[1], finalists[2]);
-      const final = makeMatch(semi1.winner, semi2.winner);
-      
-      semi1.loser.elimOrder = state.episodeNumber + 1;
-      semi2.loser.elimOrder = state.episodeNumber + 1;
-      final.loser.elimOrder = state.episodeNumber + 2;
-      final.winner.elimOrder = 999;
-
       const epIndex = state.episodeNumber; 
-      semi1.loser.history[epIndex] = "ELIM";
-      semi2.loser.history[epIndex] = "ELIM";
-      final.loser.history[epIndex] = "RUNNER UP";
-      final.winner.history[epIndex] = "WINNER";
-      state.episodeNumber++; // Increase episode count to show finale on track record
 
+      if (state.finaleFormat === "top4") {
+          const semi1 = makeMatch(finalists[0], finalists[3]);
+          const semi2 = makeMatch(finalists[1], finalists[2]);
+          const final = makeMatch(semi1.winner, semi2.winner);
+          
+          semi1.loser.elimOrder = state.episodeNumber + 1;
+          semi2.loser.elimOrder = state.episodeNumber + 1;
+          final.loser.elimOrder = state.episodeNumber + 2;
+          final.winner.elimOrder = 999;
+
+          semi1.loser.history[epIndex] = "ELIM";
+          semi2.loser.history[epIndex] = "ELIM";
+          final.loser.history[epIndex] = "RUNNER UP";
+          final.winner.history[epIndex] = "WINNER";
+          
+          state.finaleData = { step: 1, semi1, semi2, final };
+      } else {
+          // Top 3 Logic
+          const thirdPlace = finalists[2]; // Worst track record
+          const top2 = [finalists[0], finalists[1]];
+          
+          thirdPlace.elimOrder = state.episodeNumber + 1;
+          thirdPlace.history[epIndex] = "ELIM";
+          
+          const final = makeMatch(top2[0], top2[1]);
+          final.loser.elimOrder = state.episodeNumber + 2;
+          final.winner.elimOrder = 999;
+          
+          final.loser.history[epIndex] = "RUNNER UP";
+          final.winner.history[epIndex] = "WINNER";
+          
+          state.finaleData = { 
+              step: 1, 
+              finalists: finalists,
+              thirdPlace: thirdPlace,
+              final: final,
+              lipSong: pick(lipSongs)
+          };
+      }
+
+      state.episodeNumber++; // Increase episode count to show finale on track record
       state.mode = "finale";
-      state.finaleData = { step: 1, semi1, semi2, final };
       renderFinale();
     }
 
@@ -794,154 +832,286 @@
       el.finaleBtn.classList.remove("hidden");
       el.finaleBtn.textContent = "Next";
 
-      if (f.step === 1) {
-        content = `
-          <div class="section-card flex-col-center">
-            <div class="label-row"><span class="pill">Screen 1 of 7</span></div>
-            <p class="big-message">Semifinal 1 Matchup</p>
-            <div class="flex-center" style="gap:24px; margin-top: 12px;">
-              <div class="placement-card bg-safe">${escapeHtml(f.semi1.winner.name)}</div>
-              <p class="muted" style="font-weight:900;">VS</p>
-              <div class="placement-card bg-safe">${escapeHtml(f.semi1.loser.name)}</div>
-            </div>
-          </div>
-        `;
-      } else if (f.step === 2) {
-        content = `
-          <div class="section-card flex-col-center">
-            <div class="label-row"><span class="pill">Screen 2 of 7</span></div>
-            <p class="big-message">Semifinal 1 Winner</p>
-            <div class="group-row" style="border:none;">
-              <div class="placement-card bg-high">${escapeHtml(f.semi1.winner.name)}</div>
-              <p class="muted" style="font-size:12px;">Eliminated: ${escapeHtml(f.semi1.loser.name)}</p>
-            </div>
-          </div>
-        `;
-      } else if (f.step === 3) {
-        content = `
-          <div class="section-card flex-col-center">
-            <div class="label-row"><span class="pill">Screen 3 of 7</span></div>
-            <p class="big-message">Semifinal 2 Matchup</p>
-            <div class="flex-center" style="gap:24px; margin-top: 12px;">
-              <div class="placement-card bg-safe">${escapeHtml(f.semi2.winner.name)}</div>
-              <p class="muted" style="font-weight:900;">VS</p>
-              <div class="placement-card bg-safe">${escapeHtml(f.semi2.loser.name)}</div>
-            </div>
-          </div>
-        `;
-      } else if (f.step === 4) {
-        content = `
-          <div class="section-card flex-col-center">
-            <div class="label-row"><span class="pill">Screen 4 of 7</span></div>
-            <p class="big-message">Semifinal 2 Winner</p>
-            <div class="group-row" style="border:none;">
-              <div class="placement-card bg-high">${escapeHtml(f.semi2.winner.name)}</div>
-              <p class="muted" style="font-size:12px;">Eliminated: ${escapeHtml(f.semi2.loser.name)}</p>
-            </div>
-          </div>
-        `;
-      } else if (f.step === 5) {
-        content = `
-          <div class="section-card flex-col-center">
-            <div class="label-row"><span class="pill">Screen 5 of 7</span></div>
-            <p class="big-message">The Final Lip Sync</p>
-            <div class="flex-center" style="gap:24px; margin-top: 12px;">
-              <div class="placement-card bg-safe">${escapeHtml(f.final.winner.name)}</div>
-              <p class="muted" style="font-weight:900;">VS</p>
-              <div class="placement-card bg-safe">${escapeHtml(f.final.loser.name)}</div>
-            </div>
-          </div>
-        `;
-      } else if (f.step === 6) {
-        el.finaleBtn.classList.add("hidden");
-        content = `
-          <div class="flex-col-center" style="gap: 20px; padding: 24px 0;">
-            <div class="label-row"><span class="pill">Screen 6 of 7</span></div>
-            <p class="big-message">The Winner of the season is...</p>
-            <div id="loadingSpinner" style="height: 80px; display: grid; place-items: center;">
-              <div class="spinner"></div>
-            </div>
-            <div id="winnerRevealBox" class="hidden flex-col-center" style="width:100%;">
-                <div class="placement-card bg-winner" style="padding: 24px; font-size: 20px; width: 100%; max-width: 400px; border-radius: 24px;">
-                  <p style="margin:0 0 8px; font-size:14px; font-weight:600; opacity:0.8;">WINNER</p>
-                  <p class="big-message" style="margin:0;">${escapeHtml(f.final.winner.name)}<span class="winner-crown">👑</span></p>
+      if (state.finaleFormat === "top4") {
+          if (f.step === 1) {
+            content = `
+              <div class="section-card flex-col-center">
+                <div class="label-row"><span class="pill">Screen 1 of 7</span></div>
+                <p class="big-message">Semifinal 1 Matchup</p>
+                <div class="flex-center" style="gap:24px; margin-top: 12px;">
+                  <div class="placement-card bg-safe">${escapeHtml(f.semi1.winner.name)}</div>
+                  <p class="muted" style="font-weight:900;">VS</p>
+                  <div class="placement-card bg-safe">${escapeHtml(f.semi1.loser.name)}</div>
                 </div>
-                <div class="placement-card bg-runner" style="padding: 16px; width: 100%; max-width: 400px; border-radius: 16px;">
-                  <p style="margin:0 0 4px; font-size:12px; font-weight:600; opacity:0.8;">RUNNER UP</p>
-                  <p style="margin:0; font-weight:800; font-size: 16px;">${escapeHtml(f.final.loser.name)}</p>
+              </div>
+            `;
+          } else if (f.step === 2) {
+            content = `
+              <div class="section-card flex-col-center">
+                <div class="label-row"><span class="pill">Screen 2 of 7</span></div>
+                <p class="big-message">Semifinal 1 Winner</p>
+                <div class="group-row" style="border:none;">
+                  <div class="placement-card bg-high">${escapeHtml(f.semi1.winner.name)}</div>
+                  <p class="muted" style="font-size:12px;">Eliminated: ${escapeHtml(f.semi1.loser.name)}</p>
                 </div>
-            </div>
-          </div>
-        `;
-        setTimeout(() => {
-          const spinner = document.getElementById("loadingSpinner");
-          const box = document.getElementById("winnerRevealBox");
-          if (spinner && box) {
-              spinner.classList.add("hidden");
-              box.classList.remove("hidden");
-              el.finaleBtn.classList.remove("hidden");
-          }
-        }, 3000);
-      } else if (f.step === 7) {
-        let sortedQueens = [...state.queens].sort((a, b) => {
-          if (b.elimOrder !== a.elimOrder) return b.elimOrder - a.elimOrder;
-          return trackScore(b) - trackScore(a);
-        });
+              </div>
+            `;
+          } else if (f.step === 3) {
+            content = `
+              <div class="section-card flex-col-center">
+                <div class="label-row"><span class="pill">Screen 3 of 7</span></div>
+                <p class="big-message">Semifinal 2 Matchup</p>
+                <div class="flex-center" style="gap:24px; margin-top: 12px;">
+                  <div class="placement-card bg-safe">${escapeHtml(f.semi2.winner.name)}</div>
+                  <p class="muted" style="font-weight:900;">VS</p>
+                  <div class="placement-card bg-safe">${escapeHtml(f.semi2.loser.name)}</div>
+                </div>
+              </div>
+            `;
+          } else if (f.step === 4) {
+            content = `
+              <div class="section-card flex-col-center">
+                <div class="label-row"><span class="pill">Screen 4 of 7</span></div>
+                <p class="big-message">Semifinal 2 Winner</p>
+                <div class="group-row" style="border:none;">
+                  <div class="placement-card bg-high">${escapeHtml(f.semi2.winner.name)}</div>
+                  <p class="muted" style="font-size:12px;">Eliminated: ${escapeHtml(f.semi2.loser.name)}</p>
+                </div>
+              </div>
+            `;
+          } else if (f.step === 5) {
+            content = `
+              <div class="section-card flex-col-center">
+                <div class="label-row"><span class="pill">Screen 5 of 7</span></div>
+                <p class="big-message">The Final Lip Sync</p>
+                <div class="flex-center" style="gap:24px; margin-top: 12px;">
+                  <div class="placement-card bg-safe">${escapeHtml(f.final.winner.name)}</div>
+                  <p class="muted" style="font-weight:900;">VS</p>
+                  <div class="placement-card bg-safe">${escapeHtml(f.final.loser.name)}</div>
+                </div>
+              </div>
+            `;
+          } else if (f.step === 6) {
+            el.finaleBtn.classList.add("hidden");
+            content = `
+              <div class="flex-col-center" style="gap: 20px; padding: 24px 0;">
+                <div class="label-row"><span class="pill">Screen 6 of 7</span></div>
+                <p class="big-message">The Winner of the season is...</p>
+                <div id="loadingSpinner" style="height: 80px; display: grid; place-items: center;">
+                  <div class="spinner"></div>
+                </div>
+                <div id="winnerRevealBox" class="hidden flex-col-center" style="width:100%;">
+                    <div class="placement-card bg-winner" style="padding: 24px; font-size: 20px; width: 100%; max-width: 400px; border-radius: 24px;">
+                      <p style="margin:0 0 8px; font-size:14px; font-weight:600; opacity:0.8;">WINNER</p>
+                      <p class="big-message" style="margin:0;">${escapeHtml(f.final.winner.name)}<span class="winner-crown">👑</span></p>
+                    </div>
+                    <div class="placement-card bg-runner" style="padding: 16px; width: 100%; max-width: 400px; border-radius: 16px;">
+                      <p style="margin:0 0 4px; font-size:12px; font-weight:600; opacity:0.8;">RUNNER UP</p>
+                      <p style="margin:0; font-weight:800; font-size: 16px;">${escapeHtml(f.final.loser.name)}</p>
+                    </div>
+                </div>
+              </div>
+            `;
+            setTimeout(() => {
+              const spinner = document.getElementById("loadingSpinner");
+              const box = document.getElementById("winnerRevealBox");
+              if (spinner && box) {
+                  spinner.classList.add("hidden");
+                  box.classList.remove("hidden");
+                  el.finaleBtn.classList.remove("hidden");
+              }
+            }, 3000);
+          } else if (f.step === 7) {
+            let sortedQueens = [...state.queens].sort((a, b) => {
+              if (b.elimOrder !== a.elimOrder) return b.elimOrder - a.elimOrder;
+              return trackScore(b) - trackScore(a);
+            });
 
-        content = `
-          <div class="section-card" id="finaleTrackRecord" style="text-align: left; padding: 24px; background: white;">
-            <div style="display:flex; gap: 8px; margin-bottom: 16px;">
-              <span class="pill">Screen 7 of 7</span>
-              <span class="pill">Final Track Record</span>
-            </div>
-            <h2 style="font-size: 24px; font-weight: 900; margin: 0 0 16px; text-align: center;">Final Season Standings</h2>
-            <div style="overflow-x: auto;">
-              <table class="standings-table">
-                <thead>
-                  <tr>
-                    <th>Queen</th>
-                    ${Array.from({length: state.episodeNumber}, (_, i) => `<th>Ep ${i+1}</th>`).join("")}
-                    <th>Score</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${sortedQueens.map(q => `
-                    <tr>
-                      <td class="qname-cell">${escapeHtml(q.name)}</td>
-                      ${Array.from({length: state.episodeNumber}, (_, i) => {
-                        let p = q.history[i];
-                        if (!p) return `<td class="empty-cell"></td>`;
-                        let cssClass = p === "BTM2" ? "bg-btm" : (p === "RUNNER" ? "bg-runner" : `bg-${p.toLowerCase()}`);
-                        return `<td class="${cssClass}" style="font-weight: 900; font-size: 12px;">${p}</td>`;
-                      }).join("")}
-                      <td style="font-weight: 600;">${trackScore(q)}</td>
-                    </tr>
-                  `).join("")}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="button-row" style="justify-content: center; margin-top: 16px;">
-             <button id="downloadPngBtn" class="secondary">Download Track Record as PNG</button>
-          </div>
-        `;
-        
-        setTimeout(() => {
-             const btn = document.getElementById("downloadPngBtn");
-             if(btn) btn.addEventListener("click", () => {
-                 html2canvas(document.getElementById("finaleTrackRecord")).then(canvas => {
-                     const link = document.createElement("a");
-                     link.download = "drag_race_track_record.png";
-                     link.href = canvas.toDataURL("image/png");
-                     link.click();
+            content = `
+              <div class="section-card" id="finaleTrackRecord" style="text-align: left; padding: 24px; background: white;">
+                <div style="display:flex; gap: 8px; margin-bottom: 16px;">
+                  <span class="pill">Screen 7 of 7</span>
+                  <span class="pill">Final Track Record</span>
+                </div>
+                <h2 style="font-size: 24px; font-weight: 900; margin: 0 0 16px; text-align: center;">Final Season Standings</h2>
+                <div style="overflow-x: auto;">
+                  <table class="standings-table">
+                    <thead>
+                      <tr>
+                        <th>Queen</th>
+                        ${Array.from({length: state.episodeNumber}, (_, i) => `<th>Ep ${i+1}</th>`).join("")}
+                        <th>Score</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${sortedQueens.map(q => `
+                        <tr>
+                          <td class="qname-cell">${escapeHtml(q.name)}</td>
+                          ${Array.from({length: state.episodeNumber}, (_, i) => {
+                            let p = q.history[i];
+                            if (!p) return `<td class="empty-cell"></td>`;
+                            let cssClass = p === "BTM2" ? "bg-btm" : (p === "RUNNER UP" || p === "RUNNER" ? "bg-runner" : `bg-${p.toLowerCase()}`);
+                            return `<td class="${cssClass}" style="font-weight: 900; font-size: 12px;">${p}</td>`;
+                          }).join("")}
+                          <td style="font-weight: 600;">${trackScore(q)}</td>
+                        </tr>
+                      `).join("")}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="button-row" style="justify-content: center; margin-top: 16px;">
+                 <button id="downloadPngBtn" class="secondary">Download Track Record as PNG</button>
+              </div>
+            `;
+            
+            setTimeout(() => {
+                 const btn = document.getElementById("downloadPngBtn");
+                 if(btn) btn.addEventListener("click", () => {
+                     html2canvas(document.getElementById("finaleTrackRecord")).then(canvas => {
+                         const link = document.createElement("a");
+                         link.download = "drag_race_track_record.png";
+                         link.href = canvas.toDataURL("image/png");
+                         link.click();
+                     });
                  });
-             });
-        }, 100);
+            }, 100);
 
-        el.finaleBtn.textContent = "End Season";
-      } else {
-        state.mode = "setup"; state.queens = []; updateSetupUI(); clearQueenForm(); renderAll(); return;
+            el.finaleBtn.textContent = "End Season";
+          } else {
+            state.mode = "setup"; state.queens = []; updateSetupUI(); clearQueenForm(); renderAll(); return;
+          }
+      } else if (state.finaleFormat === "top3") {
+          // TOP 3 FINALE FORMAT SCREENS
+          if (f.step === 1) {
+              content = `
+                <div class="section-card flex-col-center">
+                  <div class="label-row"><span class="pill">Screen 1 of 5</span></div>
+                  <p class="big-message">The Top 3</p>
+                  <p class="muted">Condragulations on making it to the finale! You've all performed exceptionally well all season, but unfortunately, one of you will not be making it to the final lip sync.</p>
+                  <div class="flex-center" style="gap:16px; margin-top: 12px;">
+                    ${f.finalists.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
+                  </div>
+                </div>
+              `;
+          } else if (f.step === 2) {
+              content = `
+                <div class="section-card flex-col-center">
+                  <div class="label-row"><span class="pill">Screen 2 of 5</span></div>
+                  <p class="big-message">A difficult decision...</p>
+                  <p class="muted">Based on your performances and track records all season...</p>
+                  <div class="group-row" style="border:none; margin-top: 16px;">
+                    <div class="placement-card bg-elim">${escapeHtml(f.thirdPlace.name)}</div>
+                    <p class="muted" style="margin-top: 8px;">I'm sorry my dear, but you will not be moving forward to the final lip sync. Sashay away.</p>
+                  </div>
+                </div>
+              `;
+          } else if (f.step === 3) {
+              content = `
+                <div class="section-card flex-col-center">
+                  <div class="label-row"><span class="pill">Screen 3 of 5</span></div>
+                  <p class="big-message">The Final Lip Sync</p>
+                  <p class="muted">Two queens stand before me. Prior to tonight, you were asked to prepare a lip sync performance to:</p>
+                  <p class="big-message" style="margin: 12px 0;">${escapeHtml(f.lipSong)}</p>
+                  <div class="flex-center" style="gap:24px; margin-top: 12px;">
+                    <div class="placement-card bg-safe">${escapeHtml(f.final.winner.name)}</div>
+                    <p class="muted" style="font-weight:900;">VS</p>
+                    <div class="placement-card bg-safe">${escapeHtml(f.final.loser.name)}</div>
+                  </div>
+                </div>
+              `;
+          } else if (f.step === 4) {
+              el.finaleBtn.classList.add("hidden");
+              content = `
+                <div class="flex-col-center" style="gap: 20px; padding: 24px 0;">
+                  <div class="label-row"><span class="pill">Screen 4 of 5</span></div>
+                  <p class="big-message">The Winner of the season is...</p>
+                  <div id="loadingSpinner" style="height: 80px; display: grid; place-items: center;">
+                    <div class="spinner"></div>
+                  </div>
+                  <div id="winnerRevealBox" class="hidden flex-col-center" style="width:100%;">
+                      <div class="placement-card bg-winner" style="padding: 24px; font-size: 20px; width: 100%; max-width: 400px; border-radius: 24px;">
+                        <p style="margin:0 0 8px; font-size:14px; font-weight:600; opacity:0.8;">WINNER</p>
+                        <p class="big-message" style="margin:0;">${escapeHtml(f.final.winner.name)}<span class="winner-crown">👑</span></p>
+                      </div>
+                      <div class="placement-card bg-runner" style="padding: 16px; width: 100%; max-width: 400px; border-radius: 16px;">
+                        <p style="margin:0 0 4px; font-size:12px; font-weight:600; opacity:0.8;">RUNNER UP</p>
+                        <p style="margin:0; font-weight:800; font-size: 16px;">${escapeHtml(f.final.loser.name)}</p>
+                      </div>
+                  </div>
+                </div>
+              `;
+              setTimeout(() => {
+                const spinner = document.getElementById("loadingSpinner");
+                const box = document.getElementById("winnerRevealBox");
+                if (spinner && box) {
+                    spinner.classList.add("hidden");
+                    box.classList.remove("hidden");
+                    el.finaleBtn.classList.remove("hidden");
+                }
+              }, 3000);
+          } else if (f.step === 5) {
+              let sortedQueens = [...state.queens].sort((a, b) => {
+                if (b.elimOrder !== a.elimOrder) return b.elimOrder - a.elimOrder;
+                return trackScore(b) - trackScore(a);
+              });
+
+              content = `
+                <div class="section-card" id="finaleTrackRecord" style="text-align: left; padding: 24px; background: white;">
+                  <div style="display:flex; gap: 8px; margin-bottom: 16px;">
+                    <span class="pill">Screen 5 of 5</span>
+                    <span class="pill">Final Track Record</span>
+                  </div>
+                  <h2 style="font-size: 24px; font-weight: 900; margin: 0 0 16px; text-align: center;">Final Season Standings</h2>
+                  <div style="overflow-x: auto;">
+                    <table class="standings-table">
+                      <thead>
+                        <tr>
+                          <th>Queen</th>
+                          ${Array.from({length: state.episodeNumber}, (_, i) => `<th>Ep ${i+1}</th>`).join("")}
+                          <th>Score</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        ${sortedQueens.map(q => `
+                          <tr>
+                            <td class="qname-cell">${escapeHtml(q.name)}</td>
+                            ${Array.from({length: state.episodeNumber}, (_, i) => {
+                              let p = q.history[i];
+                              if (!p) return `<td class="empty-cell"></td>`;
+                              let cssClass = p === "BTM2" ? "bg-btm" : (p === "RUNNER UP" || p === "RUNNER" ? "bg-runner" : `bg-${p.toLowerCase()}`);
+                              return `<td class="${cssClass}" style="font-weight: 900; font-size: 12px;">${p}</td>`;
+                            }).join("")}
+                            <td style="font-weight: 600;">${trackScore(q)}</td>
+                          </tr>
+                        `).join("")}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="button-row" style="justify-content: center; margin-top: 16px;">
+                   <button id="downloadPngBtn" class="secondary">Download Track Record as PNG</button>
+                </div>
+              `;
+              
+              setTimeout(() => {
+                   const btn = document.getElementById("downloadPngBtn");
+                   if(btn) btn.addEventListener("click", () => {
+                       html2canvas(document.getElementById("finaleTrackRecord")).then(canvas => {
+                           const link = document.createElement("a");
+                           link.download = "drag_race_track_record.png";
+                           link.href = canvas.toDataURL("image/png");
+                           link.click();
+                       });
+                   });
+              }, 100);
+
+              el.finaleBtn.textContent = "End Season";
+          } else {
+              state.mode = "setup"; state.queens = []; updateSetupUI(); clearQueenForm(); renderAll(); return;
+          }
       }
+      
       el.finaleContent.innerHTML = content;
     }
 
