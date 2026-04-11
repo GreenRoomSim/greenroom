@@ -96,9 +96,17 @@
     .right-side-empty { padding: 18px; border-radius: 18px; border: 1px dashed var(--border); background: #fbfff7; color: var(--muted); text-align: center; min-height: 160px; display: grid; place-items: center; }
     .queen-card { background: var(--card-2); border: 1px solid var(--border); border-radius: 18px; padding: 12px; box-shadow: 0 6px 14px rgba(76, 110, 50, 0.06); }
     .queen-card .topline { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .queen-card .queen-info { display: flex; align-items: center; gap: 10px; }
+    .queen-card .queen-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: #eee; border: 1px solid var(--border); }
     .queen-name { font-weight: 900; font-size: 16px; margin: 0; line-height: 1.2; }
     .queen-mini { font-size: 12px; color: var(--muted); line-height: 1.4; }
     .tiny-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-start; margin-top: 12px; }
+
+    /* Search Results Style */
+    .search-results-grid { display: grid; grid-template-columns: 1fr; gap: 8px; max-height: 220px; overflow-y: auto; margin-top: 6px;}
+    .search-result-item { display: flex; align-items: center; gap: 12px; padding: 8px; border: 1px solid var(--border); border-radius: 12px; cursor: pointer; background: #fbfff8; transition: background 0.1s; }
+    .search-result-item:hover { background: var(--lime-3); }
+    .search-result-img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: #eee; border: 1px solid var(--border); }
 
     input[type="file"] { display: none; }
     .phase-wrap { display: grid; gap: 14px; }
@@ -182,7 +190,7 @@
   <div class="app">
     <div class="hero">
       <h1 class="title">Greenroom Fantasy Drag Race Simulator</h1>
-      <p class="subtitle">Release v1.3.0 - Last Updated 11/4/26.</p>
+      <p class="subtitle">Release v1.4.0 - Last Updated 11/4/26.</p>
       
       <div class="button-row" style="margin-top: 16px;">
         <button id="patchNotesBtn" class="secondary" style="padding: 8px 16px; font-size: 14px;">View Patch Notes</button>
@@ -198,6 +206,12 @@
         </div>
         <div class="panel-body">
           <div class="patch-notes-content">
+            <h3>v1.4.0 - Update</h3>
+            <ul>
+              <li>Edited Setup Screen UI.</li>
+              <li>Add Real RPDR Queens Feature.</li>
+            </ul>
+
             <h3>v1.3.0 - Update</h3>
             <ul>
               <li>Added Premiere Format customization options.</li>
@@ -227,34 +241,60 @@
       </div>
     </div>
 
+    <div id="customQueenModal" class="modal hidden">
+      <div class="modal-content panel">
+        <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center;">
+          <h2>Add Custom Queen</h2>
+          <button id="closeCustomQueenBtn" class="ghost" style="padding: 6px 12px;">Close</button>
+        </div>
+        <div class="panel-body form-grid">
+          <label class="field">Input Queen Name<input id="queenNameInput" type="text" placeholder="Coral" /></label>
+          <div class="stat-grid">
+            <label class="field">Comedy<input id="comedyInput" type="number" min="1" max="10" value="5" /></label>
+            <label class="field">Design<input id="designInput" type="number" min="1" max="10" value="5" /></label>
+            <label class="field">Performance<input id="performanceInput" type="number" min="1" max="10" value="5" /></label>
+            <label class="field">Acting<input id="actingInput" type="number" min="1" max="10" value="5" /></label>
+            <label class="field">Lip Sync<input id="lipSyncInput" type="number" min="1" max="10" value="5" /></label>
+          </div>
+          <div class="button-row">
+            <button id="randomizeQueenBtn" class="secondary">Randomize</button>
+            <button id="addQueenBtn" class="primary">Add Queen</button>
+          </div>
+          <hr style="border: 0; border-top: 1px solid var(--border); margin: 12px 0;" />
+          <p class="subtle" style="margin-bottom:4px; text-align:center;">Or load/save a full cast using JSON</p>
+          <div class="button-row" style="justify-content:center;">
+            <label for="importCastInput" class="file-btn">Import Cast</label>
+            <input id="importCastInput" type="file" accept="application/json" />
+            <button id="exportCastBtn" class="ghost">Export Cast</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <section id="setupView" class="panel">
       <div class="panel-header">
         <h2>Cast Setup</h2>
-        <div class="meta">Create your cast manually or import from JSON.</div>
+        <div class="meta">Select queens from the franchise or create your own.</div>
       </div>
       <div class="panel-body">
         <div class="setup-layout">
           <div class="control-panel">
-            <div class="panel-title">Control Panel</div>
-            <p class="subtle">Create one queen at a time, or load a full cast.</p>
+            <div class="panel-title">Add Queens</div>
+            <p class="subtle">Search for a queen, add a random one, or create your own custom drag star!</p>
             <div class="form-grid">
-              <label class="field">Input Queen Name<input id="queenNameInput" type="text" placeholder="Coral" /></label>
-              <div class="stat-grid">
-                <label class="field">Comedy<input id="comedyInput" type="number" min="1" max="10" value="5" /></label>
-                <label class="field">Design<input id="designInput" type="number" min="1" max="10" value="5" /></label>
-                <label class="field">Performance<input id="performanceInput" type="number" min="1" max="10" value="5" /></label>
-                <label class="field">Acting<input id="actingInput" type="number" min="1" max="10" value="5" /></label>
-                <label class="field">Lip Sync<input id="lipSyncInput" type="number" min="1" max="10" value="5" /></label>
+              
+              <div class="button-row" style="margin-bottom: 8px;">
+                <button id="addRandomRealBtn" class="secondary" style="flex:1;">Add Random</button>
+                <button id="openCustomQueenBtn" class="ghost" style="flex:1;">Add Custom</button>
               </div>
-              <div class="button-row">
-                <button id="randomizeQueenBtn" class="secondary">Randomize</button>
-                <button id="addQueenBtn" class="primary">Add Queen</button>
-              </div>
-              <div class="button-row">
-                <label for="importCastInput" class="file-btn">Import Cast JSON</label>
-                <input id="importCastInput" type="file" accept="application/json" />
-                <button id="exportCastBtn" class="ghost">Export Cast JSON</button>
-              </div>
+
+              <label class="field">Search Franchise Queens
+                <input id="realQueenSearch" type="text" placeholder="e.g. Trixie Mattel..." autocomplete="off"/>
+              </label>
+              
+              <div id="searchResults" class="search-results-grid"></div>
+
+              <hr style="border: 0; border-top: 1px solid var(--border); margin: 12px 0;" />
               
               <label class="field" style="margin-top: 4px;">Premiere Format
                 <select id="premiereFormatSelect">
@@ -321,6 +361,17 @@
   <script>
     const MIN_CAST = 10;
     const MAX_CAST = 16;
+    let allRealQueens = []; // Will hold the data loaded from queens.json
+
+    // Load Real Queens from JSON file
+    fetch('queens.json')
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.queens) {
+          allRealQueens = data.queens;
+        }
+      })
+      .catch(error => console.error("Error loading queens.json:", error));
 
     // Challenge Lists
     const miniChallenges = [
@@ -348,12 +399,6 @@
       { name: "Music Video", type: "Performance", once: true, req: "last" }
     ];
 
-    // ==========================================
-    // HOW TO ADD SONGS:
-    // Simply add a new line below with "Song Name by Artist",
-    // Make sure every song has "quotes" around it, 
-    // and a comma at the very end of the line!
-    // ==========================================
     const lipSongs = [
       "Strong Enough by Cher", 
       "Toxic by Britney Spears", 
@@ -364,10 +409,22 @@
       "Physical by Dua Lipa", 
       "Roar by Katy Perry", 
       "Rain On Me by Lady Gaga & Ariana Grande",
-      // ADD NEW SONGS BELOW HERE:
-      
+      "I'm Every Woman by Chaka Khan",
+      "Espresso by Sabrina Carpenter",
+      "Dont Start Now by Dua Lipa",
+      "Brreak Free by Ariana Grande",
+      "Time Warp from The Rocky Horror Picture Show",
+      "Hot Stuff by Donna Summer",
+      "The Winner Takes It All by Abba",
+      "Murder On The Dancefloor by Sophie Ellis-Bextor",
+      "Super Graphic Ultra Modern Girl by Chappell Roan",
+      "WAP by Cardi B ft. Megan Thee Stallion",
+      "Edge Of Glory by Lady Gaga",
+      "I Wanna Dance With Somebody by Whitney Houtston",
+      "Run The WOrld (Girls) by Beyoncé",
+      "Bad Romance by Lady Gaga",
+      "Total Eclipse Of The Heart by Bonnie Tyler",
     ];
-    // ==========================================
 
     const state = {
       mode: "setup",
@@ -396,22 +453,85 @@
       patchNotesBtn: document.getElementById("patchNotesBtn"),
       closePatchNotesBtn: document.getElementById("closePatchNotesBtn"),
       patchNotesModal: document.getElementById("patchNotesModal"),
-      suggestBtn: document.getElementById("suggestBtn")
+      suggestBtn: document.getElementById("suggestBtn"),
+      openCustomQueenBtn: document.getElementById("openCustomQueenBtn"),
+      closeCustomQueenBtn: document.getElementById("closeCustomQueenBtn"),
+      customQueenModal: document.getElementById("customQueenModal"),
+      realQueenSearch: document.getElementById("realQueenSearch"),
+      searchResults: document.getElementById("searchResults"),
+      addRandomRealBtn: document.getElementById("addRandomRealBtn")
     };
 
     // Modal Events
-    el.patchNotesBtn.addEventListener("click", () => {
-      el.patchNotesModal.classList.remove("hidden");
-    });
-    el.closePatchNotesBtn.addEventListener("click", () => {
-      el.patchNotesModal.classList.add("hidden");
-    });
+    el.patchNotesBtn.addEventListener("click", () => el.patchNotesModal.classList.remove("hidden"));
+    el.closePatchNotesBtn.addEventListener("click", () => el.patchNotesModal.classList.add("hidden"));
     
-    // Suggest Button Event (UPDATE THE LINK HERE)
+    el.openCustomQueenBtn.addEventListener("click", () => el.customQueenModal.classList.remove("hidden"));
+    el.closeCustomQueenBtn.addEventListener("click", () => el.customQueenModal.classList.add("hidden"));
+
     el.suggestBtn.addEventListener("click", () => {
-      // Replace the URL below with your actual Google Form URL
       window.open("https://forms.gle/bprZzRLGFyfe9yWs6", "_blank");
     });
+
+    // Real Queen Search & Add functionality
+    el.realQueenSearch.addEventListener("input", (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      if (!query) {
+        el.searchResults.innerHTML = "";
+        return;
+      }
+      
+      const results = allRealQueens.filter(q => q.name.toLowerCase().includes(query)).slice(0, 15);
+      el.searchResults.innerHTML = results.map(q => `
+        <div class="search-result-item" data-name="${escapeHtml(q.name)}" data-image="${escapeHtml(q.image)}">
+          <img src="${escapeHtml(q.image)}" class="search-result-img" alt="${escapeHtml(q.name)}" />
+          <span style="font-weight: 600;">${escapeHtml(q.name)}</span>
+        </div>
+      `).join("");
+    });
+
+    el.searchResults.addEventListener("click", (e) => {
+      const item = e.target.closest(".search-result-item");
+      if (!item) return;
+      
+      const name = item.dataset.name;
+      const image = item.dataset.image;
+      
+      addRealQueen(name, image);
+      
+      // Clear search
+      el.realQueenSearch.value = "";
+      el.searchResults.innerHTML = "";
+    });
+
+    el.addRandomRealBtn.addEventListener("click", () => {
+      if (!allRealQueens.length) return alert("Still loading queens data, please wait a moment.");
+      
+      const unaddedQueens = allRealQueens.filter(rq => !state.queens.some(sq => sq.name === rq.name));
+      if (!unaddedQueens.length) return alert("You've added all available queens!");
+      
+      const randomQueen = pick(unaddedQueens);
+      addRealQueen(randomQueen.name, randomQueen.image);
+    });
+
+    function addRealQueen(name, image) {
+      if (state.queens.some(q => q.name === name)) {
+        return alert(`${name} is already in the cast!`);
+      }
+      
+      // We randomly generate stats for real queens since they don't have them in the json
+      state.queens.push({
+        name: name,
+        image: image,
+        comedy: intRand(3, 10),
+        design: intRand(3, 10),
+        performance: intRand(3, 10),
+        acting: intRand(3, 10),
+        lip_sync: intRand(3, 10)
+      });
+      
+      updateSetupUI();
+    }
 
     function rand(min, max) { return min + Math.random() * (max - min); }
     function intRand(min, max) { return Math.floor(rand(min, max + 1)); }
@@ -422,7 +542,7 @@
 
     function randomizeQueenForm() {
       el.comedyInput.value = intRand(1, 10); el.designInput.value = intRand(1, 10); el.performanceInput.value = intRand(1, 10); el.actingInput.value = intRand(1, 10); el.lipSyncInput.value = intRand(1, 10);
-      if (!el.queenNameInput.value.trim()) el.queenNameInput.value = `Queen ${state.queens.length + 1}`;
+      if (!el.queenNameInput.value.trim()) el.queenNameInput.value = `Custom Queen ${state.queens.length + 1}`;
     }
 
     function clearQueenForm() {
@@ -438,7 +558,13 @@
       el.castPreview.innerHTML = state.queens.map((q, index) => `
         <div class="queen-card">
           <div class="topline">
-            <div class="queen-name">${escapeHtml(q.name || `Queen ${index + 1}`)}</div>
+            <div class="queen-info">
+              ${q.image 
+                ? `<img src="${escapeHtml(q.image)}" class="queen-avatar" alt="${escapeHtml(q.name)}" />` 
+                : `<div class="queen-avatar" style="display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800; color:var(--muted);">?</div>`
+              }
+              <div class="queen-name">${escapeHtml(q.name || `Queen ${index + 1}`)}</div>
+            </div>
             <span class="pill">#${index + 1}</span>
           </div>
           <div class="queen-mini">Com ${q.comedy} • Des ${q.design} • Perf ${q.performance} • Act ${q.acting} • Lip ${q.lip_sync}</div>
@@ -450,7 +576,7 @@
     function addQueenFromForm() {
       const name = (el.queenNameInput.value || "").trim();
       if (!name) return alert("Please input a queen name.");
-      state.queens.push({ name, comedy: normalizeStat(el.comedyInput.value), design: normalizeStat(el.designInput.value), performance: normalizeStat(el.performanceInput.value), acting: normalizeStat(el.actingInput.value), lip_sync: normalizeStat(el.lipSyncInput.value) });
+      state.queens.push({ name, image: null, comedy: normalizeStat(el.comedyInput.value), design: normalizeStat(el.designInput.value), performance: normalizeStat(el.performanceInput.value), acting: normalizeStat(el.actingInput.value), lip_sync: normalizeStat(el.lipSyncInput.value) });
       updateSetupUI(); clearQueenForm(); el.queenNameInput.focus();
     }
 
@@ -458,8 +584,12 @@
       if (state.queens.length < MIN_CAST || state.queens.length > MAX_CAST) return alert(`Cast must be between ${MIN_CAST} and ${MAX_CAST} queens.`);
       state.finaleFormat = el.finaleFormatSelect.value;
       state.premiereFormat = el.premiereFormatSelect.value;
+      
+      // Close custom modal if open
+      el.customQueenModal.classList.add("hidden");
+
       state.queens = state.queens.map((q, i) => ({
-        id: i, name: q.name, stats: { comedy: q.comedy, design: q.design, performance: q.performance, acting: q.acting, lipSync: q.lip_sync },
+        id: i, name: q.name, image: q.image, stats: { comedy: q.comedy, design: q.design, performance: q.performance, acting: q.acting, lipSync: q.lip_sync },
         record: { WIN: 0, TOP2: 0, HIGH: 0, SAFE: 0, LOW: 0, BTM2: 0, ELIM: 0 },
         history: [], eliminated: false, elimOrder: 999
       }));
@@ -484,10 +614,8 @@
         return true;
       });
       
-      // Fallback 1: If no valid timing challenges, use remaining "none" challenges
       if (!valid.length) valid = pool.filter(c => c.req === "none");
       
-      // Fallback 2: If we've used ALL "none" challenges (longer seasons), reuse all "none" challenges
       if (!valid.length) {
         valid = miniChallenges.filter(c => c.req === "none");
       }
@@ -582,11 +710,9 @@
         bottomTwo = [scores[n-2].queen, scores[n-1].queen];
 
         if (n < 6) {
-            // Less than 6 queens: No safe queens, everyone is critiqued
             pureSafe = [];
             let middle = scores.slice(1, n-2);
             if (middle.length === 1) {
-                // Determine if they did more 'good' or 'bad'
                 if (middle[0].score > (scores[0].score + bottomTwo[0].score)/2) { highQueens = [middle[0].queen]; }
                 else { savedLow = middle[0].queen; }
             } else if (middle.length === 2) {
@@ -715,7 +841,6 @@
         if (!data.countsApplied) {
           const epIndex = state.episodeNumber - 1;
           if (state.episodeNumber === 1 && state.premiereFormat === "top2") {
-              // Top 2 records applied after lip sync
               data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
               data.placements.pureSafe.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
               data.placements.bottomThree.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
@@ -847,7 +972,7 @@
               data.elimination = { doubleSashay: true, q1, q2 };
           } else {
               l.record.ELIM += 1; l.eliminated = true; l.elimOrder = state.episodeNumber;
-              l.history[state.episodeNumber - 1] = "ELIM"; // Overwrite BTM2 with ELIM
+              l.history[state.episodeNumber - 1] = "ELIM";
               data.elimination = { survivor: w, eliminated: l };
           }
         }
@@ -995,8 +1120,7 @@
           
           state.finaleData = { step: 1, semi1, semi2, final };
       } else {
-          // Top 3 Logic
-          const thirdPlace = finalists[2]; // Worst track record
+          const thirdPlace = finalists[2];
           const top2 = [finalists[0], finalists[1]];
           
           thirdPlace.elimOrder = state.episodeNumber + 1;
@@ -1018,7 +1142,7 @@
           };
       }
 
-      state.episodeNumber++; // Increase episode count to show finale on track record
+      state.episodeNumber++;
       state.mode = "finale";
       renderFinale();
     }
@@ -1180,7 +1304,6 @@
             state.mode = "setup"; state.queens = []; updateSetupUI(); clearQueenForm(); renderAll(); return;
           }
       } else if (state.finaleFormat === "top3") {
-          // TOP 3 FINALE FORMAT SCREENS
           if (f.step === 1) {
               content = `
                 <div class="section-card flex-col-center">
@@ -1335,7 +1458,7 @@
         try {
           const parsed = JSON.parse(reader.result);
           if (!parsed.queens) return alert("Invalid JSON format.");
-          state.queens = parsed.queens.map(q => ({ name: q.name, comedy: q.comedy, design: q.design, performance: q.performance, acting: q.acting, lip_sync: q.lip_sync || q.lipSync }));
+          state.queens = parsed.queens.map(q => ({ name: q.name, image: q.image || null, comedy: q.comedy, design: q.design, performance: q.performance, acting: q.acting, lip_sync: q.lip_sync || q.lipSync }));
           updateSetupUI();
         } catch { alert("Could not parse file."); }
       };
