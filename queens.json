@@ -1,322 +1,2553 @@
 {
   "queens": [
-
-    { "name": "Victoria 'Porkchop' Parker",                        "image": "victoria_porkchop_parker.webp",                          "seasons": ["US S1"] },
-    { "name": "Akashia",                                           "image": "akashia.webp",                                           "seasons": ["US S1"] },
-    { "name": "Tammie Brown",                                      "image": "tammie_brown.webp",                                      "seasons": ["US S1", "US AS1"] },
-    { "name": "Jade",                                              "image": "jade.webp",                                              "seasons": ["US S1"] },
-    { "name": "Ongina",                                            "image": "ongina.webp",                                            "seasons": ["US S1", "US AS5"] },
-    { "name": "Shannel",                                           "image": "shannel.webp",                                           "seasons": ["US S1", "US AS1", "US AS9"] },
-    { "name": "Nina Flowers",                                      "image": "nina_flowers.webp",                                      "seasons": ["US S1", "US AS1"] },
-    { "name": "BeBe Zahara Benet",                                 "image": "bebe_zahara_benet.webp",                                 "seasons": ["US S1", "US AS3"] },
-    { "name": "Shangela",                                          "image": "shangela.webp",                                          "seasons": ["US S2", "US S3", "US AS3"] },
-    { "name": "Nicole Paige Brooks",                               "image": "nicole_paige_brooks.webp",                               "seasons": ["US S2", "US AS10"] },
-    { "name": "Mystique Summers Madison",                          "image": "mystique_summers_madison.webp",                          "seasons": ["US S2"] },
-    { "name": "Sahara Davenport",                                  "image": "sahara_davenport.webp",                                  "seasons": ["US S2"] },
-    { "name": "Kylie Sonique Love",                                "image": "sonique.webp",                                           "seasons": ["US S2", "US AS6"] },
-    { "name": "Jessica Wild",                                      "image": "jessica_wild.webp",                                      "seasons": ["US S2", "US AS8"] },
-    { "name": "Pandora Boxx",                                      "image": "pandora_boxx.webp",                                      "seasons": ["US S2", "US AS1", "US AS6"] },
-    { "name": "Morgan McMichaels",                                 "image": "morgan_mcmichaels.webp",                                 "seasons": ["US S2", "US AS3"] },
-    { "name": "Jujubee",                                           "image": "jujubee.webp",                                           "seasons": ["US S2", "US AS1", "US AS5"] },
-    { "name": "Raven",                                             "image": "raven.webp",                                             "seasons": ["US S2", "US AS1"] },
-    { "name": "Tatianna",                                          "image": "tatianna.webp",                                          "seasons": ["US S2", "US AS2"] },
-    { "name": "Tyra Sanchez",                                      "image": "tyra_sanchez.webp",                                      "seasons": ["US S2"] },
-    { "name": "Venus D-Lite",                                      "image": "venus_d_lite.webp",                                      "seasons": ["US S3"] },
-    { "name": "Stacy Layne Matthews",                              "image": "stacy_layne_matthews.webp",                              "seasons": ["US S3"] },
-    { "name": "Phoenix",                                           "image": "phoenix.webp",                                           "seasons": ["US S3", "US AS10"] },
-    { "name": "Mimi Imfurst",                                      "image": "mimi_imfurst.webp",                                      "seasons": ["US S3", "US AS1"] },
-    { "name": "India Ferrah",                                      "image": "india_ferrah.webp",                                      "seasons": ["US S3", "US AS5"] },
-    { "name": "Mariah",                                            "image": "mariah.webp",                                            "seasons": ["US S3", "US AS5"] },
-    { "name": "Delta Work",                                        "image": "delta_work.webp",                                        "seasons": ["US S3"] },
-    { "name": "Carmen Carrera",                                    "image": "carmen_carrera.webp",                                    "seasons": ["US S3"] },
-    { "name": "Alexis Mateo",                                      "image": "alexis_mateo.webp",                                      "seasons": ["US S3", "US AS1", "US AS5"] },
-    { "name": "Yara Sofia",                                        "image": "yara_sofia.webp",                                        "seasons": ["US S3", "US AS1", "US AS6"] },
-    { "name": "Manila Luzon",                                      "image": "manila_luzon.webp",                                      "seasons": ["US S3", "US AS1", "US AS4"] },
-    { "name": "Raja",                                              "image": "raja.webp",                                              "seasons": ["US S3", "US AS7"] },
-    { "name": "Alisa Summers",                                     "image": "alisa_summers.webp",                                     "seasons": ["US S4"] },
-    { "name": "The Princess",                                      "image": "the_princess.webp",                                      "seasons": ["US S4"] },
-    { "name": "Lashauwn Beyond",                                   "image": "lashauwn_beyond.webp",                                   "seasons": ["US S4"] },
-    { "name": "Madame LaQueer",                                    "image": "madame_laqueer.webp",                                    "seasons": ["US S4"] },
-    { "name": "Milan",                                             "image": "milan.webp",                                             "seasons": ["US S4"] },
-    { "name": "Jiggly Caliente",                                   "image": "jiggly_caliente.webp",                                   "seasons": ["US S4", "US AS6"] },
-    { "name": "Dida Ritz",                                         "image": "dida_ritz.webp",                                         "seasons": ["US S4"] },
-    { "name": "Kenya Michaels",                                    "image": "kenya_michaels.webp",                                    "seasons": ["US S4"] },
-    { "name": "Willam",                                            "image": "willam.webp",                                            "seasons": ["US S4"] },
-    { "name": "Phi Phi O'Hara",                                    "image": "phi_phi_o_hara.webp",                                    "seasons": ["US S4", "US AS2"] },
-    { "name": "Latrice Royale",                                    "image": "latrice_royale.webp",                                    "seasons": ["US S4", "US AS1", "US AS4"] },
-    { "name": "Chad Michaels",                                     "image": "chad_michaels.webp",                                     "seasons": ["US S4", "US AS1"] },
-    { "name": "Sharon Needles",                                    "image": "sharon_needles.webp",                                    "seasons": ["US S4"] },
-    { "name": "Penny Tration",                                     "image": "penny_tration.webp",                                     "seasons": ["US S5"] },
-    { "name": "Serena ChaCha",                                     "image": "serena_chacha.webp",                                     "seasons": ["US S5", "US AS6"] },
-    { "name": "Monica Beverly Hillz",                              "image": "monica_beverly_hillz.webp",                              "seasons": ["US S5", "US AS8"] },
-    { "name": "Honey Mahogany",                                    "image": "honey_mahogany.webp",                                    "seasons": ["US S5"] },
-    { "name": "Vivienne Pinay",                                    "image": "vivienne_pinay.webp",                                    "seasons": ["US S5"] },
-    { "name": "Lineysha Sparx",                                    "image": "lineysha_sparkx.webp",                                   "seasons": ["US S5"] },
-    { "name": "Jade Jolie",                                        "image": "jade_jolie.webp",                                        "seasons": ["US S5"] },
-    { "name": "Ivy Winters",                                       "image": "ivy_winters.webp",                                       "seasons": ["US S5"] },
-    { "name": "Coco Montrese",                                     "image": "coco_montrese.webp",                                     "seasons": ["US S5", "US AS2"] },
-    { "name": "Detox",                                             "image": "detox.webp",                                             "seasons": ["US S5", "US AS2"] },
-    { "name": "Roxxxy Andrews",                                    "image": "roxxxy_andrews.webp",                                    "seasons": ["US S5", "US AS2", "US AS9"] },
-    { "name": "Alaska",                                            "image": "alaska.webp",                                            "seasons": ["US S5", "US AS2"] },
-    { "name": "Alyssa Edwards",                                    "image": "alyssa_edwards.webp",                                    "seasons": ["US S5", "US AS2"] },
-    { "name": "Jinkx Monsoon",                                     "image": "jinkx_monsoon.webp",                                     "seasons": ["US S5", "US AS7"] },
-    { "name": "Magnolia Crawford",                                 "image": "magnolia_crawford.webp",                                 "seasons": ["US S6"] },
-    { "name": "Kelly Mantle",                                      "image": "kelly_mantle.webp",                                      "seasons": ["US S6"] },
-    { "name": "Vivacious",                                         "image": "vivacious.webp",                                         "seasons": ["US S6"] },
-    { "name": "April Carrion",                                     "image": "april_carrion.webp",                                     "seasons": ["US S6"] },
-    { "name": "Gia Gunn",                                          "image": "gia_gunn.webp",                                          "seasons": ["US S6", "US AS4"] },
-    { "name": "Milk",                                              "image": "milk.webp",                                              "seasons": ["US S6", "US AS3"] },
-    { "name": "Laganja Estranja",                                  "image": "laganja_estranja.webp",                                  "seasons": ["US S6"] },
-    { "name": "Trinity K. Bonet",                                  "image": "trinity_k_bonet.webp",                                   "seasons": ["US S6", "US AS6"] },
-    { "name": "Joslyn Fox",                                        "image": "joslyn_fox.webp",                                        "seasons": ["US S6"] },
-    { "name": "BenDeLaCreme",                                      "image": "bendelacreme.webp",                                      "seasons": ["US S6", "US AS3"] },
-    { "name": "Darienne Lake",                                     "image": "darienne_lake.webp",                                     "seasons": ["US S6", "US AS8"] },
-    { "name": "Courtney Act",                                      "image": "courtney_act.webp",                                      "seasons": ["US S6"] },
-    { "name": "Adore Delano",                                      "image": "adore_delano.webp",                                      "seasons": ["US S6", "US AS2"] },
-    { "name": "Bianca Del Rio",                                    "image": "bianca_del_rio.webp",                                    "seasons": ["US S6"] },
-    { "name": "Tempest DuJour",                                    "image": "tempest_dujour.webp",                                    "seasons": ["US S7"] },
-    { "name": "Sasha Belle",                                       "image": "sasha_belle.webp",                                       "seasons": ["US S7"] },
-    { "name": "Jasmine Masters",                                   "image": "jasmine_masters.webp",                                   "seasons": ["US S7", "US AS4"] },
-    { "name": "Mrs. Kasha Davis",                                  "image": "mrs_kasha_davis.webp",                                   "seasons": ["US S7", "US AS8"] },
-    { "name": "Kandy Ho",                                          "image": "kandy_ho.webp",                                          "seasons": ["US S7"] },
-    { "name": "Max",                                               "image": "max.webp",                                               "seasons": ["US S7"] },
-    { "name": "Jaidynn Diore Fierce",                              "image": "jaidynn_diore_fierce.webp",                              "seasons": ["US S7"] },
-    { "name": "Miss Fame",                                         "image": "miss_fame.webp",                                         "seasons": ["US S7"] },
-    { "name": "Trixie Mattel",                                     "image": "trixie_mattel.webp",                                     "seasons": ["US S7", "US AS3"] },
-    { "name": "Katya",                                             "image": "katya.webp",                                             "seasons": ["US S7", "US AS2"] },
-    { "name": "Kennedy Davenport",                                 "image": "kennedy_davenport.webp",                                 "seasons": ["US S7", "US AS3"] },
-    { "name": "Ginger Minj",                                       "image": "ginger_minj.webp",                                       "seasons": ["US S7", "US AS2", "US AS6", "US AS10"] },
-    { "name": "Pearl",                                             "image": "pearl.webp",                                             "seasons": ["US S7"] },
-    { "name": "Violet Chachki",                                    "image": "violet_chachki.webp",                                    "seasons": ["US S7"] },
-    { "name": "Laila McQueen",                                     "image": "laila_mcqueen.webp",                                     "seasons": ["US S8"] },
-    { "name": "Dax ExclamationPoint",                              "image": "dax_exclamationpoint.webp",                              "seasons": ["US S8"] },
-    { "name": "Cynthia Lee Fontaine",                              "image": "cynthia_lee_fontaine.webp",                              "seasons": ["US S8", "US S9", "US AS10"] },
-    { "name": "Naysha Lopez",                                      "image": "naysha_lopez.webp",                                      "seasons": ["US S8", "US AS8"] },
-    { "name": "Acid Betty",                                        "image": "acid_betty.webp",                                        "seasons": ["US S8", "US AS10"] },
-    { "name": "Robbie Turner",                                     "image": "robbie_turner.webp",                                     "seasons": ["US S8"] },
-    { "name": "Thorgy Thor",                                       "image": "thorgy_thor.webp",                                       "seasons": ["US S8", "US AS3"] },
-    { "name": "Derrick Barry",                                     "image": "derrick_barry.webp",                                     "seasons": ["US S8", "US AS5"] },
-    { "name": "Chi Chi DeVayne",                                   "image": "chi_chi_devayne.webp",                                   "seasons": ["US S8", "US AS3"] },
-    { "name": "Naomi Smalls",                                      "image": "naomi_smalls.webp",                                      "seasons": ["US S8", "US AS4"] },
-    { "name": "Kim Chi",                                           "image": "kim_chi.webp",                                           "seasons": ["US S8"] },
-    { "name": "Bob The Drag Queen",                                "image": "bob_the_drag_queen.webp",                                "seasons": ["US S8"] },
-    { "name": "Jaymes Mansfield",                                  "image": "jaymes_mansfield.webp",                                  "seasons": ["US S9", "US AS8"] },
-    { "name": "Kimora Blac",                                       "image": "kimora_blac.webp",                                       "seasons": ["US S9"] },
-    { "name": "Charlie Hides",                                     "image": "charlie_hides.webp",                                     "seasons": ["US S9"] },
-    { "name": "Eureka O'Hara",                                     "image": "eureka_ohara.webp",                                      "seasons": ["US S9", "US S10", "US AS6"] },
-    { "name": "Farrah Moan",                                       "image": "farrah_moan.webp",                                       "seasons": ["US S9", "US AS4"] },
-    { "name": "Aja",                                               "image": "aja.webp",                                               "seasons": ["US S9", "US AS3", "US AS10"] },
-    { "name": "Valentina",                                         "image": "valentina.webp",                                         "seasons": ["US S9", "US AS4"] },
-    { "name": "Nina Bo'nina Brown",                                "image": "nina_bonina_brown.webp",                                 "seasons": ["US S9"] },
-    { "name": "Alexis Michelle",                                   "image": "alexis_michelle.webp",                                   "seasons": ["US S9", "US AS8"] },
-    { "name": "Trinity The Tuck",                                  "image": "trinity_the_tuck.webp",                                  "seasons": ["US S9", "US AS4", "US AS7"] },
-    { "name": "Peppermint",                                        "image": "peppermint.webp",                                        "seasons": ["US S9"] },
-    { "name": "Shea Couleé",                                       "image": "shea_coulee.webp",                                       "seasons": ["US S9", "US AS5", "US AS7"] },
-    { "name": "Sasha Velour",                                      "image": "sasha_velour.webp",                                      "seasons": ["US S9"] },
-    { "name": "Vanessa Vanjie",                                    "image": "vanessa_vanjie.webp",                                    "seasons": ["US S10", "US S11", "US AS9"] },
-    { "name": "Kalorie Karbdashian-Williams",                      "image": "kalorie_karbdashian_williams.webp",                      "seasons": ["US S10"] },
-    { "name": "Yuhua Hamasaki",                                    "image": "yuhua_hamasaki.webp",                                    "seasons": ["US S10"] },
-    { "name": "Dusty Ray Bottoms",                                 "image": "dusty_ray_bottoms.webp",                                 "seasons": ["US S10"] },
-    { "name": "Mayhem Miller",                                     "image": "mayhem_miller.webp",                                     "seasons": ["US S10", "US AS5"] },
-    { "name": "Blair St. Clair",                                   "image": "blair_st_clair.webp",                                    "seasons": ["US S10", "US AS5"] },
-    { "name": "The Vixen",                                         "image": "the_vixen.webp",                                         "seasons": ["US S10"] },
-    { "name": "Monique Heart",                                     "image": "monique_heart.webp",                                     "seasons": ["US S10", "US AS4"] },
-    { "name": "Miz Cracker",                                       "image": "miz_cracker.webp",                                       "seasons": ["US S10", "US AS5"] },
-    { "name": "Asia O'Hara",                                       "image": "asia_o_hara.webp",                                       "seasons": ["US S10"] },
-    { "name": "Kameron Michaels",                                  "image": "kameron_michaels.webp",                                  "seasons": ["US S10"] },
-    { "name": "Aquaria",                                           "image": "aquaria.webp",                                           "seasons": ["US S10"] },
-    { "name": "Monét X Change",                                    "image": "monet_x_change.webp",                                    "seasons": ["US S10", "US AS4", "US AS7"] },
-    { "name": "Soju",                                              "image": "soju.webp",                                              "seasons": ["US S11"] },
-    { "name": "Kahanna Montrese",                                  "image": "kahanna_montrese.webp",                                  "seasons": ["US S11", "US AS8"] },
-    { "name": "Honey Davenport",                                   "image": "honey_davenport.webp",                                   "seasons": ["US S11"] },
-    { "name": "Mercedes Iman Diamond",                             "image": "mercedes_iman_diamond.webp",                             "seasons": ["US S11"] },
-    { "name": "Ariel Versace",                                     "image": "ariel_versace.webp",                                     "seasons": ["US S11"] },
-    { "name": "Scarlet Envy",                                      "image": "scarlet_envy.webp",                                      "seasons": ["US S11", "US AS6"] },
-    { "name": "Ra'Jah O'Hara",                                     "image": "ra_jah_o_hara.webp",                                     "seasons": ["US S11", "US AS6"] },
-    { "name": "Shuga Cain",                                        "image": "shuga_cain.webp",                                        "seasons": ["US S11"] },
-    { "name": "Nina West",                                         "image": "nina_west.webp",                                         "seasons": ["US S11", "US AS9"] },
-    { "name": "Plastique Tiara",                                   "image": "plastique_tiara.webp",                                   "seasons": ["US S11", "US AS9"] },
-    { "name": "Silky Nutmeg Ganache",                              "image": "silky_nutmeg_ganache.webp",                              "seasons": ["US S11", "US AS6"] },
-    { "name": "A'keria C. Davenport",                              "image": "a_keria_c_davenport.webp",                               "seasons": ["US S11", "US AS6"] },
-    { "name": "Brooke Lynn Hytes",                                 "image": "brooke_lynn_hytes.webp",                                 "seasons": ["US S11"] },
-    { "name": "Yvie Oddly",                                        "image": "yvie_oddly.webp",                                        "seasons": ["US S11", "US AS7"] },
-    { "name": "Dahlia Sin",                                        "image": "dahlia_sin.webp",                                        "seasons": ["US S12"] },
-    { "name": "Rock M. Sakura",                                    "image": "rock_m_sakura.webp",                                     "seasons": ["US S12"] },
-    { "name": "Nicky Doll",                                        "image": "nicky_doll.webp",                                        "seasons": ["US S12"] },
-    { "name": "Aiden Zhane",                                       "image": "aiden_zhane.webp",                                       "seasons": ["US S12"] },
-    { "name": "Brita",                                             "image": "brita.webp",                                             "seasons": ["US S12"] },
-    { "name": "Jan",                                               "image": "jan.webp",                                               "seasons": ["US S12", "US AS6"] },
-    { "name": "Widow Von'Du",                                      "image": "widow_von_du.webp",                                      "seasons": ["US S12"] },
-    { "name": "Heidi N Closet",                                    "image": "heidi_n_closet.webp",                                    "seasons": ["US S12", "US AS8"] },
-    { "name": "Jackie Cox",                                        "image": "jackie_cox.webp",                                        "seasons": ["US S12"] },
-    { "name": "Crystal Methyd",                                    "image": "crystal_methyd.webp",                                    "seasons": ["US S12"] },
-    { "name": "Gigi Goode",                                        "image": "gigi_goode.webp",                                        "seasons": ["US S12"] },
-    { "name": "Jaida Essence Hall",                                "image": "jaida_essence_hall.webp",                                "seasons": ["US S12", "US AS7"] },
-    { "name": "Sherry Pie",                                        "image": "sherry_pie.webp",                                        "seasons": ["US S12"] },
-    { "name": "Kahmora Hall",                                      "image": "kahmora_hall.webp",                                      "seasons": ["US S13", "US AS8"] },
-    { "name": "Joey Jay",                                          "image": "joey_jay.webp",                                          "seasons": ["US S13"] },
-    { "name": "Tamisha Iman",                                      "image": "tamisha_iman.webp",                                      "seasons": ["US S13"] },
-    { "name": "LaLa Ri",                                           "image": "lala_ri.webp",                                           "seasons": ["US S13", "US AS8"] },
-    { "name": "Elliott with 3 Ks",                                 "image": "elliott_with_2_ts.webp",                                 "seasons": ["US S13"] },
-    { "name": "Denali",                                            "image": "denali.webp",                                            "seasons": ["US S13", "US AS10"] },
-    { "name": "Tina Burner",                                       "image": "tina_burner.webp",                                       "seasons": ["US S13", "US AS10"] },
-    { "name": "Utica Queen",                                       "image": "utica_queen.webp",                                       "seasons": ["US S13"] },
-    { "name": "Olivia Lux",                                        "image": "olivia_lux.webp",                                        "seasons": ["US S13", "US AS10"] },
-    { "name": "Rosé",                                              "image": "rose.webp",                                              "seasons": ["US S13"] },
-    { "name": "Gottmik",                                           "image": "gottmik.webp",                                           "seasons": ["US S13", "US AS9"] },
-    { "name": "Kandy Muse",                                        "image": "kandy_muse.webp",                                        "seasons": ["US S13", "US AS8"] },
-    { "name": "Symone",                                            "image": "symone.webp",                                            "seasons": ["US S13"] },
-    { "name": "Alyssa Hunter",                                     "image": "alyssa_hunter.webp",                                     "seasons": ["US S14", "US AS10"] },
-    { "name": "June Jambalaya",                                    "image": "june_jambalaya.webp",                                    "seasons": ["US S14"] },
-    { "name": "Maddy Morphosis",                                   "image": "maddy_morphosis.webp",                                   "seasons": ["US S14"] },
-    { "name": "Orion Story",                                       "image": "orion_story.webp",                                       "seasons": ["US S14"] },
-    { "name": "Kornbread 'The Snack' Jeté",                        "image": "kornbread_the_snack_jete.webp",                          "seasons": ["US S14"] },
-    { "name": "Kerri Colby",                                       "image": "kerri_colby.webp",                                       "seasons": ["US S14", "US AS10"] },
-    { "name": "Jasmine Kennedie",                                  "image": "jasmine_kennedie.webp",                                  "seasons": ["US S14"] },
-    { "name": "Jorgeous",                                          "image": "jorgeous.webp",                                          "seasons": ["US S14", "US AS9", "US AS10"] },
-    { "name": "DeJa Skye",                                         "image": "deja_skye.webp",                                         "seasons": ["US S14", "US AS10"] },
-    { "name": "Angeria Paris VanMicheals",                         "image": "angeria_paris_vanmicheals.webp",                         "seasons": ["US S14", "US AS9"] },
-    { "name": "Bosco",                                             "image": "bosco.webp",                                             "seasons": ["US S14", "US AS10"] },
-    { "name": "Daya Betty",                                        "image": "daya_betty.webp",                                        "seasons": ["US S14", "US AS10"] },
-    { "name": "Lady Camden",                                       "image": "lady_camden.webp",                                       "seasons": ["US S14"] },
-    { "name": "Willow Pill",                                       "image": "willow_pill.webp",                                       "seasons": ["US S14"] },
-    { "name": "Irene The Alien",                                   "image": "irene_the_alien.webp",                                   "seasons": ["US S15", "US AS10"] },
-    { "name": "Princess Poppy",                                    "image": "princess_poppy.webp",                                    "seasons": ["US S15"] },
-    { "name": "Sugar",                                             "image": "sugar.webp",                                             "seasons": ["US S15"] },
-    { "name": "Amethyst",                                          "image": "amethyst.webp",                                          "seasons": ["US S15"] },
-    { "name": "Robin Fierce",                                      "image": "robin_fierce.webp",                                      "seasons": ["US S15"] },
-    { "name": "Aura Mayari",                                       "image": "aura_mayari.webp",                                       "seasons": ["US S15"] },
-    { "name": "Jax",                                               "image": "jax.webp",                                               "seasons": ["US S15"] },
-    { "name": "Spice",                                             "image": "spice.webp",                                             "seasons": ["US S15"] },
-    { "name": "Marcia Marcia Marcia",                              "image": "marcia_marcia_marcia.webp",                              "seasons": ["US S15"] },
-    { "name": "Malaysia Babydoll Foxx",                            "image": "malaysia_babydoll_foxx.webp",                            "seasons": ["US S15"] },
-    { "name": "Salina EsTitties",                                  "image": "salina_estitties.webp",                                  "seasons": ["US S15"] },
-    { "name": "Loosey LaDuca",                                     "image": "loosey_laduca.webp",                                     "seasons": ["US S15"] },
-    { "name": "Mistress Isabelle Brooks",                          "image": "mistress_isabelle_brooks.webp",                          "seasons": ["US S15", "US AS10"] },
-    { "name": "Luxx Noir London",                                  "image": "luxx_noir_london.webp",                                  "seasons": ["US S15"] },
-    { "name": "Anetra",                                            "image": "anetra.webp",                                            "seasons": ["US S15"] },
-    { "name": "Sasha Colby",                                       "image": "sasha_colby.webp",                                       "seasons": ["US S15"] },
-    { "name": "Geneva Karr",                                       "image": "geneva_karr.webp",                                       "seasons": ["US S16"] },
-    { "name": "Xunami Muse",                                       "image": "xunami_muse.webp",                                       "seasons": ["US S16"] },
-    { "name": "Plasma",                                            "image": "plasma.webp",                                            "seasons": ["US S16"] },
-    { "name": "Megami",                                            "image": "megami.webp",                                            "seasons": ["US S16"] },
-    { "name": "Mhi'ya Iman Le'Paige",                              "image": "mhi_ya_iman_le_paige.webp",                              "seasons": ["US S16"] },
-    { "name": "Dawn",                                              "image": "dawn.webp",                                              "seasons": ["US S16"] },
-    { "name": "Morphine Love Dion",                                "image": "morphine_love_dion.webp",                                "seasons": ["US S16"] },
-    { "name": "Q",                                                 "image": "q.webp",                                                 "seasons": ["US S16"] },
-    { "name": "Plane Jane",                                        "image": "plane_jane.webp",                                        "seasons": ["US S16"] },
-    { "name": "Amanda Tori Meating",                               "image": "amanda_tori_meating.webp",                               "seasons": ["US S16"] },
-    { "name": "Mirage",                                            "image": "mirage.webp",                                            "seasons": ["US S16"] },
-    { "name": "Hershii LiqCour-Jeté",                              "image": "hershii_liqcour_jete.webp",                              "seasons": ["US S16"] },
-    { "name": "Sapphira Cristál",                                  "image": "sapphira_cristal.webp",                                  "seasons": ["US S16"] },
-    { "name": "Nymphia Wind",                                      "image": "nymphia_wind.webp",                                      "seasons": ["US S16"] },
-    { "name": "Lucky Starzzz",                                     "image": "lucky_starzzz.webp",                                     "seasons": ["US S17"] },
-    { "name": "Joella",                                            "image": "joella.webp",                                            "seasons": ["US S17"] },
-    { "name": "Hormona Lisa",                                      "image": "hormona_lisa.webp",                                      "seasons": ["US S17"] },
-    { "name": "Crystal Envy",                                      "image": "crystal_envy.webp",                                      "seasons": ["US S17"] },
-    { "name": "Acacia Forgot",                                     "image": "acacia_forgot.webp",                                     "seasons": ["US S17"] },
-    { "name": "Kori King",                                         "image": "kori_king.webp",                                         "seasons": ["US S17"] },
-    { "name": "Arrietty",                                          "image": "arrietty.webp",                                          "seasons": ["US S17"] },
-    { "name": "Lydia B. Kollins",                                  "image": "lydia_b_kollins.webp",                                   "seasons": ["US S17", "US AS10"] },
-    { "name": "Lana Ja'Rae",                                       "image": "lana_ja_rae.webp",                                       "seasons": ["US S17"] },
-    { "name": "Suzie Toot",                                        "image": "suzie_toot.webp",                                        "seasons": ["US S17"] },
-    { "name": "Sam Star",                                          "image": "sam_star.webp",                                          "seasons": ["US S17"] },
-    { "name": "Lexi Love",                                         "image": "lexi_love.webp",                                         "seasons": ["US S17"] },
-    { "name": "Jewels Sparkles",                                   "image": "jewels_sparkles.webp",                                   "seasons": ["US S17"] },
-    { "name": "Onya Nurve",                                        "image": "onya_nurve.webp",                                        "seasons": ["US S17"] },
-    { "name": "DD Fuego",                                          "image": "dd_fuego.webp",                                          "seasons": ["US S18"] },
-    { "name": "Mandy Mango",                                       "image": "mandy_mango.webp",                                       "seasons": ["US S18"] },
-    { "name": "Darlene Mitchell",                                  "image": "darlene_mitchell.webp",                                  "seasons": ["US S18"] },
-    { "name": "Athena Dion",                                       "image": "athena_dion.webp",                                       "seasons": ["US S18"] },
-    { "name": "Vita VonTesse Starr",                               "image": "vita_vontesse_starr.webp",                               "seasons": ["US S18"] },
-    { "name": "Nini Coco",                                         "image": "nini_coco.webp",                                         "seasons": ["US S18"] },
-    { "name": "Myki Meeks",                                        "image": "myki_meeks.webp",                                        "seasons": ["US S18"] },
-    { "name": "Kenya Pleaser",                                     "image": "kenya_pleaser.webp",                                     "seasons": ["US S18"] },
-    { "name": "Juicy Love Dion",                                   "image": "juicy_love_dion.webp",                                   "seasons": ["US S18"] },
-    { "name": "Discord Addams",                                    "image": "discord_addams.webp",                                    "seasons": ["US S18"] },
-    { "name": "Ciara Myst",                                        "image": "ciara_myst.webp",                                        "seasons": ["US S18"] },
-    { "name": "Briar Blush",                                       "image": "briar_blush.webp",                                       "seasons": ["US S18"] },
-    { "name": "Mia Starr",                                         "image": "mia_starr.webp",                                         "seasons": ["US S18"] },
-    { "name": "Jane Don't",                                        "image": "jane_dont.webp",                                         "seasons": ["US S18"] },
-    { "name": "Baga Chipz",                                        "image": "baga_chipz.webp",                                        "seasons": ["UK S1"] },
-    { "name": "Blu Hydrangea",                                     "image": "blu_hydrangea.webp",                                     "seasons": ["UK S1"] },
-    { "name": "Cheryl Hole",                                       "image": "cheryl_hole.webp",                                       "seasons": ["UK S1"] },
-    { "name": "Crystal",                                           "image": "crystal.webp",                                           "seasons": ["UK S1"] },
-    { "name": "Divina De Campo",                                   "image": "divina_de_campo.webp",                                   "seasons": ["UK S1"] },
-    { "name": "Gothy Kendoll",                                     "image": "gothy_kendoll.webp",                                     "seasons": ["UK S1"] },
-    { "name": "Scaredy Kat",                                       "image": "scaredy_kat.webp",                                       "seasons": ["UK S1"] },
-    { "name": "Sum Ting Wong",                                     "image": "sum_ting_wong.webp",                                     "seasons": ["UK S1"] },
-    { "name": "The Vivienne",                                      "image": "the_vivienne.webp",                                      "seasons": ["UK S1", "US AS7"] },
-    { "name": "Vinegar Strokes",                                   "image": "vinegar_strokes.webp",                                   "seasons": ["UK S1"] },
-    { "name": "A'Whora",                                           "image": "awhora.webp",                                            "seasons": ["UK S2"] },
-    { "name": "Asttina Mandella",                                  "image": "asttina_mandella.webp",                                  "seasons": ["UK S2"] },
-    { "name": "Bimini Bon-Boulash",                                "image": "bimini_bon_boulash.webp",                                "seasons": ["UK S2"] },
-    { "name": "Cherry Valentine",                                  "image": "cherry_valentine.webp",                                  "seasons": ["UK S2"] },
-    { "name": "Ellie Diamond",                                     "image": "ellie_diamond.webp",                                     "seasons": ["UK S2"] },
-    { "name": "Ginny Lemon",                                       "image": "ginny_lemon.webp",                                       "seasons": ["UK S2"] },
-    { "name": "Joe Black",                                         "image": "joe_black.webp",                                         "seasons": ["UK S2"] },
-    { "name": "Lawrence Chaney",                                   "image": "lawrence_chaney.webp",                                   "seasons": ["UK S2"] },
-    { "name": "Sister Sister",                                     "image": "sister_sister.webp",                                     "seasons": ["UK S2"] },
-    { "name": "Tayce",                                             "image": "tayce.webp",                                             "seasons": ["UK S2"] },
-    { "name": "Tia Kofi",                                          "image": "tia_kofi.webp",                                          "seasons": ["UK S2"] },
-    { "name": "Veronica Green",                                    "image": "veronica_green.webp",                                    "seasons": ["UK S2", "UK S3"] },
-    { "name": "Choriza May",                                       "image": "choriza_may.webp",                                       "seasons": ["UK S3"] },
-    { "name": "River Medway",                                      "image": "river_medway.webp",                                      "seasons": ["UK S3"] },
-    { "name": "Charity Kase",                                      "image": "charity_kase.webp",                                      "seasons": ["UK S3"] },
-    { "name": "Victoria Scone",                                    "image": "victoria_scone.webp",                                    "seasons": ["UK S3"] },
-    { "name": "Ella Vaday",                                        "image": "ella_vaday.webp",                                        "seasons": ["UK S3"] },
-    { "name": "Kitty Scott-Claus",                                 "image": "kitty_scott-claus.webp",                                 "seasons": ["UK S3"] },
-    { "name": "Vanity Milan",                                      "image": "vanity_milan.webp",                                      "seasons": ["UK S3"] },
-    { "name": "Scarlett Harlett",                                  "image": "scarlett_harlett.webp",                                  "seasons": ["UK S3"] },
-    { "name": "Elektra Fence",                                     "image": "elektra_fence.webp",                                     "seasons": ["UK S3"] },
-    { "name": "Krystal Versace",                                   "image": "krystal_versace.webp",                                   "seasons": ["UK S3"] },
-    { "name": "Anubis",                                            "image": "anubis.webp",                                            "seasons": ["UK S4"] },
-    { "name": "Baby",                                              "image": "baby.webp",                                              "seasons": ["UK S4"] },
-    { "name": "Black Peppa",                                       "image": "black_peppa.webp",                                       "seasons": ["UK S4"] },
-    { "name": "Cheddar Gorgeous",                                  "image": "cheddar_gorgeous.webp",                                  "seasons": ["UK S4"] },
-    { "name": "Copper Topp",                                       "image": "copper_topp.webp",                                       "seasons": ["UK S4"] },
-    { "name": "Dakota Schiffer",                                   "image": "dakota_schiffer.webp",                                   "seasons": ["UK S4"] },
-    { "name": "Danny Beard",                                       "image": "danny_beard.webp",                                       "seasons": ["UK S4"] },
-    { "name": "Jonbers Blonde",                                    "image": "jonbers_blonde.webp",                                    "seasons": ["UK S4"] },
-    { "name": "Just May",                                          "image": "just_may.webp",                                          "seasons": ["UK S4"] },
-    { "name": "Le Fil",                                            "image": "le_fil.webp",                                            "seasons": ["UK S4"] },
-    { "name": "Pixie Polite",                                      "image": "pixie_polite.webp",                                      "seasons": ["UK S4"] },
-    { "name": "Sminty Drop",                                       "image": "sminty_drop.webp",                                       "seasons": ["UK S4"] },
-    { "name": "Starlet",                                           "image": "starlet.webp",                                           "seasons": ["UK S4"] },
-    { "name": "Ginger Johnson",                                    "image": "ginger_johnson.webp",                                    "seasons": ["UK S5"] },
-    { "name": "Michael Marouli",                                   "image": "michael_marouli.webp",                                   "seasons": ["UK S5"] },
-    { "name": "DeDeLicious",                                       "image": "dedelicious.webp",                                       "seasons": ["UK S5"] },
-    { "name": "Kate Butch",                                        "image": "kate_butch.webp",                                        "seasons": ["UK S5"] },
-    { "name": "Cara Melle",                                        "image": "cara_melle.webp",                                        "seasons": ["UK S5"] },
-    { "name": "Vicki Vivacious",                                   "image": "vicki_vivacious.webp",                                   "seasons": ["UK S5"] },
-    { "name": "Banksie",                                           "image": "banksie.webp",                                           "seasons": ["UK S5"] },
-    { "name": "Miss Naomi Carter",                                 "image": "miss_naomi_carter.webp",                                 "seasons": ["UK S5"] },
-    { "name": "Alexis Saint-Pete",                                 "image": "alexis_saint-pete.webp",                                 "seasons": ["UK S5"] },
-    { "name": "Tomara Thomas",                                     "image": "tomara_thomas.webp",                                     "seasons": ["UK S5"] },
-    { "name": "Kyran Thrax",                                       "image": "kyran_thrax.webp",                                       "seasons": ["UK S6"] },
-    { "name": "La Voix",                                           "image": "la_voix.webp",                                           "seasons": ["UK S6"] },
-    { "name": "Marmalade",                                         "image": "marmalade.webp",                                         "seasons": ["UK S6"] },
-    { "name": "Rileasa Slaves",                                    "image": "rileasa_slaves.webp",                                    "seasons": ["UK S6"] },
-    { "name": "Actavia",                                           "image": "actavia.webp",                                           "seasons": ["UK S6"] },
-    { "name": "Chanel O'Conor",                                    "image": "chanel_o_conor.webp",                                    "seasons": ["UK S6"] },
-    { "name": "Charra Tea",                                        "image": "charra_tea.webp",                                        "seasons": ["UK S6"] },
-    { "name": "Dita Garbo",                                        "image": "dita_garbo.webp",                                        "seasons": ["UK S6"] },
-    { "name": "Kiki Snatch",                                       "image": "kiki_snatch.webp",                                       "seasons": ["UK S6"] },
-    { "name": "Lill",                                              "image": "lill.webp",                                              "seasons": ["UK S6"] },
-    { "name": "Zahirah Zapanta",                                   "image": "zahirah_zapanta.webp",                                   "seasons": ["UK S6"] },
-    { "name": "Saki Yew",                                          "image": "saki_yew.webp",                                          "seasons": ["UK S6"] },
-    { "name": "Bones",                                             "image": "bones.webp",                                             "seasons": ["UK S7"] },
-    { "name": "Elle Vosque",                                       "image": "elle_vosque.webp",                                       "seasons": ["UK S7"] },
-    { "name": "Catrin Feelings",                                   "image": "catrin_feelings.webp",                                   "seasons": ["UK S7"] },
-    { "name": "Chai T Grande",                                     "image": "chai_t_grande.webp",                                     "seasons": ["UK S7"] },
-    { "name": "Nyongbella",                                        "image": "nyongbella.webp",                                        "seasons": ["UK S7"] },
-    { "name": "Paige Three",                                       "image": "paige_three.webp",                                       "seasons": ["UK S7"] },
-    { "name": "Pasty",                                             "image": "pasty.webp",                                             "seasons": ["UK S7"] },
-    { "name": "Sally TM",                                          "image": "sally_tm.webp",                                          "seasons": ["UK S7"] },
-    { "name": "Silllexa Diction",                                  "image": "silllexa_diction.webp",                                  "seasons": ["UK S7"] },
-    { "name": "Tayris Mongardi",                                   "image": "tayris_mongardi.webp",                                   "seasons": ["UK S7"] },
-    { "name": "Bonnie Ann Clyde",                                  "image": "bonnie_ann_clyde.webp",                                  "seasons": ["UK S7"] },
-    { "name": "Viola",                                             "image": "viola.webp",                                             "seasons": ["UK S7"] }
-
+    {
+      "name": "Victoria 'Porkchop' Parker",
+      "image": "victoria_porkchop_parker.webp",
+      "seasons": [
+        "US S1"
+      ],
+      "stats": [4, 4, 4, 4, 4]
+    },
+    {
+      "name": "Akashia",
+      "image": "akashia.webp",
+      "seasons": [
+        "US S1"
+      ],
+      "stats": [4, 4, 7, 4, 8]
+    },
+    {
+      "name": "Tammie Brown",
+      "image": "tammie_brown.webp",
+      "seasons": [
+        "US S1",
+        "US AS1"
+      ],
+      "stats": [10, 5, 5, 6, 6]
+    },
+    {
+      "name": "Jade",
+      "image": "jade.webp",
+      "seasons": [
+        "US S1"
+      ],
+      "stats": [5, 6, 6, 5, 6]
+    },
+    {
+      "name": "Ongina",
+      "image": "ongina.webp",
+      "seasons": [
+        "US S1",
+        "US AS5"
+      ],
+      "stats": [8, 7, 7, 7, 8]
+    },
+    {
+      "name": "Shannel",
+      "image": "shannel.webp",
+      "seasons": [
+        "US S1",
+        "US AS1",
+        "US AS9"
+      ],
+      "stats": [8, 8, 8, 8, 8]
+    },
+    {
+      "name": "Nina Flowers",
+      "image": "nina_flowers.webp",
+      "seasons": [
+        "US S1",
+        "US AS1"
+      ],
+      "stats": [7, 10, 9, 6, 7]
+    },
+    {
+      "name": "BeBe Zahara Benet",
+      "image": "bebe_zahara_benet.webp",
+      "seasons": [
+        "US S1",
+        "US AS3"
+      ],
+      "stats": [6, 8, 8, 7, 8]
+    },
+    {
+      "name": "Shangela",
+      "image": "shangela.webp",
+      "seasons": [
+        "US S2",
+        "US S3",
+        "US AS3"
+      ],
+      "stats": [8, 5, 7, 7, 8]
+    },
+    {
+      "name": "Nicole Paige Brooks",
+      "image": "nicole_paige_brooks.webp",
+      "seasons": [
+        "US S2",
+        "US AS10"
+      ],
+      "stats": [5, 4, 4, 4, 3]
+    },
+    {
+      "name": "Mystique Summers Madison",
+      "image": "mystique_summers_madison.webp",
+      "seasons": [
+        "US S2"
+      ],
+      "stats": [5, 4, 4, 4, 4]
+    },
+    {
+      "name": "Sahara Davenport",
+      "image": "sahara_davenport.webp",
+      "seasons": [
+        "US S2"
+      ],
+      "stats": [6, 6, 9, 5, 9]
+    },
+    {
+      "name": "Kylie Sonique Love",
+      "image": "sonique.webp",
+      "seasons": [
+        "US S2",
+        "US AS6"
+      ],
+      "stats": [5, 7, 8, 4, 6]
+    },
+    {
+      "name": "Jessica Wild",
+      "image": "jessica_wild.webp",
+      "seasons": [
+        "US S2",
+        "US AS8"
+      ],
+      "stats": [8, 7, 9, 6, 8]
+    },
+    {
+      "name": "Pandora Boxx",
+      "image": "pandora_boxx.webp",
+      "seasons": [
+        "US S2",
+        "US AS1",
+        "US AS6"
+      ],
+      "stats": [10, 6, 6, 8, 6]
+    },
+    {
+      "name": "Morgan McMichaels",
+      "image": "morgan_mcmichaels.webp",
+      "seasons": [
+        "US S2",
+        "US AS3"
+      ],
+      "stats": [6, 7, 8, 5, 8]
+    },
+    {
+      "name": "Jujubee",
+      "image": "jujubee.webp",
+      "seasons": [
+        "US S2",
+        "US AS1",
+        "US AS5"
+      ],
+      "stats": [10, 6, 8, 8, 10]
+    },
+    {
+      "name": "Raven",
+      "image": "raven.webp",
+      "seasons": [
+        "US S2",
+        "US AS1"
+      ],
+      "stats": [7, 8, 8, 6, 9]
+    },
+    {
+      "name": "Tatianna",
+      "image": "tatianna.webp",
+      "seasons": [
+        "US S2",
+        "US AS2"
+      ],
+      "stats": [7, 6, 7, 7, 9]
+    },
+    {
+      "name": "Tyra Sanchez",
+      "image": "tyra_sanchez.webp",
+      "seasons": [
+        "US S2"
+      ],
+      "stats": [6, 9, 8, 8, 9]
+    },
+    {
+      "name": "Venus D-Lite",
+      "image": "venus_d_lite.webp",
+      "seasons": ["US S3"],
+      "stats": [2, 3, 4, 1, 3]
+    },
+    {
+      "name": "Stacy Layne Matthews",
+      "image": "stacy_layne_matthews.webp",
+      "seasons": ["US S3"],
+      "stats": [9, 4, 7, 5, 6]
+    },
+    {
+      "name": "Phoenix",
+      "image": "phoenix.webp",
+      "seasons": ["US S3", "US AS10"],
+      "stats": [2, 4, 4, 2, 3]
+    },
+    {
+      "name": "Mimi Imfurst",
+      "image": "mimi_imfurst.webp",
+      "seasons": ["US S3", "US AS1"],
+      "stats": [7, 2, 6, 5, 5]
+    },
+    {
+      "name": "India Ferrah",
+      "image": "india_ferrah.webp",
+      "seasons": ["US S3", "US AS5"],
+      "stats": [3, 8, 6, 4, 6]
+    },
+    {
+      "name": "Mariah",
+      "image": "mariah.webp",
+      "seasons": ["US S3", "US AS5"],
+      "stats": [5, 9, 7, 5, 5]
+    },
+    {
+      "name": "Delta Work",
+      "image": "delta_work.webp",
+      "seasons": ["US S3"],
+      "stats": [5, 8, 5, 4, 4]
+    },
+    {
+      "name": "Carmen Carrera",
+      "image": "carmen_carrera.webp",
+      "seasons": ["US S3"],
+      "stats": [3, 7, 7, 4, 6]
+    },
+    {
+      "name": "Alexis Mateo",
+      "image": "alexis_mateo.webp",
+      "seasons": ["US S3", "US AS1", "US AS5"],
+      "stats": [6, 6, 8, 6, 8]
+    },
+    {
+      "name": "Yara Sofia",
+      "image": "yara_sofia.webp",
+      "seasons": ["US S3", "US AS1", "US AS6"],
+      "stats": [7, 9, 8, 5, 9]
+    },
+    {
+      "name": "Manila Luzon",
+      "image": "manila_luzon.webp",
+      "seasons": ["US S3", "US AS1", "US AS4"],
+      "stats": [8, 9, 8, 8, 7]
+    },
+    {
+      "name": "Raja",
+      "image": "raja.webp",
+      "seasons": ["US S3", "US AS7"],
+      "stats": [6, 10, 8, 6, 6]
+    },
+    {
+      "name": "Alisa Summers",
+      "image": "alisa_summers.webp",
+      "seasons": ["US S4"],
+      "stats": [1, 1, 1, 1, 1]
+    },
+    {
+      "name": "The Princess",
+      "image": "the_princess.webp",
+      "seasons": ["US S4"],
+      "stats": [4, 4, 3, 3, 4]
+    },
+    {
+      "name": "Lashauwn Beyond",
+      "image": "lashauwn_beyond.webp",
+      "seasons": ["US S4"],
+      "stats": [4, 5, 3, 3, 3]
+    },
+    {
+      "name": "Madame LaQueer",
+      "image": "madame_laqueer.webp",
+      "seasons": ["US S4"],
+      "stats": [3, 6, 4, 3, 4]
+    },
+    {
+      "name": "Milan",
+      "image": "milan.webp",
+      "seasons": ["US S4"],
+      "stats": [2, 8, 7, 3, 8]
+    },
+    {
+      "name": "Jiggly Caliente",
+      "image": "jiggly_caliente.webp",
+      "seasons": ["US S4", "US AS6"],
+      "stats": [7, 4, 6, 5, 6]
+    },
+    {
+      "name": "Dida Ritz",
+      "image": "dida_ritz.webp",
+      "seasons": ["US S4"],
+      "stats": [6, 4, 8, 6, 10]
+    },
+    {
+      "name": "Kenya Michaels",
+      "image": "kenya_michaels.webp",
+      "seasons": ["US S4"],
+      "stats": [3, 5, 8, 3, 8]
+    },
+    {
+      "name": "Willam",
+      "image": "willam.webp",
+      "seasons": ["US S4"],
+      "stats": [9, 7, 8, 9, 7]
+    },
+    {
+      "name": "Phi Phi O'Hara",
+      "image": "phi_phi_o_hara.webp",
+      "seasons": ["US S4", "US AS2"],
+      "stats": [6, 7, 8, 6, 6]
+    },
+    {
+      "name": "Latrice Royale",
+      "image": "latrice_royale.webp",
+      "seasons": ["US S4", "US AS1", "US AS4"],
+      "stats": [9, 6, 7, 8, 8]
+    },
+    {
+      "name": "Chad Michaels",
+      "image": "chad_michaels.webp",
+      "seasons": ["US S4", "US AS1"],
+      "stats": [8, 8, 8, 7, 7]
+    },
+    {
+      "name": "Sharon Needles",
+      "image": "sharon_needles.webp",
+      "seasons": ["US S4"],
+      "stats": [9, 7, 8, 8, 7]
+    },
+    {
+      "name": "Penny Tration",
+      "image": "penny_tration.webp",
+      "seasons": ["US S5"],
+      "stats": [1, 2, 1, 1, 1]
+    },
+    {
+      "name": "Serena ChaCha",
+      "image": "serena_chacha.webp",
+      "seasons": ["US S5", "US AS6"],
+      "stats": [1, 8, 2, 1, 1]
+    },
+    {
+      "name": "Monica Beverly Hillz",
+      "image": "monica_beverly_hillz.webp",
+      "seasons": ["US S5", "US AS8"],
+      "stats": [4, 4, 4, 3, 5]
+    },
+    {
+      "name": "Honey Mahogany",
+      "image": "honey_mahogany.webp",
+      "seasons": ["US S5"],
+      "stats": [4, 5, 5, 4, 4]
+    },
+    {
+      "name": "Vivienne Pinay",
+      "image": "vivienne_pinay.webp",
+      "seasons": ["US S5"],
+      "stats": [3, 7, 3, 2, 2]
+    },
+    {
+      "name": "Lineysha Sparx",
+      "image": "lineysha_sparkx.webp",
+      "seasons": ["US S5"],
+      "stats": [2, 9, 8, 4, 5]
+    },
+    {
+      "name": "Jade Jolie",
+      "image": "jade_jolie.webp",
+      "seasons": ["US S5"],
+      "stats": [4, 5, 5, 4, 7]
+    },
+    {
+      "name": "Ivy Winters",
+      "image": "ivy_winters.webp",
+      "seasons": ["US S5"],
+      "stats": [7, 9, 8, 6, 6]
+    },
+    {
+      "name": "Coco Montrese",
+      "image": "coco_montrese.webp",
+      "seasons": ["US S5", "US AS2"],
+      "stats": [4, 6, 8, 4, 10]
+    },
+    {
+      "name": "Detox",
+      "image": "detox.webp",
+      "seasons": ["US S5", "US AS2"],
+      "stats": [8, 9, 8, 7, 8]
+    },
+    {
+      "name": "Roxxxy Andrews",
+      "image": "roxxxy_andrews.webp",
+      "seasons": ["US S5", "US AS2", "US AS9"],
+      "stats": [6, 8, 8, 6, 9]
+    },
+    {
+      "name": "Alaska",
+      "image": "alaska.webp",
+      "seasons": ["US S5", "US AS2"],
+      "stats": [10, 8, 9, 8, 8]
+    },
+    {
+      "name": "Alyssa Edwards",
+      "image": "alyssa_edwards.webp",
+      "seasons": ["US S5", "US AS2"],
+      "stats": [7, 8, 10, 5, 9]
+    },
+    {
+      "name": "Jinkx Monsoon",
+      "image": "jinkx_monsoon.webp",
+      "seasons": ["US S5", "US AS7"],
+      "stats": [10, 6, 8, 9, 7]
+    },
+    {
+      "name": "Magnolia Crawford",
+      "image": "magnolia_crawford.webp",
+      "seasons": [
+        "US S6"
+      ],
+      "stats": [1, 1, 1, 1, 1]
+    },
+    {
+      "name": "Kelly Mantle",
+      "image": "kelly_mantle.webp",
+      "seasons": [
+        "US S6"
+      ],
+      "stats": [6, 3, 4, 8, 4]
+    },
+    {
+      "name": "Vivacious",
+      "image": "vivacious.webp",
+      "seasons": [
+        "US S6"
+      ],
+      "stats": [5, 7, 5, 3, 3]
+    },
+    {
+      "name": "April Carrion",
+      "image": "april_carrion.webp",
+      "seasons": [
+        "US S6"
+      ],
+      "stats": [4, 8, 6, 4, 6]
+    },
+    {
+      "name": "Gia Gunn",
+      "image": "gia_gunn.webp",
+      "seasons": [
+        "US S6",
+        "US AS4"
+      ],
+      "stats": [5, 6, 7, 4, 5]
+    },
+    {
+      "name": "Milk",
+      "image": "milk.webp",
+      "seasons": [
+        "US S6",
+        "US AS3"
+      ],
+      "stats": [7, 10, 6, 7, 4]
+    },
+    {
+      "name": "Laganja Estranja",
+      "image": "laganja_estranja.webp",
+      "seasons": [
+        "US S6"
+      ],
+      "stats": [5, 4, 10, 4, 9]
+    },
+    {
+      "name": "Trinity K. Bonet",
+      "image": "trinity_k_bonet.webp",
+      "seasons": [
+        "US S6",
+        "US AS6"
+      ],
+      "stats": [5, 5, 10, 5, 10]
+    },
+    {
+      "name": "Joslyn Fox",
+      "image": "joslyn_fox.webp",
+      "seasons": [
+        "US S6"
+      ],
+      "stats": [7, 5, 6, 6, 6]
+    },
+    {
+      "name": "BenDeLaCreme",
+      "image": "bendelacreme.webp",
+      "seasons": [
+        "US S6",
+        "US AS3"
+      ],
+      "stats": [10, 8, 8, 9, 7]
+    },
+    {
+      "name": "Darienne Lake",
+      "image": "darienne_lake.webp",
+      "seasons": [
+        "US S6",
+        "US AS8"
+      ],
+      "stats": [8, 7, 7, 6, 9]
+    },
+    {
+      "name": "Courtney Act",
+      "image": "courtney_act.webp",
+      "seasons": [
+        "US S6"
+      ],
+      "stats": [8, 8, 8, 8, 8]
+    },
+    {
+      "name": "Adore Delano",
+      "image": "adore_delano.webp",
+      "seasons": [
+        "US S6",
+        "US AS2"
+      ],
+      "stats": [8, 5, 9, 6, 8]
+    },
+    {
+      "name": "Bianca Del Rio",
+      "image": "bianca_del_rio.webp",
+      "seasons": [
+        "US S6"
+      ],
+      "stats": [10, 7, 8, 9, 6]
+    },
+    {
+      "name": "Tempest DuJour",
+      "image": "tempest_dujour.webp",
+      "seasons": [
+        "US S7"
+      ],
+      "stats": [1, 1, 1, 1, 1]
+    },
+    {
+      "name": "Sasha Belle",
+      "image": "sasha_belle.webp",
+      "seasons": [
+        "US S7"
+      ],
+      "stats": [3, 3, 3, 2, 2]
+    },
+    {
+      "name": "Jasmine Masters",
+      "image": "jasmine_masters.webp",
+      "seasons": [
+        "US S7",
+        "US AS4"
+      ],
+      "stats": [9, 2, 5, 3, 5]
+    },
+    {
+      "name": "Mrs. Kasha Davis",
+      "image": "mrs_kasha_davis.webp",
+      "seasons": [
+        "US S7",
+        "US AS8"
+      ],
+      "stats": [8, 5, 4, 5, 4]
+    },
+    {
+      "name": "Kandy Ho",
+      "image": "kandy_ho.webp",
+      "seasons": [
+        "US S7"
+      ],
+      "stats": [2, 6, 5, 2, 5]
+    },
+    {
+      "name": "Max",
+      "image": "max.webp",
+      "seasons": [
+        "US S7"
+      ],
+      "stats": [6, 9, 5, 6, 4]
+    },
+    {
+      "name": "Jaidynn Diore Fierce",
+      "image": "jaidynn_diore_fierce.webp",
+      "seasons": [
+        "US S7"
+      ],
+      "stats": [6, 4, 8, 5, 9]
+    },
+    {
+      "name": "Miss Fame",
+      "image": "miss_fame.webp",
+      "seasons": [
+        "US S7"
+      ],
+      "stats": [4, 10, 4, 4, 3]
+    },
+    {
+      "name": "Trixie Mattel",
+      "image": "trixie_mattel.webp",
+      "seasons": [
+        "US S7",
+        "US AS3"
+      ],
+      "stats": [10, 7, 7, 7, 5]
+    },
+    {
+      "name": "Katya",
+      "image": "katya.webp",
+      "seasons": [
+        "US S7",
+        "US AS2"
+      ],
+      "stats": [10, 7, 9, 8, 9]
+    },
+    {
+      "name": "Kennedy Davenport",
+      "image": "kennedy_davenport.webp",
+      "seasons": [
+        "US S7",
+        "US AS3"
+      ],
+      "stats": [5, 6, 10, 5, 10]
+    },
+    {
+      "name": "Ginger Minj",
+      "image": "ginger_minj.webp",
+      "seasons": [
+        "US S7",
+        "US AS2",
+        "US AS6",
+        "US AS10"
+      ],
+      "stats": [10, 5, 8, 9, 8]
+    },
+    {
+      "name": "Pearl",
+      "image": "pearl.webp",
+      "seasons": [
+        "US S7"
+      ],
+      "stats": [4, 9, 6, 5, 5]
+    },
+    {
+      "name": "Violet Chachki",
+      "image": "violet_chachki.webp",
+      "seasons": [
+        "US S7"
+      ],
+      "stats": [3, 10, 9, 6, 8]
+    },
+    {
+      "name": "Laila McQueen",
+      "image": "laila_mcqueen.webp",
+      "seasons": [
+        "US S8"
+      ],
+      "stats": [4, 3, 3, 5, 1]
+    },
+    {
+      "name": "Dax ExclamationPoint",
+      "image": "dax_exclamationpoint.webp",
+      "seasons": [
+        "US S8"
+      ],
+      "stats": [1, 2, 2, 1, 1]
+    },
+    {
+      "name": "Cynthia Lee Fontaine",
+      "image": "cynthia_lee_fontaine.webp",
+      "seasons": [
+        "US S8",
+        "US S9",
+        "US AS10"
+      ],
+      "stats": [7, 4, 5, 4, 6]
+    },
+    {
+      "name": "Naysha Lopez",
+      "image": "naysha_lopez.webp",
+      "seasons": [
+        "US S8",
+        "US AS8"
+      ],
+      "stats": [2, 8, 6, 2, 4]
+    },
+    {
+      "name": "Acid Betty",
+      "image": "acid_betty.webp",
+      "seasons": [
+        "US S8",
+        "US AS10"
+      ],
+      "stats": [3, 10, 6, 3, 5]
+    },
+    {
+      "name": "Robbie Turner",
+      "image": "robbie_turner.webp",
+      "seasons": [
+        "US S8"
+      ],
+      "stats": [5, 7, 5, 5, 4]
+    },
+    {
+      "name": "Thorgy Thor",
+      "image": "thorgy_thor.webp",
+      "seasons": [
+        "US S8",
+        "US AS3"
+      ],
+      "stats": [9, 6, 7, 6, 8]
+    },
+    {
+      "name": "Derrick Barry",
+      "image": "derrick_barry.webp",
+      "seasons": [
+        "US S8",
+        "US AS5"
+      ],
+      "stats": [3, 5, 9, 4, 10]
+    },
+    {
+      "name": "Chi Chi DeVayne",
+      "image": "chi_chi_devayne.webp",
+      "seasons": [
+        "US S8",
+        "US AS3"
+      ],
+      "stats": [7, 4, 10, 5, 10]
+    },
+    {
+      "name": "Naomi Smalls",
+      "image": "naomi_smalls.webp",
+      "seasons": [
+        "US S8",
+        "US AS4"
+      ],
+      "stats": [6, 10, 8, 5, 8]
+    },
+    {
+      "name": "Kim Chi",
+      "image": "kim_chi.webp",
+      "seasons": [
+        "US S8"
+      ],
+      "stats": [8, 10, 5, 6, 5]
+    },
+    {
+      "name": "Bob The Drag Queen",
+      "image": "bob_the_drag_queen.webp",
+      "seasons": [
+        "US S8"
+      ],
+      "stats": [10, 6, 8, 8, 7]
+    },
+    {
+      "name": "Jaymes Mansfield",
+      "image": "jaymes_mansfield.webp",
+      "seasons": [
+        "US S9",
+        "US AS8"
+      ],
+      "stats": [7, 8, 4, 4, 2]
+    },
+    {
+      "name": "Kimora Blac",
+      "image": "kimora_blac.webp",
+      "seasons": [
+        "US S9"
+      ],
+      "stats": [2, 8, 7, 2, 4]
+    },
+    {
+      "name": "Charlie Hides",
+      "image": "charlie_hides.webp",
+      "seasons": [
+        "US S9"
+      ],
+      "stats": [7, 3, 3, 2, 2]
+    },
+    {
+      "name": "Eureka O'Hara",
+      "image": "eureka_ohara.webp",
+      "seasons": [
+        "US S9",
+        "US S10",
+        "US AS6"
+      ],
+      "stats": [6, 4, 8, 5, 7]
+    },
+    {
+      "name": "Farrah Moan",
+      "image": "farrah_moan.webp",
+      "seasons": [
+        "US S9",
+        "US AS4"
+      ],
+      "stats": [3, 8, 7, 5, 6]
+    },
+    {
+      "name": "Aja",
+      "image": "aja.webp",
+      "seasons": [
+        "US S9",
+        "US AS3",
+        "US AS10"
+      ],
+      "stats": [7, 7, 9, 4, 8]
+    },
+    {
+      "name": "Valentina",
+      "image": "valentina.webp",
+      "seasons": [
+        "US S9",
+        "US AS4"
+      ],
+      "stats": [5, 9, 6, 5, 6]
+    },
+    {
+      "name": "Nina Bo'nina Brown",
+      "image": "nina_bonina_brown.webp",
+      "seasons": [
+        "US S9"
+      ],
+      "stats": [8, 8, 5, 7, 3]
+    },
+    {
+      "name": "Alexis Michelle",
+      "image": "alexis_michelle.webp",
+      "seasons": [
+        "US S9",
+        "US AS8"
+      ],
+      "stats": [8, 5, 6, 8, 4]
+    },
+    {
+      "name": "Trinity The Tuck",
+      "image": "trinity_the_tuck.webp",
+      "seasons": [
+        "US S9",
+        "US AS4",
+        "US AS7"
+      ],
+      "stats": [7, 10, 8, 7, 9]
+    },
+    {
+      "name": "Peppermint",
+      "image": "peppermint.webp",
+      "seasons": [
+        "US S9"
+      ],
+      "stats": [7, 6, 9, 8, 10]
+    },
+    {
+      "name": "Shea Couleé",
+      "image": "shea_coulee.webp",
+      "seasons": [
+        "US S9",
+        "US AS5",
+        "US AS7"
+      ],
+      "stats": [8, 9, 9, 8, 8]
+    },
+    {
+      "name": "Sasha Velour",
+      "image": "sasha_velour.webp",
+      "seasons": [
+        "US S9"
+      ],
+      "stats": [7, 10, 8, 8, 10]
+    },
+    {
+      "name": "Vanessa Vanjie",
+      "image": "vanessa_vanjie.webp",
+      "seasons": [
+        "US S10",
+        "US S11",
+        "US AS9"
+      ],
+      "stats": [9, 4, 8, 4, 8]
+    },
+    {
+      "name": "Kalorie Karbdashian-Williams",
+      "image": "kalorie_karbdashian_williams.webp",
+      "seasons": [
+        "US S10"
+      ],
+      "stats": [4, 6, 6, 4, 5]
+    },
+    {
+      "name": "Yuhua Hamasaki",
+      "image": "yuhua_hamasaki.webp",
+      "seasons": [
+        "US S10"
+      ],
+      "stats": [6, 7, 5, 4, 5]
+    },
+    {
+      "name": "Dusty Ray Bottoms",
+      "image": "dusty_ray_bottoms.webp",
+      "seasons": [
+        "US S10"
+      ],
+      "stats": [4, 8, 5, 5, 4]
+    },
+    {
+      "name": "Mayhem Miller",
+      "image": "mayhem_miller.webp",
+      "seasons": [
+        "US S10",
+        "US AS5"
+      ],
+      "stats": [6, 6, 7, 5, 7]
+    },
+    {
+      "name": "Blair St. Clair",
+      "image": "blair_st_clair.webp",
+      "seasons": [
+        "US S10",
+        "US AS5"
+      ],
+      "stats": [6, 7, 7, 7, 5]
+    },
+    {
+      "name": "The Vixen",
+      "image": "the_vixen.webp",
+      "seasons": [
+        "US S10"
+      ],
+      "stats": [5, 6, 8, 4, 8]
+    },
+    {
+      "name": "Monique Heart",
+      "image": "monique_heart.webp",
+      "seasons": [
+        "US S10",
+        "US AS4"
+      ],
+      "stats": [9, 7, 8, 6, 7]
+    },
+    {
+      "name": "Miz Cracker",
+      "image": "miz_cracker.webp",
+      "seasons": [
+        "US S10",
+        "US AS5"
+      ],
+      "stats": [10, 8, 6, 7, 5]
+    },
+    {
+      "name": "Asia O'Hara",
+      "image": "asia_o_hara.webp",
+      "seasons": [
+        "US S10"
+      ],
+      "stats": [6, 9, 10, 6, 9]
+    },
+    {
+      "name": "Kameron Michaels",
+      "image": "kameron_michaels.webp",
+      "seasons": [
+        "US S10"
+      ],
+      "stats": [2, 7, 10, 3, 10]
+    },
+    {
+      "name": "Aquaria",
+      "image": "aquaria.webp",
+      "seasons": [
+        "US S10"
+      ],
+      "stats": [7, 10, 9, 8, 7]
+    },
+    {
+      "name": "Monét X Change",
+      "image": "monet_x_change.webp",
+      "seasons": [
+        "US S10",
+        "US AS4",
+        "US AS7"
+      ],
+      "stats": [10, 6, 8, 8, 9]
+    },
+    {
+      "name": "Soju",
+      "image": "soju.webp",
+      "seasons": [
+        "US S11"
+      ],
+      "stats": [3, 5, 5, 3, 4]
+    },
+    {
+      "name": "Kahanna Montrese",
+      "image": "kahanna_montrese.webp",
+      "seasons": [
+        "US S11",
+        "US AS8"
+      ],
+      "stats": [5, 6, 7, 5, 6]
+    },
+    {
+      "name": "Honey Davenport",
+      "image": "honey_davenport.webp",
+      "seasons": [
+        "US S11"
+      ],
+      "stats": [6, 6, 6, 5, 6]
+    },
+    {
+      "name": "Mercedes Iman Diamond",
+      "image": "mercedes_iman_diamond.webp",
+      "seasons": [
+        "US S11"
+      ],
+      "stats": [5, 5, 7, 4, 7]
+    },
+    {
+      "name": "Ariel Versace",
+      "image": "ariel_versace.webp",
+      "seasons": [
+        "US S11"
+      ],
+      "stats": [6, 6, 6, 6, 5]
+    },
+    {
+      "name": "Scarlet Envy",
+      "image": "scarlet_envy.webp",
+      "seasons": [
+        "US S11",
+        "US AS6"
+      ],
+      "stats": [8, 8, 6, 7, 5]
+    },
+    {
+      "name": "Ra'Jah O'Hara",
+      "image": "ra_jah_o_hara.webp",
+      "seasons": [
+        "US S11",
+        "US AS6"
+      ],
+      "stats": [7, 6, 8, 5, 8]
+    },
+    {
+      "name": "Shuga Cain",
+      "image": "shuga_cain.webp",
+      "seasons": [
+        "US S11"
+      ],
+      "stats": [7, 7, 7, 6, 6]
+    },
+    {
+      "name": "Nina West",
+      "image": "nina_west.webp",
+      "seasons": [
+        "US S11",
+        "US AS9"
+      ],
+      "stats": [9, 8, 6, 9, 5]
+    },
+    {
+      "name": "Plastique Tiara",
+      "image": "plastique_tiara.webp",
+      "seasons": [
+        "US S11",
+        "US AS9"
+      ],
+      "stats": [6, 10, 7, 5, 6]
+    },
+    {
+      "name": "Silky Nutmeg Ganache",
+      "image": "silky_nutmeg_ganache.webp",
+      "seasons": [
+        "US S11",
+        "US AS6"
+      ],
+      "stats": [9, 7, 8, 8, 7]
+    },
+    {
+      "name": "A'keria C. Davenport",
+      "image": "a_keria_c_davenport.webp",
+      "seasons": [
+        "US S11",
+        "US AS6"
+      ],
+      "stats": [7, 9, 8, 6, 8]
+    },
+    {
+      "name": "Brooke Lynn Hytes",
+      "image": "brooke_lynn_hytes.webp",
+      "seasons": [
+        "US S11"
+      ],
+      "stats": [7, 9, 10, 7, 9]
+    },
+    {
+      "name": "Yvie Oddly",
+      "image": "yvie_oddly.webp",
+      "seasons": [
+        "US S11",
+        "US AS7"
+      ],
+      "stats": [8, 8, 9, 8, 9]
+    },
+    {
+      "name": "Dahlia Sin",
+      "image": "dahlia_sin.webp",
+      "seasons": [
+        "US S12"
+      ],
+      "stats": [4, 6, 6, 4, 5]
+    },
+    {
+      "name": "Rock M. Sakura",
+      "image": "rock_m_sakura.webp",
+      "seasons": [
+        "US S12"
+      ],
+      "stats": [8, 6, 7, 7, 5]
+    },
+    {
+      "name": "Nicky Doll",
+      "image": "nicky_doll.webp",
+      "seasons": [
+        "US S12"
+      ],
+      "stats": [6, 9, 5, 5, 5]
+    },
+    {
+      "name": "Aiden Zhane",
+      "image": "aiden_zhane.webp",
+      "seasons": [
+        "US S12"
+      ],
+      "stats": [6, 5, 5, 4, 5]
+    },
+    {
+      "name": "Brita",
+      "image": "brita.webp",
+      "seasons": [
+        "US S12"
+      ],
+      "stats": [7, 7, 7, 6, 6]
+    },
+    {
+      "name": "Jan",
+      "image": "jan.webp",
+      "seasons": [
+        "US S12",
+        "US AS6"
+      ],
+      "stats": [9, 8, 7, 9, 6]
+    },
+    {
+      "name": "Widow Von'Du",
+      "image": "widow_von_du.webp",
+      "seasons": [
+        "US S12"
+      ],
+      "stats": [7, 6, 9, 5, 9]
+    },
+    {
+      "name": "Heidi N Closet",
+      "image": "heidi_n_closet.webp",
+      "seasons": [
+        "US S12",
+        "US AS8"
+      ],
+      "stats": [10, 6, 8, 8, 7]
+    },
+    {
+      "name": "Jackie Cox",
+      "image": "jackie_cox.webp",
+      "seasons": [
+        "US S12"
+      ],
+      "stats": [8, 8, 6, 7, 5]
+    },
+    {
+      "name": "Crystal Methyd",
+      "image": "crystal_methyd.webp",
+      "seasons": [
+        "US S12"
+      ],
+      "stats": [9, 9, 7, 9, 6]
+    },
+    {
+      "name": "Gigi Goode",
+      "image": "gigi_goode.webp",
+      "seasons": [
+        "US S12"
+      ],
+      "stats": [8, 10, 7, 9, 6]
+    },
+    {
+      "name": "Jaida Essence Hall",
+      "image": "jaida_essence_hall.webp",
+      "seasons": [
+        "US S12",
+        "US AS7"
+      ],
+      "stats": [8, 9, 9, 8, 8]
+    },
+    {
+      "name": "Sherry Pie",
+      "image": "sherry_pie.webp",
+      "seasons": [
+        "US S12"
+      ],
+      "stats": [8, 8, 7, 8, 6]
+    },
+    {
+      "name": "Kahmora Hall",
+      "image": "kahmora_hall.webp",
+      "seasons": [
+        "US S13",
+        "US AS8"
+      ],
+      "stats": [5, 10, 5, 4, 5]
+    },
+    {
+      "name": "Joey Jay",
+      "image": "joey_jay.webp",
+      "seasons": [
+        "US S13"
+      ],
+      "stats": [6, 6, 7, 5, 6]
+    },
+    {
+      "name": "Tamisha Iman",
+      "image": "tamisha_iman.webp",
+      "seasons": [
+        "US S13"
+      ],
+      "stats": [7, 7, 7, 6, 7]
+    },
+    {
+      "name": "LaLa Ri",
+      "image": "lala_ri.webp",
+      "seasons": [
+        "US S13",
+        "US AS8"
+      ],
+      "stats": [8, 5, 8, 6, 9]
+    },
+    {
+      "name": "Elliott with 3 Ks",
+      "image": "elliott_with_2_ts.webp",
+      "seasons": [
+        "US S13"
+      ],
+      "stats": [5, 6, 6, 5, 6]
+    },
+    {
+      "name": "Denali",
+      "image": "denali.webp",
+      "seasons": [
+        "US S13",
+        "US AS10"
+      ],
+      "stats": [7, 8, 10, 6, 9]
+    },
+    {
+      "name": "Tina Burner",
+      "image": "tina_burner.webp",
+      "seasons": [
+        "US S13",
+        "US AS10"
+      ],
+      "stats": [7, 7, 7, 7, 6]
+    },
+    {
+      "name": "Utica Queen",
+      "image": "utica_queen.webp",
+      "seasons": [
+        "US S13"
+      ],
+      "stats": [8, 9, 6, 8, 5]
+    },
+    {
+      "name": "Olivia Lux",
+      "image": "olivia_lux.webp",
+      "seasons": [
+        "US S13",
+        "US AS10"
+      ],
+      "stats": [8, 8, 7, 8, 6]
+    },
+    {
+      "name": "Rosé",
+      "image": "rose.webp",
+      "seasons": [
+        "US S13"
+      ],
+      "stats": [10, 8, 8, 9, 6]
+    },
+    {
+      "name": "Gottmik",
+      "image": "gottmik.webp",
+      "seasons": [
+        "US S13",
+        "US AS9"
+      ],
+      "stats": [8, 10, 6, 9, 6]
+    },
+    {
+      "name": "Kandy Muse",
+      "image": "kandy_muse.webp",
+      "seasons": [
+        "US S13",
+        "US AS8"
+      ],
+      "stats": [8, 6, 7, 7, 8]
+    },
+    {
+      "name": "Symone",
+      "image": "symone.webp",
+      "seasons": [
+        "US S13"
+      ],
+      "stats": [8, 10, 8, 9, 7]
+    },
+    {
+      "name": "Alyssa Hunter",
+      "image": "alyssa_hunter.webp",
+      "seasons": [
+        "US S14",
+        "US AS10"
+      ],
+      "stats": [6, 9, 6, 5, 6]
+    },
+    {
+      "name": "June Jambalaya",
+      "image": "june_jambalaya.webp",
+      "seasons": [
+        "US S14"
+      ],
+      "stats": [5, 7, 6, 5, 6]
+    },
+    {
+      "name": "Maddy Morphosis",
+      "image": "maddy_morphosis.webp",
+      "seasons": [
+        "US S14"
+      ],
+      "stats": [7, 6, 5, 7, 4]
+    },
+    {
+      "name": "Orion Story",
+      "image": "orion_story.webp",
+      "seasons": [
+        "US S14"
+      ],
+      "stats": [6, 6, 5, 5, 5]
+    },
+    {
+      "name": "Kornbread 'The Snack' Jeté",
+      "image": "kornbread_the_snack_jete.webp",
+      "seasons": [
+        "US S14"
+      ],
+      "stats": [9, 7, 8, 8, 7]
+    },
+    {
+      "name": "Kerri Colby",
+      "image": "kerri_colby.webp",
+      "seasons": [
+        "US S14",
+        "US AS10"
+      ],
+      "stats": [7, 9, 6, 7, 6]
+    },
+    {
+      "name": "Jasmine Kennedie",
+      "image": "jasmine_kennedie.webp",
+      "seasons": [
+        "US S14"
+      ],
+      "stats": [7, 6, 9, 6, 9]
+    },
+    {
+      "name": "Jorgeous",
+      "image": "jorgeous.webp",
+      "seasons": [
+        "US S14",
+        "US AS9",
+        "US AS10"
+      ],
+      "stats": [6, 6, 10, 5, 10]
+    },
+    {
+      "name": "DeJa Skye",
+      "image": "deja_skye.webp",
+      "seasons": [
+        "US S14",
+        "US AS10"
+      ],
+      "stats": [8, 7, 7, 7, 6]
+    },
+    {
+      "name": "Angeria Paris VanMicheals",
+      "image": "angeria_paris_vanmicheals.webp",
+      "seasons": [
+        "US S14",
+        "US AS9"
+      ],
+      "stats": [8, 9, 7, 8, 7]
+    },
+    {
+      "name": "Bosco",
+      "image": "bosco.webp",
+      "seasons": [
+        "US S14",
+        "US AS10"
+      ],
+      "stats": [8, 9, 7, 8, 7]
+    },
+    {
+      "name": "Daya Betty",
+      "image": "daya_betty.webp",
+      "seasons": [
+        "US S14",
+        "US AS10"
+      ],
+      "stats": [7, 8, 7, 7, 7]
+    },
+    {
+      "name": "Lady Camden",
+      "image": "lady_camden.webp",
+      "seasons": [
+        "US S14"
+      ],
+      "stats": [8, 8, 9, 8, 8]
+    },
+    {
+      "name": "Willow Pill",
+      "image": "willow_pill.webp",
+      "seasons": [
+        "US S14"
+      ],
+      "stats": [9, 8, 7, 9, 7]
+    },
+    {
+      "name": "Irene The Alien",
+      "image": "irene_the_alien.webp",
+      "seasons": [
+        "US S15",
+        "US AS10"
+      ],
+      "stats": [6, 7, 6, 6, 5]
+    },
+    {
+      "name": "Princess Poppy",
+      "image": "princess_poppy.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [7, 6, 6, 7, 5]
+    },
+    {
+      "name": "Sugar",
+      "image": "sugar.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [6, 7, 6, 7, 5]
+    },
+    {
+      "name": "Amethyst",
+      "image": "amethyst.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [7, 6, 7, 6, 6]
+    },
+    {
+      "name": "Robin Fierce",
+      "image": "robin_fierce.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [6, 8, 6, 5, 6]
+    },
+    {
+      "name": "Aura Mayari",
+      "image": "aura_mayari.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [6, 7, 7, 6, 7]
+    },
+    {
+      "name": "Jax",
+      "image": "jax.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [6, 6, 10, 5, 10]
+    },
+    {
+      "name": "Spice",
+      "image": "spice.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [6, 8, 6, 7, 5]
+    },
+    {
+      "name": "Marcia Marcia Marcia",
+      "image": "marcia_marcia_marcia.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [8, 7, 8, 7, 6]
+    },
+    {
+      "name": "Malaysia Babydoll Foxx",
+      "image": "malaysia_babydoll_foxx.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [7, 7, 8, 6, 8]
+    },
+    {
+      "name": "Salina EsTitties",
+      "image": "salina_estitties.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [7, 6, 8, 7, 8]
+    },
+    {
+      "name": "Loosey LaDuca",
+      "image": "loosey_laduca.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [9, 7, 7, 8, 6]
+    },
+    {
+      "name": "Mistress Isabelle Brooks",
+      "image": "mistress_isabelle_brooks.webp",
+      "seasons": [
+        "US S15",
+        "US AS10"
+      ],
+      "stats": [9, 8, 8, 8, 7]
+    },
+    {
+      "name": "Luxx Noir London",
+      "image": "luxx_noir_london.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [8, 9, 7, 8, 7]
+    },
+    {
+      "name": "Anetra",
+      "image": "anetra.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [8, 7, 10, 7, 10]
+    },
+    {
+      "name": "Sasha Colby",
+      "image": "sasha_colby.webp",
+      "seasons": [
+        "US S15"
+      ],
+      "stats": [9, 10, 9, 9, 8]
+    },
+    {
+      "name": "Geneva Karr",
+      "image": "geneva_karr.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [6, 7, 7, 6, 7]
+    },
+    {
+      "name": "Xunami Muse",
+      "image": "xunami_muse.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [6, 8, 7, 6, 6]
+    },
+    {
+      "name": "Plasma",
+      "image": "plasma.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [9, 8, 7, 9, 6]
+    },
+    {
+      "name": "Megami",
+      "image": "megami.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [7, 7, 6, 7, 5]
+    },
+    {
+      "name": "Mhi'ya Iman Le'Paige",
+      "image": "mhi_ya_iman_le_paige.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [5, 6, 10, 5, 10]
+    },
+    {
+      "name": "Dawn",
+      "image": "dawn.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [7, 9, 7, 8, 6]
+    },
+    {
+      "name": "Morphine Love Dion",
+      "image": "morphine_love_dion.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [7, 8, 8, 7, 8]
+    },
+    {
+      "name": "Q",
+      "image": "q.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [9, 9, 7, 8, 6]
+    },
+    {
+      "name": "Plane Jane",
+      "image": "plane_jane.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [8, 9, 7, 8, 7]
+    },
+    {
+      "name": "Amanda Tori Meating",
+      "image": "amanda_tori_meating.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [8, 7, 7, 8, 6]
+    },
+    {
+      "name": "Mirage",
+      "image": "mirage.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [6, 7, 9, 6, 9]
+    },
+    {
+      "name": "Hershii LiqCour-Jeté",
+      "image": "hershii_liqcour_jete.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [6, 6, 7, 6, 7]
+    },
+    {
+      "name": "Sapphira Cristál",
+      "image": "sapphira_cristal.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [9, 9, 8, 9, 8]
+    },
+    {
+      "name": "Nymphia Wind",
+      "image": "nymphia_wind.webp",
+      "seasons": [
+        "US S16"
+      ],
+      "stats": [8, 10, 8, 9, 7]
+    },
+    {
+      "name": "Lucky Starzzz",
+      "image": "lucky_starzzz.webp",
+      "seasons": [
+        "US S17"
+      ],
+      "stats": [6, 7, 7, 6, 6]
+    },
+    {
+      "name": "Joella",
+      "image": "joella.webp",
+      "seasons": [
+        "US S17"
+      ],
+      "stats": [6, 6, 7, 6, 6]
+    },
+    {
+      "name": "Hormona Lisa",
+      "image": "hormona_lisa.webp",
+      "seasons": [
+        "US S17"
+      ],
+      "stats": [7, 7, 6, 7, 5]
+    },
+    {
+      "name": "Crystal Envy",
+      "image": "crystal_envy.webp",
+      "seasons": [
+        "US S17"
+      ],
+      "stats": [8, 9, 7, 8, 6]
+    },
+    {
+      "name": "Acacia Forgot",
+      "image": "acacia_forgot.webp",
+      "seasons": [
+        "US S17"
+      ],
+      "stats": [7, 8, 7, 7, 6]
+    },
+    {
+      "name": "Kori King",
+      "image": "kori_king.webp",
+      "seasons": [
+        "US S17"
+      ],
+      "stats": [7, 7, 8, 7, 7]
+    },
+    {
+      "name": "Arrietty",
+      "image": "arrietty.webp",
+      "seasons": [
+        "US S17"
+      ],
+      "stats": [8, 8, 7, 8, 6]
+    },
+    {
+      "name": "Lydia B. Kollins",
+      "image": "lydia_b_kollins.webp",
+      "seasons": [
+        "US S17",
+        "US AS10"
+      ],
+      "stats": [8, 9, 7, 8, 7]
+    },
+    {
+      "name": "Lana Ja'Rae",
+      "image": "lana_ja_rae.webp",
+      "seasons": [
+        "US S17"
+      ],
+      "stats": [7, 8, 7, 7, 6]
+    },
+    {
+      "name": "Suzie Toot",
+      "image": "suzie_toot.webp",
+      "seasons": [
+        "US S17"
+      ],
+      "stats": [8, 8, 8, 8, 7]
+    },
+    {
+      "name": "Sam Star",
+      "image": "sam_star.webp",
+      "seasons": [
+        "US S17"
+      ],
+      "stats": [7, 7, 7, 7, 6]
+    },
+    {
+      "name": "Lexi Love",
+      "image": "lexi_love.webp",
+      "seasons": [
+        "US S17"
+      ],
+      "stats": [8, 8, 7, 8, 7]
+    },
+    {
+      "name": "Jewels Sparkles",
+      "image": "jewels_sparkles.webp",
+      "seasons": [
+        "US S17"
+      ],
+      "stats": [7, 8, 7, 7, 6]
+    },
+    {
+      "name": "Onya Nurve",
+      "image": "onya_nurve.webp",
+      "seasons": [
+        "US S17"
+      ],
+      "stats": [7, 7, 8, 7, 7]
+    },
+    {
+      "name": "DD Fuego",
+      "image": "dd_fuego.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [7, 8, 8, 7, 7]
+    },
+    {
+      "name": "Mandy Mango",
+      "image": "mandy_mango.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [7, 7, 7, 7, 6]
+    },
+    {
+      "name": "Darlene Mitchell",
+      "image": "darlene_mitchell.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [8, 8, 7, 8, 6]
+    },
+    {
+      "name": "Athena Dion",
+      "image": "athena_dion.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [7, 8, 7, 7, 7]
+    },
+    {
+      "name": "Vita VonTesse Starr",
+      "image": "vita_vontesse_starr.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [8, 9, 7, 8, 6]
+    },
+    {
+      "name": "Nini Coco",
+      "image": "nini_coco.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [6, 7, 7, 6, 6]
+    },
+    {
+      "name": "Myki Meeks",
+      "image": "myki_meeks.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [7, 7, 8, 7, 7]
+    },
+    {
+      "name": "Kenya Pleaser",
+      "image": "kenya_pleaser.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [8, 8, 8, 8, 7]
+    },
+    {
+      "name": "Juicy Love Dion",
+      "image": "juicy_love_dion.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [7, 8, 8, 7, 8]
+    },
+    {
+      "name": "Discord Addams",
+      "image": "discord_addams.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [8, 9, 7, 8, 6]
+    },
+    {
+      "name": "Ciara Myst",
+      "image": "ciara_myst.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [7, 7, 7, 7, 6]
+    },
+    {
+      "name": "Briar Blush",
+      "image": "briar_blush.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [8, 8, 7, 8, 7]
+    },
+    {
+      "name": "Mia Starr",
+      "image": "mia_starr.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [7, 8, 7, 7, 6]
+    },
+    {
+      "name": "Jane Don't",
+      "image": "jane_dont.webp",
+      "seasons": [
+        "US S18"
+      ],
+      "stats": [7, 7, 8, 7, 7]
+    },
+    {
+      "name": "Baga Chipz",
+      "image": "baga_chipz.webp",
+      "seasons": [
+        "UK S1"
+      ],
+      "stats": [0, 0, 0, 0, 0]
+    },
+    {
+      "name": "Baga Chipz",
+      "image": "baga_chipz.webp",
+      "seasons": [
+        "UK S1"
+      ],
+      "stats": [8, 7, 7, 9, 6]
+    },
+    {
+      "name": "Blu Hydrangea",
+      "image": "blu_hydrangea.webp",
+      "seasons": [
+        "UK S1"
+      ],
+      "stats": [8, 9, 7, 8, 6]
+    },
+    {
+      "name": "Cheryl Hole",
+      "image": "cheryl_hole.webp",
+      "seasons": [
+        "UK S1"
+      ],
+      "stats": [7, 7, 7, 7, 6]
+    },
+    {
+      "name": "Crystal",
+      "image": "crystal.webp",
+      "seasons": [
+        "UK S1"
+      ],
+      "stats": [8, 9, 7, 8, 6]
+    },
+    {
+      "name": "Divina De Campo",
+      "image": "divina_de_campo.webp",
+      "seasons": [
+        "UK S1"
+      ],
+      "stats": [9, 9, 8, 9, 7]
+    },
+    {
+      "name": "Gothy Kendoll",
+      "image": "gothy_kendoll.webp",
+      "seasons": [
+        "UK S1"
+      ],
+      "stats": [6, 6, 6, 6, 6]
+    },
+    {
+      "name": "Scaredy Kat",
+      "image": "scaredy_kat.webp",
+      "seasons": [
+        "UK S1"
+      ],
+      "stats": [6, 7, 6, 6, 6]
+    },
+    {
+      "name": "Sum Ting Wong",
+      "image": "sum_ting_wong.webp",
+      "seasons": [
+        "UK S1"
+      ],
+      "stats": [7, 7, 7, 7, 6]
+    },
+    {
+      "name": "The Vivienne",
+      "image": "the_vivienne.webp",
+      "seasons": [
+        "UK S1",
+        "US AS7"
+      ],
+      "stats": [9, 9, 8, 9, 7]
+    },
+    {
+      "name": "Vinegar Strokes",
+      "image": "vinegar_strokes.webp",
+      "seasons": [
+        "UK S1"
+      ],
+      "stats": [6, 4, 5, 6, 5]
+    },
+    {
+      "name": "A'Whora",
+      "image": "awhora.webp",
+      "seasons": [
+        "UK S2"
+      ],
+      "stats": [6, 9, 7, 7, 7]
+    },
+    {
+      "name": "Asttina Mandella",
+      "image": "asttina_mandella.webp",
+      "seasons": [
+        "UK S2"
+      ],
+      "stats": [6, 7, 9, 7, 8]
+    },
+    {
+      "name": "Bimini Bon-Boulash",
+      "image": "bimini_bon_boulash.webp",
+      "seasons": [
+        "UK S2"
+      ],
+      "stats": [9, 8, 8, 8, 9]
+    },
+    {
+      "name": "Cherry Valentine",
+      "image": "cherry_valentine.webp",
+      "seasons": [
+        "UK S2"
+      ],
+      "stats": [7, 6, 6, 7, 7]
+    },
+    {
+      "name": "Ellie Diamond",
+      "image": "ellie_diamond.webp",
+      "seasons": [
+        "UK S2"
+      ],
+      "stats": [6, 9, 7, 6, 7]
+    },
+    {
+      "name": "Ginny Lemon",
+      "image": "ginny_lemon.webp",
+      "seasons": [
+        "UK S2"
+      ],
+      "stats": [9, 5, 5, 6, 6]
+    },
+    {
+      "name": "Joe Black",
+      "image": "joe_black.webp",
+      "seasons": [
+        "UK S2"
+      ],
+      "stats": [8, 9, 6, 7, 6]
+    },
+    {
+      "name": "Lawrence Chaney",
+      "image": "lawrence_chaney.webp",
+      "seasons": [
+        "UK S2"
+      ],
+      "stats": [10, 7, 8, 8, 8]
+    },
+    {
+      "name": "Sister Sister",
+      "image": "sister_sister.webp",
+      "seasons": [
+        "UK S2"
+      ],
+      "stats": [7, 6, 6, 6, 6]
+    },
+    {
+      "name": "Tayce",
+      "image": "tayce.webp",
+      "seasons": [
+        "UK S2"
+      ],
+      "stats": [8, 7, 9, 7, 10]
+    },
+    {
+      "name": "Tia Kofi",
+      "image": "tia_kofi.webp",
+      "seasons": [
+        "UK S2"
+      ],
+      "stats": [8, 6, 7, 7, 7]
+    },
+    {
+      "name": "Veronica Green",
+      "image": "veronica_green.webp",
+      "seasons": [
+        "UK S2",
+        "UK S3"
+      ],
+      "stats": [8, 7, 7, 8, 7]
+    },
+    {
+      "name": "Choriza May",
+      "image": "choriza_may.webp",
+      "seasons": [
+        "UK S3"
+      ],
+      "stats": [8, 8, 7, 7, 7]
+    },
+    {
+      "name": "River Medway",
+      "image": "river_medway.webp",
+      "seasons": [
+        "UK S3"
+      ],
+      "stats": [8, 7, 7, 7, 7]
+    },
+    {
+      "name": "Charity Kase",
+      "image": "charity_kase.webp",
+      "seasons": [
+        "UK S3"
+      ],
+      "stats": [7, 8, 7, 7, 8]
+    },
+    {
+      "name": "Victoria Scone",
+      "image": "victoria_scone.webp",
+      "seasons": [
+        "UK S3"
+      ],
+      "stats": [7, 9, 7, 7, 7]
+    },
+    {
+      "name": "Ella Vaday",
+      "image": "ella_vaday.webp",
+      "seasons": [
+        "UK S3"
+      ],
+      "stats": [8, 7, 8, 8, 8]
+    },
+    {
+      "name": "Kitty Scott-Claus",
+      "image": "kitty_scott-claus.webp",
+      "seasons": [
+        "UK S3"
+      ],
+      "stats": [9, 7, 8, 8, 8]
+    },
+    {
+      "name": "Vanity Milan",
+      "image": "vanity_milan.webp",
+      "seasons": [
+        "UK S3"
+      ],
+      "stats": [7, 7, 9, 7, 10]
+    },
+    {
+      "name": "Scarlett Harlett",
+      "image": "scarlett_harlett.webp",
+      "seasons": [
+        "UK S3"
+      ],
+      "stats": [7, 7, 7, 7, 7]
+    },
+    {
+      "name": "Elektra Fence",
+      "image": "elektra_fence.webp",
+      "seasons": [
+        "UK S3"
+      ],
+      "stats": [8, 7, 7, 7, 7]
+    },
+    {
+      "name": "Krystal Versace",
+      "image": "krystal_versace.webp",
+      "seasons": [
+        "UK S3"
+      ],
+      "stats": [7, 9, 8, 7, 8]
+    },
+    {
+      "name": "Anubis",
+      "image": "anubis.webp",
+      "seasons": [
+        "UK S4"
+      ],
+      "stats": [6, 9, 6, 6, 6]
+    },
+    {
+      "name": "Baby",
+      "image": "baby.webp",
+      "seasons": [
+        "UK S4"
+      ],
+      "stats": [7, 8, 7, 7, 8]
+    },
+    {
+      "name": "Black Peppa",
+      "image": "black_peppa.webp",
+      "seasons": [
+        "UK S4"
+      ],
+      "stats": [8, 8, 9, 8, 9]
+    },
+    {
+      "name": "Cheddar Gorgeous",
+      "image": "cheddar_gorgeous.webp",
+      "seasons": [
+        "UK S4"
+      ],
+      "stats": [9, 10, 8, 9, 8]
+    },
+    {
+      "name": "Copper Topp",
+      "image": "copper_topp.webp",
+      "seasons": [
+        "UK S4"
+      ],
+      "stats": [7, 7, 7, 7, 7]
+    },
+    {
+      "name": "Dakota Schiffer",
+      "image": "dakota_schiffer.webp",
+      "seasons": [
+        "UK S4"
+      ],
+      "stats": [8, 8, 7, 7, 7]
+    },
+    {
+      "name": "Danny Beard",
+      "image": "danny_beard.webp",
+      "seasons": [
+        "UK S4"
+      ],
+      "stats": [10, 7, 8, 9, 9]
+    },
+    {
+      "name": "Jonbers Blonde",
+      "image": "jonbers_blonde.webp",
+      "seasons": [
+        "UK S4"
+      ],
+      "stats": [8, 7, 7, 7, 7]
+    },
+    {
+      "name": "Just May",
+      "image": "just_may.webp",
+      "seasons": [
+        "UK S4"
+      ],
+      "stats": [9, 7, 7, 7, 7]
+    },
+    {
+      "name": "Le Fil",
+      "image": "le_fil.webp",
+      "seasons": [
+        "UK S4"
+      ],
+      "stats": [8, 9, 7, 8, 7]
+    },
+    {
+      "name": "Pixie Polite",
+      "image": "pixie_polite.webp",
+      "seasons": [
+        "UK S4"
+      ],
+      "stats": [8, 7, 7, 7, 7]
+    },
+    {
+      "name": "Sminty Drop",
+      "image": "sminty_drop.webp",
+      "seasons": [
+        "UK S4"
+      ],
+      "stats": [7, 7, 8, 7, 8]
+    },
+    {
+      "name": "Starlet",
+      "image": "starlet.webp",
+      "seasons": [
+        "UK S4"
+      ],
+      "stats": [7, 7, 7, 7, 7]
+    },
+    {
+      "name": "Ginger Johnson",
+      "image": "ginger_johnson.webp",
+      "seasons": [
+        "UK S5"
+      ],
+      "stats": [10, 9, 9, 10, 8]
+    },
+    {
+      "name": "Michael Marouli",
+      "image": "michael_marouli.webp",
+      "seasons": [
+        "UK S5"
+      ],
+      "stats": [9, 9, 10, 9, 9]
+    },
+    {
+      "name": "DeDeLicious",
+      "image": "dedelicious.webp",
+      "seasons": [
+        "UK S5"
+      ],
+      "stats": [6, 9, 8, 6, 10]
+    },
+    {
+      "name": "Kate Butch",
+      "image": "kate_butch.webp",
+      "seasons": [
+        "UK S5"
+      ],
+      "stats": [10, 4, 8, 10, 6]
+    },
+    {
+      "name": "Cara Melle",
+      "image": "cara_melle.webp",
+      "seasons": [
+        "UK S5"
+      ],
+      "stats": [5, 7, 10, 4, 9]
+    },
+    {
+      "name": "Vicki Vivacious",
+      "image": "vicki_vivacious.webp",
+      "seasons": [
+        "UK S5"
+      ],
+      "stats": [8, 8, 9, 8, 7]
+    },
+    {
+      "name": "Banksie",
+      "image": "banksie.webp",
+      "seasons": [
+        "UK S5"
+      ],
+      "stats": [6, 10, 6, 5, 6]
+    },
+    {
+      "name": "Miss Naomi Carter",
+      "image": "miss_naomi_carter.webp",
+      "seasons": [
+        "UK S5"
+      ],
+      "stats": [6, 5, 6, 6, 5]
+    },
+    {
+      "name": "Alexis Saint-Pete",
+      "image": "alexis_saint-pete.webp",
+      "seasons": [
+        "UK S5"
+      ],
+      "stats": [4, 6, 7, 4, 5]
+    },
+    {
+      "name": "Tomara Thomas",
+      "image": "tomara_thomas.webp",
+      "seasons": [
+        "UK S5"
+      ],
+      "stats": [9, 8, 10, 8, 9]
+    },
+    {
+      "name": "Kyran Thrax",
+      "image": "kyran_thrax.webp",
+      "seasons": [
+        "UK S6"
+      ],
+      "stats": [10, 9, 9, 10, 8]
+    },
+    {
+      "name": "La Voix",
+      "image": "la_voix.webp",
+      "seasons": [
+        "UK S6"
+      ],
+      "stats": [10, 7, 10, 10, 8]
+    },
+    {
+      "name": "Marmalade",
+      "image": "marmalade.webp",
+      "seasons": [
+        "UK S6"
+      ],
+      "stats": [8, 10, 8, 9, 8]
+    },
+    {
+      "name": "Rileasa Slaves",
+      "image": "rileasa_slaves.webp",
+      "seasons": [
+        "UK S6"
+      ],
+      "stats": [6, 7, 10, 7, 10]
+    },
+    {
+      "name": "Actavia",
+      "image": "actavia.webp",
+      "seasons": [
+        "UK S6"
+      ],
+      "stats": [6, 9, 9, 7, 8]
+    },
+    {
+      "name": "Chanel O'Conor",
+      "image": "chanel_o_conor.webp",
+      "seasons": [
+        "UK S6"
+      ],
+      "stats": [7, 8, 7, 8, 7]
+    },
+    {
+      "name": "Charra Tea",
+      "image": "charra_tea.webp",
+      "seasons": [
+        "UK S6"
+      ],
+      "stats": [9, 7, 8, 8, 7]
+    },
+    {
+      "name": "Dita Garbo",
+      "image": "dita_garbo.webp",
+      "seasons": [
+        "UK S6"
+      ],
+      "stats": [6, 7, 6, 6, 6]
+    },
+    {
+      "name": "Kiki Snatch",
+      "image": "kiki_snatch.webp",
+      "seasons": [
+        "UK S6"
+      ],
+      "stats": [7, 8, 10, 7, 9]
+    },
+    {
+      "name": "Lill",
+      "image": "lill.webp",
+      "seasons": [
+        "UK S6"
+      ],
+      "stats": [9, 10, 8, 8, 8]
+    },
+    {
+      "name": "Zahirah Zapanta",
+      "image": "zahirah_zapanta.webp",
+      "seasons": [
+        "UK S6"
+      ],
+      "stats": [6, 9, 7, 6, 7]
+    },
+    {
+      "name": "Saki Yew",
+      "image": "saki_yew.webp",
+      "seasons": [
+        "UK S6"
+      ],
+      "stats": [6, 7, 8, 6, 7]
+    },
+    {
+      "name": "Bones",
+      "image": "bones.webp",
+      "seasons": [
+        "UK S7"
+      ],
+      "stats": [6, 7, 6, 10, 4]
+    },
+    {
+      "name": "Elle Vosque",
+      "image": "elle_vosque.webp",
+      "seasons": [
+        "UK S7"
+      ],
+      "stats": [8, 10, 9, 8, 8]
+    },
+    {
+      "name": "Catrin Feelings",
+      "image": "catrin_feelings.webp",
+      "seasons": [
+        "UK S7"
+      ],
+      "stats": [7, 7, 8, 8, 8]
+    },
+    {
+      "name": "Chai T Grande",
+      "image": "chai_t_grande.webp",
+      "seasons": [
+        "UK S7"
+      ],
+      "stats": [9, 5, 7, 8, 6]
+    },
+    {
+      "name": "Nyongbella",
+      "image": "nyongbella.webp",
+      "seasons": [
+        "UK S7"
+      ],
+      "stats": [5, 7, 8, 6, 10]
+    },
+    {
+      "name": "Paige Three",
+      "image": "paige_three.webp",
+      "seasons": [
+        "UK S7"
+      ],
+      "stats": [7, 8, 7, 7, 6]
+    },
+    {
+      "name": "Pasty",
+      "image": "pasty.webp",
+      "seasons": [
+        "UK S7"
+      ],
+      "stats": [6, 6, 5, 6, 5]
+    },
+    {
+      "name": "Sally TM",
+      "image": "sally_tm.webp",
+      "seasons": [
+        "UK S7"
+      ],
+      "stats": [6, 9, 7, 6, 7]
+    },
+    {
+      "name": "Silllexa Diction",
+      "image": "silllexa_diction.webp",
+      "seasons": [
+        "UK S7"
+      ],
+      "stats": [8, 8, 8, 8, 8]
+    },
+    {
+      "name": "Tayris Mongardi",
+      "image": "tayris_mongardi.webp",
+      "seasons": [
+        "UK S7"
+      ],
+      "stats": [7, 7, 10, 8, 9]
+    },
+    {
+      "name": "Bonnie Ann Clyde",
+      "image": "bonnie_ann_clyde.webp",
+      "seasons": [
+        "UK S7"
+      ],
+      "stats": [10, 7, 8, 10, 7]
+    },
+    {
+      "name": "Viola",
+      "image": "viola.webp",
+      "seasons": [
+        "UK S7"
+      ],
+      "stats": [6, 9, 7, 6, 7]
+    }
   ]
 }
