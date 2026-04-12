@@ -103,6 +103,20 @@
     .queen-mini { font-size: 12px; color: var(--muted); line-height: 1.4; }
     .tiny-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-start; margin-top: 12px; }
 
+    /* Tabs UI for Predefined Casts */
+    .tabs-nav { display: flex; gap: 8px; border-bottom: 1px solid var(--border); margin-bottom: 16px; padding-bottom: 8px; overflow-x: auto; }
+    .tab-btn { background: transparent; border: none; color: var(--muted); font-size: 14px; font-weight: 700; padding: 8px 16px; cursor: pointer; border-radius: 99px; transition: all 0.2s; box-shadow: none; }
+    .tab-btn:hover { background: var(--lime-3); color: var(--ink); transform: none; }
+    .tab-btn.active { background: var(--lime); color: #14380e; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Modern Grid for Season Buttons */
+    .season-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); gap: 10px; padding-bottom: 8px; }
+    .season-btn { background: #fbfff8; border: 1px solid var(--border); border-radius: 12px; color: var(--ink); font-weight: 700; font-size: 14px; padding: 12px 8px; text-align: center; cursor: pointer; transition: all 0.15s; box-shadow: 0 2px 4px rgba(76,110,50,0.04); }
+    .season-btn:hover { background: var(--lime-3); border-color: var(--lime); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(76,110,50,0.1); }
+
     /* Search Results Style */
     .search-results-grid { display: grid; grid-template-columns: 1fr; gap: 8px; max-height: 220px; overflow-y: auto; margin-top: 6px;}
     .search-result-item { display: flex; align-items: center; gap: 12px; padding: 8px; border: 1px solid var(--border); border-radius: 12px; cursor: pointer; background: #fbfff8; transition: background 0.1s; }
@@ -191,11 +205,80 @@
   <div class="app">
     <div class="hero">
       <h1 class="title">Greenroom Fantasy Drag Race Simulator</h1>
-      <p class="subtitle">Release v1.4.0 - Last Updated 11/4/26.</p>
+      <p class="subtitle">Release v1.5.0 - Last Updated 12/4/26.</p>
       
       <div class="button-row" style="margin-top: 16px;">
+        <button id="preDefBtn" class="primary" style="padding: 8px 16px; font-size: 14px;">Pre-Defined Casts</button>
         <button id="patchNotesBtn" class="secondary" style="padding: 8px 16px; font-size: 14px;">View Patch Notes</button>
         <button id="suggestBtn" class="secondary" style="padding: 8px 16px; font-size: 14px;">Suggest a Feature / Report Bug</button>
+      </div>
+    </div>
+
+    <div id="preDefModal" class="modal hidden">
+      <div class="modal-content panel">
+        <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center;">
+          <h2>Pre-Defined Casts</h2>
+          <button id="closePreDefBtn" class="ghost" style="padding: 6px 12px;">Close</button>
+        </div>
+        <div class="panel-body">
+          <p class="subtle" style="margin-bottom: 20px;">Selecting a season will replace your current cast with the queens from that season.</p>
+          
+          <div class="tabs-nav">
+            <button class="tab-btn active" data-target="tab-us">US Seasons</button>
+            <button class="tab-btn" data-target="tab-as">US All Stars</button>
+            <button class="tab-btn" data-target="tab-uk">UK Seasons</button>
+          </div>
+
+          <div id="tab-us" class="tab-content active">
+            <div class="season-grid">
+              <button class="season-btn predef-btn" data-season="US S1">S1</button>
+              <button class="season-btn predef-btn" data-season="US S2">S2</button>
+              <button class="season-btn predef-btn" data-season="US S3">S3</button>
+              <button class="season-btn predef-btn" data-season="US S4">S4</button>
+              <button class="season-btn predef-btn" data-season="US S5">S5</button>
+              <button class="season-btn predef-btn" data-season="US S6">S6</button>
+              <button class="season-btn predef-btn" data-season="US S7">S7</button>
+              <button class="season-btn predef-btn" data-season="US S8">S8</button>
+              <button class="season-btn predef-btn" data-season="US S9">S9</button>
+              <button class="season-btn predef-btn" data-season="US S10">S10</button>
+              <button class="season-btn predef-btn" data-season="US S11">S11</button>
+              <button class="season-btn predef-btn" data-season="US S12">S12</button>
+              <button class="season-btn predef-btn" data-season="US S13">S13</button>
+              <button class="season-btn predef-btn" data-season="US S14">S14</button>
+              <button class="season-btn predef-btn" data-season="US S15">S15</button>
+              <button class="season-btn predef-btn" data-season="US S16">S16</button>
+              <button class="season-btn predef-btn" data-season="US S17">S17</button>
+              <button class="season-btn predef-btn" data-season="US S18">S18</button>
+            </div>
+          </div>
+
+          <div id="tab-as" class="tab-content">
+            <div class="season-grid">
+              <button class="season-btn predef-btn" data-season="US AS1">AS1</button>
+              <button class="season-btn predef-btn" data-season="US AS2">AS2</button>
+              <button class="season-btn predef-btn" data-season="US AS3">AS3</button>
+              <button class="season-btn predef-btn" data-season="US AS4">AS4</button>
+              <button class="season-btn predef-btn" data-season="US AS5">AS5</button>
+              <button class="season-btn predef-btn" data-season="US AS6">AS6</button>
+              <button class="season-btn predef-btn" data-season="US AS7">AS7</button>
+              <button class="season-btn predef-btn" data-season="US AS8">AS8</button>
+              <button class="season-btn predef-btn" data-season="US AS9">AS9</button>
+              <button class="season-btn predef-btn" data-season="US AS10">AS10</button>
+            </div>
+          </div>
+
+          <div id="tab-uk" class="tab-content">
+            <div class="season-grid">
+              <button class="season-btn predef-btn" data-season="UK S1">UK1</button>
+              <button class="season-btn predef-btn" data-season="UK S2">UK2</button>
+              <button class="season-btn predef-btn" data-season="UK S3">UK3</button>
+              <button class="season-btn predef-btn" data-season="UK S4">UK4</button>
+              <button class="season-btn predef-btn" data-season="UK S5">UK5</button>
+              <button class="season-btn predef-btn" data-season="UK S6">UK6</button>
+              <button class="season-btn predef-btn" data-season="UK S7">UK7</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -207,6 +290,13 @@
         </div>
         <div class="panel-body">
           <div class="patch-notes-content">
+            <h3>v1.5.0 - Update</h3>
+            <ul>
+              <li>Added 'Pre-Defined Casts'.</li>
+              <li>Fixed issues with some pictures.</li>
+              <li>Added new Lip Sync Songs.</li>
+            </ul>
+
             <h3>v1.4.0 - Update</h3>
             <ul>
               <li>Edited Setup Screen UI.</li>
@@ -426,6 +516,11 @@
       "Run The World (Girls) by Beyoncé",
       "Bad Romance by Lady Gaga",
       "Total Eclipse Of The Heart by Bonnie Tyler",
+      "Applaause by Lady Gaga",
+      "Starships by Trumpie Minaj",
+      "Umbrella by Rihanna",
+      "Since U Been Gone by Kelly Clarkeson",
+      "Let it Go from Frozen",
     ];
 
     const state = {
@@ -452,6 +547,9 @@
       finaleMeta: document.getElementById("finaleMeta"), finaleContent: document.getElementById("finaleContent"), finaleBtn: document.getElementById("finaleBtn"),
       
       // New Elements
+      preDefBtn: document.getElementById("preDefBtn"),
+      closePreDefBtn: document.getElementById("closePreDefBtn"),
+      preDefModal: document.getElementById("preDefModal"),
       patchNotesBtn: document.getElementById("patchNotesBtn"),
       closePatchNotesBtn: document.getElementById("closePatchNotesBtn"),
       patchNotesModal: document.getElementById("patchNotesModal"),
@@ -465,6 +563,9 @@
     };
 
     // Modal Events
+    el.preDefBtn.addEventListener("click", () => el.preDefModal.classList.remove("hidden"));
+    el.closePreDefBtn.addEventListener("click", () => el.preDefModal.classList.add("hidden"));
+
     el.patchNotesBtn.addEventListener("click", () => el.patchNotesModal.classList.remove("hidden"));
     el.closePatchNotesBtn.addEventListener("click", () => el.patchNotesModal.classList.add("hidden"));
     
@@ -474,6 +575,51 @@
     el.suggestBtn.addEventListener("click", () => {
       window.open("https://forms.gle/bprZzRLGFyfe9yWs6", "_blank");
     });
+
+    // Tab switching logic for Pre-Defined Casts
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        // Remove active from all tabs and contents
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+        
+        // Add active to clicked tab and corresponding content
+        e.target.classList.add("active");
+        document.getElementById(e.target.dataset.target).classList.add("active");
+      });
+    });
+
+    // Pre-Defined Cast Selection
+    document.querySelectorAll(".predef-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const season = e.target.dataset.season;
+        loadPredefCast(season);
+      });
+    });
+
+    function loadPredefCast(season) {
+      if (!allRealQueens.length) return alert("Still loading queens data, please wait a moment.");
+      
+      const cast = allRealQueens.filter(q => q.seasons && q.seasons.includes(season));
+      if (!cast.length) return alert(`No queens found for ${season}.`);
+
+      state.queens = []; // Clear current cast
+      
+      cast.forEach(q => {
+        state.queens.push({
+          name: q.name,
+          image: q.image,
+          comedy: intRand(3, 10),
+          design: intRand(3, 10),
+          performance: intRand(3, 10),
+          acting: intRand(3, 10),
+          lip_sync: intRand(3, 10)
+        });
+      });
+      
+      updateSetupUI();
+      el.preDefModal.classList.add("hidden");
+    }
 
     // Real Queen Search & Add functionality
     el.realQueenSearch.addEventListener("input", (e) => {
