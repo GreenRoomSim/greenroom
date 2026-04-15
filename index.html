@@ -530,7 +530,7 @@
       { name: "Talent Show", type: "Performance", once: true, req: "early" },
       { name: "Design Challenge", type: "Design", once: false, req: "not-last" },
       { name: "Ball Challenge", type: "Design", once: true, req: "early-mid" },
-      { name: "Girl Group Challenge", type: "Performance", once: true, req: "early-mid" },
+      { name: "Girl Group Challenge", type: "Performance", once: true, req: "not-early" },
       { name: "Rusical", type: "Performance", once: true, req: "mid" },
       { name: "Snatch Game", type: "Comedy", once: true, req: "mid" },
       { name: "Acting Challenge", type: "Acting", once: false, req: "mid" },
@@ -911,7 +911,7 @@
 
           let placedIds = [...winners, ...bottomTwo, savedLow].filter(Boolean).map(q => q.id);
           let remainingForHigh = scores.filter(s => !placedIds.includes(s.queen.id));
-          highQueens = remainingForHigh.slice(0, n >= 6 ? 2 : (n >= 5 ? 1 : 0)).map(s => s.queen);
+          highQueens = remainingForHigh.slice(0, 2).map(s => s.queen);
 
           placedIds = [...winners, ...highQueens, ...bottomTwo, savedLow].filter(Boolean).map(q => q.id);
           pureSafe = actives.filter(q => !placedIds.includes(q.id));
