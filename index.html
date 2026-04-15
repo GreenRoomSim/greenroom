@@ -205,7 +205,7 @@
   <div class="app">
     <div class="hero">
       <h1 class="title">Greenroom Drag Race Simulator</h1>
-      <p class="subtitle">Release v1.6.0 - Last Updated 13/4/26.</p>
+      <p class="subtitle">Release v1.6.1 - Last Updated 15/4/26.</p>
       
       <div class="button-row" style="margin-top: 16px;">
         <button id="preDefBtn" class="primary" style="padding: 8px 16px; font-size: 14px;">Pre-Defined Casts</button>
@@ -290,6 +290,11 @@
         </div>
         <div class="panel-body">
           <div class="patch-notes-content">
+            <h3>v1.6.1 - Update</h3>
+            <ul>
+              <li>Fixed Lip Sync Fatigue Issues</li>
+            </ul>
+
             <h3>v1.6.0 - Update</h3>
             <ul>
               <li>Added Season Formats</li>
@@ -1175,8 +1180,8 @@
           
           // Lip Sync Fatigue: Queens in their 4th bottom 2 (or more) automatically lose in regular seasons
           if (state.seasonFormat === "regular") {
-              if (p1.record.BTM2 >= 3 && p2.record.BTM2 < 3) s1 = -999;
-              else if (p2.record.BTM2 >= 3 && p1.record.BTM2 < 3) s2 = -999;
+              if (p1.record.BTM2 >= 4 && p2.record.BTM2 < 4) s1 = -999;
+              else if (p2.record.BTM2 >= 4 && p1.record.BTM2 < 4) s2 = -999;
           }
 
           let winner = s1 >= s2 ? {queen: p1, event: e1} : {queen: p2, event: e2};
