@@ -1213,8 +1213,7 @@
       "name": "Kahmora Hall",
       "image": "kahmora_hall.webp",
       "seasons": [
-        "US S13",
-        "US AS8"
+        "US S13"
       ],
       "stats": [5, 10, 5, 4, 5]
     },
@@ -1569,6 +1568,14 @@
         "US S15"
       ],
       "stats": [9, 10, 9, 9, 8]
+    },
+    {
+      "name": "Jimbo",
+      "image": "jimbo.webp",
+      "seasons": [
+        "US AS8"
+      ],
+      "stats": [10, 7, 7, 9, 4]
     },
     {
       "name": "Geneva Karr",
