@@ -194,7 +194,7 @@
   <div class="app">
     <div class="hero">
       <h1 class="title">Greenroom Drag Race Simulator</h1>
-      <p class="subtitle">Release v1.7.0 - Last Updated 15/4/26</p>
+      <p class="subtitle">Release v1.8.0 - Last Updated 15/4/26</p>
       
       <div class="button-row" style="margin-top: 16px;">
         <button id="preDefBtn" class="primary" style="padding: 8px 16px; font-size: 14px;">Pre-Defined Casts</button>
@@ -279,6 +279,13 @@
         </div>
         <div class="panel-body">
           <div class="patch-notes-content">
+            <h3>v1.8.0 - Update</h3>
+            <ul>
+              <li>Changed Girl Group Challenge Episode Cycle.</li>
+              <li>Added Team Names and new performance screens.</li>
+              <li>Added Season Dimention, With Non-Elimination Episode & Double Wins.</li>
+            </ul>
+
             <h3>v1.7.0 - Update</h3>
             <ul>
               <li>Added "Choose Output" button to rig placements during Judging and Lip Syncs.</li>
@@ -497,8 +504,7 @@
     const MIN_CAST = 10;
     const MAX_CAST = 16;
     
-    let allRealQueens = []; // Will hold the data loaded from queens.json
-
+    let allRealQueens = [];
     // Load Real Queens from JSON file
     fetch('queens.json')
       .then(response => response.json())
@@ -508,7 +514,7 @@
         }
       })
       .catch(error => console.error("Error loading queens.json:", error));
-
+      
     // Challenge Lists
     const miniChallenges = [
       { name: "Reading Challenge", req: "none" },
@@ -519,12 +525,12 @@
       { name: "Dance-Off", req: "none" },
       { name: "RuMail Guessing Game", req: "none" }
     ];
-
+    
     const maxiChallenges = [
       { name: "Talent Show", type: "Performance", once: true, req: "early" },
       { name: "Design Challenge", type: "Design", once: false, req: "not-last" },
       { name: "Ball Challenge", type: "Design", once: true, req: "early-mid" },
-      { name: "Girl Group Challenge", type: "Performance", once: true, req: "early-mid" },
+      { name: "Girl Group Challenge", type: "Performance", once: true, req: "not-early" },
       { name: "Rusical", type: "Performance", once: true, req: "mid" },
       { name: "Snatch Game", type: "Comedy", once: true, req: "mid" },
       { name: "Acting Challenge", type: "Acting", once: false, req: "mid" },
@@ -566,7 +572,13 @@
       "Since U Been Gone by Kelly Clarkeson",
       "Let it Go from Frozen",
     ];
-
+    
+    const girlGroupNames = [
+        "The Frock Destroyers", "United Kingdolls", "Bananadrama", "The Slice Girls", 
+        "The Ru-Premes", "Destiny's Child-Support", "Spice Girls 2.0", "TLD", "Blackpinked", "Pussycat Dolls", "Back Door Gals", "SnS (Sexy N Stupid)", "Filth Harmony",
+        "The Dolls", "The Dreamgirls", "The Triple Threats", "Galatea's Gang"
+    ];
+    
     const state = {
       mode: "setup",
       seasonFormat: "regular",
@@ -578,9 +590,10 @@
       episodeData: null,
       finaleData: null,
       usedMinis: [],
-      usedMaxis: []
+      usedMaxis: [],
+      hasMidSeasonNonElim: false
     };
-
+    
     const el = {
       setupView: document.getElementById("setupView"), gameView: document.getElementById("gameView"), finaleView: document.getElementById("finaleView"),
       queenNameInput: document.getElementById("queenNameInput"), comedyInput: document.getElementById("comedyInput"), designInput: document.getElementById("designInput"), performanceInput: document.getElementById("performanceInput"), actingInput: document.getElementById("actingInput"), lipSyncInput: document.getElementById("lipSyncInput"),
@@ -605,7 +618,7 @@
       rigContent: document.getElementById("rigContent"),
       saveRigBtn: document.getElementById("saveRigBtn")
     };
-
+    
     // Modal Events
     el.preDefBtn.addEventListener("click", () => el.preDefModal.classList.remove("hidden"));
     el.closePreDefBtn.addEventListener("click", () => el.preDefModal.classList.add("hidden"));
@@ -614,11 +627,11 @@
     el.openCustomQueenBtn.addEventListener("click", () => el.customQueenModal.classList.remove("hidden"));
     el.closeCustomQueenBtn.addEventListener("click", () => el.customQueenModal.classList.add("hidden"));
     el.closeRigBtn.addEventListener("click", () => el.rigModal.classList.add("hidden"));
-
+    
     el.suggestBtn.addEventListener("click", () => {
       window.open("https://forms.gle/bprZzRLGFyfe9yWs6", "_blank");
     });
-
+    
     // Tab switching logic for Pre-Defined Casts
     document.querySelectorAll(".tab-btn").forEach(btn => {
       btn.addEventListener("click", (e) => {
@@ -628,7 +641,7 @@
         document.getElementById(e.target.dataset.target).classList.add("active");
       });
     });
-
+    
     // Pre-Defined Cast Selection
     document.querySelectorAll(".predef-btn").forEach(btn => {
       btn.addEventListener("click", (e) => {
@@ -636,13 +649,14 @@
         loadPredefCast(season);
       });
     });
-
+    
     function loadPredefCast(season) {
       if (!allRealQueens.length) return alert("Still loading queens data, please wait a moment.");
       const cast = allRealQueens.filter(q => q.seasons && q.seasons.includes(season));
       if (!cast.length) return alert(`No queens found for ${season}.`);
 
-      state.queens = []; // Clear current cast
+      state.queens = [];
+      // Clear current cast
       cast.forEach(q => {
         const s = q.stats || [];
         state.queens.push({
@@ -667,14 +681,14 @@
         </div>
       `).join("");
     });
-
+    
     el.searchResults.addEventListener("click", (e) => {
       const item = e.target.closest(".search-result-item");
       if (!item) return;
       addRealQueen(item.dataset.name, item.dataset.image);
       el.realQueenSearch.value = ""; el.searchResults.innerHTML = "";
     });
-
+    
     el.addRandomRealBtn.addEventListener("click", () => {
       if (!allRealQueens.length) return alert("Still loading queens data, please wait a moment.");
       const unaddedQueens = allRealQueens.filter(rq => !state.queens.some(sq => sq.name === rq.name));
@@ -682,7 +696,7 @@
       const randomQueen = pick(unaddedQueens);
       addRealQueen(randomQueen.name, randomQueen.image);
     });
-
+    
     function addRealQueen(name, image) {
       if (state.queens.some(q => q.name === name)) return alert(`${name} is already in the cast!`);
       const queenData = allRealQueens.find(q => q.name === name);
@@ -754,7 +768,7 @@
         record: { WIN: 0, TOP2: 0, HIGH: 0, SAFE: 0, LOW: 0, BTM2: 0, ELIM: 0 },
         history: [], eliminated: false, elimOrder: 999
       }));
-      state.episodeNumber = 1; state.phase = 1; state.mode = "game"; state.usedMinis = []; state.usedMaxis = [];
+      state.episodeNumber = 1; state.phase = 1; state.mode = "game"; state.usedMinis = []; state.usedMaxis = []; state.hasMidSeasonNonElim = false;
       prepareEpisode(); renderAll(); renderEpisode();
     }
 
@@ -816,61 +830,101 @@
       
       let categories = new Map();
       let winners = [], highQueens = [], pureSafe = [], savedLow = null, lowQueens = [], bottomTwo = [];
-      
-      if (maxi.name === "Girl Group Challenge" && n >= 8) {
-        let shuffled = [...scores].sort(() => Math.random() - 0.5);
-        let teamA = shuffled.slice(0, Math.floor(n/2));
-        let teamB = shuffled.slice(Math.floor(n/2));
-        
-        let scoreA = teamA.reduce((sum, item) => sum + item.score, 0);
-        let scoreB = teamB.reduce((sum, item) => sum + item.score, 0);
-        
-        let winningTeam = scoreA > scoreB ? teamA : teamB;
-        let losingTeam = scoreA > scoreB ? teamB : teamA;
-        
-        losingTeam.sort((a, b) => b.score - a.score);
-        winners = winningTeam.map(i => i.queen);
-        winningTeam.forEach(i => categories.set(i.queen.id, "Slayed"));
-        
-        pureSafe = losingTeam.slice(0, losingTeam.length - 3).map(i => i.queen);
-        pureSafe.forEach(q => categories.set(q.id, "Okay"));
-        
-        savedLow = losingTeam[losingTeam.length - 3].queen;
-        categories.set(savedLow.id, "Bad");
-        
-        bottomTwo = losingTeam.slice(-2).map(i => i.queen);
-        bottomTwo.forEach(q => categories.set(q.id, "Flopped"));
-      } else {
-        scores.forEach((entry, idx) => {
-          let label = "Okay";
-          if (idx === 0) label = "Slayed";
-          else if (idx < Math.ceil(n * 0.25)) label = "Great";
-          else if (idx >= n - 2) label = "Flopped";
-          else if (idx === n - 3) label = "Bad";
-          categories.set(entry.queen.id, label);
-        });
-        winners = [scores[0].queen];
-        bottomTwo = [scores[n-2].queen, scores[n-1].queen];
+      let isGG = false;
+      let ggData = null;
 
-        if (n < 6) {
-            pureSafe = [];
-            let middle = scores.slice(1, n-2);
-            if (middle.length === 1) {
-                if (middle[0].score > (scores[0].score + bottomTwo[0].score)/2) { highQueens = [middle[0].queen]; }
-                else { savedLow = middle[0].queen; }
-            } else if (middle.length === 2) {
-                highQueens = [middle[0].queen];
-                savedLow = middle[1].queen;
-            }
-        } else {
-            highQueens = n >= 6 ? [scores[1].queen, scores[2].queen] : (n >= 5 ? [scores[1].queen] : []);
-            savedLow = n >= 6 ? scores[n-3].queen : null;
-            let placedIds = [...winners, ...highQueens, ...bottomTwo, savedLow].filter(Boolean).map(q => q.id);
-            pureSafe = actives.filter(q => !placedIds.includes(q.id));
-        }
+      let isMidSeasonNonElim = false;
+      if (state.seasonFormat === "regular" && !state.hasMidSeasonNonElim && n <= 7 && n >= 5 && maxi.name !== "Girl Group Challenge" && state.episodeNumber > 1) {
+          if (Math.random() < 0.33 || n === 5) {
+              isMidSeasonNonElim = true;
+              state.hasMidSeasonNonElim = true;
+          }
       }
 
-      if (state.seasonFormat === "all-stars-legacy") {
+      if (maxi.name === "Girl Group Challenge" && n >= 8) {
+          isGG = true;
+          let shuffled = [...scores].sort(() => Math.random() - 0.5);
+          let teamA = shuffled.slice(0, Math.floor(n/2));
+          let teamB = shuffled.slice(Math.floor(n/2));
+          
+          let nameA = pick(girlGroupNames);
+          let nameB = pick(girlGroupNames.filter(name => name !== nameA));
+          
+          let scoreA = teamA.reduce((sum, item) => sum + item.score, 0);
+          let scoreB = teamB.reduce((sum, item) => sum + item.score, 0);
+          
+          let winningTeam = scoreA > scoreB ? teamA : teamB;
+          let losingTeam = scoreA > scoreB ? teamB : teamA;
+          let winningName = scoreA > scoreB ? nameA : nameB;
+          let losingName = scoreA > scoreB ? nameB : nameA;
+          
+          losingTeam.sort((a, b) => b.score - a.score);
+          winners = winningTeam.map(i => i.queen);
+          winningTeam.forEach(i => categories.set(i.queen.id, "Slayed"));
+          
+          let lQueens = losingTeam.map(i => i.queen);
+          bottomTwo = lQueens.slice(-2);
+          savedLow = lQueens.length > 2 ? lQueens[lQueens.length - 3] : null;
+          pureSafe = lQueens.length > 3 ? lQueens.slice(0, lQueens.length - 3) : [];
+          highQueens = []; 
+          
+          bottomTwo.forEach(q => categories.set(q.id, "Flopped"));
+          if (savedLow) categories.set(savedLow.id, "Bad");
+          pureSafe.forEach(q => categories.set(q.id, "Okay"));
+          
+          ggData = {
+              teamA: { name: nameA, queens: teamA.map(i => i.queen) },
+              teamB: { name: nameB, queens: teamB.map(i => i.queen) },
+              winningName, losingName
+          };
+      } else if (isMidSeasonNonElim) {
+          scores.forEach((entry, idx) => {
+              let label = "Okay";
+              if (idx < 2) label = "Slayed";
+              else if (idx < 5) label = "Great";
+              categories.set(entry.queen.id, label);
+          });
+          let top2 = [scores[0].queen, scores[1].queen];
+          let high = scores.slice(2, 5).map(s => s.queen);
+          let placedIds = [...top2, ...high].map(q => q.id);
+          let safe = actives.filter(q => !placedIds.includes(q.id));
+
+          state.episodeData = {
+              mini, maxi, categories, scores,
+              placements: { topTwo: top2, highQueens: high, pureSafe: safe, bottomThree: [], bottomTwo: [], savedLow: null, winners: [] },
+              countsApplied: false, lipSync: null, elimination: null, riggedOutcome: null, isMidSeasonNonElim: true
+          };
+          return;
+      } else {
+          let winnerCount = (state.seasonFormat === "regular" && Math.random() < 0.05 && n >= 5) ? 2 : 1;
+          scores.forEach((entry, idx) => {
+              let label = "Okay";
+              if (idx < winnerCount) label = "Slayed";
+              else if (idx < Math.ceil(n * 0.25) + winnerCount - 1) label = "Great";
+              else if (idx >= n - 2) label = "Flopped";
+              else if (idx === n - 3) label = "Bad";
+              categories.set(entry.queen.id, label);
+          });
+          winners = scores.slice(0, winnerCount).map(s => s.queen);
+          bottomTwo = scores.slice(n-2, n).map(s => s.queen);
+          savedLow = n >= 6 ? scores[n-3].queen : null;
+
+          let placedIds = [...winners, ...bottomTwo, savedLow].filter(Boolean).map(q => q.id);
+          let remainingForHigh = scores.filter(s => !placedIds.includes(s.queen.id));
+          highQueens = remainingForHigh.slice(0, 2).map(s => s.queen);
+
+          placedIds = [...winners, ...highQueens, ...bottomTwo, savedLow].filter(Boolean).map(q => q.id);
+          pureSafe = actives.filter(q => !placedIds.includes(q.id));
+      }
+
+      if (isGG) {
+          state.episodeData = {
+              mini, maxi, categories, scores,
+              placements: { winners, highQueens, pureSafe, savedLow, bottomTwo },
+              countsApplied: false, lipSync: null, elimination: null, riggedOutcome: null,
+              isGirlGroup: true, gg: ggData
+          };
+      } else if (state.seasonFormat === "all-stars-legacy") {
           let topTwo = [scores[0].queen, scores[1].queen];
           let asHighQueens = [];
           let asBottomTwo = [];
@@ -925,17 +979,31 @@
 
     function renderEpisode() {
       const active = activeQueens();
+      const data = state.episodeData;
+      const isGG = data.isGirlGroup;
+      
       el.gameHeader.textContent = `Episode ${state.episodeNumber}`;
       el.gameMeta.textContent = `${active.length} queens remaining • ${state.queens.length} in cast`;
-      el.screenCounterText.textContent = `Screen ${state.phase} of 7`;
+      
+      const totalScreens = isGG ? 8 : 7;
+      el.screenCounterText.textContent = `Screen ${state.phase} of ${totalScreens}`;
       
       // Rig Button Toggle Logic
-      el.rigGameBtn.classList.toggle("hidden", state.phase !== 3 && state.phase !== 5);
+      el.rigGameBtn.classList.toggle("hidden", 
+          (isGG && state.phase !== 4 && state.phase !== 6) ||
+          (!isGG && state.phase !== 3 && state.phase !== 5)
+      );
 
-      const data = state.episodeData;
+      // Phase Translator mapping specifically to handle Girl Group shifts
+      let phaseTag = state.phase;
+      if (isGG) {
+          if (state.phase === 2) phaseTag = "gg_teams";
+          else if (state.phase > 2) phaseTag = state.phase - 1; 
+      }
+
       let content = "";
 
-      if (state.phase === 1) {
+      if (phaseTag === 1) {
         if (data.mini.none) {
             content = `
               <div class="section-card" style="text-align: center; padding: 40px 24px;">
@@ -955,65 +1023,136 @@
               </div>
             `;
         }
-      } else if (state.phase === 2) {
-        let slayed = [], okay = [], bad = [];
-        data.scores.forEach(row => {
-          let cat = data.categories.get(row.queen.id);
-          if (cat === "Slayed" || cat === "Great") slayed.push(row.queen);
-          else if (cat === "Flopped" || cat === "Bad") bad.push(row.queen);
-          else okay.push(row.queen);
-        });
-        slayed.sort(() => Math.random() - 0.5); okay.sort(() => Math.random() - 0.5); bad.sort(() => Math.random() - 0.5);
+      } else if (phaseTag === "gg_teams") {
         content = `
           <div class="section-card">
-            <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Maxi Challenge</span></div>
-            <p class="big-message">${data.maxi.name}</p>
-            <p class="muted" style="margin-bottom:20px;">The queens' performances...</p>
+            <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">The Teams</span></div>
+            <p class="big-message">Girl Groups</p>
+            <p class="muted" style="margin-bottom:20px;">The queens have split into two teams...</p>
             <div class="flex-col-center">
-              ${slayed.length ? `<div class="group-row"><p class="muted">Had a great performance!</p><div class="flex-center">${slayed.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div></div>` : ""}
-              ${okay.length ? `<div class="group-row"><p class="muted">Had a good performance.</p><div class="flex-center">${okay.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div></div>` : ""}
-              ${bad.length ? `<div class="group-row"><p class="muted">Had a bad performance...</p><div class="flex-center">${bad.map(q => `<div class="placement-card bg-low">${escapeHtml(q.name)}</div>`).join("")}</div></div>` : ""}
-            </div>
-          </div>
-        `;
-      } else if (state.phase === 3) {
-        let tops, bottoms, safes;
-        if (state.seasonFormat === "all-stars-legacy") {
-            tops = [...data.placements.topTwo, ...data.placements.highQueens];
-            bottoms = [...(data.placements.savedLow ? [data.placements.savedLow] : []), ...data.placements.bottomTwo];
-            safes = [...data.placements.pureSafe];
-        } else if (state.episodeNumber === 1 && state.premiereFormat === "top2") {
-            tops = [...data.placements.topTwo, ...data.placements.highQueens];
-            bottoms = [...(data.placements.bottomThree || []), ...(data.placements.savedLow ? [data.placements.savedLow] : []), ...(data.placements.bottomTwo || [])];
-            safes = [...data.placements.pureSafe];
-        } else {
-            tops = [...data.placements.winners, ...data.placements.highQueens];
-            bottoms = [...(data.placements.savedLow ? [data.placements.savedLow] : []), ...data.placements.bottomTwo];
-            safes = [...data.placements.pureSafe];
-        }
-
-        tops.sort(() => Math.random() - 0.5); bottoms.sort(() => Math.random() - 0.5); safes.sort(() => Math.random() - 0.5);
-        content = `
-          <div class="section-card">
-            <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Judging!</span></div>
-            <p class="muted" style="margin-bottom:16px;">Based on tonight's performances...</p>
-            <div class="flex-col-center">
-              <div class="flex-center">
-                ${tops.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
-                ${bottoms.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
+              <div class="group-row">
+                <p class="muted" style="font-weight: 800; font-size: 16px; margin:0;">${escapeHtml(data.gg.teamA.name)}</p>
+                <div class="flex-center">${data.gg.teamA.queens.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div>
               </div>
-              <p class="muted">You represent the tops and bottoms of the week.</p>
-              ${safes.length ? `
-                <hr style="width:100%; border:0; border-top:1px solid var(--border); margin:10px 0;">
-                <div class="flex-center">
-                  ${safes.map(q => `<span class="placement-card small bg-safe">${escapeHtml(q.name)}</span>`).join("")}
-                </div>
-                <p class="muted">You are safe.</p>
-              ` : ""}
+              <div class="group-row" style="border:none;">
+                <p class="muted" style="font-weight: 800; font-size: 16px; margin:0;">${escapeHtml(data.gg.teamB.name)}</p>
+                <div class="flex-center">${data.gg.teamB.queens.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div>
+              </div>
             </div>
           </div>
         `;
-      } else if (state.phase === 4) {
+      } else if (phaseTag === 2) {
+        if (isGG) {
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Maxi Challenge</span></div>
+                <p class="big-message">${data.maxi.name}</p>
+                <p class="muted" style="margin-bottom:20px;">The girl groups perform their original tracks...</p>
+                <div class="flex-col-center">
+                  <div class="group-row"><p class="muted">Had a great performance!</p><div class="flex-center"><div class="placement-card bg-high">${escapeHtml(data.gg.winningName)}</div></div></div>
+                  <div class="group-row" style="border:none;"><p class="muted">Struggled to find their rhythm...</p><div class="flex-center"><div class="placement-card bg-low">${escapeHtml(data.gg.losingName)}</div></div></div>
+                </div>
+              </div>
+            `;
+        } else {
+            let slayed = [], okay = [], bad = [];
+            data.scores.forEach(row => {
+              let cat = data.categories.get(row.queen.id);
+              if (cat === "Slayed" || cat === "Great") slayed.push(row.queen);
+              else if (cat === "Flopped" || cat === "Bad") bad.push(row.queen);
+              else okay.push(row.queen);
+            });
+            slayed.sort(() => Math.random() - 0.5); okay.sort(() => Math.random() - 0.5); bad.sort(() => Math.random() - 0.5);
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Maxi Challenge</span></div>
+                <p class="big-message">${data.maxi.name}</p>
+                <p class="muted" style="margin-bottom:20px;">The queens' performances...</p>
+                <div class="flex-col-center">
+                  ${slayed.length ? `<div class="group-row"><p class="muted">Had a great performance!</p><div class="flex-center">${slayed.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div></div>` : ""}
+                  ${okay.length ? `<div class="group-row"><p class="muted">Had a good performance.</p><div class="flex-center">${okay.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div></div>` : ""}
+                  ${bad.length ? `<div class="group-row"><p class="muted">Had a bad performance...</p><div class="flex-center">${bad.map(q => `<div class="placement-card bg-low">${escapeHtml(q.name)}</div>`).join("")}</div></div>` : ""}
+                </div>
+              </div>
+            `;
+        }
+      } else if (phaseTag === 3) {
+        if (isGG) {
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Judging!</span></div>
+                <p class="muted" style="margin-bottom:16px;">Based on tonight's performances...</p>
+                <div class="flex-col-center">
+                  <div class="group-row" style="border:none;">
+                    <p class="big-message" style="font-size: 24px; color: var(--lime);">${escapeHtml(data.gg.winningName)}</p>
+                    <p class="muted">Condragulations, you are the winning team!</p>
+                  </div>
+                </div>
+              </div>
+            `;
+        } else if (data.isMidSeasonNonElim) {
+            let tops = [...data.placements.topTwo, ...data.placements.highQueens];
+            let safes = [...data.placements.pureSafe];
+            
+            tops.sort(() => Math.random() - 0.5); safes.sort(() => Math.random() - 0.5);
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Judging!</span></div>
+                <p class="muted" style="margin-bottom:16px;">Based on tonight's performances...</p>
+                <div class="flex-col-center">
+                  <div class="flex-center">
+                    ${tops.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
+                  </div>
+                  <p class="muted">You represent the tops of the week. There are no bottoms!</p>
+                  ${safes.length ? `
+                    <hr style="width:100%; border:0; border-top:1px solid var(--border); margin:10px 0;">
+                    <div class="flex-center">
+                      ${safes.map(q => `<span class="placement-card small bg-safe">${escapeHtml(q.name)}</span>`).join("")}
+                    </div>
+                    <p class="muted">You are safe.</p>
+                  ` : ""}
+                </div>
+              </div>
+            `;
+        } else {
+            let tops, bottoms, safes;
+            if (state.seasonFormat === "all-stars-legacy") {
+                tops = [...data.placements.topTwo, ...data.placements.highQueens];
+                bottoms = [...(data.placements.savedLow ? [data.placements.savedLow] : []), ...data.placements.bottomTwo];
+                safes = [...data.placements.pureSafe];
+            } else if (state.episodeNumber === 1 && state.premiereFormat === "top2") {
+                tops = [...data.placements.topTwo, ...data.placements.highQueens];
+                bottoms = [...(data.placements.bottomThree || []), ...(data.placements.savedLow ? [data.placements.savedLow] : []), ...(data.placements.bottomTwo || [])];
+                safes = [...data.placements.pureSafe];
+            } else {
+                tops = [...data.placements.winners, ...data.placements.highQueens];
+                bottoms = [...(data.placements.savedLow ? [data.placements.savedLow] : []), ...data.placements.bottomTwo];
+                safes = [...data.placements.pureSafe];
+            }
+
+            tops.sort(() => Math.random() - 0.5); bottoms.sort(() => Math.random() - 0.5); safes.sort(() => Math.random() - 0.5);
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Judging!</span></div>
+                <p class="muted" style="margin-bottom:16px;">Based on tonight's performances...</p>
+                <div class="flex-col-center">
+                  <div class="flex-center">
+                    ${tops.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
+                    ${bottoms.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
+                  </div>
+                  <p class="muted">You represent the tops and bottoms of the week.</p>
+                  ${safes.length ? `
+                    <hr style="width:100%; border:0; border-top:1px solid var(--border); margin:10px 0;">
+                    <div class="flex-center">
+                      ${safes.map(q => `<span class="placement-card small bg-safe">${escapeHtml(q.name)}</span>`).join("")}
+                    </div>
+                    <p class="muted">You are safe.</p>
+                  ` : ""}
+                </div>
+              </div>
+            `;
+        }
+      } else if (phaseTag === 4) {
         if (!data.countsApplied) {
           const epIndex = state.episodeNumber - 1;
           if (state.seasonFormat === "all-stars-legacy") {
@@ -1025,19 +1164,45 @@
               data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
               data.placements.pureSafe.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
               if (data.placements.bottomThree) data.placements.bottomThree.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
-              if (data.placements.bottomTwo) data.placements.bottomTwo.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; }); // Just in case it was rigged
+              if (data.placements.bottomTwo) data.placements.bottomTwo.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
+          } else if (data.isMidSeasonNonElim) {
+              data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
+              data.placements.pureSafe.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
           } else {
               data.placements.winners.forEach(q => { q.record.WIN += 1; q.history[epIndex] = "WIN"; });
               data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
               data.placements.pureSafe.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
               if (data.placements.savedLow) { data.placements.savedLow.record.LOW += 1; data.placements.savedLow.history[epIndex] = "LOW"; }
-              data.placements.bottomTwo.forEach(q => { q.record.BTM2 += 1; q.history[epIndex] = "BTM2"; });
+              if (data.placements.bottomTwo) { data.placements.bottomTwo.forEach(q => { q.record.BTM2 += 1; q.history[epIndex] = "BTM2"; }); }
           }
           data.countsApplied = true;
         }
         
         const p = data.placements;
-        if (state.seasonFormat === "all-stars-legacy") {
+        if (isGG) {
+             content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Results</span></div>
+                <p class="muted" style="margin-bottom:16px;">Ladies of ${escapeHtml(data.gg.losingName)}, I've made some decisions...</p>
+                <div class="flex-col-center">
+                  ${p.pureSafe.length ? `
+                  <div class="group-row">
+                    <div class="flex-center">${p.pureSafe.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div>
+                    <p class="muted">You are safe.</p>
+                  </div>` : ""}
+                  ${p.savedLow ? `
+                  <div class="group-row">
+                    <div class="flex-center"><div class="placement-card bg-low">${escapeHtml(p.savedLow.name)}</div></div>
+                    <p class="muted">You are safe, but step it up.</p>
+                  </div>` : ""}
+                  <div class="group-row" style="border:none;">
+                    <div class="flex-center">${p.bottomTwo.map(q => `<div class="placement-card bg-btm">${escapeHtml(q.name)}</div>`).join("")}</div>
+                    <p class="muted">I'm sorry my dears but you are up for elimination.</p>
+                  </div>
+                </div>
+              </div>
+            `;
+        } else if (state.seasonFormat === "all-stars-legacy") {
             content = `
               <div class="section-card">
                 <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Results</span></div>
@@ -1064,12 +1229,14 @@
                 </div>
               </div>
             `;
-        } else if (state.episodeNumber === 1 && state.premiereFormat === "top2") {
+        } else if (state.episodeNumber === 1 && state.premiereFormat === "top2" || data.isMidSeasonNonElim) {
             let bottomsHTML = "";
-            if (p.bottomThree) {
-                 bottomsHTML = `<div class="flex-center">${p.bottomThree.map(q => `<div class="placement-card bg-low">${escapeHtml(q.name)}</div>`).join("")}</div>`;
-            } else {
-                 bottomsHTML = `<div class="flex-center">${p.savedLow ? `<div class="placement-card bg-low">${escapeHtml(p.savedLow.name)}</div>` : ''}${p.bottomTwo.map(q => `<div class="placement-card bg-low">${escapeHtml(q.name)}</div>`).join("")}</div>`;
+            if (!data.isMidSeasonNonElim) {
+                if (p.bottomThree) {
+                     bottomsHTML = `<div class="flex-center">${p.bottomThree.map(q => `<div class="placement-card bg-low">${escapeHtml(q.name)}</div>`).join("")}</div>`;
+                } else {
+                     bottomsHTML = `<div class="flex-center">${p.savedLow ? `<div class="placement-card bg-low">${escapeHtml(p.savedLow.name)}</div>` : ''}${p.bottomTwo.map(q => `<div class="placement-card bg-low">${escapeHtml(q.name)}</div>`).join("")}</div>`;
+                }
             }
             content = `
               <div class="section-card">
@@ -1087,7 +1254,7 @@
                   </div>` : ""}
                   <div class="group-row" style="border:none;">
                     ${bottomsHTML}
-                    <p class="muted">Since its our first episode, Nobody is going home! instead the top 2 will lip sync for the win!</p>
+                    <p class="muted">${data.isMidSeasonNonElim ? "Since you all did so well this week, Nobody is going home!" : "Since its our first episode, Nobody is going home!"} instead the top 2 will lip sync for the win!</p>
                   </div>
                 </div>
               </div>
@@ -1113,17 +1280,17 @@
                     <p class="muted">You are safe, but step it up.</p>
                   </div>` : ""}
                   <div class="group-row" style="border:none;">
-                    <div class="flex-center">${p.bottomTwo.map(q => `<div class="placement-card bg-btm">${escapeHtml(q.name)}</div>`).join("")}</div>
+                    <div class="flex-center">${(p.bottomTwo || []).map(q => `<div class="placement-card bg-btm">${escapeHtml(q.name)}</div>`).join("")}</div>
                     <p class="muted">I'm sorry my dears but you are up for elimination.</p>
                   </div>
                 </div>
               </div>
             `;
         }
-      } else if (state.phase === 5) {
+      } else if (phaseTag === 5) {
         if (!data.lipSync) {
           let p1, p2;
-          if (state.seasonFormat === "all-stars-legacy" || (state.episodeNumber === 1 && state.premiereFormat === "top2")) {
+          if (state.seasonFormat === "all-stars-legacy" || (state.episodeNumber === 1 && state.premiereFormat === "top2") || data.isMidSeasonNonElim) {
               p1 = data.placements.topTwo[0]; p2 = data.placements.topTwo[1];
           } else {
               p1 = data.placements.bottomTwo[0]; p2 = data.placements.bottomTwo[1];
@@ -1146,7 +1313,7 @@
         let lipSyncText = "";
         if (state.seasonFormat === "all-stars-legacy") {
             lipSyncText = "Two top queens stand before me. Prior to tonight, you were asked to prepare a lip sync performance... for your legacy! Good luck, and don't f*ck it up.";
-        } else if (state.episodeNumber === 1 && state.premiereFormat === "top2") {
+        } else if ((state.episodeNumber === 1 && state.premiereFormat === "top2") || data.isMidSeasonNonElim) {
             lipSyncText = "For you to lip-sync... for the win! Good luck, and don't f*ck it up.";
         } else {
             lipSyncText = "For you to lip-sync... for your lives! Good luck, and don't f*ck it up.";
@@ -1167,7 +1334,7 @@
             </div>
           </div>
         `;
-      } else if (state.phase === 6) {
+      } else if (phaseTag === 6) {
         if (!data.elimination) {
           let w = data.lipSync.winner.queen;
           let l = data.lipSync.loser.queen;
@@ -1206,6 +1373,10 @@
           } else if (state.episodeNumber === 1 && state.premiereFormat === "top2") {
               w.record.WIN += 1; w.history[0] = "WIN";
               l.record.TOP2 = (l.record.TOP2 || 0) + 1; l.history[0] = "TOP 2";
+              data.elimination = { top2LipSync: true, winner: w, loser: l };
+          } else if (data.isMidSeasonNonElim) {
+              w.record.WIN += 1; w.history[state.episodeNumber - 1] = "WIN";
+              l.record.TOP2 = (l.record.TOP2 || 0) + 1; l.history[state.episodeNumber - 1] = "TOP 2";
               data.elimination = { top2LipSync: true, winner: w, loser: l };
           } else if (state.episodeNumber === 1 && state.premiereFormat === "no-elim") {
               const q1 = data.lipSync.performances[0].queen;
@@ -1311,7 +1482,7 @@
             </div>
           </div>
         `;
-      } else if (state.phase === 7) {
+      } else if (phaseTag === 7) {
         let sortedQueens = [...state.queens].sort((a, b) => {
           if (b.elimOrder !== a.elimOrder) return b.elimOrder - a.elimOrder;
           return trackScore(b) - trackScore(a);
@@ -1353,7 +1524,7 @@
       }
 
       el.gameContent.innerHTML = content;
-      if (state.phase === 7) {
+      if (phaseTag === 7) {
         const finaleThreshold = state.finaleFormat === "top3" ? 3 : 4;
         el.nextPhaseBtn.textContent = activeQueens().length <= finaleThreshold ? "Start Finale" : "Next Episode";
       } else {
@@ -1362,7 +1533,8 @@
     }
 
     el.nextPhaseBtn.addEventListener("click", () => {
-      if (state.phase < 7) { state.phase++; renderEpisode(); }
+      const totalPhases = (state.episodeData && state.episodeData.isGirlGroup) ? 8 : 7;
+      if (state.phase < totalPhases) { state.phase++; renderEpisode(); }
       else {
         const finaleThreshold = state.finaleFormat === "top3" ? 3 : 4;
         if (activeQueens().length <= finaleThreshold) startFinale();
@@ -1719,41 +1891,50 @@
     // --- RIGGORY SYSTEM LOGIC --- //
     el.rigGameBtn.addEventListener("click", () => {
         const p = state.episodeData.placements;
-        let isTop2Format = (state.seasonFormat === "all-stars-legacy" || (state.episodeNumber === 1 && state.premiereFormat === "top2"));
+        let isTop2Format = (state.seasonFormat === "all-stars-legacy" || (state.episodeNumber === 1 && state.premiereFormat === "top2") || state.episodeData.isMidSeasonNonElim);
         let html = "";
+        const isGG = state.episodeData.isGirlGroup;
 
-        if (state.phase === 3) {
+        if ((isGG && state.phase === 4) || (!isGG && state.phase === 3)) {
             let tops = isTop2Format ? [...p.topTwo, ...p.highQueens] : [...p.winners, ...p.highQueens];
-            let bottoms = p.bottomThree ? [...p.bottomThree] : [...(p.savedLow ? [p.savedLow] : []), ...p.bottomTwo];
+            let bottoms = p.bottomThree ? [...p.bottomThree] : [...(p.savedLow ? [p.savedLow] : []), ...(p.bottomTwo || [])];
             
-            if (isTop2Format) {
-                html += `<label class="field" style="margin-bottom:8px;">Select Top 2 Queen 1: <select id="rigTop1">${tops.map(q => `<option value="${q.id}">${q.name}</option>`).join('')}</select></label>`;
-                html += `<label class="field" style="margin-bottom:8px;">Select Top 2 Queen 2: <select id="rigTop2">${tops.map(q => `<option value="${q.id}">${q.name}</option>`).join('')}</select></label>`;
+            if (!isGG) {
+                if (isTop2Format) {
+                    html += `<label class="field" style="margin-bottom:8px;">Select Top 2 Queen 1: <select id="rigTop1">${tops.map(q => `<option value="${q.id}">${q.name}</option>`).join('')}</select></label>`;
+                    html += `<label class="field" style="margin-bottom:8px;">Select Top 2 Queen 2: <select id="rigTop2">${tops.map(q => `<option value="${q.id}">${q.name}</option>`).join('')}</select></label>`;
+                } else {
+                    html += `<label class="field" style="margin-bottom:8px;">Select Winner: <select id="rigWin">${tops.map(q => `<option value="${q.id}">${q.name}</option>`).join('')}</select></label>`;
+                    if (p.winners && p.winners.length === 2) {
+                         html += `<label class="field" style="margin-bottom:8px;">Select Winner 2: <select id="rigWin2">${tops.map(q => `<option value="${q.id}">${q.name}</option>`).join('')}</select></label>`;
+                    }
+                }
             } else {
-                html += `<label class="field" style="margin-bottom:8px;">Select Winner: <select id="rigWin">${tops.map(q => `<option value="${q.id}">${q.name}</option>`).join('')}</select></label>`;
+                html += `<p class="muted">Winning Team: <strong>${escapeHtml(state.episodeData.gg.winningName)}</strong></p>`;
             }
 
-            if (bottoms.length > 2 && !(state.episodeNumber === 1 && state.premiereFormat === "top2")) {
+            if (bottoms.length > 0 && bottoms.length > 2 && !(state.episodeNumber === 1 && state.premiereFormat === "top2") && !state.episodeData.isMidSeasonNonElim) {
                  html += `<label class="field">Select Queen to Save: <select id="rigSave">${bottoms.map(q => `<option value="${q.id}">${q.name}</option>`).join('')}</select></label>`;
             }
             
             el.rigModal.dataset.rigType = "ep3";
             el.rigContent.innerHTML = html;
             el.rigModal.classList.remove("hidden");
-        } else if (state.phase === 5) {
+        } else if ((isGG && state.phase === 6) || (!isGG && state.phase === 5)) {
             let p1 = state.episodeData.lipSync.performances[0].queen;
             let p2 = state.episodeData.lipSync.performances[1].queen;
             let isAS = state.seasonFormat === "all-stars-legacy";
             let minQueens = state.finaleFormat === "top3" ? 4 : 5;
             let canDoubleSashay = activeQueens().length > minQueens;
+            let isTop2LipSync = isAS || state.episodeData.isMidSeasonNonElim || (state.episodeNumber === 1 && state.premiereFormat === "top2");
             
             html = `
                 <label class="field">Select Lip Sync Outcome:
                     <select id="rigLipSync">
                         <option value="w1">${escapeHtml(p1.name)} Wins</option>
                         <option value="w2">${escapeHtml(p2.name)} Wins</option>
-                        ${!isAS ? `<option value="double_shantay">Double Shantay</option>` : ''}
-                        ${!isAS && canDoubleSashay ? `<option value="double_sashay">Double Sashay</option>` : ''}
+                        ${!isTop2LipSync ? `<option value="double_shantay">Double Shantay</option>` : ''}
+                        ${!isTop2LipSync && canDoubleSashay ? `<option value="double_sashay">Double Sashay</option>` : ''}
                     </select>
                 </label>
             `;
@@ -1795,20 +1976,29 @@
         
         if (rt === "ep3") {
             const p = state.episodeData.placements;
-            let isTop2Format = (state.seasonFormat === "all-stars-legacy" || (state.episodeNumber === 1 && state.premiereFormat === "top2"));
+            let isTop2Format = (state.seasonFormat === "all-stars-legacy" || (state.episodeNumber === 1 && state.premiereFormat === "top2") || state.episodeData.isMidSeasonNonElim);
             let tops = isTop2Format ? [...p.topTwo, ...p.highQueens] : [...p.winners, ...p.highQueens];
-            let bottoms = p.bottomThree ? [...p.bottomThree] : [...(p.savedLow ? [p.savedLow] : []), ...p.bottomTwo];
+            let bottoms = p.bottomThree ? [...p.bottomThree] : [...(p.savedLow ? [p.savedLow] : []), ...(p.bottomTwo || [])];
 
-            if (isTop2Format) {
-                let t1 = document.getElementById("rigTop1").value;
-                let t2 = document.getElementById("rigTop2").value;
-                if(t1 === t2) return alert("Must select two different queens for Top 2.");
-                p.topTwo = tops.filter(q => q.id == t1 || q.id == t2);
-                p.highQueens = tops.filter(q => q.id != t1 && q.id != t2);
-            } else {
-                let w = document.getElementById("rigWin").value;
-                p.winners = tops.filter(q => q.id == w);
-                p.highQueens = tops.filter(q => q.id != w);
+            if (!state.episodeData.isGirlGroup) {
+                if (isTop2Format) {
+                    let t1 = document.getElementById("rigTop1").value;
+                    let t2 = document.getElementById("rigTop2").value;
+                    if(t1 === t2) return alert("Must select two different queens for Top 2.");
+                    p.topTwo = tops.filter(q => q.id == t1 || q.id == t2);
+                    p.highQueens = tops.filter(q => q.id != t1 && q.id != t2);
+                } else {
+                    let w = document.getElementById("rigWin").value;
+                    if (document.getElementById("rigWin2")) {
+                        let w2 = document.getElementById("rigWin2").value;
+                        if(w === w2) return alert("Must select two different queens for double win.");
+                        p.winners = tops.filter(q => q.id == w || q.id == w2);
+                        p.highQueens = tops.filter(q => q.id != w && q.id != w2);
+                    } else {
+                        p.winners = tops.filter(q => q.id == w);
+                        p.highQueens = tops.filter(q => q.id != w);
+                    }
+                }
             }
 
             if (document.getElementById("rigSave")) {
@@ -1832,7 +2022,8 @@
             if (rt === "fin_top4_s1") {
                 let wid = document.getElementById("rigSemi1").value;
                 if (wid != f.semi1.winner.id) { 
-                    let temp = f.semi1.winner; f.semi1.winner = f.semi1.loser; f.semi1.loser = temp;
+                    let temp = f.semi1.winner;
+                    f.semi1.winner = f.semi1.loser; f.semi1.loser = temp;
                     f.semi1.loser.elimOrder = state.episodeNumber + 1; f.semi1.winner.elimOrder = 999;
                     f.semi1.loser.history[state.episodeNumber] = "ELIM"; f.semi1.winner.history[state.episodeNumber] = undefined;
                     f.final = makeMatch(f.semi1.winner, f.semi2.winner);
@@ -1842,7 +2033,8 @@
             } else if (rt === "fin_top4_s2") {
                 let wid = document.getElementById("rigSemi2").value;
                 if (wid != f.semi2.winner.id) { 
-                    let temp = f.semi2.winner; f.semi2.winner = f.semi2.loser; f.semi2.loser = temp;
+                    let temp = f.semi2.winner;
+                    f.semi2.winner = f.semi2.loser; f.semi2.loser = temp;
                     f.semi2.loser.elimOrder = state.episodeNumber + 1; f.semi2.winner.elimOrder = 999;
                     f.semi2.loser.history[state.episodeNumber] = "ELIM"; f.semi2.winner.history[state.episodeNumber] = undefined;
                     f.final = makeMatch(f.semi1.winner, f.semi2.winner);
@@ -1852,14 +2044,17 @@
             } else if (rt === "fin_top4_fin" || rt === "fin_top3_fin") {
                 let wid = document.getElementById("rigFin").value;
                 if (wid != f.final.winner.id) { 
-                    let temp = f.final.winner; f.final.winner = f.final.loser; f.final.loser = temp;
+                    let temp = f.final.winner;
+                    f.final.winner = f.final.loser; f.final.loser = temp;
                     f.final.loser.elimOrder = state.episodeNumber + 2; f.final.winner.elimOrder = 999;
-                    f.final.loser.history[state.episodeNumber] = "RUNNER UP"; f.final.winner.history[state.episodeNumber] = "WINNER";
+                    f.final.loser.history[state.episodeNumber] = "RUNNER UP";
+                    f.final.winner.history[state.episodeNumber] = "WINNER";
                 }
             } else if (rt === "fin_top3_3rd") {
                 let tid = document.getElementById("rigThird").value;
                 if (tid != f.thirdPlace.id) {
-                    f.thirdPlace.elimOrder = 999; f.thirdPlace.history[state.episodeNumber] = undefined;
+                    f.thirdPlace.elimOrder = 999;
+                    f.thirdPlace.history[state.episodeNumber] = undefined;
                     f.thirdPlace = f.finalists.find(q => q.id == tid);
                     f.thirdPlace.elimOrder = state.episodeNumber + 1; f.thirdPlace.history[state.episodeNumber] = "ELIM";
                     let top2 = f.finalists.filter(q => q.id != tid);
@@ -1900,20 +2095,17 @@
       reader.readAsText(file);
       e.target.value = "";
     });
-
     // File Exporter
     el.exportCastBtn.addEventListener("click", () => {
       if(!state.queens.length) return alert("No queens to export.");
       const blob = new Blob([JSON.stringify({ queens: state.queens }, null, 2)], { type: "application/json" });
       const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `drag_race_cast.json`; a.click();
     });
-
     el.castPreview.addEventListener("click", (e) => {
       if (e.target.dataset.action === "remove-queen") {
         state.queens.splice(Number(e.target.dataset.index), 1); updateSetupUI();
       }
     });
-
     updateSetupUI();
   </script>
 </body>
