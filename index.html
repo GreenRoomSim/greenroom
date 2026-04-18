@@ -141,9 +141,7 @@
     .group-row:last-child { border-bottom: none; }
     
     /* Uniform Placement Cards */
-    .placement-card { 
-      padding: 12px 24px; border-radius: 16px; font-weight: 800; font-size: 15px; text-align: center; min-width: 140px;
-    }
+    .placement-card { padding: 12px 24px; border-radius: 16px; font-weight: 800; font-size: 15px; text-align: center; min-width: 140px; }
     .placement-card.small { padding: 8px 16px; font-size: 13px; font-weight: 600; min-width: auto; }
 
     /* Placement Colors */
@@ -158,6 +156,11 @@
     .bg-shantay { background: #dcf3cd !important; color: #14380e !important; border: none; }
     .bg-winner { background: #f1c232 !important; color: #000000 !important; border: none; }
     .bg-runner { background: #c3c3c3 !important; color: #000000 !important; border: none; }
+
+    /* LaLaPaRuza Placement Colors */
+    .bg-won-r1 { background: #ffbc4b !important; color: #000000 !important; border: none; }
+    .bg-won-r2 { background: #ff9500 !important; color: #000000 !important; border: none; }
+    .bg-won-r3 { background: #ff7600 !important; color: #000000 !important; border: none; }
 
     .big-message { font-size: clamp(20px, 2.6vw, 28px); font-weight: 900; letter-spacing: -0.03em; margin: 0 0 12px; text-align: center; }
     .muted { color: var(--muted); margin: 0; text-align: center; }
@@ -194,7 +197,7 @@
   <div class="app">
     <div class="hero">
       <h1 class="title">Greenroom Drag Race Simulator</h1>
-      <p class="subtitle">Release v1.8.0 - Last Updated 17/4/26</p>
+      <p class="subtitle">Release v1.9.0 - Last Updated 18/4/26</p>
       
       <div class="button-row" style="margin-top: 16px;">
         <button id="preDefBtn" class="primary" style="padding: 8px 16px; font-size: 14px;">Pre-Defined Casts</button>
@@ -279,11 +282,18 @@
         </div>
         <div class="panel-body">
           <div class="patch-notes-content">
+            <h3>v1.9.0 - Update</h3>
+            <ul>
+              <li>Added the mid-season LaLaPaRuza Smackdown (Toggleable in setup).</li>
+              <li>Changed Minimum Cast to 8</li>
+            </ul>
+
             <h3>v1.8.0 - Update</h3>
             <ul>
               <li>Changed Girl Group Challenge Episode Cycle.</li>
               <li>Added Team Names and new performance screens.</li>
               <li>Added Season Dimention, With Non-Elimination Episode & Double Wins.</li>
+              <li>Fixed some issues with Late & Early Season Progression.</li>
             </ul>
 
             <h3>v1.7.0 - Update</h3>
@@ -451,6 +461,13 @@
                 </select>
               </label>
 
+              <label class="field">LaLaPaRuza Smackdown
+                <select id="lalaPaRuzaSelect">
+                  <option value="enabled">Enabled (Mid-Season)</option>
+                  <option value="disabled">Disabled</option>
+                </select>
+              </label>
+
               <button id="startBtn" class="primary" disabled>Start Season</button>
             </div>
           </div>
@@ -501,7 +518,7 @@
   </div>
 
   <script>
-    const MIN_CAST = 10;
+    const MIN_CAST = 8;
     const MAX_CAST = 16;
     
     let allRealQueens = [];
@@ -514,7 +531,7 @@
         }
       })
       .catch(error => console.error("Error loading queens.json:", error));
-      
+
     // Challenge Lists
     const miniChallenges = [
       { name: "Reading Challenge", req: "none" },
@@ -525,7 +542,7 @@
       { name: "Dance-Off", req: "none" },
       { name: "RuMail Guessing Game", req: "none" }
     ];
-    
+
     const maxiChallenges = [
       { name: "Talent Show", type: "Performance", once: true, req: "early" },
       { name: "Design Challenge", type: "Design", once: false, req: "not-last" },
@@ -571,19 +588,62 @@
       "Umbrella by Rihanna",
       "Since U Been Gone by Kelly Clarkeson",
       "Let it Go from Frozen",
+      "Supermodel (You Better Work) by RuPaul",
+      "Cover Girl by RuPaul",
+      "Born Naked by RuPaul feat. Clairy Browne",
+      "Sissy That Walk by RuPaul",
+      "Born This Way by Lady Gaga",
+      "Judas by Lady Gaga",
+      "Telephone by Lady Gaga",
+      "Express Yourself by Madonna",
+      "Hung Up by Madonna",
+      "I Will Survive by Gloria Gaynor",
+      "Respect by Aretha Franklin",
+      "Greatest Love Of All by Whitney Houston",
+      "It's Not Right But It's Okay by Whitney Houston",
+      "Finally by CeCe Peniston",
+      "Holding Out For A Hero by Bonnie Tyler",
+      "Shackles (Praise You) by Mary Mary",
+      "Work Bitch by Britney Spears",
+      "Stronger by Britney Spears",
+      "Womanizer by Britney Spears",
+      "Oops!... I Did It Again by Britney Spears",
+      "Gimme More by Britney Spears",
+      "Till The World Ends by Britney Spears",
+      "If U Seek Amy by Britney Spears",
+      "Good As Hell by Lizzo",
+      "Levitating by Dua Lipa",
+      "Firework by Katy Perry",
+      "Call Me Maybe by Carly Rae Jepsen",
+      "Run Away With Me by Carly Rae Jepsen",
+      "Into You by Ariana Grande",
+      "Problem by Ariana Grande",
+      "One Last Time by Ariana Grande",
+      "Bang Bang by Jessie J, Ariana Grande & Trumpie Minaj",
+      "Anaconda by Nicki Minaj",
+      "Pound The Alarm by Nicki Minaj",
+      "Super Freaky Girl by Nicki Minaj",
+      "Crazy In Love by Beyoncé",
+      "Single Ladies (Put A Ring On It) by Beyoncé",
+      "Suga Mama by Beyoncé",
+      "Radio by Beyoncé",
+      "Freakum Dress by Beyoncé",
+      "Blue Eyes by Zoella",
+      "Twist Of Fate by Olivia Newton John",
     ];
-    
+
     const girlGroupNames = [
         "The Frock Destroyers", "United Kingdolls", "Bananadrama", "The Slice Girls", 
         "The Ru-Premes", "Destiny's Child-Support", "Spice Girls 2.0", "TLD", "Blackpinked", "Pussycat Dolls", "Back Door Gals", "SnS (Sexy N Stupid)", "Filth Harmony",
         "The Dolls", "The Dreamgirls", "The Triple Threats", "Galatea's Gang"
     ];
-    
+
     const state = {
       mode: "setup",
       seasonFormat: "regular",
       finaleFormat: "top4",
       premiereFormat: "regular",
+      lalaPaRuzaEnabled: true,
       queens: [],
       episodeNumber: 0,
       phase: 0,
@@ -593,7 +653,7 @@
       usedMaxis: [],
       hasMidSeasonNonElim: false
     };
-    
+
     const el = {
       setupView: document.getElementById("setupView"), gameView: document.getElementById("gameView"), finaleView: document.getElementById("finaleView"),
       queenNameInput: document.getElementById("queenNameInput"), comedyInput: document.getElementById("comedyInput"), designInput: document.getElementById("designInput"), performanceInput: document.getElementById("performanceInput"), actingInput: document.getElementById("actingInput"), lipSyncInput: document.getElementById("lipSyncInput"),
@@ -601,6 +661,7 @@
       seasonFormatSelect: document.getElementById("seasonFormatSelect"),
       finaleFormatSelect: document.getElementById("finaleFormatSelect"), 
       premiereFormatSelect: document.getElementById("premiereFormatSelect"),
+      lalaPaRuzaSelect: document.getElementById("lalaPaRuzaSelect"),
       startBtn: document.getElementById("startBtn"), castPreview: document.getElementById("castPreview"), castEmptyState: document.getElementById("castEmptyState"), castCountText: document.getElementById("castCountText"),
       gameHeader: document.getElementById("gameHeader"), gameMeta: document.getElementById("gameMeta"), gameContent: document.getElementById("gameContent"), nextPhaseBtn: document.getElementById("nextPhaseBtn"), screenCounterText: document.getElementById("screenCounterText"),
       finaleMeta: document.getElementById("finaleMeta"), finaleContent: document.getElementById("finaleContent"), finaleBtn: document.getElementById("finaleBtn"),
@@ -618,7 +679,7 @@
       rigContent: document.getElementById("rigContent"),
       saveRigBtn: document.getElementById("saveRigBtn")
     };
-    
+
     // Modal Events
     el.preDefBtn.addEventListener("click", () => el.preDefModal.classList.remove("hidden"));
     el.closePreDefBtn.addEventListener("click", () => el.preDefModal.classList.add("hidden"));
@@ -627,11 +688,10 @@
     el.openCustomQueenBtn.addEventListener("click", () => el.customQueenModal.classList.remove("hidden"));
     el.closeCustomQueenBtn.addEventListener("click", () => el.customQueenModal.classList.add("hidden"));
     el.closeRigBtn.addEventListener("click", () => el.rigModal.classList.add("hidden"));
-    
     el.suggestBtn.addEventListener("click", () => {
       window.open("https://forms.gle/bprZzRLGFyfe9yWs6", "_blank");
     });
-    
+
     // Tab switching logic for Pre-Defined Casts
     document.querySelectorAll(".tab-btn").forEach(btn => {
       btn.addEventListener("click", (e) => {
@@ -641,7 +701,7 @@
         document.getElementById(e.target.dataset.target).classList.add("active");
       });
     });
-    
+
     // Pre-Defined Cast Selection
     document.querySelectorAll(".predef-btn").forEach(btn => {
       btn.addEventListener("click", (e) => {
@@ -649,7 +709,7 @@
         loadPredefCast(season);
       });
     });
-    
+
     function loadPredefCast(season) {
       if (!allRealQueens.length) return alert("Still loading queens data, please wait a moment.");
       const cast = allRealQueens.filter(q => q.seasons && q.seasons.includes(season));
@@ -681,14 +741,14 @@
         </div>
       `).join("");
     });
-    
+
     el.searchResults.addEventListener("click", (e) => {
       const item = e.target.closest(".search-result-item");
       if (!item) return;
       addRealQueen(item.dataset.name, item.dataset.image);
       el.realQueenSearch.value = ""; el.searchResults.innerHTML = "";
     });
-    
+
     el.addRandomRealBtn.addEventListener("click", () => {
       if (!allRealQueens.length) return alert("Still loading queens data, please wait a moment.");
       const unaddedQueens = allRealQueens.filter(rq => !state.queens.some(sq => sq.name === rq.name));
@@ -696,7 +756,7 @@
       const randomQueen = pick(unaddedQueens);
       addRealQueen(randomQueen.name, randomQueen.image);
     });
-    
+
     function addRealQueen(name, image) {
       if (state.queens.some(q => q.name === name)) return alert(`${name} is already in the cast!`);
       const queenData = allRealQueens.find(q => q.name === name);
@@ -716,13 +776,25 @@
     function escapeHtml(text) { return String(text).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"); }
     function normalizeStat(v) { const n = parseInt(v ?? 5, 10); return clamp(Number.isFinite(n) ? n : 5, 1, 10); }
 
+    function getTrackRecordClass(p) {
+        if (!p) return "";
+        if (p === "BTM2" || p === "BTM") return "bg-btm";
+        if (p === "TOP 2") return "bg-top2";
+        if (p === "RUNNER UP" || p === "RUNNER") return "bg-runner";
+        if (p === "WON R1") return "bg-won-r1";
+        if (p === "WON R2") return "bg-won-r2";
+        if (p === "WON R3") return "bg-won-r3";
+        return `bg-${p.toLowerCase()}`;
+    }
+
     function randomizeQueenForm() {
       el.comedyInput.value = intRand(1, 10); el.designInput.value = intRand(1, 10); el.performanceInput.value = intRand(1, 10); el.actingInput.value = intRand(1, 10); el.lipSyncInput.value = intRand(1, 10);
       if (!el.queenNameInput.value.trim()) el.queenNameInput.value = `Custom Queen ${state.queens.length + 1}`;
     }
 
     function clearQueenForm() {
-      el.queenNameInput.value = ""; el.comedyInput.value = 5; el.designInput.value = 5; el.performanceInput.value = 5; el.actingInput.value = 5; el.lipSyncInput.value = 5;
+      el.queenNameInput.value = ""; el.comedyInput.value = 5;
+      el.designInput.value = 5; el.performanceInput.value = 5; el.actingInput.value = 5; el.lipSyncInput.value = 5;
     }
 
     function updateSetupUI() {
@@ -761,6 +833,7 @@
       state.seasonFormat = el.seasonFormatSelect.value;
       state.finaleFormat = el.finaleFormatSelect.value;
       state.premiereFormat = el.premiereFormatSelect.value;
+      state.lalaPaRuzaEnabled = el.lalaPaRuzaSelect.value === "enabled";
       
       el.customQueenModal.classList.add("hidden");
       state.queens = state.queens.map((q, i) => ({
@@ -769,7 +842,8 @@
         history: [], eliminated: false, elimOrder: 999
       }));
       state.episodeNumber = 1; state.phase = 1; state.mode = "game"; state.usedMinis = []; state.usedMaxis = []; state.hasMidSeasonNonElim = false;
-      prepareEpisode(); renderAll(); renderEpisode();
+      prepareEpisode(); renderAll();
+      renderEpisode();
     }
 
     function activeQueens() { return state.queens.filter(q => !q.eliminated); }
@@ -786,7 +860,6 @@
       });
       if (!valid.length) valid = pool.filter(c => c.req === "none");
       if (!valid.length) valid = miniChallenges.filter(c => c.req === "none");
-      
       const chosen = pick(valid);
       state.usedMinis.push(chosen.name);
       return { none: false, challenge: chosen.name };
@@ -812,9 +885,62 @@
       return chosen;
     }
 
+    function rollLipEvent() {
+      const r = Math.random() * 100;
+      if (r < 10) return { type: "words", text: "Forgot the words" };
+      if (r < 20) return { type: "fall", text: "Messy stumble" };
+      if (r < 40) return { type: "reveal", text: "Stunning outfit reveal" };
+      return { type: "slay", text: "Gave an incredible performance" };
+    }
+
+    function simulateLaLaMatch(q1, q2) {
+      let e1 = rollLipEvent();
+      let e2 = rollLipEvent();
+      let s1 = rand(1,10) + q1.stats.lipSync;
+      if(e1.type==="words") s1-=99; if(e1.type==="fall") s1-=2; if(e1.type==="reveal") s1+=2;
+      let s2 = rand(1,10) + q2.stats.lipSync;
+      if(e2.type==="words") s2-=99; if(e2.type==="fall") s2-=2; if(e2.type==="reveal") s2+=2;
+      let winner = s1 >= s2 ? q1 : q2;
+      let loser = s1 >= s2 ? q2 : q1;
+      return { winner, loser, e1: {queen: q1, event: e1}, e2: {queen: q2, event: e2}, song: pick(lipSongs) };
+    }
+
     function prepareEpisode() {
       const actives = activeQueens();
       const n = actives.length;
+      // LaLaPaRuza Trigger Check
+      if (state.lalaPaRuzaEnabled && n === 8 && !state.usedMaxis.includes("LaLaPaRuza")) {
+          state.usedMaxis.push("LaLaPaRuza");
+          let shuffled = [...actives].sort(() => Math.random() - 0.5);
+          let r1Matches = [
+              {p1: shuffled[0], p2: shuffled[1]},
+              {p1: shuffled[2], p2: shuffled[3]},
+              {p1: shuffled[4], p2: shuffled[5]},
+              {p1: shuffled[6], p2: shuffled[7]}
+          ];
+          let r1Results = r1Matches.map(m => simulateLaLaMatch(m.p1, m.p2));
+
+          let r2Matches = [
+              {p1: r1Results[0].loser, p2: r1Results[1].loser},
+              {p1: r1Results[2].loser, p2: r1Results[3].loser}
+          ];
+          let r2Results = r2Matches.map(m => simulateLaLaMatch(m.p1, m.p2));
+
+          let r3Match = {p1: r2Results[0].loser, p2: r2Results[1].loser};
+          let r3Result = simulateLaLaMatch(r3Match.p1, r3Match.p2);
+          state.episodeData = {
+              isLaLaPaRuza: true,
+              maxi: {name: "LaLaPaRuza Lip Sync Smackdown"},
+              mini: {none: true},
+              r1Matches, r1Results,
+              r2Matches, r2Results,
+              r3Match, r3Result,
+              countsApplied: false,
+              riggedOutcome: null
+          };
+          return;
+      }
+
       const mini = getMiniChallenge(state.episodeNumber, n);
       if (!mini.none) {
         mini.winners = [pick(actives)];
@@ -827,7 +953,6 @@
         const score = rand(1, 10) + q.stats[statKey] * rand(0.8, 1.5) + rand(-1, 1);
         return { queen: q, score };
       }).sort((a, b) => b.score - a.score);
-      
       let categories = new Map();
       let winners = [], highQueens = [], pureSafe = [], savedLow = null, lowQueens = [], bottomTwo = [];
       let isGG = false;
@@ -846,22 +971,17 @@
           let shuffled = [...scores].sort(() => Math.random() - 0.5);
           let teamA = shuffled.slice(0, Math.floor(n/2));
           let teamB = shuffled.slice(Math.floor(n/2));
-          
           let nameA = pick(girlGroupNames);
           let nameB = pick(girlGroupNames.filter(name => name !== nameA));
-          
           let scoreA = teamA.reduce((sum, item) => sum + item.score, 0);
           let scoreB = teamB.reduce((sum, item) => sum + item.score, 0);
-          
           let winningTeam = scoreA > scoreB ? teamA : teamB;
           let losingTeam = scoreA > scoreB ? teamB : teamA;
           let winningName = scoreA > scoreB ? nameA : nameB;
           let losingName = scoreA > scoreB ? nameB : nameA;
-          
           losingTeam.sort((a, b) => b.score - a.score);
           winners = winningTeam.map(i => i.queen);
           winningTeam.forEach(i => categories.set(i.queen.id, "Slayed"));
-          
           let lQueens = losingTeam.map(i => i.queen);
           bottomTwo = lQueens.slice(-2);
           savedLow = lQueens.length > 2 ? lQueens[lQueens.length - 3] : null;
@@ -969,14 +1089,6 @@
       }
     }
 
-    function rollLipEvent() {
-      const r = Math.random() * 100;
-      if (r < 10) return { type: "words", text: "Forgot the words" };
-      if (r < 20) return { type: "fall", text: "Messy stumble" };
-      if (r < 40) return { type: "reveal", text: "Stunning outfit reveal" };
-      return { type: "slay", text: "Gave an incredible performance" };
-    }
-
     function renderEpisode() {
       const active = activeQueens();
       const data = state.episodeData;
@@ -984,543 +1096,684 @@
       
       el.gameHeader.textContent = `Episode ${state.episodeNumber}`;
       el.gameMeta.textContent = `${active.length} queens remaining • ${state.queens.length} in cast`;
-      
-      const totalScreens = isGG ? 8 : 7;
+
+      const totalScreens = isGG ? 8 : (data.isLaLaPaRuza ? 8 : 7);
       el.screenCounterText.textContent = `Screen ${state.phase} of ${totalScreens}`;
-      
       // Rig Button Toggle Logic
       el.rigGameBtn.classList.toggle("hidden", 
           (isGG && state.phase !== 4 && state.phase !== 6) ||
-          (!isGG && state.phase !== 3 && state.phase !== 5)
+          (data.isLaLaPaRuza && state.phase !== 6) ||
+          (!isGG && !data.isLaLaPaRuza && state.phase !== 3 && state.phase !== 5)
       );
-
       // Phase Translator mapping specifically to handle Girl Group shifts
       let phaseTag = state.phase;
       if (isGG) {
           if (state.phase === 2) phaseTag = "gg_teams";
-          else if (state.phase > 2) phaseTag = state.phase - 1; 
+          else if (state.phase > 2) phaseTag = state.phase - 1;
+      }
+      if (data.isLaLaPaRuza) {
+          if (state.phase === 8) {
+              phaseTag = 7; // Maps the final stats screen to the track record
+          } else {
+              phaseTag = "lala"; // Labels all other screens (1-7) as the tournament
+          }
       }
 
       let content = "";
+      if (data.isLaLaPaRuza && phaseTag !== 7) {
+          if (state.phase === 1) {
+              content = `
+                <div class="section-card" style="text-align: center; padding: 40px 24px;">
+                  <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Maxi Challenge</span></div>
+                  <h2 style="font-size: 24px; font-weight: 900; margin: 0 0 16px; color: var(--danger);">LaLaPaRuza Lip Sync Smackdown!</h2>
+                  <p class="muted">There is no mini challenge today. All 8 queens will compete in a sudden-death lip sync tournament! You must win a lip sync to be safe.</p>
+                </div>
+              `;
+          } else if (state.phase === 2) {
+              content = `
+                <div class="section-card">
+                  <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Round 1 Matchups</span></div>
+                  <p class="big-message">Round 1</p>
+                  <div class="flex-col-center">
+                    ${data.r1Matches.map((m, i) => `
+                      <div class="group-row">
+                        <p class="muted" style="margin:0;">Lip Sync ${i+1}</p>
+                        <div class="flex-center">
+                          <div class="placement-card bg-safe">${escapeHtml(m.p1.name)}</div>
+                          <span style="font-weight:900;">VS</span>
+                          <div class="placement-card bg-safe">${escapeHtml(m.p2.name)}</div>
+                        </div>
+                      </div>
+                    `).join("")}
+                  </div>
+                </div>
+              `;
+          } else if (state.phase === 3) {
+              content = `
+                <div class="section-card">
+                  <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Round 1 Results</span></div>
+                  <p class="big-message">The Winners</p>
+                  <div class="flex-col-center">
+                    ${data.r1Results.map((r, i) => `
+                      <div class="group-row">
+                        <p class="muted" style="margin:0; font-size:12px;">Song: ${escapeHtml(r.song)}</p>
+                        <div class="flex-center">
+                          <div class="placement-card bg-won-r1">${escapeHtml(r.winner.name)}</div>
+                        </div>
+                        <p class="muted" style="font-size:12px;">${escapeHtml(r.loser.name)} lost and moves to Round 2.</p>
+                      </div>
+                    `).join("")}
+                  </div>
+                </div>
+              `;
+          } else if (state.phase === 4) {
+              content = `
+                <div class="section-card">
+                  <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Round 2 Matchups</span></div>
+                  <p class="big-message">Round 2</p>
+                  <div class="flex-col-center">
+                    ${data.r2Matches.map((m, i) => `
+                      <div class="group-row">
+                        <p class="muted" style="margin:0;">Lip Sync ${i+1}</p>
+                        <div class="flex-center">
+                          <div class="placement-card bg-safe">${escapeHtml(m.p1.name)}</div>
+                          <span style="font-weight:900;">VS</span>
+                          <div class="placement-card bg-safe">${escapeHtml(m.p2.name)}</div>
+                        </div>
+                      </div>
+                    `).join("")}
+                  </div>
+                </div>
+              `;
+          } else if (state.phase === 5) {
+              content = `
+                <div class="section-card">
+                  <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Round 2 Results</span></div>
+                  <p class="big-message">The Winners</p>
+                  <div class="flex-col-center">
+                    ${data.r2Results.map((r, i) => `
+                      <div class="group-row">
+                        <p class="muted" style="margin:0; font-size:12px;">Song: ${escapeHtml(r.song)}</p>
+                        <div class="flex-center">
+                          <div class="placement-card bg-won-r2">${escapeHtml(r.winner.name)}</div>
+                        </div>
+                        <p class="muted" style="font-size:12px;">${escapeHtml(r.loser.name)} lost and moves to the Final Round.</p>
+                      </div>
+                    `).join("")}
+                  </div>
+                </div>
+              `;
+          } else if (state.phase === 6) {
+              content = `
+                <div class="section-card">
+                  <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Final Round Matchup</span></div>
+                  <p class="big-message" style="color:var(--danger);">The Final Lip Sync</p>
+                  <p class="muted">Whoever loses this lip sync will be eliminated.</p>
+                  <p class="muted" style="margin-top:12px; margin-bottom:12px; font-weight:800;">Song: ${escapeHtml(data.r3Result.song)}</p>
+                  <div class="flex-col-center">
+                      <div class="flex-center">
+                        <div class="placement-card bg-btm">${escapeHtml(data.r3Match.p1.name)}</div>
+                        <span style="font-weight:900;">VS</span>
+                        <div class="placement-card bg-btm">${escapeHtml(data.r3Match.p2.name)}</div>
+                      </div>
+                  </div>
+                </div>
+              `;
+          } else if (state.phase === 7) {
+              if (!data.countsApplied) {
+                 if (data.riggedOutcome === "w1") { data.r3Result.winner = data.r3Match.p1; data.r3Result.loser = data.r3Match.p2; }
+                 if (data.riggedOutcome === "w2") { data.r3Result.winner = data.r3Match.p2; data.r3Result.loser = data.r3Match.p1; }
 
-      if (phaseTag === 1) {
-        if (data.mini.none) {
+                 const epIndex = state.episodeNumber - 1;
+                 data.r1Results.forEach(r => { r.winner.record.SAFE++; r.winner.history[epIndex] = "WON R1"; });
+                 data.r2Results.forEach(r => { r.winner.record.LOW++; r.winner.history[epIndex] = "WON R2"; });
+                 data.r3Result.winner.record.BTM2++; data.r3Result.winner.history[epIndex] = "WON R3";
+
+                 let l = data.r3Result.loser;
+                 l.record.ELIM++; l.eliminated = true; l.elimOrder = state.episodeNumber; l.history[epIndex] = "ELIM";
+                 data.countsApplied = true;
+              }
+
+              content = `
+                <div class="section-card">
+                  <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Results</span></div>
+                  <p class="big-message">Final Decisions</p>
+                  <div class="flex-col-center">
+                    <div class="group-row">
+                      <div class="placement-card bg-won-r3">${escapeHtml(data.r3Result.winner.name)}</div>
+                      <p class="muted">Shantay you stay. That was a close call.</p>
+                    </div>
+                    <div class="group-row" style="border:none;">
+                      <div class="placement-card bg-elim">${escapeHtml(data.r3Result.loser.name)}</div>
+                      <p class="muted">Sashay away.</p>
+                    </div>
+                  </div>
+                </div>
+              `;
+          }
+      }
+
+      if (!data.isLaLaPaRuza || phaseTag === 7) {
+          if (phaseTag === 1 && !data.isLaLaPaRuza) {
+            if (data.mini.none) {
+                content = `
+                  <div class="section-card" style="text-align: center; padding: 40px 24px;">
+                    <h2 style="font-size: 24px; font-weight: 900; margin: 0 0 16px;">There is no mini challenge today.</h2>
+                    <p class="muted">Let's get straight to the main event.</p>
+                  </div>
+                `;
+            } else {
+                content = `
+                  <div class="section-card" style="text-align: left; padding: 24px;">
+                    <div style="display:flex; gap: 8px; margin-bottom: 16px;">
+                      <span class="pill">Screen ${state.phase}</span>
+                      <span class="pill">Mini Challenge</span>
+                    </div>
+                    <h2 style="font-size: 24px; font-weight: 900; margin: 0 0 16px;">${escapeHtml(data.mini.challenge)}</h2>
+                    <p class="muted" style="text-align: left;">Mini challenge winners: ${data.mini.winners.map(q => `<strong>${escapeHtml(q.name)}</strong>`).join(", ")}</p>
+                  </div>
+                `;
+            }
+          } else if (phaseTag === "gg_teams" && !data.isLaLaPaRuza) {
             content = `
-              <div class="section-card" style="text-align: center; padding: 40px 24px;">
-                <h2 style="font-size: 24px; font-weight: 900; margin: 0 0 16px;">There is no mini challenge today.</h2>
-                <p class="muted">Let's get straight to the main event.</p>
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">The Teams</span></div>
+                <p class="big-message">Girl Groups</p>
+                <p class="muted" style="margin-bottom:20px;">The queens have split into two teams...</p>
+                <div class="flex-col-center">
+                  <div class="group-row">
+                    <p class="muted" style="font-weight: 800; font-size: 16px; margin:0;">${escapeHtml(data.gg.teamA.name)}</p>
+                    <div class="flex-center">${data.gg.teamA.queens.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div>
+                  </div>
+                  <div class="group-row" style="border:none;">
+                    <p class="muted" style="font-weight: 800; font-size: 16px; margin:0;">${escapeHtml(data.gg.teamB.name)}</p>
+                    <div class="flex-center">${data.gg.teamB.queens.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div>
+                  </div>
+                </div>
               </div>
             `;
-        } else {
+          } else if (phaseTag === 2 && !data.isLaLaPaRuza) {
+            if (isGG) {
+                content = `
+                  <div class="section-card">
+                    <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Maxi Challenge</span></div>
+                    <p class="big-message">${data.maxi.name}</p>
+                    <p class="muted" style="margin-bottom:20px;">The girl groups perform their original tracks...</p>
+                    <div class="flex-col-center">
+                      <div class="group-row"><p class="muted">Had a great performance!</p><div class="flex-center"><div class="placement-card bg-high">${escapeHtml(data.gg.winningName)}</div></div></div>
+                      <div class="group-row" style="border:none;"><p class="muted">Struggled to find their rhythm...</p><div class="flex-center"><div class="placement-card bg-low">${escapeHtml(data.gg.losingName)}</div></div></div>
+                    </div>
+                  </div>
+                `;
+            } else {
+                let slayed = [], okay = [], bad = [];
+                data.scores.forEach(row => {
+                  let cat = data.categories.get(row.queen.id);
+                  if (cat === "Slayed" || cat === "Great") slayed.push(row.queen);
+                  else if (cat === "Flopped" || cat === "Bad") bad.push(row.queen);
+                  else okay.push(row.queen);
+                });
+                slayed.sort(() => Math.random() - 0.5);
+                okay.sort(() => Math.random() - 0.5); bad.sort(() => Math.random() - 0.5);
+                content = `
+                  <div class="section-card">
+                    <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Maxi Challenge</span></div>
+                    <p class="big-message">${data.maxi.name}</p>
+                    <p class="muted" style="margin-bottom:20px;">The queens' performances...</p>
+                    <div class="flex-col-center">
+                      ${slayed.length ? `<div class="group-row"><p class="muted">Had a great performance!</p><div class="flex-center">${slayed.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div></div>` : ""}
+                      ${okay.length ? `<div class="group-row"><p class="muted">Had a good performance.</p><div class="flex-center">${okay.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div></div>` : ""}
+                      ${bad.length ? `<div class="group-row"><p class="muted">Had a bad performance...</p><div class="flex-center">${bad.map(q => `<div class="placement-card bg-low">${escapeHtml(q.name)}</div>`).join("")}</div></div>` : ""}
+                    </div>
+                  </div>
+                `;
+            }
+          } else if (phaseTag === 3 && !data.isLaLaPaRuza) {
+            if (isGG) {
+                content = `
+                  <div class="section-card">
+                    <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Judging!</span></div>
+                    <p class="muted" style="margin-bottom:16px;">Based on tonight's performances...</p>
+                    <div class="flex-col-center">
+                      <div class="group-row" style="border:none;">
+                        <p class="big-message" style="font-size: 24px; color: var(--lime);">${escapeHtml(data.gg.winningName)}</p>
+                        <p class="muted">Condragulations, you are the winning team!</p>
+                      </div>
+                    </div>
+                  </div>
+                `;
+            } else if (data.isMidSeasonNonElim) {
+                let tops = [...data.placements.topTwo, ...data.placements.highQueens];
+                let safes = [...data.placements.pureSafe];
+                
+                tops.sort(() => Math.random() - 0.5); safes.sort(() => Math.random() - 0.5);
+                content = `
+                  <div class="section-card">
+                    <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Judging!</span></div>
+                    <p class="muted" style="margin-bottom:16px;">Based on tonight's performances...</p>
+                    <div class="flex-col-center">
+                      <div class="flex-center">
+                        ${tops.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
+                      </div>
+                      <p class="muted">You represent the tops of the week. There are no bottoms!</p>
+                      ${safes.length ? `
+                        <hr style="width:100%; border:0; border-top:1px solid var(--border); margin:10px 0;">
+                        <div class="flex-center">
+                          ${safes.map(q => `<span class="placement-card small bg-safe">${escapeHtml(q.name)}</span>`).join("")}
+                        </div>
+                        <p class="muted">You are safe.</p>
+                      ` : ""}
+                    </div>
+                  </div>
+                `;
+            } else {
+                let tops, bottoms, safes;
+                if (state.seasonFormat === "all-stars-legacy") {
+                    tops = [...data.placements.topTwo, ...data.placements.highQueens];
+                    bottoms = [...(data.placements.savedLow ? [data.placements.savedLow] : []), ...data.placements.bottomTwo];
+                    safes = [...data.placements.pureSafe];
+                } else if (state.episodeNumber === 1 && state.premiereFormat === "top2") {
+                    tops = [...data.placements.topTwo, ...data.placements.highQueens];
+                    bottoms = [...(data.placements.bottomThree || []), ...(data.placements.savedLow ? [data.placements.savedLow] : []), ...(data.placements.bottomTwo || [])];
+                    safes = [...data.placements.pureSafe];
+                } else {
+                    tops = [...data.placements.winners, ...data.placements.highQueens];
+                    bottoms = [...(data.placements.savedLow ? [data.placements.savedLow] : []), ...data.placements.bottomTwo];
+                    safes = [...data.placements.pureSafe];
+                }
+
+                tops.sort(() => Math.random() - 0.5);
+                bottoms.sort(() => Math.random() - 0.5); safes.sort(() => Math.random() - 0.5);
+                content = `
+                  <div class="section-card">
+                    <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Judging!</span></div>
+                    <p class="muted" style="margin-bottom:16px;">Based on tonight's performances...</p>
+                    <div class="flex-col-center">
+                      <div class="flex-center">
+                        ${tops.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
+                        ${bottoms.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
+                      </div>
+                      <p class="muted">You represent the tops and bottoms of the week.</p>
+                      ${safes.length ? `
+                        <hr style="width:100%; border:0; border-top:1px solid var(--border); margin:10px 0;">
+                        <div class="flex-center">
+                          ${safes.map(q => `<span class="placement-card small bg-safe">${escapeHtml(q.name)}</span>`).join("")}
+                        </div>
+                        <p class="muted">You are safe.</p>
+                      ` : ""}
+                    </div>
+                  </div>
+                `;
+            }
+          } else if (phaseTag === 4 && !data.isLaLaPaRuza) {
+            if (!data.countsApplied) {
+              const epIndex = state.episodeNumber - 1;
+              if (state.seasonFormat === "all-stars-legacy") {
+                  data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
+                  data.placements.pureSafe.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
+                  if (data.placements.savedLow) { data.placements.savedLow.record.LOW += 1; data.placements.savedLow.history[epIndex] = "LOW"; }
+                  data.placements.bottomTwo.forEach(q => { q.record.BTM2 += 1; q.history[epIndex] = "BTM"; });
+              } else if (state.episodeNumber === 1 && state.premiereFormat === "top2") {
+                  data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
+                  data.placements.pureSafe.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
+                  if (data.placements.bottomThree) data.placements.bottomThree.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
+                  if (data.placements.bottomTwo) data.placements.bottomTwo.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
+              } else if (data.isMidSeasonNonElim) {
+                  data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
+                  data.placements.pureSafe.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
+              } else {
+                  data.placements.winners.forEach(q => { q.record.WIN += 1; q.history[epIndex] = "WIN"; });
+                  data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
+                  data.placements.pureSafe.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
+                  if (data.placements.savedLow) { data.placements.savedLow.record.LOW += 1; data.placements.savedLow.history[epIndex] = "LOW"; }
+                  if (data.placements.bottomTwo) { data.placements.bottomTwo.forEach(q => { q.record.BTM2 += 1; q.history[epIndex] = "BTM2"; }); }
+              }
+              data.countsApplied = true;
+            }
+            
+            const p = data.placements;
+            if (isGG) {
+                 content = `
+                  <div class="section-card">
+                    <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Results</span></div>
+                    <p class="muted" style="margin-bottom:16px;">Ladies of ${escapeHtml(data.gg.losingName)}, I've made some decisions...</p>
+                    <div class="flex-col-center">
+                      ${p.pureSafe.length ? `
+                      <div class="group-row">
+                        <div class="flex-center">${p.pureSafe.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div>
+                        <p class="muted">You are safe.</p>
+                      </div>` : ""}
+                      ${p.savedLow ? `
+                      <div class="group-row">
+                        <div class="flex-center"><div class="placement-card bg-low">${escapeHtml(p.savedLow.name)}</div></div>
+                        <p class="muted">You are safe, but step it up.</p>
+                      </div>` : ""}
+                      <div class="group-row" style="border:none;">
+                        <div class="flex-center">${p.bottomTwo.map(q => `<div class="placement-card bg-btm">${escapeHtml(q.name)}</div>`).join("")}</div>
+                        <p class="muted">I'm sorry my dears but you are up for elimination.</p>
+                      </div>
+                    </div>
+                  </div>
+                `;
+            } else if (state.seasonFormat === "all-stars-legacy") {
+                content = `
+                  <div class="section-card">
+                    <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Results</span></div>
+                    <p class="muted" style="margin-bottom:16px;">Ladies, I've made some decisions...</p>
+                    <div class="flex-col-center">
+                      <div class="group-row">
+                        <div class="flex-center">${p.topTwo.map(q => `<div class="placement-card bg-win">${escapeHtml(q.name)}</div>`).join("")}</div>
+                        <p class="muted">Condragulations, you are the Top 2 queens of the week!</p>
+                      </div>
+                      ${p.highQueens.length ? `
+                      <div class="group-row">
+                        <div class="flex-center">${p.highQueens.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div>
+                        <p class="muted">Good job this week, you're safe.</p>
+                      </div>` : ""}
+                      ${p.savedLow ? `
+                      <div class="group-row">
+                        <div class="flex-center"><div class="placement-card bg-low">${escapeHtml(p.savedLow.name)}</div></div>
+                        <p class="muted">You are safe, but step it up.</p>
+                      </div>` : ""}
+                      <div class="group-row" style="border:none;">
+                        <div class="flex-center">${p.bottomTwo.map(q => `<div class="placement-card bg-btm">${escapeHtml(q.name)}</div>`).join("")}</div>
+                        <p class="muted">I'm sorry my dears but you are the bottom queens of the week.</p>
+                      </div>
+                    </div>
+                  </div>
+                `;
+            } else if (state.episodeNumber === 1 && state.premiereFormat === "top2" || data.isMidSeasonNonElim) {
+                let bottomsHTML = "";
+                if (!data.isMidSeasonNonElim) {
+                    if (p.bottomThree) {
+                         bottomsHTML = `<div class="flex-center">${p.bottomThree.map(q => `<div class="placement-card bg-low">${escapeHtml(q.name)}</div>`).join("")}</div>`;
+                    } else {
+                         bottomsHTML = `<div class="flex-center">${p.savedLow ? `<div class="placement-card bg-low">${escapeHtml(p.savedLow.name)}</div>` : ''}${p.bottomTwo.map(q => `<div class="placement-card bg-low">${escapeHtml(q.name)}</div>`).join("")}</div>`;
+                    }
+                }
+                content = `
+                  <div class="section-card">
+                    <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Results</span></div>
+                    <p class="muted" style="margin-bottom:16px;">Ladies, I've made some decisions...</p>
+                    <div class="flex-col-center">
+                      <div class="group-row">
+                        <div class="flex-center">${p.topTwo.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div>
+                        <p class="muted">Condragulations, you are the Top 2 queens of the week!</p>
+                      </div>
+                      ${p.highQueens.length ? `
+                      <div class="group-row">
+                        <div class="flex-center">${p.highQueens.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div>
+                        <p class="muted">Good job this week, you're safe.</p>
+                      </div>` : ""}
+                      <div class="group-row" style="border:none;">
+                        ${bottomsHTML}
+                        <p class="muted">${data.isMidSeasonNonElim ? "Since you all did so well this week, Nobody is going home!" : "Since its our first episode, Nobody is going home!"} instead the top 2 will lip sync for the win!</p>
+                      </div>
+                    </div>
+                  </div>
+                `;
+            } else {
+                content = `
+                  <div class="section-card">
+                    <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Results</span></div>
+                    <p class="muted" style="margin-bottom:16px;">Ladies, I've made some decisions...</p>
+                    <div class="flex-col-center">
+                      <div class="group-row">
+                        <div class="flex-center">${p.winners.map(q => `<div class="placement-card bg-win">${escapeHtml(q.name)}</div>`).join("")}</div>
+                        <p class="muted">Condragulations, you're the winner${p.winners.length > 1 ? "s" : ""} of today's challenge!</p>
+                      </div>
+                      ${p.highQueens.length ? `
+                      <div class="group-row">
+                        <div class="flex-center">${p.highQueens.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div>
+                        <p class="muted">Good job this week, you're safe.</p>
+                      </div>` : ""}
+                      ${p.savedLow ? `
+                      <div class="group-row">
+                        <div class="flex-center"><div class="placement-card bg-low">${escapeHtml(p.savedLow.name)}</div></div>
+                        <p class="muted">You are safe, but step it up.</p>
+                      </div>` : ""}
+                      <div class="group-row" style="border:none;">
+                        <div class="flex-center">${(p.bottomTwo || []).map(q => `<div class="placement-card bg-btm">${escapeHtml(q.name)}</div>`).join("")}</div>
+                        <p class="muted">I'm sorry my dears but you are up for elimination.</p>
+                      </div>
+                    </div>
+                  </div>
+                `;
+            }
+          } else if (phaseTag === 5 && !data.isLaLaPaRuza) {
+            if (!data.lipSync) {
+              let p1, p2;
+              if (state.seasonFormat === "all-stars-legacy" || (state.episodeNumber === 1 && state.premiereFormat === "top2") || data.isMidSeasonNonElim) {
+                  p1 = data.placements.topTwo[0];
+                  p2 = data.placements.topTwo[1];
+              } else {
+                  p1 = data.placements.bottomTwo[0];
+                  p2 = data.placements.bottomTwo[1];
+              }
+              
+              const e1 = rollLipEvent();
+              const e2 = rollLipEvent();
+              let s1 = rand(1,10) + p1.stats.lipSync; if(e1.type==="words") s1-=99; if(e1.type==="fall") s1-=2; if(e1.type==="reveal") s1+=2;
+              let s2 = rand(1,10) + p2.stats.lipSync; if(e2.type==="words") s2-=99; if(e2.type==="fall") s2-=2; if(e2.type==="reveal") s2+=2;
+              if (state.seasonFormat === "regular") {
+                  if (p1.record.BTM2 >= 4 && p2.record.BTM2 < 4) s1 = -999;
+                  else if (p2.record.BTM2 >= 4 && p1.record.BTM2 < 4) s2 = -999;
+              }
+
+              let winner = s1 >= s2 ? {queen: p1, event: e1} : {queen: p2, event: e2};
+              let loser = s1 >= s2 ? {queen: p2, event: e2} : {queen: p1, event: e1};
+              data.lipSync = { song: pick(lipSongs), performances: [{queen: p1, event: e1}, {queen: p2, event: e2}], winner, loser, s1, s2 };
+            }
+            
+            let lipSyncText = "";
+            if (state.seasonFormat === "all-stars-legacy") {
+                lipSyncText = "Two top queens stand before me. Prior to tonight, you were asked to prepare a lip sync performance... for your legacy! Good luck, and don't f*ck it up.";
+            } else if ((state.episodeNumber === 1 && state.premiereFormat === "top2") || data.isMidSeasonNonElim) {
+                lipSyncText = "For you to lip-sync... for the win! Good luck, and don't f*ck it up.";
+            } else {
+                lipSyncText = "For you to lip-sync... for your lives! Good luck, and don't f*ck it up.";
+            }
+            
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">The time has come...</span></div>
+                <p class="muted">${lipSyncText}</p>
+                <p class="big-message" style="margin: 16px 0;">${escapeHtml(data.lipSync.song)}</p>
+                <div class="flex-center" style="align-items: stretch; gap: 16px;">
+                  ${data.lipSync.performances.map(p => `
+                    <div style="text-align:center; width: 160px; display: flex; flex-direction: column;">
+                      <div class="placement-card bg-safe" style="flex: 1;">${escapeHtml(p.queen.name)}</div>
+                      <p class="muted" style="margin-top:6px; font-size:13px;">${p.event.text}</p>
+                    </div>
+                  `).join("")}
+                </div>
+              </div>
+            `;
+          } else if (phaseTag === 6 && !data.isLaLaPaRuza) {
+            if (!data.elimination) {
+              let w = data.lipSync.winner.queen;
+              let l = data.lipSync.loser.queen;
+              let s1 = data.lipSync.s1; let s2 = data.lipSync.s2;
+              let ev1 = data.lipSync.performances[0]; let ev2 = data.lipSync.performances[1];
+              let isDoubleShantay = (s1 >= 13 && s2 >= 13 && Math.random() < 0.1);
+              let isDoubleSashay = (s1 <= 7 && s2 <= 7 && Math.random() < 0.02 && activeQueens().length > (state.finaleFormat === "top3" ? 4 : 5));
+              if (data.riggedOutcome) {
+                   if (data.riggedOutcome === "w1") { w = ev1.queen; l = ev2.queen; isDoubleShantay=false; isDoubleSashay=false;}
+                   if (data.riggedOutcome === "w2") { w = ev2.queen; l = ev1.queen; isDoubleShantay=false; isDoubleSashay=false;}
+                   if (data.riggedOutcome === "double_shantay") { isDoubleShantay = true; isDoubleSashay = false; }
+                   if (data.riggedOutcome === "double_sashay") { isDoubleSashay = true; isDoubleShantay = false; }
+              }
+
+              if (state.seasonFormat === "all-stars-legacy") {
+                  if (state.episodeNumber === 1 && (state.premiereFormat === "no-elim" || state.premiereFormat === "top2")) {
+                      w.record.WIN += 1;
+                      w.history[state.episodeNumber - 1] = "WIN";
+                      l.record.TOP2 = (l.record.TOP2 || 0) + 1; l.history[state.episodeNumber - 1] = "TOP 2";
+                      data.elimination = { legacyNoElim: true, winner: w, top2loser: l };
+                  } else {
+                      w.record.WIN += 1;
+                      w.history[state.episodeNumber - 1] = "WIN";
+                      l.record.TOP2 = (l.record.TOP2 || 0) + 1; l.history[state.episodeNumber - 1] = "TOP 2";
+                      const btmQueens = data.placements.bottomTwo;
+                      const eliminatedQueen = pick(btmQueens); 
+
+                      eliminatedQueen.record.ELIM += 1; eliminatedQueen.eliminated = true; eliminatedQueen.elimOrder = state.episodeNumber;
+                      eliminatedQueen.history[state.episodeNumber - 1] = "ELIM";
+                      data.elimination = { legacy: true, winner: w, top2loser: l, eliminated: eliminatedQueen };
+                  }
+              } else if (state.episodeNumber === 1 && state.premiereFormat === "top2") {
+                  w.record.WIN += 1;
+                  w.history[0] = "WIN";
+                  l.record.TOP2 = (l.record.TOP2 || 0) + 1; l.history[0] = "TOP 2";
+                  data.elimination = { top2LipSync: true, winner: w, loser: l };
+              } else if (data.isMidSeasonNonElim) {
+                  w.record.WIN += 1;
+                  w.history[state.episodeNumber - 1] = "WIN";
+                  l.record.TOP2 = (l.record.TOP2 || 0) + 1; l.history[state.episodeNumber - 1] = "TOP 2";
+                  data.elimination = { top2LipSync: true, winner: w, loser: l };
+              } else if (state.episodeNumber === 1 && state.premiereFormat === "no-elim") {
+                  const q1 = data.lipSync.performances[0].queen;
+                  const q2 = data.lipSync.performances[1].queen;
+                  data.elimination = { doubleShantay: true, forcedNoElim: true, q1, q2 };
+              } else if (isDoubleShantay) {
+                  data.elimination = { doubleShantay: true, q1: data.lipSync.performances[0].queen, q2: data.lipSync.performances[1].queen };
+              } else if (isDoubleSashay) {
+                  const q1 = data.lipSync.performances[0].queen;
+                  const q2 = data.lipSync.performances[1].queen;
+                  q1.record.ELIM += 1; q1.eliminated = true; q1.elimOrder = state.episodeNumber; q1.history[state.episodeNumber - 1] = "ELIM";
+                  q2.record.ELIM += 1; q2.eliminated = true; q2.elimOrder = state.episodeNumber; q2.history[state.episodeNumber - 1] = "ELIM";
+                  data.elimination = { doubleSashay: true, q1, q2 };
+              } else {
+                  l.record.ELIM += 1;
+                  l.eliminated = true; l.elimOrder = state.episodeNumber; l.history[state.episodeNumber - 1] = "ELIM";
+                  data.elimination = { survivor: w, eliminated: l };
+              }
+            }
+            
+            const e = data.elimination;
+            let contentInner = "";
+            
+            if (e.legacy) {
+                contentInner = `
+                  <div class="group-row">
+                    <div class="placement-card bg-win">${escapeHtml(e.winner.name)}</div>
+                    <p class="muted">You're a winner baby! You have earned a cash tip of $10,000.</p>
+                  </div>
+                  <div class="group-row">
+                    <div class="placement-card bg-top2">${escapeHtml(e.top2loser.name)}</div>
+                    <p class="muted">You are safe.</p>
+                  </div>
+                  <div class="group-row" style="border:none;">
+                    <p class="muted" style="margin-bottom: 8px;">${escapeHtml(e.winner.name)}, with great power comes great responsibility. Which queen have you chosen to get the chop?</p>
+                    <div class="placement-card bg-elim">${escapeHtml(e.eliminated.name)}</div>
+                    <p class="muted" style="margin-top: 8px;">As it is written, so it shall be done. Sashay away.</p>
+                  </div>
+                `;
+            } else if (e.legacyNoElim) {
+                contentInner = `
+                  <div class="group-row">
+                    <div class="placement-card bg-win">${escapeHtml(e.winner.name)}</div>
+                    <p class="muted">You're a winner baby! You have earned a cash tip of $10,000.</p>
+                  </div>
+                  <div class="group-row" style="border:none;">
+                    <div class="placement-card bg-top2">${escapeHtml(e.top2loser.name)}</div>
+                    <p class="muted">You are safe to slay another day.</p>
+                    <p class="muted" style="margin-top: 8px; font-weight: bold;">Since it's the premiere, no one is going home tonight!</p>
+                  </div>
+                `;
+            } else if (e.top2LipSync) {
+                contentInner = `
+                  <div class="group-row">
+                    <div class="placement-card bg-win">${escapeHtml(e.winner.name)}</div>
+                    <p class="muted">You're a winner baby!</p>
+                  </div>
+                  <div class="group-row" style="border:none;">
+                    <div class="placement-card bg-top2">${escapeHtml(e.loser.name)}</div>
+                    <p class="muted">You are safe to slay another day.</p>
+                  </div>
+                `;
+            } else if (e.doubleShantay) {
+                let text = e.forcedNoElim ? "I'm not ready for either of you to go. Shantay you BOTH stay!" : "Shantay you BOTH stay!";
+                contentInner = `
+                  <div class="group-row" style="border:none;">
+                    <div class="flex-center">
+                        <div class="placement-card bg-shantay">${escapeHtml(e.q1.name)}</div>
+                        <div class="placement-card bg-shantay">${escapeHtml(e.q2.name)}</div>
+                    </div>
+                    <p class="muted">${text}</p>
+                  </div>
+                `;
+            } else if (e.doubleSashay) {
+                contentInner = `
+                  <div class="group-row" style="border:none;">
+                    <div class="flex-center">
+                        <div class="placement-card bg-elim">${escapeHtml(e.q1.name)}</div>
+                        <div class="placement-card bg-elim">${escapeHtml(e.q2.name)}</div>
+                    </div>
+                    <p class="muted">Neither one of you showed me the power it takes to stay. I'm sending you BOTH home.</p>
+                  </div>
+                `;
+            } else {
+                contentInner = `
+                  <div class="group-row">
+                    <div class="placement-card bg-shantay">${escapeHtml(e.survivor.name)}</div>
+                    <p class="muted">Shantay you stay.</p>
+                  </div>
+                  <div class="group-row" style="border:none;">
+                    <div class="placement-card bg-elim">${escapeHtml(e.eliminated.name)}</div>
+                    <p class="muted">Sashay away.</p>
+                  </div>
+                `;
+            }
+
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Decisions...</span></div>
+                <div class="flex-col-center" style="margin-top:16px;">
+                  ${contentInner}
+                </div>
+              </div>
+            `;
+          } else if (phaseTag === 7) {
+            let sortedQueens = [...state.queens].sort((a, b) => {
+              if (b.elimOrder !== a.elimOrder) return b.elimOrder - a.elimOrder;
+              return trackScore(b) - trackScore(a);
+            });
             content = `
               <div class="section-card" style="text-align: left; padding: 24px;">
                 <div style="display:flex; gap: 8px; margin-bottom: 16px;">
                   <span class="pill">Screen ${state.phase}</span>
-                  <span class="pill">Mini Challenge</span>
+                  <span class="pill">Track Record</span>
                 </div>
-                <h2 style="font-size: 24px; font-weight: 900; margin: 0 0 16px;">${escapeHtml(data.mini.challenge)}</h2>
-                <p class="muted" style="text-align: left;">Mini challenge winners: ${data.mini.winners.map(q => `<strong>${escapeHtml(q.name)}</strong>`).join(", ")}</p>
-              </div>
-            `;
-        }
-      } else if (phaseTag === "gg_teams") {
-        content = `
-          <div class="section-card">
-            <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">The Teams</span></div>
-            <p class="big-message">Girl Groups</p>
-            <p class="muted" style="margin-bottom:20px;">The queens have split into two teams...</p>
-            <div class="flex-col-center">
-              <div class="group-row">
-                <p class="muted" style="font-weight: 800; font-size: 16px; margin:0;">${escapeHtml(data.gg.teamA.name)}</p>
-                <div class="flex-center">${data.gg.teamA.queens.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div>
-              </div>
-              <div class="group-row" style="border:none;">
-                <p class="muted" style="font-weight: 800; font-size: 16px; margin:0;">${escapeHtml(data.gg.teamB.name)}</p>
-                <div class="flex-center">${data.gg.teamB.queens.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div>
-              </div>
-            </div>
-          </div>
-        `;
-      } else if (phaseTag === 2) {
-        if (isGG) {
-            content = `
-              <div class="section-card">
-                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Maxi Challenge</span></div>
-                <p class="big-message">${data.maxi.name}</p>
-                <p class="muted" style="margin-bottom:20px;">The girl groups perform their original tracks...</p>
-                <div class="flex-col-center">
-                  <div class="group-row"><p class="muted">Had a great performance!</p><div class="flex-center"><div class="placement-card bg-high">${escapeHtml(data.gg.winningName)}</div></div></div>
-                  <div class="group-row" style="border:none;"><p class="muted">Struggled to find their rhythm...</p><div class="flex-center"><div class="placement-card bg-low">${escapeHtml(data.gg.losingName)}</div></div></div>
+                <h2 style="font-size: 24px; font-weight: 900; margin: 0 0 16px;">Season standings</h2>
+                <div style="overflow-x: auto;">
+                  <table class="standings-table">
+                    <thead>
+                      <tr>
+                        <th>Queen</th>
+                        ${Array.from({length: state.episodeNumber}, (_, i) => `<th>Ep ${i+1}</th>`).join("")}
+                        <th>Score</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${sortedQueens.map(q => `
+                        <tr>
+                          <td class="qname-cell">${escapeHtml(q.name)}</td>
+                          ${Array.from({length: state.episodeNumber}, (_, i) => {
+                            let p = q.history[i];
+                            if (!p) return `<td class="empty-cell"></td>`;
+                            let cssClass = getTrackRecordClass(p);
+                            return `<td class="${cssClass}" style="font-weight: 900; font-size: 12px;">${p}</td>`;
+                          }).join("")}
+                          <td style="font-weight: 600;">${trackScore(q)}</td>
+                        </tr>
+                      `).join("")}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             `;
-        } else {
-            let slayed = [], okay = [], bad = [];
-            data.scores.forEach(row => {
-              let cat = data.categories.get(row.queen.id);
-              if (cat === "Slayed" || cat === "Great") slayed.push(row.queen);
-              else if (cat === "Flopped" || cat === "Bad") bad.push(row.queen);
-              else okay.push(row.queen);
-            });
-            slayed.sort(() => Math.random() - 0.5); okay.sort(() => Math.random() - 0.5); bad.sort(() => Math.random() - 0.5);
-            content = `
-              <div class="section-card">
-                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Maxi Challenge</span></div>
-                <p class="big-message">${data.maxi.name}</p>
-                <p class="muted" style="margin-bottom:20px;">The queens' performances...</p>
-                <div class="flex-col-center">
-                  ${slayed.length ? `<div class="group-row"><p class="muted">Had a great performance!</p><div class="flex-center">${slayed.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div></div>` : ""}
-                  ${okay.length ? `<div class="group-row"><p class="muted">Had a good performance.</p><div class="flex-center">${okay.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div></div>` : ""}
-                  ${bad.length ? `<div class="group-row"><p class="muted">Had a bad performance...</p><div class="flex-center">${bad.map(q => `<div class="placement-card bg-low">${escapeHtml(q.name)}</div>`).join("")}</div></div>` : ""}
-                </div>
-              </div>
-            `;
-        }
-      } else if (phaseTag === 3) {
-        if (isGG) {
-            content = `
-              <div class="section-card">
-                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Judging!</span></div>
-                <p class="muted" style="margin-bottom:16px;">Based on tonight's performances...</p>
-                <div class="flex-col-center">
-                  <div class="group-row" style="border:none;">
-                    <p class="big-message" style="font-size: 24px; color: var(--lime);">${escapeHtml(data.gg.winningName)}</p>
-                    <p class="muted">Condragulations, you are the winning team!</p>
-                  </div>
-                </div>
-              </div>
-            `;
-        } else if (data.isMidSeasonNonElim) {
-            let tops = [...data.placements.topTwo, ...data.placements.highQueens];
-            let safes = [...data.placements.pureSafe];
-            
-            tops.sort(() => Math.random() - 0.5); safes.sort(() => Math.random() - 0.5);
-            content = `
-              <div class="section-card">
-                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Judging!</span></div>
-                <p class="muted" style="margin-bottom:16px;">Based on tonight's performances...</p>
-                <div class="flex-col-center">
-                  <div class="flex-center">
-                    ${tops.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
-                  </div>
-                  <p class="muted">You represent the tops of the week. There are no bottoms!</p>
-                  ${safes.length ? `
-                    <hr style="width:100%; border:0; border-top:1px solid var(--border); margin:10px 0;">
-                    <div class="flex-center">
-                      ${safes.map(q => `<span class="placement-card small bg-safe">${escapeHtml(q.name)}</span>`).join("")}
-                    </div>
-                    <p class="muted">You are safe.</p>
-                  ` : ""}
-                </div>
-              </div>
-            `;
-        } else {
-            let tops, bottoms, safes;
-            if (state.seasonFormat === "all-stars-legacy") {
-                tops = [...data.placements.topTwo, ...data.placements.highQueens];
-                bottoms = [...(data.placements.savedLow ? [data.placements.savedLow] : []), ...data.placements.bottomTwo];
-                safes = [...data.placements.pureSafe];
-            } else if (state.episodeNumber === 1 && state.premiereFormat === "top2") {
-                tops = [...data.placements.topTwo, ...data.placements.highQueens];
-                bottoms = [...(data.placements.bottomThree || []), ...(data.placements.savedLow ? [data.placements.savedLow] : []), ...(data.placements.bottomTwo || [])];
-                safes = [...data.placements.pureSafe];
-            } else {
-                tops = [...data.placements.winners, ...data.placements.highQueens];
-                bottoms = [...(data.placements.savedLow ? [data.placements.savedLow] : []), ...data.placements.bottomTwo];
-                safes = [...data.placements.pureSafe];
-            }
-
-            tops.sort(() => Math.random() - 0.5); bottoms.sort(() => Math.random() - 0.5); safes.sort(() => Math.random() - 0.5);
-            content = `
-              <div class="section-card">
-                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Judging!</span></div>
-                <p class="muted" style="margin-bottom:16px;">Based on tonight's performances...</p>
-                <div class="flex-col-center">
-                  <div class="flex-center">
-                    ${tops.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
-                    ${bottoms.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
-                  </div>
-                  <p class="muted">You represent the tops and bottoms of the week.</p>
-                  ${safes.length ? `
-                    <hr style="width:100%; border:0; border-top:1px solid var(--border); margin:10px 0;">
-                    <div class="flex-center">
-                      ${safes.map(q => `<span class="placement-card small bg-safe">${escapeHtml(q.name)}</span>`).join("")}
-                    </div>
-                    <p class="muted">You are safe.</p>
-                  ` : ""}
-                </div>
-              </div>
-            `;
-        }
-      } else if (phaseTag === 4) {
-        if (!data.countsApplied) {
-          const epIndex = state.episodeNumber - 1;
-          if (state.seasonFormat === "all-stars-legacy") {
-              data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
-              data.placements.pureSafe.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
-              if (data.placements.savedLow) { data.placements.savedLow.record.LOW += 1; data.placements.savedLow.history[epIndex] = "LOW"; }
-              data.placements.bottomTwo.forEach(q => { q.record.BTM2 += 1; q.history[epIndex] = "BTM"; });
-          } else if (state.episodeNumber === 1 && state.premiereFormat === "top2") {
-              data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
-              data.placements.pureSafe.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
-              if (data.placements.bottomThree) data.placements.bottomThree.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
-              if (data.placements.bottomTwo) data.placements.bottomTwo.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
-          } else if (data.isMidSeasonNonElim) {
-              data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
-              data.placements.pureSafe.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
-          } else {
-              data.placements.winners.forEach(q => { q.record.WIN += 1; q.history[epIndex] = "WIN"; });
-              data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
-              data.placements.pureSafe.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
-              if (data.placements.savedLow) { data.placements.savedLow.record.LOW += 1; data.placements.savedLow.history[epIndex] = "LOW"; }
-              if (data.placements.bottomTwo) { data.placements.bottomTwo.forEach(q => { q.record.BTM2 += 1; q.history[epIndex] = "BTM2"; }); }
           }
-          data.countsApplied = true;
-        }
-        
-        const p = data.placements;
-        if (isGG) {
-             content = `
-              <div class="section-card">
-                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Results</span></div>
-                <p class="muted" style="margin-bottom:16px;">Ladies of ${escapeHtml(data.gg.losingName)}, I've made some decisions...</p>
-                <div class="flex-col-center">
-                  ${p.pureSafe.length ? `
-                  <div class="group-row">
-                    <div class="flex-center">${p.pureSafe.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div>
-                    <p class="muted">You are safe.</p>
-                  </div>` : ""}
-                  ${p.savedLow ? `
-                  <div class="group-row">
-                    <div class="flex-center"><div class="placement-card bg-low">${escapeHtml(p.savedLow.name)}</div></div>
-                    <p class="muted">You are safe, but step it up.</p>
-                  </div>` : ""}
-                  <div class="group-row" style="border:none;">
-                    <div class="flex-center">${p.bottomTwo.map(q => `<div class="placement-card bg-btm">${escapeHtml(q.name)}</div>`).join("")}</div>
-                    <p class="muted">I'm sorry my dears but you are up for elimination.</p>
-                  </div>
-                </div>
-              </div>
-            `;
-        } else if (state.seasonFormat === "all-stars-legacy") {
-            content = `
-              <div class="section-card">
-                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Results</span></div>
-                <p class="muted" style="margin-bottom:16px;">Ladies, I've made some decisions...</p>
-                <div class="flex-col-center">
-                  <div class="group-row">
-                    <div class="flex-center">${p.topTwo.map(q => `<div class="placement-card bg-win">${escapeHtml(q.name)}</div>`).join("")}</div>
-                    <p class="muted">Condragulations, you are the Top 2 queens of the week!</p>
-                  </div>
-                  ${p.highQueens.length ? `
-                  <div class="group-row">
-                    <div class="flex-center">${p.highQueens.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div>
-                    <p class="muted">Good job this week, you're safe.</p>
-                  </div>` : ""}
-                  ${p.savedLow ? `
-                  <div class="group-row">
-                    <div class="flex-center"><div class="placement-card bg-low">${escapeHtml(p.savedLow.name)}</div></div>
-                    <p class="muted">You are safe, but step it up.</p>
-                  </div>` : ""}
-                  <div class="group-row" style="border:none;">
-                    <div class="flex-center">${p.bottomTwo.map(q => `<div class="placement-card bg-btm">${escapeHtml(q.name)}</div>`).join("")}</div>
-                    <p class="muted">I'm sorry my dears but you are the bottom queens of the week.</p>
-                  </div>
-                </div>
-              </div>
-            `;
-        } else if (state.episodeNumber === 1 && state.premiereFormat === "top2" || data.isMidSeasonNonElim) {
-            let bottomsHTML = "";
-            if (!data.isMidSeasonNonElim) {
-                if (p.bottomThree) {
-                     bottomsHTML = `<div class="flex-center">${p.bottomThree.map(q => `<div class="placement-card bg-low">${escapeHtml(q.name)}</div>`).join("")}</div>`;
-                } else {
-                     bottomsHTML = `<div class="flex-center">${p.savedLow ? `<div class="placement-card bg-low">${escapeHtml(p.savedLow.name)}</div>` : ''}${p.bottomTwo.map(q => `<div class="placement-card bg-low">${escapeHtml(q.name)}</div>`).join("")}</div>`;
-                }
-            }
-            content = `
-              <div class="section-card">
-                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Results</span></div>
-                <p class="muted" style="margin-bottom:16px;">Ladies, I've made some decisions...</p>
-                <div class="flex-col-center">
-                  <div class="group-row">
-                    <div class="flex-center">${p.topTwo.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div>
-                    <p class="muted">Condragulations, you are the Top 2 queens of the week!</p>
-                  </div>
-                  ${p.highQueens.length ? `
-                  <div class="group-row">
-                    <div class="flex-center">${p.highQueens.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div>
-                    <p class="muted">Good job this week, you're safe.</p>
-                  </div>` : ""}
-                  <div class="group-row" style="border:none;">
-                    ${bottomsHTML}
-                    <p class="muted">${data.isMidSeasonNonElim ? "Since you all did so well this week, Nobody is going home!" : "Since its our first episode, Nobody is going home!"} instead the top 2 will lip sync for the win!</p>
-                  </div>
-                </div>
-              </div>
-            `;
-        } else {
-            content = `
-              <div class="section-card">
-                <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Results</span></div>
-                <p class="muted" style="margin-bottom:16px;">Ladies, I've made some decisions...</p>
-                <div class="flex-col-center">
-                  <div class="group-row">
-                    <div class="flex-center">${p.winners.map(q => `<div class="placement-card bg-win">${escapeHtml(q.name)}</div>`).join("")}</div>
-                    <p class="muted">Condragulations, you're the winner${p.winners.length > 1 ? "s" : ""} of today's challenge!</p>
-                  </div>
-                  ${p.highQueens.length ? `
-                  <div class="group-row">
-                    <div class="flex-center">${p.highQueens.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div>
-                    <p class="muted">Good job this week, you're safe.</p>
-                  </div>` : ""}
-                  ${p.savedLow ? `
-                  <div class="group-row">
-                    <div class="flex-center"><div class="placement-card bg-low">${escapeHtml(p.savedLow.name)}</div></div>
-                    <p class="muted">You are safe, but step it up.</p>
-                  </div>` : ""}
-                  <div class="group-row" style="border:none;">
-                    <div class="flex-center">${(p.bottomTwo || []).map(q => `<div class="placement-card bg-btm">${escapeHtml(q.name)}</div>`).join("")}</div>
-                    <p class="muted">I'm sorry my dears but you are up for elimination.</p>
-                  </div>
-                </div>
-              </div>
-            `;
-        }
-      } else if (phaseTag === 5) {
-        if (!data.lipSync) {
-          let p1, p2;
-          if (state.seasonFormat === "all-stars-legacy" || (state.episodeNumber === 1 && state.premiereFormat === "top2") || data.isMidSeasonNonElim) {
-              p1 = data.placements.topTwo[0]; p2 = data.placements.topTwo[1];
-          } else {
-              p1 = data.placements.bottomTwo[0]; p2 = data.placements.bottomTwo[1];
-          }
-          
-          const e1 = rollLipEvent(); const e2 = rollLipEvent();
-          let s1 = rand(1,10) + p1.stats.lipSync; if(e1.type==="words") s1-=99; if(e1.type==="fall") s1-=2; if(e1.type==="reveal") s1+=2;
-          let s2 = rand(1,10) + p2.stats.lipSync; if(e2.type==="words") s2-=99; if(e2.type==="fall") s2-=2; if(e2.type==="reveal") s2+=2;
-          
-          if (state.seasonFormat === "regular") {
-              if (p1.record.BTM2 >= 4 && p2.record.BTM2 < 4) s1 = -999;
-              else if (p2.record.BTM2 >= 4 && p1.record.BTM2 < 4) s2 = -999;
-          }
-
-          let winner = s1 >= s2 ? {queen: p1, event: e1} : {queen: p2, event: e2};
-          let loser = s1 >= s2 ? {queen: p2, event: e2} : {queen: p1, event: e1};
-          data.lipSync = { song: pick(lipSongs), performances: [{queen: p1, event: e1}, {queen: p2, event: e2}], winner, loser, s1, s2 };
-        }
-        
-        let lipSyncText = "";
-        if (state.seasonFormat === "all-stars-legacy") {
-            lipSyncText = "Two top queens stand before me. Prior to tonight, you were asked to prepare a lip sync performance... for your legacy! Good luck, and don't f*ck it up.";
-        } else if ((state.episodeNumber === 1 && state.premiereFormat === "top2") || data.isMidSeasonNonElim) {
-            lipSyncText = "For you to lip-sync... for the win! Good luck, and don't f*ck it up.";
-        } else {
-            lipSyncText = "For you to lip-sync... for your lives! Good luck, and don't f*ck it up.";
-        }
-        
-        content = `
-          <div class="section-card">
-            <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">The time has come...</span></div>
-            <p class="muted">${lipSyncText}</p>
-            <p class="big-message" style="margin: 16px 0;">${escapeHtml(data.lipSync.song)}</p>
-            <div class="flex-center" style="align-items: stretch; gap: 16px;">
-              ${data.lipSync.performances.map(p => `
-                <div style="text-align:center; width: 160px; display: flex; flex-direction: column;">
-                  <div class="placement-card bg-safe" style="flex: 1;">${escapeHtml(p.queen.name)}</div>
-                  <p class="muted" style="margin-top:6px; font-size:13px;">${p.event.text}</p>
-                </div>
-              `).join("")}
-            </div>
-          </div>
-        `;
-      } else if (phaseTag === 6) {
-        if (!data.elimination) {
-          let w = data.lipSync.winner.queen;
-          let l = data.lipSync.loser.queen;
-          let s1 = data.lipSync.s1;
-          let s2 = data.lipSync.s2;
-          let ev1 = data.lipSync.performances[0];
-          let ev2 = data.lipSync.performances[1];
-
-          let isDoubleShantay = (s1 >= 13 && s2 >= 13 && Math.random() < 0.1);
-          let isDoubleSashay = (s1 <= 7 && s2 <= 7 && Math.random() < 0.02 && activeQueens().length > (state.finaleFormat === "top3" ? 4 : 5));
-
-          if (data.riggedOutcome) {
-               if (data.riggedOutcome === "w1") { w = ev1.queen; l = ev2.queen; isDoubleShantay=false; isDoubleSashay=false;}
-               if (data.riggedOutcome === "w2") { w = ev2.queen; l = ev1.queen; isDoubleShantay=false; isDoubleSashay=false;}
-               if (data.riggedOutcome === "double_shantay") { isDoubleShantay = true; isDoubleSashay = false; }
-               if (data.riggedOutcome === "double_sashay") { isDoubleSashay = true; isDoubleShantay = false; }
-          }
-
-          if (state.seasonFormat === "all-stars-legacy") {
-              if (state.episodeNumber === 1 && (state.premiereFormat === "no-elim" || state.premiereFormat === "top2")) {
-                  w.record.WIN += 1; w.history[state.episodeNumber - 1] = "WIN";
-                  l.record.TOP2 = (l.record.TOP2 || 0) + 1; l.history[state.episodeNumber - 1] = "TOP 2";
-                  data.elimination = { legacyNoElim: true, winner: w, top2loser: l };
-              } else {
-                  w.record.WIN += 1; w.history[state.episodeNumber - 1] = "WIN";
-                  l.record.TOP2 = (l.record.TOP2 || 0) + 1; l.history[state.episodeNumber - 1] = "TOP 2";
-                  const btmQueens = data.placements.bottomTwo;
-                  const eliminatedQueen = pick(btmQueens); 
-
-                  eliminatedQueen.record.ELIM += 1;
-                  eliminatedQueen.eliminated = true; 
-                  eliminatedQueen.elimOrder = state.episodeNumber; 
-                  eliminatedQueen.history[state.episodeNumber - 1] = "ELIM";
-                  data.elimination = { legacy: true, winner: w, top2loser: l, eliminated: eliminatedQueen };
-              }
-          } else if (state.episodeNumber === 1 && state.premiereFormat === "top2") {
-              w.record.WIN += 1; w.history[0] = "WIN";
-              l.record.TOP2 = (l.record.TOP2 || 0) + 1; l.history[0] = "TOP 2";
-              data.elimination = { top2LipSync: true, winner: w, loser: l };
-          } else if (data.isMidSeasonNonElim) {
-              w.record.WIN += 1; w.history[state.episodeNumber - 1] = "WIN";
-              l.record.TOP2 = (l.record.TOP2 || 0) + 1; l.history[state.episodeNumber - 1] = "TOP 2";
-              data.elimination = { top2LipSync: true, winner: w, loser: l };
-          } else if (state.episodeNumber === 1 && state.premiereFormat === "no-elim") {
-              const q1 = data.lipSync.performances[0].queen;
-              const q2 = data.lipSync.performances[1].queen;
-              data.elimination = { doubleShantay: true, forcedNoElim: true, q1, q2 };
-          } else if (isDoubleShantay) {
-              data.elimination = { doubleShantay: true, q1: data.lipSync.performances[0].queen, q2: data.lipSync.performances[1].queen };
-          } else if (isDoubleSashay) {
-              const q1 = data.lipSync.performances[0].queen;
-              const q2 = data.lipSync.performances[1].queen;
-              q1.record.ELIM += 1; q1.eliminated = true; q1.elimOrder = state.episodeNumber; q1.history[state.episodeNumber - 1] = "ELIM";
-              q2.record.ELIM += 1; q2.eliminated = true; q2.elimOrder = state.episodeNumber; q2.history[state.episodeNumber - 1] = "ELIM";
-              data.elimination = { doubleSashay: true, q1, q2 };
-          } else {
-              l.record.ELIM += 1;
-              l.eliminated = true; l.elimOrder = state.episodeNumber;
-              l.history[state.episodeNumber - 1] = "ELIM";
-              data.elimination = { survivor: w, eliminated: l };
-          }
-        }
-        
-        const e = data.elimination;
-        let contentInner = "";
-        
-        if (e.legacy) {
-            contentInner = `
-              <div class="group-row">
-                <div class="placement-card bg-win">${escapeHtml(e.winner.name)}</div>
-                <p class="muted">You're a winner baby! You have earned a cash tip of $10,000.</p>
-              </div>
-              <div class="group-row">
-                <div class="placement-card bg-top2">${escapeHtml(e.top2loser.name)}</div>
-                <p class="muted">You are safe.</p>
-              </div>
-              <div class="group-row" style="border:none;">
-                <p class="muted" style="margin-bottom: 8px;">${escapeHtml(e.winner.name)}, with great power comes great responsibility. Which queen have you chosen to get the chop?</p>
-                <div class="placement-card bg-elim">${escapeHtml(e.eliminated.name)}</div>
-                <p class="muted" style="margin-top: 8px;">As it is written, so it shall be done. Sashay away.</p>
-              </div>
-            `;
-        } else if (e.legacyNoElim) {
-            contentInner = `
-              <div class="group-row">
-                <div class="placement-card bg-win">${escapeHtml(e.winner.name)}</div>
-                <p class="muted">You're a winner baby! You have earned a cash tip of $10,000.</p>
-              </div>
-              <div class="group-row" style="border:none;">
-                <div class="placement-card bg-top2">${escapeHtml(e.top2loser.name)}</div>
-                <p class="muted">You are safe to slay another day.</p>
-                <p class="muted" style="margin-top: 8px; font-weight: bold;">Since it's the premiere, no one is going home tonight!</p>
-              </div>
-            `;
-        } else if (e.top2LipSync) {
-            contentInner = `
-              <div class="group-row">
-                <div class="placement-card bg-win">${escapeHtml(e.winner.name)}</div>
-                <p class="muted">You're a winner baby!</p>
-              </div>
-              <div class="group-row" style="border:none;">
-                <div class="placement-card bg-top2">${escapeHtml(e.loser.name)}</div>
-                <p class="muted">You are safe to slay another day.</p>
-              </div>
-            `;
-        } else if (e.doubleShantay) {
-            let text = e.forcedNoElim ? "I'm not ready for either of you to go. Shantay you BOTH stay!" : "Shantay you BOTH stay!";
-            contentInner = `
-              <div class="group-row" style="border:none;">
-                <div class="flex-center">
-                    <div class="placement-card bg-shantay">${escapeHtml(e.q1.name)}</div>
-                    <div class="placement-card bg-shantay">${escapeHtml(e.q2.name)}</div>
-                </div>
-                <p class="muted">${text}</p>
-              </div>
-            `;
-        } else if (e.doubleSashay) {
-            contentInner = `
-              <div class="group-row" style="border:none;">
-                <div class="flex-center">
-                    <div class="placement-card bg-elim">${escapeHtml(e.q1.name)}</div>
-                    <div class="placement-card bg-elim">${escapeHtml(e.q2.name)}</div>
-                </div>
-                <p class="muted">Neither one of you showed me the power it takes to stay. I'm sending you BOTH home.</p>
-              </div>
-            `;
-        } else {
-            contentInner = `
-              <div class="group-row">
-                <div class="placement-card bg-shantay">${escapeHtml(e.survivor.name)}</div>
-                <p class="muted">Shantay you stay.</p>
-              </div>
-              <div class="group-row" style="border:none;">
-                <div class="placement-card bg-elim">${escapeHtml(e.eliminated.name)}</div>
-                <p class="muted">Sashay away.</p>
-              </div>
-            `;
-        }
-
-        content = `
-          <div class="section-card">
-            <div class="label-row"><span class="pill">Screen ${state.phase}</span><span class="pill">Decisions...</span></div>
-            <div class="flex-col-center" style="margin-top:16px;">
-              ${contentInner}
-            </div>
-          </div>
-        `;
-      } else if (phaseTag === 7) {
-        let sortedQueens = [...state.queens].sort((a, b) => {
-          if (b.elimOrder !== a.elimOrder) return b.elimOrder - a.elimOrder;
-          return trackScore(b) - trackScore(a);
-        });
-        content = `
-          <div class="section-card" style="text-align: left; padding: 24px;">
-            <div style="display:flex; gap: 8px; margin-bottom: 16px;">
-              <span class="pill">Screen ${state.phase}</span>
-              <span class="pill">Track Record</span>
-            </div>
-            <h2 style="font-size: 24px; font-weight: 900; margin: 0 0 16px;">Season standings</h2>
-            <div style="overflow-x: auto;">
-              <table class="standings-table">
-                <thead>
-                  <tr>
-                    <th>Queen</th>
-                    ${Array.from({length: state.episodeNumber}, (_, i) => `<th>Ep ${i+1}</th>`).join("")}
-                    <th>Score</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${sortedQueens.map(q => `
-                    <tr>
-                      <td class="qname-cell">${escapeHtml(q.name)}</td>
-                      ${Array.from({length: state.episodeNumber}, (_, i) => {
-                        let p = q.history[i];
-                        if (!p) return `<td class="empty-cell"></td>`;
-                        let cssClass = (p === "BTM2" || p === "BTM") ? "bg-btm" : (p === "TOP 2" ? "bg-top2" : `bg-${p.toLowerCase()}`);
-                        return `<td class="${cssClass}" style="font-weight: 900; font-size: 12px;">${p}</td>`;
-                      }).join("")}
-                      <td style="font-weight: 600;">${trackScore(q)}</td>
-                    </tr>
-                  `).join("")}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        `;
       }
 
       el.gameContent.innerHTML = content;
@@ -1533,7 +1786,11 @@
     }
 
     el.nextPhaseBtn.addEventListener("click", () => {
-      const totalPhases = (state.episodeData && state.episodeData.isGirlGroup) ? 8 : 7;
+      let totalPhases = 7;
+      if (state.episodeData) {
+          if (state.episodeData.isGirlGroup || state.episodeData.isLaLaPaRuza) totalPhases = 8;
+      }
+      
       if (state.phase < totalPhases) { state.phase++; renderEpisode(); }
       else {
         const finaleThreshold = state.finaleFormat === "top3" ? 3 : 4;
@@ -1582,7 +1839,6 @@
           
           final.loser.history[epIndex] = "RUNNER UP";
           final.winner.history[epIndex] = "WINNER";
-          
           state.finaleData = { 
               step: 1, 
               finalists: finalists,
@@ -1663,7 +1919,7 @@
                 <div class="label-row"><span class="pill">Screen 5 of 7</span></div>
                 <p class="big-message">The Final Lip Sync</p>
                 <div class="flex-center" style="gap:24px; margin-top: 12px;">
-                 <div class="placement-card bg-safe">${escapeHtml(f.final.winner.name)}</div>
+                  <div class="placement-card bg-safe">${escapeHtml(f.final.winner.name)}</div>
                   <p class="muted" style="font-weight:900;">VS</p>
                   <div class="placement-card bg-safe">${escapeHtml(f.final.loser.name)}</div>
                 </div>
@@ -1726,7 +1982,7 @@
                           ${Array.from({length: state.episodeNumber}, (_, i) => {
                             let p = q.history[i];
                             if (!p) return `<td class="empty-cell"></td>`;
-                            let cssClass = (p === "BTM2" || p === "BTM") ? "bg-btm" : (p === "RUNNER UP" || p === "RUNNER" ? "bg-runner" : (p === "TOP 2" ? "bg-top2" : `bg-${p.toLowerCase()}`));
+                            let cssClass = getTrackRecordClass(p);
                             return `<td class="${cssClass}" style="font-weight: 900; font-size: 12px;">${p}</td>`;
                           }).join("")}
                           <td style="font-weight: 600;">${trackScore(q)}</td>
@@ -1851,7 +2107,7 @@
                             ${Array.from({length: state.episodeNumber}, (_, i) => {
                               let p = q.history[i];
                               if (!p) return `<td class="empty-cell"></td>`;
-                              let cssClass = (p === "BTM2" || p === "BTM") ? "bg-btm" : (p === "RUNNER UP" || p === "RUNNER" ? "bg-runner" : (p === "TOP 2" ? "bg-top2" : `bg-${p.toLowerCase()}`));
+                              let cssClass = getTrackRecordClass(p);
                               return `<td class="${cssClass}" style="font-weight: 900; font-size: 12px;">${p}</td>`;
                             }).join("")}
                             <td style="font-weight: 600;">${trackScore(q)}</td>
@@ -1894,8 +2150,9 @@
         let isTop2Format = (state.seasonFormat === "all-stars-legacy" || (state.episodeNumber === 1 && state.premiereFormat === "top2") || state.episodeData.isMidSeasonNonElim);
         let html = "";
         const isGG = state.episodeData.isGirlGroup;
+        const isLaLa = state.episodeData.isLaLaPaRuza;
 
-        if ((isGG && state.phase === 4) || (!isGG && state.phase === 3)) {
+        if ((isGG && state.phase === 4) || (!isGG && !isLaLa && state.phase === 3)) {
             let tops = isTop2Format ? [...p.topTwo, ...p.highQueens] : [...p.winners, ...p.highQueens];
             let bottoms = p.bottomThree ? [...p.bottomThree] : [...(p.savedLow ? [p.savedLow] : []), ...(p.bottomTwo || [])];
             
@@ -1920,21 +2177,29 @@
             el.rigModal.dataset.rigType = "ep3";
             el.rigContent.innerHTML = html;
             el.rigModal.classList.remove("hidden");
-        } else if ((isGG && state.phase === 6) || (!isGG && state.phase === 5)) {
-            let p1 = state.episodeData.lipSync.performances[0].queen;
-            let p2 = state.episodeData.lipSync.performances[1].queen;
-            let isAS = state.seasonFormat === "all-stars-legacy";
-            let minQueens = state.finaleFormat === "top3" ? 4 : 5;
-            let canDoubleSashay = activeQueens().length > minQueens;
-            let isTop2LipSync = isAS || state.episodeData.isMidSeasonNonElim || (state.episodeNumber === 1 && state.premiereFormat === "top2");
+        } else if ((isGG && state.phase === 6) || (isLaLa && state.phase === 6) || (!isGG && !isLaLa && state.phase === 5)) {
+            let p1, p2;
+            let canDoubleSashay = false;
+            let isTop2LipSyncTrigger = false;
+            
+            if (isLaLa) {
+                p1 = state.episodeData.r3Match.p1;
+                p2 = state.episodeData.r3Match.p2;
+                isTop2LipSyncTrigger = true; // Treats it like a top 2 format so you cant select double elim/shantay
+            } else {
+                p1 = state.episodeData.lipSync.performances[0].queen;
+                p2 = state.episodeData.lipSync.performances[1].queen;
+                isTop2LipSyncTrigger = state.seasonFormat === "all-stars-legacy" || state.episodeData.isMidSeasonNonElim || (state.episodeNumber === 1 && state.premiereFormat === "top2");
+                canDoubleSashay = activeQueens().length > (state.finaleFormat === "top3" ? 4 : 5);
+            }
             
             html = `
                 <label class="field">Select Lip Sync Outcome:
                     <select id="rigLipSync">
                         <option value="w1">${escapeHtml(p1.name)} Wins</option>
                         <option value="w2">${escapeHtml(p2.name)} Wins</option>
-                        ${!isTop2LipSync ? `<option value="double_shantay">Double Shantay</option>` : ''}
-                        ${!isTop2LipSync && canDoubleSashay ? `<option value="double_sashay">Double Sashay</option>` : ''}
+                        ${!isTop2LipSyncTrigger ? `<option value="double_shantay">Double Shantay</option>` : ''}
+                        ${!isTop2LipSyncTrigger && canDoubleSashay ? `<option value="double_sashay">Double Sashay</option>` : ''}
                     </select>
                 </label>
             `;
@@ -2013,7 +2278,9 @@
         } 
         else if (rt === "ep5") {
             state.episodeData.riggedOutcome = document.getElementById("rigLipSync").value;
-            state.episodeData.elimination = null; 
+            if (!state.episodeData.isLaLaPaRuza) {
+                state.episodeData.elimination = null;
+            }
             el.rigModal.classList.add("hidden");
             alert("Outcome locked! Click Next to see results.");
         }
@@ -2095,17 +2362,20 @@
       reader.readAsText(file);
       e.target.value = "";
     });
+
     // File Exporter
     el.exportCastBtn.addEventListener("click", () => {
       if(!state.queens.length) return alert("No queens to export.");
       const blob = new Blob([JSON.stringify({ queens: state.queens }, null, 2)], { type: "application/json" });
       const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `drag_race_cast.json`; a.click();
     });
+
     el.castPreview.addEventListener("click", (e) => {
       if (e.target.dataset.action === "remove-queen") {
         state.queens.splice(Number(e.target.dataset.index), 1); updateSetupUI();
       }
     });
+
     updateSetupUI();
   </script>
 </body>
