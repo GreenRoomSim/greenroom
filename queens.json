@@ -93,7 +93,8 @@
       "name": "Mystique Summers Madison",
       "image": "mystique_summers_madison.webp",
       "seasons": [
-        "US S2"
+        "US S2",
+        "US AS11"
       ],
       "stats": [5, 4, 4, 4, 4]
     },
@@ -138,7 +139,8 @@
       "image": "morgan_mcmichaels.webp",
       "seasons": [
         "US S2",
-        "US AS3"
+        "US AS3",
+        "US AS11"
       ],
       "stats": [6, 7, 8, 5, 8]
     },
@@ -1081,7 +1083,8 @@
       "image": "a_keria_c_davenport.webp",
       "seasons": [
         "US S11",
-        "US AS6"
+        "US AS6",
+        "US AS11"
       ],
       "stats": [7, 9, 8, 6, 8]
     },
@@ -1621,7 +1624,8 @@
       "name": "Dawn",
       "image": "dawn.webp",
       "seasons": [
-        "US S16"
+        "US S16",
+        "US AS11"
       ],
       "stats": [7, 9, 7, 8, 6]
     },
@@ -1629,7 +1633,8 @@
       "name": "Morphine Love Dion",
       "image": "morphine_love_dion.webp",
       "seasons": [
-        "US S16"
+        "US S16",
+        "US AS11"
       ],
       "stats": [7, 8, 8, 7, 8]
     },
@@ -1693,7 +1698,8 @@
       "name": "Lucky Starzzz",
       "image": "lucky_starzzz.webp",
       "seasons": [
-        "US S17"
+        "US S17",
+        "US AS11"
       ],
       "stats": [6, 7, 7, 6, 6]
     },
