@@ -434,7 +434,8 @@
       "name": "Vivacious",
       "image": "vivacious.webp",
       "seasons": [
-        "US S6"
+        "US S6",
+        "US As11"
       ],
       "stats": [5, 7, 5, 3, 3]
     },
@@ -442,7 +443,8 @@
       "name": "April Carrion",
       "image": "april_carrion.webp",
       "seasons": [
-        "US S6"
+        "US S6",
+        "US AS11"
       ],
       "stats": [4, 8, 6, 4, 6]
     },
@@ -1074,7 +1076,8 @@
       "image": "silky_nutmeg_ganache.webp",
       "seasons": [
         "US S11",
-        "US AS6"
+        "US AS6",
+        "US AS11"
       ],
       "stats": [9, 7, 8, 8, 7]
     },
@@ -1183,7 +1186,8 @@
       "name": "Crystal Methyd",
       "image": "crystal_methyd.webp",
       "seasons": [
-        "US S12"
+        "US S12",
+        "US AS11"
       ],
       "stats": [9, 9, 7, 9, 6]
     },
@@ -1487,7 +1491,8 @@
       "name": "Aura Mayari",
       "image": "aura_mayari.webp",
       "seasons": [
-        "US S15"
+        "US S15",
+        "US AS11"
       ],
       "stats": [6, 7, 7, 6, 7]
     },
@@ -1527,7 +1532,8 @@
       "name": "Salina EsTitties",
       "image": "salina_estitties.webp",
       "seasons": [
-        "US S15"
+        "US S15",
+        "US AS11"
       ],
       "stats": [7, 6, 8, 7, 8]
     },
