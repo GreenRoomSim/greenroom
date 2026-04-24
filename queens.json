@@ -623,7 +623,8 @@
       "image": "kennedy_davenport.webp",
       "seasons": [
         "US S7",
-        "US AS3"
+        "US AS3",
+        "US AS11"
       ],
       "stats": [5, 6, 10, 5, 10]
     },
@@ -1049,7 +1050,8 @@
       "name": "Shuga Cain",
       "image": "shuga_cain.webp",
       "seasons": [
-        "US S11"
+        "US S11",
+        "US AS11"
       ],
       "stats": [7, 7, 7, 6, 6]
     },
@@ -1228,7 +1230,8 @@
       "name": "Joey Jay",
       "image": "joey_jay.webp",
       "seasons": [
-        "US S13"
+        "US S13",
+        "US AS11"
       ],
       "stats": [6, 6, 7, 5, 6]
     },
@@ -1380,7 +1383,8 @@
       "name": "Jasmine Kennedie",
       "image": "jasmine_kennedie.webp",
       "seasons": [
-        "US S14"
+        "US S14",
+        "US AS11"
       ],
       "stats": [7, 6, 9, 6, 9]
     },
@@ -1680,7 +1684,8 @@
       "name": "Hershii LiqCour-Jeté",
       "image": "hershii_liqcour_jete.webp",
       "seasons": [
-        "US S16"
+        "US S16",
+        "US AS11"
       ],
       "stats": [6, 6, 7, 6, 7]
     },
@@ -1786,7 +1791,8 @@
       "name": "Sam Star",
       "image": "sam_star.webp",
       "seasons": [
-        "US S17"
+        "US S17",
+        "US AS11"
       ],
       "stats": [7, 7, 7, 7, 6]
     },
