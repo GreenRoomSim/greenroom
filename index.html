@@ -857,7 +857,7 @@
     <div class="hero">
       <header class="header">
         <div class="logo-wrapper">
-          <img src="2.1banner.png" alt="Drag Race Simulator Banner" class="main-logo" />
+          <img src="banner.png" alt="Drag Race Simulator Banner" class="main-logo" />
         </div>
       <h1 class="title">Greenroom Drag Race Simulator</h1>
       <p class="subtitle" id="secretTrigger">V2.1 (Part 1) - Last Updated 30/4/26</p>
@@ -2946,7 +2946,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                   data.placements.pureSafe.forEach(q => { if (q.id !== quitId) { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; } });
                   if (data.placements.savedLow && data.placements.savedLow.id !== quitId) { data.placements.savedLow.record.LOW += 1; data.placements.savedLow.history[epIndex] = "LOW"; }
                   // Bottom 2 get LOW placement (not BTM2) on a QUIT episode
-                  if (data.placements.bottomTwo) { data.placements.bottomTwo.forEach(q => { if (q.id !== quitId) { q.record.LOW += 1; q.history[epIndex] = "LOW"; } }); }
+                  if (data.placements.bottomTwo) { data.placements.bottomTwo.forEach(q => { if (q.id !== quitId) { q.record.LOW += 1; q.history[epIndex] = "BTM2"; } }); }
               } else {
                   data.placements.winners.forEach(q => { q.record.WIN += 1; q.history[epIndex] = "WIN"; });
                   data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
@@ -3074,7 +3074,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                 const qSavedLow = (p.savedLow && p.savedLow.id !== quitId) ? p.savedLow : null;
                 content = `
                   <div class="section-card">
-                    <div class="label-row"><span class="pill" style="background:#ff66a2; color:#000; border-color:#ff66a2;">Reshuffled Placements</span></div>
+                    <div class="label-row"><span class="pill" style="background:#ff66a2; color:#000; border-color:#ff66a2;">New Placements</span></div>
                     <p class="muted" style="margin-bottom:16px;">Due to tonight's shock withdrawal, the episode format has changed. The Top 2 will lip sync for the win!</p>
                     <div class="flex-col-center">
                       <div class="group-row">
@@ -3094,7 +3094,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                       ${qBtm.length ? `
                       <div class="group-row" style="border:none;">
                         <div class="flex-center">${qBtm.map(q => `<div class="placement-card bg-low">${escapeHtml(q.name)}</div>`).join("")}</div>
-                        <p class="muted">Due to the circumstances tonight, you are not up for elimination — but you are low this week.</p>
+                        <p class="muted">Ladies, you are the BTM2 this week, but because of the circumstances, neither of you will be going home.</p>
                       </div>` : ""}
                     </div>
                   </div>
@@ -3139,7 +3139,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
             }
             content = `
               <div class="section-card flex-col-center">
-                <div class="label-row"><span class="pill" style="background:#ff66a2; color:#000; border-color:#ff66a2;">⚠ Shock Announcement</span></div>
+                <div class="label-row"><span class="pill" style="background:#ff66a2; color:#000; border-color:#ff66a2;">⚠ Announcement</span></div>
                 <p class="big-message" style="color:#ff66a2; margin-top:16px;">A Queen Wants to Quit!</p>
                 <p class="muted" style="margin-bottom:16px;">During critiques, <strong>${escapeHtml(qq.name)}</strong> has made a shocking announcement...</p>
                 <div class="flex-col-center" style="gap:12px; margin-top:8px;">
@@ -3148,7 +3148,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                   <p class="muted" style="font-weight:800; color:#ff66a2;">Sashay away.</p>
                 </div>
                 <hr style="width:100%; border:0; border-top:1px solid var(--border); margin:20px 0;">
-                <p class="muted" style="font-size:13px; color:var(--muted);">This shock departure reshapes tonight's episode — the <strong>Top 2</strong> will now lip sync for the win!</p>
+                <p class="muted" style="font-size:13px; color:var(--muted);">This shock departure reshapes tonight's episode. The <strong>Top 2</strong> will now lip sync for the win!</p>
               </div>
             `;
           } else if (phaseTag === "lsa_ruveal") {
@@ -3454,7 +3454,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                     <div class="placement-card bg-dept">${escapeHtml(e.deptQueen.name)}</div>
                   </div>
                   <div class="group-row" style="border:none;">
-                    <p class="muted">Due to an injury sustained during this competition, you have been advised to withdraw and seek proper medical care. We are deeply grateful for everything you have brought to this competition, and we wish you a full and speedy recovery.</p>
+                    <p class="muted">Due to an issue with your health, You have been advised to withdraw and seek proper medical care. We wish you a speedy recovery, but for now, Sashay Away...</p>
                     <p class="muted" style="margin-top: 10px; font-style: italic; color: var(--danger);">As a result, no queen from the bottom 2 will be going home tonight.</p>
                   </div>
                 `;
@@ -3462,7 +3462,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                 contentInner = `
                   <div class="group-row">
                     <div class="placement-card bg-shantay">${escapeHtml(e.winner.name)}</div>
-                    <p class="muted">Condragulations — you have won this lip sync.</p>
+                    <p class="muted">Condragulations, you have won this lip sync.</p>
                   </div>
                   <div class="group-row">
                     <div class="placement-card bg-btm">${escapeHtml(e.loser.name)}</div>
@@ -3486,7 +3486,6 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                   <div class="group-row" style="border:none;">
                     <div class="placement-card bg-top2">${escapeHtml(e.loser.name)}</div>
                     <p class="muted">You are safe to slay another day.</p>
-                    <p class="muted" style="margin-top: 8px; font-style:italic; color:#ff66a2;">Tonight's bottom queens are not eliminated — due to ${escapeHtml(e.quitQueen.name)}'s shock withdrawal, no one else is going home.</p>
                   </div>
                 `;
             } else if (e.legacy) {
