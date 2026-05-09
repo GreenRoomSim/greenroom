@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#9be564" />
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Patch Notes — Drag Race Simulator</title>
+  <style>
+    :root {
+      --bg: #eefbe7;
+      --card: #ffffff;
+      --card-2: #f8fff3;
+      --ink: #20311f;
+      --muted: #61705e;
+      --lime: #9be564;
+      --lime-2: #c5f29b;
+      --lime-3: #e8ffd8;
+      --border: #d8efc9;
+      --shadow: 0 12px 34px rgba(76, 110, 50, 0.12);
+      --shadow-sm: 0 4px 14px rgba(76, 110, 50, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      background: linear-gradient(180deg, #f4ffe9 0%, var(--bg) 100%);
+      color: var(--ink);
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, #f7fff0, #e6ffd0);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 20px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+      transition: all 0.15s;
+      box-shadow: var(--shadow-sm);
+    }
+    .back-btn:hover {
+      color: var(--ink);
+      border-color: var(--lime);
+      background: var(--lime-3);
+      transform: translateY(-1px);
+    }
+    .back-btn svg { flex-shrink: 0; }
+    .header-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: clamp(20px, 3vw, 28px);
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .header-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .version-badge {
+      background: linear-gradient(180deg, var(--lime), #76d939);
+      color: #14380e;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(80, 125, 48, 0.25);
+      white-space: nowrap;
+    }
+
+    /* ── Main layout ── */
+    .main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 36px 24px 0;
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--lime), var(--lime-2) 80%, transparent);
+      border-radius: 2px;
+    }
+
+    /* ── Release entry ── */
+    .release {
+      display: flex;
+      gap: 20px;
+      padding-bottom: 28px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: slideUp 0.4s ease forwards;
+    }
+    .release:nth-child(1)  { animation-delay: 0.05s; }
+    .release:nth-child(2)  { animation-delay: 0.10s; }
+    .release:nth-child(3)  { animation-delay: 0.15s; }
+    .release:nth-child(4)  { animation-delay: 0.20s; }
+    .release:nth-child(5)  { animation-delay: 0.25s; }
+    .release:nth-child(6)  { animation-delay: 0.30s; }
+    .release:nth-child(7)  { animation-delay: 0.35s; }
+    .release:nth-child(8)  { animation-delay: 0.40s; }
+    .release:nth-child(9)  { animation-delay: 0.44s; }
+    .release:nth-child(10) { animation-delay: 0.48s; }
+    .release:nth-child(11) { animation-delay: 0.52s; }
+    .release:nth-child(12) { animation-delay: 0.56s; }
+    .release:nth-child(13) { animation-delay: 0.60s; }
+    .release:nth-child(14) { animation-delay: 0.64s; }
+    .release:nth-child(15) { animation-delay: 0.68s; }
+
+    @keyframes slideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Dot ── */
+    .dot-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+    .dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 3px solid var(--lime);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(155, 229, 100, 0.25);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .release:hover .dot {
+      transform: scale(1.2);
+      background: var(--lime);
+    }
+    .dot.latest {
+      background: var(--lime);
+      box-shadow: 0 0 0 4px rgba(155, 229, 100, 0.35);
+    }
+
+    /* ── Card ── */
+    .release-card {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s, box-shadow 0.15s;
+      min-width: 0;
+    }
+    .release-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .release.latest .release-card {
+      background: linear-gradient(135deg, #f7fff0, #edffd9);
+      border-color: var(--lime-2);
+    }
+
+    .release-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .release-version {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .release-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .tag-update   { background: var(--lime-3); color: #2d5a1b; border: 1px solid var(--lime-2); }
+    .tag-bugfix   { background: #fff0f0; color: #8b2020; border: 1px solid #ffd0d0; }
+    .tag-mini     { background: #f0f8ff; color: #1a5080; border: 1px solid #c0ddf5; }
+    .tag-latest   { background: linear-gradient(135deg, var(--lime), #76d939); color: #14380e; border: none; box-shadow: 0 3px 10px rgba(80,125,48,0.25); }
+
+    .release-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .release-items li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .release-items li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--lime);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      max-width: 860px;
+      margin: 32px auto 0;
+      padding: 0 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .page-footer a {
+      color: #4a9a25;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .page-footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .timeline::before { left: 15px; }
+      .dot { width: 16px; height: 16px; }
+      .release-card { padding: 14px 16px; }
+      .release-version { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="index.html" class="back-btn">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back to Sim
+        </a>
+        <div>
+          <div class="header-title">Patch Notes</div>
+          <div class="header-subtitle">Drag Race Simulator — update history</div>
+        </div>
+      </div>
+      <div class="version-badge">Latest: v2.1 (Part 2)</div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="timeline">
+
+      <div class="release latest">
+        <div class="dot-col"><div class="dot latest"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v2.1 (Part 2)</span>
+            <span class="release-tag tag-latest">Latest</span>
+          </div>
+          <ul class="release-items">
+            <li>Added Returning Format to Extra Options for Regular Seasons.</li>
+            <li>Remodled patch notes to open a new page on the site</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v2.1 (Part 1)</span>
+            <span class="release-tag tag-update">Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Remodeled the Track Record Table with new features and pictures.</li>
+            <li>Added new placements for season realism such as DEPT, QUIT, and DISQ.</li>
+            <li>Added Miss Congeniality to Regular seasons, along with Guests at the finale.</li>
+            <li>Made mini challenges less frequent.</li>
+            <li>Added a hidden "Debug Panel" for developers to test and force certain outcomes.</li>
+            <li>Moved & Added some toggles into the new "Extra Options" section in setup.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v2.0.1</span>
+            <span class="release-tag tag-mini">Mini Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Updated all cast photos to close ups.</li>
+            <li>Added all UK cast photos.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v2.0</span>
+            <span class="release-tag tag-update">Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Added Lip Sync Assassin Format.</li>
+            <li>Added Tournament Of All Stars Format.</li>
+            <li>Added All Stars 11 to Pre-Defined Casts.</li>
+            <li>Added Banner to top of screen.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.9.1</span>
+            <span class="release-tag tag-update">Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Added AS11 Cast Photos in preparation for the v2.0 Update.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.9.0</span>
+            <span class="release-tag tag-update">Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Added the mid-season LaLaPaRuza Smackdown (Toggleable in setup).</li>
+            <li>Changed Minimum Cast to 8.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.8.0</span>
+            <span class="release-tag tag-update">Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Changed Girl Group Challenge Episode Cycle.</li>
+            <li>Added Team Names and new performance screens.</li>
+            <li>Added Season Dimension, With Non-Elimination Episode &amp; Double Wins.</li>
+            <li>Fixed some issues with Late &amp; Early Season Progression.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.7.0</span>
+            <span class="release-tag tag-update">Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Added "Choose Output" button to rig placements during Judging and Lip Syncs.</li>
+            <li>Added ability to rig Finale placements.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.6.1</span>
+            <span class="release-tag tag-bugfix">Bug Fix</span>
+          </div>
+          <ul class="release-items">
+            <li>Fixed Lip Sync Fatigue Issues.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.6.0</span>
+            <span class="release-tag tag-update">Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Added Season Formats.</li>
+            <li>Added Lip Sync fatigue: Many BTM2 Placements Force Elimination.</li>
+            <li>Finale winner is now decided on a fairer basis.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.5.5.1</span>
+            <span class="release-tag tag-bugfix">Bug Fix</span>
+          </div>
+          <ul class="release-items">
+            <li>Fixed Some Unfair Queen Stats.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.5.5</span>
+            <span class="release-tag tag-mini">Mini Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Changed Queen Loading System.</li>
+            <li>Queens Stats are No Longer Randomized.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.5.0</span>
+            <span class="release-tag tag-update">Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Added 'Pre-Defined Casts'.</li>
+            <li>Fixed issues with some pictures.</li>
+            <li>Added new Lip Sync Songs.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.4.0</span>
+            <span class="release-tag tag-update">Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Edited Setup Screen UI.</li>
+            <li>Added Real RPDR Queens Feature.</li>
+            <li>Added new Lip Sync Songs.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.3.0</span>
+            <span class="release-tag tag-update">Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Added Premiere Format customization options.</li>
+            <li>Added Top 2 Premiere logic (Top 2 Lip Sync for the win).</li>
+            <li>Added Regular Premiere (No Elimination) logic.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.2.1</span>
+            <span class="release-tag tag-update">Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Increased maximum cast size to 16 queens.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.2.0</span>
+            <span class="release-tag tag-update">Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Added Patch Notes page to the home screen.</li>
+            <li>Added a "Suggest" button to easily submit Google Forms ideas.</li>
+            <li>Added new mini challenges.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.1.1</span>
+            <span class="release-tag tag-bugfix">Bug Fix</span>
+          </div>
+          <ul class="release-items">
+            <li>Fixed bug with double eliminations.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="release">
+        <div class="dot-col"><div class="dot"></div></div>
+        <div class="release-card">
+          <div class="release-header">
+            <span class="release-version">v1.1.0</span>
+            <span class="release-tag tag-update">Update</span>
+          </div>
+          <ul class="release-items">
+            <li>Added Top 3 and Top 4 Finale formats.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="page-footer">
+      <p>Drag Race Simulator &mdash; <a href="index.html">← Back to the Sim</a></p>
+    </footer>
+  </main>
+
+</body>
+</html>
