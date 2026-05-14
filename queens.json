@@ -1591,14 +1591,6 @@
       "stats": [9, 10, 9, 9, 8]
     },
     {
-      "name": "Jimbo",
-      "image": "jimbo.webp",
-      "seasons": [
-        "US AS8"
-      ],
-      "stats": [10, 7, 7, 9, 4]
-    },
-    {
       "name": "Geneva Karr",
       "image": "geneva_karr.webp",
       "seasons": [
@@ -2573,6 +2565,426 @@
         "UK S7"
       ],
       "stats": [6, 9, 7, 6, 7]
-    }
-  ]
+    },
+    {
+    "name": "Juice Boxx",
+    "image": "juice_boxx.webp",
+    "seasons": ["CA S1"],
+    "stats": [6, 6, 7, 5, 5]
+  },
+  {
+    "name": "Kyne",
+    "image": "kyne.webp",
+    "seasons": ["CA S1"],
+    "stats": [6, 9, 6, 5, 5]
+  },
+  {
+    "name": "Anastarzia Anaquway",
+    "image": "anastarzia_anaquway.webp",
+    "seasons": ["CA S1"],
+    "stats": [5, 7, 7, 6, 7]
+  },
+  {
+    "name": "Tynomi Banks",
+    "image": "tynomi_banks.webp",
+    "seasons": ["CA S1"],
+    "stats": [5, 7, 10, 5, 9]
+  },
+  {
+    "name": "Kiara",
+    "image": "kiara.webp",
+    "seasons": ["CA S1"],
+    "stats": [3, 6, 6, 4, 5]
+  },
+  {
+    "name": "BOA",
+    "image": "boa.webp",
+    "seasons": ["CA S1"],
+    "stats": [8, 6, 7, 7, 7]
+  },
+  {
+    "name": "Ilona Verley",
+    "image": "ilona_verley.webp",
+    "seasons": ["CA S1"],
+    "stats": [6, 8, 8, 7, 7]
+  },
+  {
+    "name": "Lemon",
+    "image": "lemon.webp",
+    "seasons": ["CA S1"],
+    "stats": [9, 7, 8, 8, 8]
+  },
+  {
+    "name": "Jimbo",
+    "image": "jimbo.webp",
+    "seasons": ["CA S1", "US AS8"],
+    "stats": [10, 9, 9, 9, 7]
+  },
+  {
+    "name": "Scarlett BoBo",
+    "image": "scarlett_bobo.webp",
+    "seasons": ["CA S1"],
+    "stats": [7, 8, 8, 7, 10]
+  },
+  {
+    "name": "Rita Baga",
+    "image": "rita_baga.webp",
+    "seasons": ["CA S1"],
+    "stats": [7, 9, 9, 8, 9]
+  },
+  {
+    "name": "Priyanka",
+    "image": "priyanka.webp",
+    "seasons": ["CA S1"],
+    "stats": [9, 7, 9, 9, 9]
+  },
+  {
+    "name": "Beth",
+    "image": "beth.webp",
+    "seasons": ["CA S2"],
+    "stats": [4, 5, 5, 5, 4]
+  },
+  {
+    "name": "Oc\u00e9ane Aqua-Black",
+    "image": "oceane_aqua_black.webp",
+    "seasons": ["CA S2"],
+    "stats": [5, 7, 6, 5, 5]
+  },
+  {
+    "name": "Stephanie Prince",
+    "image": "stephanie_prince.webp",
+    "seasons": ["CA S2"],
+    "stats": [6, 7, 7, 6, 6]
+  },
+  {
+    "name": "Suki Doll",
+    "image": "suki_doll.webp",
+    "seasons": ["CA S2"],
+    "stats": [5, 10, 7, 6, 7]
+  },
+  {
+    "name": "Eve 6000",
+    "image": "eve_6000.webp",
+    "seasons": ["CA S2"],
+    "stats": [6, 8, 7, 6, 6]
+  },
+  {
+    "name": "Synthia Kiss",
+    "image": "synthia_kiss.webp",
+    "seasons": ["CA S2"],
+    "stats": [7, 7, 8, 7, 7]
+  },
+  {
+    "name": "Kimora Amour",
+    "image": "kimora_amour.webp",
+    "seasons": ["CA S2"],
+    "stats": [7, 7, 7, 7, 8]
+  },
+  {
+    "name": "Adriana",
+    "image": "adriana.webp",
+    "seasons": ["CA S2"],
+    "stats": [6, 7, 7, 6, 7]
+  },
+  {
+    "name": "Gia Metric",
+    "image": "gia_metric.webp",
+    "seasons": ["CA S2"],
+    "stats": [7, 9, 7, 7, 6]
+  },
+  {
+    "name": "Pythia",
+    "image": "pythia.webp",
+    "seasons": ["CA S2"],
+    "stats": [6, 10, 7, 7, 7]
+  },
+  {
+    "name": "Kendall Gender",
+    "image": "kendall_gender.webp",
+    "seasons": ["CA S2"],
+    "stats": [8, 8, 9, 8, 9]
+  },
+  {
+    "name": "Icesis Couture",
+    "image": "icesis_couture.webp",
+    "seasons": ["CA S2"],
+    "stats": [7, 10, 8, 8, 8]
+  },
+  {
+    "name": "Halal Bae",
+    "image": "halal_bae.webp",
+    "seasons": ["CA S3"],
+    "stats": [5, 5, 5, 5, 4]
+  },
+  {
+    "name": "Miss Mo\u00e7o",
+    "image": "miss_moco.webp",
+    "seasons": ["CA S3"],
+    "stats": [5, 6, 6, 5, 5]
+  },
+  {
+    "name": "Chelazon Leroux",
+    "image": "chelazon_leroux.webp",
+    "seasons": ["CA S3"],
+    "stats": [8, 7, 7, 7, 7]
+  },
+  {
+    "name": "Kaos",
+    "image": "kaos.webp",
+    "seasons": ["CA S3"],
+    "stats": [7, 7, 7, 7, 6]
+  },
+  {
+    "name": "Lady Boom Boom",
+    "image": "lady_boom_boom.webp",
+    "seasons": ["CA S3"],
+    "stats": [7, 7, 8, 7, 8]
+  },
+  {
+    "name": "Bombae",
+    "image": "bombae.webp",
+    "seasons": ["CA S3"],
+    "stats": [6, 7, 7, 6, 6]
+  },
+  {
+    "name": "Irma Gerd",
+    "image": "irma_gerd.webp",
+    "seasons": ["CA S3"],
+    "stats": [8, 7, 7, 7, 6]
+  },
+  {
+    "name": "Vivian Vanderpuss",
+    "image": "vivian_vanderpuss.webp",
+    "seasons": ["CA S3"],
+    "stats": [8, 8, 9, 8, 9]
+  },
+  {
+    "name": "Kimmy Couture",
+    "image": "kimmy_couture.webp",
+    "seasons": ["CA S3"],
+    "stats": [6, 9, 7, 7, 7]
+  },
+  {
+    "name": "Miss Fiercalicious",
+    "image": "miss_fiercalicious.webp",
+    "seasons": ["CA S3"],
+    "stats": [7, 8, 8, 7, 8]
+  },
+  {
+    "name": "Jada Shada Hudson",
+    "image": "jada_shada_hudson.webp",
+    "seasons": ["CA S3"],
+    "stats": [9, 7, 8, 8, 7]
+  },
+  {
+    "name": "Gis\u00e8le Lullaby",
+    "image": "gisele_lullaby.webp",
+    "seasons": ["CA S3"],
+    "stats": [7, 9, 10, 9, 9]
+  },
+  {
+    "name": "Sisi Superstar",
+    "image": "sisi_superstar.webp",
+    "seasons": ["CA S4"],
+    "stats": [6, 5, 5, 4, 4]
+  },
+  {
+    "name": "The Girlfriend Experience",
+    "image": "the_girlfriend_experience.webp",
+    "seasons": ["CA S4"],
+    "stats": [7, 6, 7, 5, 6]
+  },
+  {
+    "name": "Luna DuBois",
+    "image": "luna_dubois.webp",
+    "seasons": ["CA S4"],
+    "stats": [6, 8, 7, 7, 6]
+  },
+  {
+    "name": "Aimee Yonce Shennel",
+    "image": "aimee_yonce_shennel.webp",
+    "seasons": ["CA S4"],
+    "stats": [7, 7, 8, 7, 8]
+  },
+  {
+    "name": "Kitten Kaboodle",
+    "image": "kitten_kaboodle.webp",
+    "seasons": ["CA S4"],
+    "stats": [8, 8, 8, 9, 8]
+  },
+  {
+    "name": "Kiki Coe",
+    "image": "kiki_coe.webp",
+    "seasons": ["CA S4"],
+    "stats": [6, 10, 7, 6, 7]
+  },
+  {
+    "name": "Melinda Verga",
+    "image": "melinda_verga.webp",
+    "seasons": ["CA S4"],
+    "stats": [8, 6, 7, 8, 7]
+  },
+  {
+    "name": "Denim",
+    "image": "denim.webp",
+    "seasons": ["CA S4"],
+    "stats": [7, 9, 8, 7, 8]
+  },
+  {
+    "name": "Nearah Nuff",
+    "image": "nearah_nuff.webp",
+    "seasons": ["CA S4"],
+    "stats": [6, 7, 9, 7, 10]
+  },
+  {
+    "name": "Aurora Matrix",
+    "image": "aurora_matrix.webp",
+    "seasons": ["CA S4"],
+    "stats": [7, 8, 9, 8, 9]
+  },
+  {
+    "name": "Venus",
+    "image": "venus.webp",
+    "seasons": ["CA S4"],
+    "stats": [8, 7, 9, 8, 9]
+  },
+  {
+    "name": "Tara Nova",
+    "image": "tara_nova.webp",
+    "seasons": ["CA S5"],
+    "stats": [5, 6, 6, 5, 5]
+  },
+  {
+    "name": "Tiffany Ann Co.",
+    "image": "tiffany_ann_co.webp",
+    "seasons": ["CA S5"],
+    "stats": [5, 6, 6, 5, 5]
+  },
+  {
+    "name": "Sanjina Dabish Queen",
+    "image": "sanjina_dabish_queen.webp",
+    "seasons": ["CA S5"],
+    "stats": [6, 7, 7, 7, 7]
+  },
+  {
+    "name": "Jaylene Tyme",
+    "image": "jaylene_tyme.webp",
+    "seasons": ["CA S5"],
+    "stats": [7, 7, 8, 7, 7]
+  },
+  {
+    "name": "Uma Gahd",
+    "image": "uma_gahd.webp",
+    "seasons": ["CA S5"],
+    "stats": [6, 7, 7, 6, 6]
+  },
+  {
+    "name": "Xana",
+    "image": "xana.webp",
+    "seasons": ["CA S5"],
+    "stats": [6, 7, 7, 6, 7]
+  },
+  {
+    "name": "Perla",
+    "image": "perla.webp",
+    "seasons": ["CA S5"],
+    "stats": [7, 8, 8, 7, 8]
+  },
+  {
+    "name": "Minhi Wang",
+    "image": "minhi_wang.webp",
+    "seasons": ["CA S5"],
+    "stats": [7, 9, 8, 7, 7]
+  },
+  {
+    "name": "Helena Poison",
+    "image": "helena_poison.webp",
+    "seasons": ["CA S5"],
+    "stats": [7, 10, 8, 8, 7]
+  },
+  {
+    "name": "Makayla Couture",
+    "image": "makayla_couture.webp",
+    "seasons": ["CA S5"],
+    "stats": [7, 9, 9, 8, 9]
+  },
+  {
+    "name": "The Virgo Queen",
+    "image": "the_virgo_queen.webp",
+    "seasons": ["CA S5"],
+    "stats": [7, 8, 9, 8, 9]
+  },
+  {
+    "name": "Paolo Perfecci\u00f3n",
+    "image": "paolo_perfeccion.webp",
+    "seasons": ["CA S6"],
+    "stats": [6, 9, 7, 6, 6]
+  },
+  {
+    "name": "Star Doll",
+    "image": "star_doll.webp",
+    "seasons": ["CA S6"],
+    "stats": [5, 8, 7, 5, 6]
+  },
+  {
+    "name": "Hazel",
+    "image": "hazel.webp",
+    "seasons": ["CA S6"],
+    "stats": [7, 7, 9, 7, 8]
+  },
+  {
+    "name": "Dulce",
+    "image": "dulce.webp",
+    "seasons": ["CA S6"],
+    "stats": [7, 7, 7, 7, 7]
+  },
+  {
+    "name": "Velma Jones",
+    "image": "velma_jones.webp",
+    "seasons": ["CA S6"],
+    "stats": [7, 7, 8, 7, 7]
+  },
+  {
+    "name": "Mya Foxx",
+    "image": "mya_foxx.webp",
+    "seasons": ["CA S6"],
+    "stats": [6, 7, 8, 6, 8]
+  },
+  {
+    "name": "Saltina Shaker",
+    "image": "saltina_shaker.webp",
+    "seasons": ["CA S6"],
+    "stats": [6, 7, 7, 6, 7]
+  },
+  {
+    "name": "Karamilk",
+    "image": "karamilk.webp",
+    "seasons": ["CA S6"],
+    "stats": [7, 8, 8, 7, 8]
+  },
+  {
+    "name": "PM",
+    "image": "pm.webp",
+    "seasons": ["CA S6"],
+    "stats": [7, 8, 9, 8, 8]
+  },
+  {
+    "name": "Sami Landri",
+    "image": "sami_landri.webp",
+    "seasons": ["CA S6"],
+    "stats": [9, 7, 8, 8, 8]
+  },
+  {
+    "name": "Eboni La'Belle",
+    "image": "eboni_la_belle.webp",
+    "seasons": ["CA S6"],
+    "stats": [8, 7, 9, 8, 9]
+  },
+  {
+    "name": "Van Goth",
+    "image": "van_goth.webp",
+    "seasons": ["CA S6"],
+    "stats": [7, 10, 8, 7, 8]
+  }
+]
 }
