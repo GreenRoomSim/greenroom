@@ -223,6 +223,8 @@
     }
     .bg-low { background: #ffaea4 !important; color: #000000 !important; border: none;
     }
+    .bg-low-b { background: #ffb6c1 !important; color: #000000 !important; border: none; box-shadow: inset 0 0 0 3px #d7b45a;
+    }
     .bg-btm { background: #d30000 !important; color: #000000 !important; border: none;
     }
     .bg-elim { background: #883131 !important; color: #ffffff !important; border: none;
@@ -261,6 +263,35 @@
     .big-message { font-size: clamp(20px, 2.6vw, 28px); font-weight: 900; letter-spacing: -0.03em; margin: 0 0 12px; text-align: center;
     }
     .muted { color: var(--muted); margin: 0; text-align: center;
+    }
+
+    /* ── Photo-enhanced placement cards ── */
+    .placement-card.with-photo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 14px 10px;
+      min-width: 84px;
+    }
+    .placement-card .pc-img {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.5);
+      display: block;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .placement-card.small.with-photo {
+      padding: 5px 10px 7px;
+      min-width: 60px;
+      gap: 4px;
+    }
+    .placement-card.small .pc-img {
+      width: 36px;
+      height: 36px;
     }
 
     /* Standings Table Styling */
@@ -490,6 +521,58 @@
       transform: none;
     }
 
+    /* Format Card Buttons */
+    .format-card-btn {
+      background: #fbfff8;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      padding: 12px 8px;
+      cursor: pointer;
+      text-align: center;
+      line-height: 1.35;
+      transition: all 0.15s;
+      box-shadow: 0 2px 6px rgba(76,110,50,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .format-card-btn .fmt-icon { font-size: 20px; line-height: 1; }
+    .format-card-btn:hover {
+      background: var(--lime-3);
+      border-color: var(--lime);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(76,110,50,0.12);
+    }
+    .format-card-btn.active {
+      background: linear-gradient(180deg, var(--lime), #76d939);
+      border-color: #5eba28;
+      color: #14380e;
+      box-shadow: 0 4px 12px rgba(76,110,50,0.22);
+    }
+    .change-format-btn {
+      background: var(--lime-3);
+      border: 1px solid var(--lime);
+      border-radius: 10px;
+      color: #2a5216;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 11px;
+      cursor: pointer;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .change-format-btn:hover {
+      background: var(--lime);
+      transform: none;
+    }
+
     /* Toggle Switch */
     .toggle-row {
       display: flex;
@@ -549,6 +632,111 @@
       width: 90%; max-width: 600px;
       max-height: 80vh; overflow-y: auto;
     }
+
+/* ── Premiere Intro Screens ── */
+.season-intro-card {
+  text-align: center;
+  padding: 48px 32px;
+  background: linear-gradient(135deg, #f0fff5, #e0ffd0);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+.season-intro-card .intro-pill {
+  display: inline-block;
+  background: var(--lime);
+  color: #14380e;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+.season-intro-card .intro-headline {
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 0 0 14px;
+  line-height: 1.1;
+}
+.season-intro-card .intro-subtext {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.55;
+}
+.season-intro-card .intro-crown {
+  font-size: 52px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* Werk Room */
+.werkroom-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  padding: 8px 0 4px;
+}
+.werkroom-queen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 10px 12px;
+  border-radius: 18px;
+  background: var(--card-2);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 14px rgba(76,110,50,0.07);
+  opacity: 0;
+  transform: translateY(22px) scale(0.93);
+  transition: opacity 0.38s cubic-bezier(0.22,1,0.36,1), transform 0.38s cubic-bezier(0.22,1,0.36,1);
+}
+.werkroom-queen.entered {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.werkroom-queen .wq-avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--lime);
+  background: #e8f5e0;
+  flex-shrink: 0;
+}
+.werkroom-queen .wq-avatar-placeholder {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--lime-2), var(--lime-3));
+  border: 2px solid var(--lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 900;
+  color: #14380e;
+  flex-shrink: 0;
+}
+.werkroom-queen .wq-name {
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.25;
+  color: var(--ink);
+  word-break: break-word;
+}
+.werkroom-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.werkroom-header .big-message {
+  margin-bottom: 4px;
+}
 
 /* --- TRACK RECORD TABLE (wiki-style) --- */
 .track-record-wrap {
@@ -1006,10 +1194,10 @@
     <div class="hero">
       <header class="header">
         <div class="logo-wrapper">
-          <img src="2.1banner.png" alt="Drag Race Simulator Banner" class="main-logo" />
+          <img src="banner.png" alt="Drag Race Simulator Banner" class="main-logo" />
         </div>
       <h1 class="title">Greenroom Drag Race Simulator</h1>
-      <p class="subtitle" id="secretTrigger">V2.1 - Last Updated 7/5/26</p>
+      <p class="subtitle" id="secretTrigger">V2.2 - Last Updated 15/5/26</p>
 
     <!-- Debug Code Entry Modal -->
     <div id="debugCodeModal" class="modal hidden">
@@ -1086,7 +1274,7 @@
       
       <div class="button-row" style="margin-top: 16px;">
         <button id="preDefBtn" class="primary" style="padding: 8px 16px; font-size: 14px;">Pre-Defined Casts</button>
-        <a href="patchnotes.html" class="secondary" style="padding: 8px 16px; font-size: 14px; text-decoration: none; border-radius: 16px; font-weight: 700; font-size: 15px; display: inline-flex; align-items: center; justify-content: center;">View Patch Notes</a>
+        <a href="patchnotes.html" class="secondary" style="padding: 8px 16px; font-size: 14px; text-decoration: none; border-radius: 16px; font-weight: 700; font-size: 15px; display: inline-flex; align-items: center; justify-content: center;">View Update Log</a>
         <button id="suggestBtn" class="secondary" style="padding: 8px 16px; font-size: 14px;">Suggest a Feature / Report Bug</button>
       </div>
     </div>
@@ -1104,6 +1292,7 @@
             <button class="tab-btn active" data-target="tab-us">US Seasons</button>
             <button class="tab-btn" data-target="tab-as">US All Stars</button>
             <button class="tab-btn" data-target="tab-uk">UK Seasons</button>
+            <button class="tab-btn" data-target="tab-ca">Canada Seasons</button>
           </div>
 
          <div id="tab-us" class="tab-content active">
@@ -1154,6 +1343,17 @@
               <button class="season-btn predef-btn" data-season="UK S5">UK5</button>
               <button class="season-btn predef-btn" data-season="UK S6">UK6</button>
               <button class="season-btn predef-btn" data-season="UK S7">UK7</button>
+            </div>
+          </div>
+
+          <div id="tab-ca" class="tab-content">
+            <div class="season-grid">
+              <button class="season-btn predef-btn" data-season="CA S1">CA1</button>
+              <button class="season-btn predef-btn" data-season="CA S2">CA2</button>
+              <button class="season-btn predef-btn" data-season="CA S3">CA3</button>
+              <button class="season-btn predef-btn" data-season="CA S4">CA4</button>
+              <button class="season-btn predef-btn" data-season="CA S5">CA5</button>
+              <button class="season-btn predef-btn" data-season="CA S6">CA6</button>
             </div>
           </div>
         </div>
@@ -1212,7 +1412,7 @@
         <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center;">
           <div>
             <h2 style="margin:0;">Extra Options</h2>
-            <div class="meta">Optional season toggles — customise your experience.</div>
+            <div class="meta">Optional season toggles, customise your experience.</div>
           </div>
           <button id="closeExtraOptionsBtn" class="ghost" style="padding: 6px 12px;">Close</button>
         </div>
@@ -1254,7 +1454,7 @@
           <div class="toggle-row">
             <div class="toggle-label-group">
               <span class="toggle-label-title">Disqualification (DISQ)</span>
-              <span class="toggle-label-desc">Very rarely (0.5% chance per elimination episode), a queen may be disqualified for breaking competition rules and asked to leave immediately. The bottom 2 still lip sync normally. Regular Season only — not available on premieres, LaLaPaRuza, or Non-Elim episodes.</span>
+              <span class="toggle-label-desc">Very rarely (0.5% chance per elimination episode), a queen may be disqualified for breaking competition rules and asked to leave immediately. The bottom 2 still lip sync normally. Regular Season only, not available on premieres, LaLaPaRuza, or Non-Elim episodes.</span>
             </div>
             <label class="toggle-switch">
               <input type="checkbox" id="disqToggle" />
@@ -1265,7 +1465,7 @@
           <div class="toggle-row">
             <div class="toggle-label-group">
               <span class="toggle-label-title">Queen Quits (QUIT)</span>
-              <span class="toggle-label-desc">Rarely (2% chance per elimination episode), a queen announces during critiques that she wants to quit. She sashays away immediately. The episode then converts to a Top 2 format — the top two queens lip sync for the win, and all bottom queens receive a LOW placement instead. Only once per season. Regular Season only.</span>
+              <span class="toggle-label-desc">Rarely (2% chance per elimination episode), a queen announces during critiques that she wants to quit. She sashays away immediately. The episode then converts to a Top 2 format, with the top two queens lip syncing for the win, and all bottom queens receiving a LOW placement instead. Only once per season. Regular Season only.</span>
             </div>
             <label class="toggle-switch">
               <input type="checkbox" id="quitToggle" />
@@ -1273,27 +1473,6 @@
             </label>
           </div>
 
-          <div style="position: relative;">
-            <div id="returnFormatOverlay" class="hidden" style="position: absolute; inset: -5px; background: rgba(238, 251, 231, 0.7); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 10; display: flex; align-items: center; justify-content: center; border-radius: 12px; border: 2px solid var(--border); pointer-events: none; transition: all 0.3s ease;">
-              <div style="background: var(--card); padding: 8px 16px; border-radius: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); display: flex; align-items: center; gap: 8px;">
-                <span style="color: var(--muted); font-weight: 600; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase;">Regular Season Only</span>
-              </div>
-            </div>
-            <div class="toggle-row" id="returnFormatRow" style="align-items: flex-start; flex-wrap: wrap;">
-            <div class="toggle-label-group" style="flex: 1; min-width: 200px;">
-              <span class="toggle-label-title">Returning Format</span>
-              <span class="toggle-label-desc">Choose whether an eliminated queen returns to the competition during the season. <strong>Random Return</strong>: one eliminated queen is chosen randomly. <strong>Queens Vote</strong>: the remaining queens each vote for who they want to return — if there's a tie, you decide! <strong>Choose Who Returns</strong>: you personally pick which eliminated queen comes back. Cannot happen on premiere, Top 2, LaLaPaRuza, Final, or QUIT/DISQ/DEPT episodes. Queens who quit or were disqualified are not eligible. Regular Season only.</span>
-            </div>
-            <div style="min-width: 160px; flex-shrink: 0; margin-top: 2px;">
-              <select id="returnFormatSelect" style="width: 100%; border: 1px solid var(--border); border-radius: 12px; padding: 10px 11px; font-size: 14px; background: #fbfff8; color: var(--ink); outline: none; -webkit-appearance: none; appearance: none; cursor: pointer;">
-                <option value="none">No Return</option>
-                <option value="random">Random Return</option>
-                <option value="vote">Remaining Queens Vote</option>
-                <option value="choose">Choose Who Returns</option>
-              </select>
-            </div>
-            </div>
-          </div> <!-- end returnFormatRow relative wrapper -->
 
         </div>
       </div>
@@ -1323,32 +1502,51 @@
 
               <hr style="border: 0; border-top: 1px solid var(--border); margin: 12px 0;" />
 
-              <label class="field" style="margin-top: 4px;">Season Format
-                <select id="seasonFormatSelect">
-                  <option value="regular">Regular Season</option>
-                  <option value="all-stars-legacy">All Stars (Lip Sync For Your Legacy)</option>
-                  <option value="all-stars-assassin">All Stars (Lip Sync Assassin)</option>
-                  <option value="tournament-of-all-stars">Tournament Of All Stars</option>
-                </select>
-              </label>
-              
-              <div id="extraSettingsWrapper" style="position: relative; display: grid; gap: 10px; margin-top: 4px;">
+              <!-- Hidden native select kept for JS compatibility -->
+              <select id="seasonFormatSelect" class="hidden">
+                <option value="regular">Regular Season</option>
+                <option value="all-stars-legacy">All Stars (Lip Sync For Your Legacy)</option>
+                <option value="all-stars-assassin">All Stars (Lip Sync Assassin)</option>
+                <option value="tournament-of-all-stars">Tournament Of All Stars</option>
+                <option value="beaver">Canada's Drag Race (Beaver Format)</option>
+              </select>
 
-                <!-- Full overlay: Tournament Of All Stars -->
-                <div id="tournamentOverlay" class="hidden" style="position: absolute; inset: -5px; background: rgba(238, 251, 231, 0.7); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 10; display: flex; align-items: center; justify-content: center; border-radius: 12px; border: 2px solid var(--border); pointer-events: none; transition: all 0.3s ease;">
-                  <div style="background: var(--card); padding: 8px 16px; border-radius: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); display: flex; align-items: center; gap: 8px;">
-                    <span style="color: var(--muted); font-weight: 600; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase;">Other Settings Locked For This Format</span>
-                  </div>
+              <!-- ── Format Selector Panel (before a format is chosen) ── -->
+              <div id="formatSelectorPanel">
+                <p class="subtle" style="margin: 0 0 8px; font-size: 12px; text-align: center;">Select a season format to begin</p>
+                <div id="formatCardGrid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                  <button class="format-card-btn" data-format="regular">
+                    <span class="fmt-icon">🎭</span>Regular
+                  </button>
+                  <button class="format-card-btn" data-format="beaver">
+                    <span class="fmt-icon">🦫</span>Beaver (CDR)
+                  </button>
+                  <button class="format-card-btn" data-format="all-stars-legacy">
+                    <span class="fmt-icon">⭐</span>All Stars Legacy
+                  </button>
+                  <button class="format-card-btn" data-format="all-stars-assassin">
+                    <span class="fmt-icon">⭐</span>All Stars Assassin
+                  </button>
+                  <button class="format-card-btn" data-format="tournament-of-all-stars" style="grid-column: 1 / -1; flex-direction: row; justify-content: center; padding: 10px 8px;">
+                    <span class="fmt-icon">🏆</span>Tournament Of All Stars
+                  </button>
                 </div>
+                <div style="margin-top: 10px; padding: 14px 12px; border-radius: 14px; background: #f8fff3; border: 1px dashed var(--border); color: var(--muted); font-size: 13px; text-align: center; line-height: 1.55;">
+                  <strong style="color: var(--ink); display: block; margin-bottom: 3px;">Choose Season Format First</strong>
+                  Premiere, finale &amp; other options will appear here once you pick a format above.
+                </div>
+              </div>
 
-                <!-- Partial overlay: Lip Sync Assassin (covers premiere + extra options only) -->
-                <div id="assassinLockWrapper" style="position: relative; display: grid; gap: 10px;">
-                  <div id="assassinOverlay" class="hidden" style="position: absolute; inset: -5px; background: rgba(238, 251, 231, 0.7); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 10; display: flex; align-items: center; justify-content: center; border-radius: 12px; border: 2px solid var(--border); pointer-events: none; transition: all 0.3s ease;">
-                    <div style="background: var(--card); padding: 8px 16px; border-radius: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); display: flex; align-items: center; gap: 8px;">
-                      <span style="color: var(--muted); font-weight: 600; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase;">Some Settings Locked For This Format</span>
-                    </div>
-                  </div>
+              <!-- ── Settings Panel (shown after format is chosen) ── -->
+              <div id="settingsPanel" class="hidden" style="display: grid; gap: 10px;">
 
+                <!-- Change format row -->
+                <button id="changeFormatBtn" class="change-format-btn">
+                  ← Change Format &nbsp;·&nbsp; <span id="chosenFormatLabel" style="font-weight: 900;"></span>
+                </button>
+
+                <!-- Premiere Format (hidden for Assassin + Tournament) -->
+                <div id="premiereSection" class="hidden">
                   <label class="field">Premiere Format
                     <select id="premiereFormatSelect">
                       <option value="regular">Regular Premiere</option>
@@ -1356,16 +1554,40 @@
                       <option value="top2">Top 2 Premiere (Lip Sync for the Win)</option>
                     </select>
                   </label>
+                </div>
 
+                <!-- Returning Format — visible for Regular only -->
+                <div id="returnFormatSection" class="hidden">
+                  <label class="field">Returning Format
+                    <select id="returnFormatSelect" style="width: 100%; border: 1px solid var(--border); border-radius: 12px; padding: 10px 11px; font-size: 14px; background: #fbfff8; color: var(--ink); outline: none; -webkit-appearance: none; appearance: none; cursor: pointer;">
+                      <option value="none">No Return</option>
+                      <option value="random">Random Return</option>
+                      <option value="vote">Remaining Queens Vote</option>
+                      <option value="choose">Choose Who Returns</option>
+                    </select>
+                  </label>
+                </div>
+
+                <!-- Extra Options — Regular only -->
+                <div id="extraOptionsSection" class="hidden">
                   <button id="openExtraOptionsBtn" class="extra-options-btn">⚙️ Open Extra Options</button>
                 </div>
 
-                <label class="field">Finale Format
-                  <select id="finaleFormatSelect">
-                    <option value="top4">Top 4 Finale (Lip Sync Smackdown)</option>
-                    <option value="top3">Top 3 Finale</option>
-                  </select>
-                </label>
+                <!-- Finale Format (hidden for Tournament) -->
+                <div id="finaleSection" class="hidden">
+                  <label class="field">Finale Format
+                    <select id="finaleFormatSelect">
+                      <option value="top4">Top 4 Finale (Lip Sync Smackdown)</option>
+                      <option value="top3">Top 3 Finale</option>
+                    </select>
+                  </label>
+                </div>
+
+                <!-- Tournament message — shown instead of options -->
+                <div id="tournamentMsg" class="hidden" style="padding: 14px 12px; border-radius: 14px; background: #f8fff3; border: 1px dashed var(--border); color: var(--muted); font-size: 13px; text-align: center; line-height: 1.55;">
+                  No other options are available for this format.<br>
+                  <strong style="color: var(--ink);">Start season below.</strong>
+                </div>
 
               </div>
               <button id="startBtn" class="primary" disabled>Start Season</button>
@@ -1431,7 +1653,7 @@
           link.href = canvas.toDataURL("image/png");
           link.click();
         })
-        .catch(function() { alert("Could not generate image — this may be due to browser security restrictions on external images."); });
+        .catch(function() { alert("Could not generate image, this may be due to browser security restrictions on external images."); });
     }
 
     const MIN_CAST = 8;
@@ -1566,6 +1788,15 @@
         "The Dolls", "The Dreamgirls", "The Triple Threats", "Galatea's Gang"
     ];
     
+    const beaverLeaveMessages = [
+      "The Beaver has been called away for an urgent dam emergency.",
+      "Apparently the Beaver has a flight to catch. Priorities!",
+      "The Beaver has resigned to pursue a career in competitive swimming.",
+      "Health and Safety have ruled that the Beaver is a trip hazard. Goodbye.",
+      "The Beaver received a better offer from a rival show. We wish them well.",
+      "The Beaver has decided it needs to find itself. A sabbatical, if you will.",
+      "The Beaver got stage fright. After all this time. We understand.",
+    ];
     const state = {
       mode: "setup",
       seasonFormat: "regular",
@@ -1629,10 +1860,6 @@
 
     // Extra Options Modal
     document.getElementById("openExtraOptionsBtn").addEventListener("click", () => {
-      // Sync returning format overlay with current season format
-      const isRegular = el.seasonFormatSelect.value === "regular";
-      document.getElementById("returnFormatOverlay").classList.toggle("hidden", isRegular);
-      document.getElementById("returnFormatSelect").disabled = !isRegular;
       document.getElementById("extraOptionsModal").classList.remove("hidden");
     });
     document.getElementById("closeExtraOptionsBtn").addEventListener("click", () => {
@@ -1744,6 +1971,49 @@
     function escapeHtml(text) { return String(text).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"); }
     function normalizeStat(v) { const n = parseInt(v ?? 5, 10); return clamp(Number.isFinite(n) ? n : 5, 1, 10); }
 
+    // ── Queen photo injection ───────────────────────────────────────────────
+    // After any innerHTML update, scan for .placement-card elements and inject
+    // the queen's photo if one is available. Cards are matched by:
+    //   1. data-queen-id attribute (explicit, for multi-child cards like winner reveals)
+    //   2. text content exactly matching a queen's name
+    function injectQueenPhotos(container) {
+      if (!container) return;
+      container.querySelectorAll('.placement-card').forEach(card => {
+        if (card.querySelector('.pc-img')) return; // already processed
+        let q = null;
+        if (card.dataset.queenId !== undefined && card.dataset.queenId !== '') {
+          const id = parseInt(card.dataset.queenId, 10);
+          q = state.queens.find(x => x.id === id) || null;
+        }
+        if (!q) {
+          const text = card.textContent.trim();
+          q = state.queens.find(x => x.name === text) || null;
+        }
+        if (!q || !q.image) return;
+        const img = document.createElement('img');
+        img.src = q.image;
+        img.className = 'pc-img';
+        img.alt = '';
+        img.onerror = function() { this.remove(); card.classList.remove('with-photo'); };
+        card.insertBefore(img, card.firstChild);
+        card.classList.add('with-photo');
+      });
+    }
+
+    // Returns the queen's original competitive placement (WIN/HIGH/SAFE/LOW)
+    // used when they were DEPT'd or DISQ'd that episode.
+    function getQueenOriginalPlacement(queen, placements) {
+        const isIn = (arr) => arr && arr.some(q => q.id === queen.id);
+        if (isIn(placements.topOne) || isIn(placements.winners)) return "WIN";
+        if (isIn(placements.highQueens)) return "HIGH";
+        if (placements.savedLow && placements.savedLow.id === queen.id) return "LOW";
+        return "SAFE";
+    }
+
+    // Checks if a queen's history contains a DEPT or DISQ entry (handles compound format like "HIGH|DEPT")
+    function hadDept(q) { return Object.values(q.history).some(v => v === "DEPT" || (v && v.endsWith("|DEPT"))); }
+    function hadDisq(q) { return Object.values(q.history).some(v => v === "DISQ" || (v && v.endsWith("|DISQ"))); }
+
     function getTrackRecordClass(p) {
         if (!p) return "";
         if (p === "BTM2" || p === "BTM") return "bg-btm";
@@ -1761,11 +2031,12 @@
         if (p === "T_WIN2_ELIM") return "bg-t_win2_elim";
         if (p === "T_WIN_ELIM")  return "bg-t_win_elim";
         if (p === "RTRN")        return "bg-return";
-        if (p === "DEPT")        return "bg-dept";
-        if (p === "DISQ")        return "bg-disq";
+        if (p === "DEPT" || (p && p.endsWith("|DEPT"))) return "bg-dept";
+        if (p === "DISQ" || (p && p.endsWith("|DISQ"))) return "bg-disq";
         if (p === "QUIT")        return "bg-quit";
         if (p === "MISS CON")    return "bg-miss-con";
         if (p === "GUEST")       return "bg-guest";
+        if (p === "LOW_B") return "bg-low-b";
         return `bg-${p.toLowerCase()}`;
     }
 
@@ -1781,9 +2052,18 @@
         if (p === "T_WIN_ELIM")  return `<span class="compound-placement">WIN<br>+ ELIM</span>`;
         if (p === "DEPT")        return "DEPT";
         if (p === "DISQ")        return "DISQ";
+        if (p && p.endsWith("|DEPT")) {
+            const orig = p.split("|")[0];
+            return `<span class="compound-placement">${orig}<br>+<br>DEPT</span>`;
+        }
+        if (p && p.endsWith("|DISQ")) {
+            const orig = p.split("|")[0];
+            return `<span class="compound-placement">${orig}<br>+<br>DISQ</span>`;
+        }
         if (p === "QUIT")        return "QUIT";
         if (p === "MISS CON")    return "MISS CON";
         if (p === "GUEST")       return "GUEST";
+        if (p === "LOW_B") return "LOW";
         return p;
     }
 
@@ -1829,6 +2109,10 @@
     }
 
     function startSeason() {
+      // Guard: ensure a format has been chosen via the card picker
+      if (document.getElementById("settingsPanel").classList.contains("hidden")) {
+        return alert("Please choose a Season Format before starting.");
+      }
       if (el.seasonFormatSelect.value === "tournament-of-all-stars") {
       if (state.queens.length !== 18) {
         return alert("Tournament Of All Stars requires exactly 18 queens to start!");
@@ -1839,8 +2123,9 @@
       }
     }
       state.seasonFormat = el.seasonFormatSelect.value;
-      state.finaleFormat = el.finaleFormatSelect.value;
+      state.finaleFormat = el.finaleFormatSelect ? el.finaleFormatSelect.value : "top4";
       state.premiereFormat = el.premiereFormatSelect.value;
+      // CA6 Premiere — fully implemented below in prepareEpisode and renderEpisode
       state.lalaPaRuzaEnabled = document.getElementById("lalaPaRuzaToggle").checked;
       state.deptEnabled = document.getElementById("deptToggle").checked;
       state.disqEnabled = document.getElementById("disqToggle").checked;
@@ -2076,6 +2361,95 @@ if (state.seasonFormat === "tournament-of-all-stars") {
 }
 
 
+// ── CA6 PREMIERE ──────────────────────────────────────────────────────────────
+      if (state.seasonFormat === "beaver" && state.episodeNumber === 1 && state.premiereFormat === "ca6-premiere") {
+        const maxi = { name: "Rumix", type: "Performance" };
+        state.usedMaxis.push(maxi.name);
+        const mini = { none: true };
+        const scores = actives.map(q => ({
+          queen: q,
+          score: rand(1, 10) + q.stats.performance * rand(0.8, 1.5) + rand(-1, 1)
+        })).sort((a, b) => b.score - a.score);
+
+        // Top 5 queens are the highs; highest scorer wins
+        const ca6Tops = scores.slice(0, Math.min(5, n)).map(s => s.queen);
+        const ca6Winner = ca6Tops[0];
+        const ca6OtherTops = ca6Tops.slice(1).sort(() => Math.random() - 0.5);
+        const ca6Safes = scores.slice(Math.min(5, n)).map(s => s.queen).sort(() => Math.random() - 0.5);
+        const ca6TopsShuffled = [...ca6Tops].sort(() => Math.random() - 0.5);
+
+        // Lip sync vs Brooke Lynn Hytes — just for funsies, no real winner
+        const brook = { name: "Brooke Lynn Hytes", image: "brooke_lynn_hytes_lipsync.webp", isBrook: true };
+        const brookLipEvent = rollLipEvent();
+        const winnerLipEvent = rollLipEvent();
+        const ca6LipSync = {
+          song: pick(lipSongs),
+          performances: [
+            { queen: ca6Winner, event: winnerLipEvent },
+            { queen: brook, event: brookLipEvent }
+          ]
+        };
+
+        state.episodeData = {
+          mini, maxi, scores, ca6Tops, ca6TopsShuffled, ca6Winner, ca6OtherTops, ca6Safes, ca6LipSync, brook,
+          countsApplied: false, elimination: null,
+          isCA6Premiere: true
+        };
+        return;
+      }
+
+      if (state.seasonFormat === "beaver" && n >= 6) {
+        const mini = getMiniChallenge(state.episodeNumber, n);
+        if (!mini.none) {
+          mini.winners = [pick(actives)];
+          if (n > 5 && Math.random() < 0.15) mini.winners.push(pick(actives.filter(q => q.id !== mini.winners[0].id)));
+        }
+        const maxi = getMaxiChallenge(state.episodeNumber, n);
+        const statKey = maxi.type.toLowerCase();
+        const scores = actives.map(q => ({
+          queen: q,
+          score: rand(1, 10) + q.stats[statKey] * rand(0.8, 1.5) + rand(-1, 1)
+        })).sort((a, b) => b.score - a.score);
+
+        const categories = new Map();
+        const winners = [scores[0].queen];
+        const highCount = Math.min(2, n - 4);
+        const highQueens = scores.slice(1, 1 + highCount).map(s => s.queen);
+        const bottomThree = [scores[n - 3].queen, scores[n - 2].queen, scores[n - 1].queen];
+        const beaverSaved = pick(bottomThree);
+        const bottomTwo = bottomThree.filter(q => q.id !== beaverSaved.id);
+        const placedIds = new Set([...winners, ...highQueens, ...bottomThree].map(q => q.id));
+        const pureSafe = actives.filter(q => !placedIds.has(q.id));
+
+        winners.forEach(q => categories.set(q.id, "Slayed"));
+        highQueens.forEach(q => categories.set(q.id, "Great"));
+        pureSafe.forEach(q => categories.set(q.id, "Okay"));
+        bottomThree.forEach(q => categories.set(q.id, "Flopped"));
+
+        const e1 = rollLipEvent(); const e2 = rollLipEvent();
+        let s1 = rand(1, 10) + bottomTwo[0].stats.lipSync;
+        if (e1.type === "words") s1 -= 99; if (e1.type === "fall") s1 -= 2; if (e1.type === "reveal") s1 += 2;
+        let s2 = rand(1, 10) + bottomTwo[1].stats.lipSync;
+        if (e2.type === "words") s2 -= 99; if (e2.type === "fall") s2 -= 2; if (e2.type === "reveal") s2 += 2;
+        const lipSync = {
+          song: pick(lipSongs),
+          performances: [{ queen: bottomTwo[0], event: e1 }, { queen: bottomTwo[1], event: e2 }],
+          winner: s1 >= s2 ? { queen: bottomTwo[0], event: e1 } : { queen: bottomTwo[1], event: e2 },
+          loser: s1 >= s2 ? { queen: bottomTwo[1], event: e2 } : { queen: bottomTwo[0], event: e1 },
+          s1, s2
+        };
+
+        state.episodeData = {
+          mini, maxi, scores, categories,
+          placements: { winners, highQueens, pureSafe, bottomThree, beaverSaved, savedLow: (n === 6) ? beaverSaved : null, bottomTwo },
+          lipSync,
+          countsApplied: false, beaverBtm3Applied: false, elimination: null, riggedOutcome: null,
+          isBeaverEpisode: true,
+          isBeaverLeaving: (n === 6),
+          beaverLeaveMsg: n === 6 ? pick(beaverLeaveMessages) : null
+        };
+        return;
+      }
       // LaLaPaRuza Trigger Check
       if (state.lalaPaRuzaEnabled && n === 8 && !state.usedMaxis.includes("LaLaPaRuza")) {
           state.usedMaxis.push("LaLaPaRuza");
@@ -2112,7 +2486,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
       const mini = getMiniChallenge(state.episodeNumber, n);
       if (!mini.none) {
         mini.winners = [pick(actives)];
-        if (n > 5 && Math.random() < 0.5) mini.winners.push(pick(actives.filter(q => q.id !== mini.winners[0].id)));
+        if (n > 5 && Math.random() < 0.15) mini.winners.push(pick(actives.filter(q => q.id !== mini.winners[0].id)));
       }
 
       const maxi = getMaxiChallenge(state.episodeNumber, n);
@@ -2253,7 +2627,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
            };
           return;
       } else {
-          let winnerCount = (state.seasonFormat === "regular" && Math.random() < 0.05 && n >= 5) ? 2 : 1;
+          let winnerCount = (state.seasonFormat === "regular" && Math.random() < 0.03 && n >= 5) ? 2 : 1;
           scores.forEach((entry, idx) => {
               let label = "Okay";
               if (idx < winnerCount) label = "Slayed";
@@ -2397,8 +2771,8 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                       const eligibleReturners = state.queens.filter(q =>
                           q.eliminated &&
                           !Object.values(q.history).includes("QUIT") &&
-                          !Object.values(q.history).includes("DISQ") &&
-                          !Object.values(q.history).includes("DEPT")
+                          !hadDisq(q) &&
+                          !hadDept(q)
                       );
                       if (eligibleReturners.length > 0) {
                           const returnQueen = pick(eligibleReturners);
@@ -2426,8 +2800,8 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                       const eligibleReturners = state.queens.filter(q =>
                           q.eliminated &&
                           !Object.values(q.history).includes("QUIT") &&
-                          !Object.values(q.history).includes("DISQ") &&
-                          !Object.values(q.history).includes("DEPT")
+                          !hadDisq(q) &&
+                          !hadDept(q)
                       );
                       if (eligibleReturners.length > 0) {
                           const remainingQueens = activeQueens();
@@ -2474,8 +2848,8 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                       const eligibleReturners = state.queens.filter(q =>
                           q.eliminated &&
                           !Object.values(q.history).includes("QUIT") &&
-                          !Object.values(q.history).includes("DISQ") &&
-                          !Object.values(q.history).includes("DEPT")
+                          !hadDisq(q) &&
+                          !hadDept(q)
                       );
                       if (eligibleReturners.length > 0) {
                           ed.isChooseReturn = true;
@@ -2633,6 +3007,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
             `;
             el.nextPhaseBtn.classList.add("hidden");
             el.gameContent.innerHTML = content;
+            injectQueenPhotos(el.gameContent);
             return;
         }
 
@@ -2700,13 +3075,98 @@ if (state.seasonFormat === "tournament-of-all-stars") {
     }
 
     el.gameContent.innerHTML = content;
+    injectQueenPhotos(el.gameContent);
     el.nextPhaseBtn.textContent = (p === 8 && !d.bracketEnd) || (p === 9 && d.bracketEnd) ? "Next Episode" : "Next";
     el.rigGameBtn.classList.add("hidden");
 }
 
+    // Returns true for formats that get premiere intro screens
+    function showsPremiereIntro() {
+      return state.episodeNumber === 1 &&
+        ["regular", "all-stars-legacy", "all-stars-assassin", "beaver"].includes(state.seasonFormat);
+    }
+
     function renderEpisode() {
       const active = activeQueens();
       const data = state.episodeData;
+
+      // ── Premiere intro screens: Season Intro (phase 1) & Werk Room (phase 2) ──
+      if (showsPremiereIntro() && state.phase <= 2) {
+        el.rigGameBtn.classList.add("hidden");
+        el.screenCounterText.textContent = "";
+        el.nextPhaseBtn.classList.remove("hidden");
+
+        if (state.phase === 1) {
+          // ── Screen 1: Season Welcome ──
+          el.gameHeader.textContent = "A Brand New Season!";
+          el.gameMeta.textContent = `${state.queens.length} queens are ready to compete`;
+          el.nextPhaseBtn.textContent = "Let's Go! →";
+          el.nextPhaseBtn.disabled = false;
+
+          const formatLabels = {
+            "regular": "Drag Race",
+            "all-stars-legacy": "All Stars: Lip Sync for Your Legacy",
+            "all-stars-assassin": "All Stars: Lip Sync Assassin"
+          };
+          const fmtLabel = formatLabels[state.seasonFormat] || "Drag Race";
+
+          el.gameContent.innerHTML = `
+            <div class="season-intro-card">
+              <span class="intro-crown">👑</span>
+              <div class="intro-pill">Season Premiere</div>
+              <h2 class="intro-headline">Welcome to<br>Greenroom Drag Race Simulator!</h2>
+              <p class="intro-subtext">
+                ${state.queens.length} fierce queens have arrived, ready to compete for the crown.
+                <br><br>Are you ready? Then let's get this party started!
+              </p>
+            </div>
+          `;
+        } else {
+          // ── Screen 2: Werk Room entrances ──
+          el.gameHeader.textContent = "The Werk Room";
+          el.gameMeta.textContent = `${state.queens.length} queens enter…`;
+          el.nextPhaseBtn.textContent = "Continue";
+          el.nextPhaseBtn.disabled = true; // re-enabled after all queens enter
+
+          const queenCards = state.queens.map((q, i) => {
+            const avatarHtml = q.image
+              ? `<img class="wq-avatar" src="${escapeHtml(q.image)}" alt="${escapeHtml(q.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="wq-avatar-placeholder" style="display:none;">${escapeHtml(q.name.charAt(0))}</div>`
+              : `<div class="wq-avatar-placeholder">${escapeHtml(q.name.charAt(0))}</div>`;
+            return `<div class="werkroom-queen" data-qid="${i}">${avatarHtml}<span class="wq-name">${escapeHtml(q.name)}</span></div>`;
+          }).join("");
+
+          el.gameContent.innerHTML = `
+            <div class="werkroom-header">
+              <p class="big-message" style="margin-bottom:6px;">The Werk Room</p>
+              <p class="muted">The queens have arrived. Let's meet this season's cast!</p>
+            </div>
+            <div class="werkroom-wrap" id="werkroomGrid">${queenCards}</div>
+          `;
+
+          // Stagger entrance animations — total ≤ 5 s
+          const n = state.queens.length;
+          const intervalMs = Math.min(360, 4600 / n);
+          state.queens.forEach((_, i) => {
+            setTimeout(() => {
+              const card = el.gameContent.querySelector(`.werkroom-queen[data-qid="${i}"]`);
+              if (card) card.classList.add("entered");
+              if (i === n - 1) {
+                // All queens have entered — enable Next
+                setTimeout(() => { el.nextPhaseBtn.disabled = false; }, 280);
+              }
+            }, 300 + i * intervalMs);
+          });
+        }
+        return; // Early return — skip all normal episode rendering
+      }
+
+      // For eligible formats on episode 1, shift phase back by 2 so the rest of
+      // this function sees the standard 1–7 phase numbers it already expects.
+      const introOffset = showsPremiereIntro() ? 2 : 0;
+      if (introOffset) state.phase -= introOffset;
+
+      // ── Normal episode rendering (all existing logic below unchanged) ──
+
       const isGG = data.isGirlGroup;
       const isAssassin = state.seasonFormat === "all-stars-assassin";
       
@@ -2726,28 +3186,55 @@ if (state.seasonFormat === "tournament-of-all-stars") {
       if (data.isVoteReturn && !isGG && !data.isLaLaPaRuza && !isAssassin && !data.isQuit) {
           totalScreens = 10;
       }
+      if (data.isBeaverEpisode) {
+        const _bPremiere = (state.episodeNumber === 1) || (state.premiereFormat === "ca6-premiere" && state.episodeNumber === 2);
+        const _bLeaving = data.isBeaverLeaving;
+        if (_bPremiere && _bLeaving) totalScreens = 10;
+        else if (_bPremiere) totalScreens = 9;
+        else totalScreens = 8;
+      }
       if (data.isChooseReturn && !isGG && !data.isLaLaPaRuza && !isAssassin && !data.isQuit) {
           totalScreens = 10;
       }
+      if (data.isCA6Premiere) totalScreens = 10;
       el.screenCounterText.textContent = "";
 
       // Always ensure Next button is visible at start of render (tie-breaker phase will re-hide it)
       el.nextPhaseBtn.classList.remove("hidden");
       
       // Rig Button Toggle Logic
-      // Rig Button Toggle Logic
-      el.rigGameBtn.classList.toggle("hidden", 
-          data.isTournamentBracket || // Ensures it stays hidden during bracket episodes
-          (isGG && state.phase !== 4 && state.phase !== 6) ||
-          (data.isLaLaPaRuza && state.phase !== 6) ||
-          (isAssassin && state.phase !== 3 && state.phase !== 6) ||
-          (data.isTournamentMerge && state.phase !== 4 && state.phase !== 6) || // Accounts for the Merge phase shift
-          (data.isQuit && !isGG && !data.isLaLaPaRuza && !isAssassin && !data.isTournamentMerge && state.phase !== 3 && state.phase !== 6) ||
-          (data.isReturn && !isGG && !data.isLaLaPaRuza && !isAssassin && !data.isTournamentMerge && !data.isQuit) || // Always hide rig during return episodes
-          (data.isVoteReturn && !isGG && !data.isLaLaPaRuza && !isAssassin && !data.isTournamentMerge && !data.isQuit) || // Always hide rig during vote return episodes
-          (data.isChooseReturn && !isGG && !data.isLaLaPaRuza && !isAssassin && !data.isTournamentMerge && !data.isQuit) || // Always hide rig during choose return episodes
-          (!data.isQuit && !data.isReturn && !data.isVoteReturn && !data.isChooseReturn && !isGG && !data.isLaLaPaRuza && !isAssassin && !data.isTournamentMerge && state.phase !== 3 && state.phase !== 5)
-      );
+      // Uses the intro-shifted state.phase so phase checks work correctly on ep1 too.
+      // The resolved rig type is stored in state._currentRigType so the click handler
+      // doesn't need to re-derive it from the restored (unshifted) phase.
+      {
+        let _rigType = null;
+        if (!data.isTournamentBracket && !data.isReturn && !data.isVoteReturn && !data.isChooseReturn && !data.isCA6Premiere) {
+          if (data.isBeaverEpisode) {
+            // Beaver: judging (results reveal) and lip sync phases vary by episode type.
+            // state.phase here is already intro-shifted for ep1.
+            const _bPrem = (state.episodeNumber === 1) || (state.premiereFormat === "ca6-premiere" && state.episodeNumber === 2);
+            const _bLv   = data.isBeaverLeaving;
+            const _bJP   = (!_bPrem && !_bLv) ? 3 : (!_bPrem && _bLv) ? 3 : (_bPrem && !_bLv) ? 4 : 5;
+            const _bLP   = (!_bPrem && !_bLv) ? 6 : (!_bPrem && _bLv) ? 6 : (_bPrem && !_bLv) ? 7 : 8;
+            if (state.phase === _bJP) _rigType = "ep3_beaver";
+            else if (state.phase === _bLP) _rigType = "ep5";
+          } else {
+            const _isJudge = (isGG && state.phase === 4) ||
+                             (data.isTournamentMerge && state.phase === 4) ||
+                             (!isGG && !data.isLaLaPaRuza && !data.isTournamentMerge && state.phase === 3);
+            const _isLS    = (isGG && state.phase === 6) ||
+                             (data.isLaLaPaRuza && state.phase === 6) ||
+                             (isAssassin && state.phase === 6) ||
+                             (data.isTournamentMerge && state.phase === 6) ||
+                             (!isGG && !data.isLaLaPaRuza && !isAssassin && !data.isTournamentMerge &&
+                              ((data.isQuit && state.phase === 6) || (!data.isQuit && state.phase === 5)));
+            if (_isJudge) _rigType = "ep3";
+            else if (_isLS) _rigType = "ep5";
+          }
+        }
+        state._currentRigType = _rigType;
+        el.rigGameBtn.classList.toggle("hidden", _rigType === null);
+      }
       
       // Phase Translator mapping specifically to handle Girl Group shifts and Assassin shifts
       let phaseTag = state.phase;
@@ -2801,6 +3288,54 @@ if (state.seasonFormat === "tournament-of-all-stars") {
           else if (state.phase === 8) phaseTag = "choose_return_pick";
           else if (state.phase === 9) phaseTag = "return_reveal";
           else if (state.phase === 10) phaseTag = 7;
+      }
+      if (data.isCA6Premiere) {
+        if (state.phase === 1) phaseTag = "ca6_alert";
+        else if (state.phase === 2) phaseTag = "ca6_announce";
+        else if (state.phase === 3) phaseTag = "ca6_rules";
+        else if (state.phase === 4) phaseTag = "ca6_performances";
+        else if (state.phase === 5) phaseTag = "ca6_tops";
+        else if (state.phase === 6) phaseTag = "ca6_winner";
+        else if (state.phase === 7) phaseTag = "ca6_brook";
+        else if (state.phase === 8) phaseTag = "ca6_lipsync";
+        else if (state.phase === 9) phaseTag = "ca6_result";
+        else if (state.phase === 10) phaseTag = 7;
+      }
+      if (data.isBeaverEpisode) {
+        const _bPremiere = (state.episodeNumber === 1) || (state.premiereFormat === "ca6-premiere" && state.episodeNumber === 2);
+        const _bLeaving = data.isBeaverLeaving;
+        if (_bPremiere && !_bLeaving) {
+          if (state.phase === 3) phaseTag = "beaver_announce";
+          else if (state.phase === 4) phaseTag = "beaver_tops";
+          else if (state.phase === 5) phaseTag = "beaver_results";
+          else if (state.phase === 6) phaseTag = "beaver_give";
+          else if (state.phase === 7) phaseTag = "beaver_lipsync";
+          else if (state.phase === 8) phaseTag = "beaver_elim";
+          else if (state.phase === 9) phaseTag = 7;
+        } else if (_bLeaving && !_bPremiere) {
+          if (state.phase === 3) phaseTag = "beaver_tops";
+          else if (state.phase === 4) phaseTag = "beaver_leaving";
+          else if (state.phase === 5) phaseTag = 4;
+          else if (state.phase === 6) phaseTag = 5;
+          else if (state.phase === 7) phaseTag = 6;
+          else if (state.phase === 8) phaseTag = 7;
+        } else if (_bPremiere && _bLeaving) {
+          if (state.phase === 3) phaseTag = "beaver_announce";
+          else if (state.phase === 4) phaseTag = "beaver_leaving";
+          else if (state.phase === 5) phaseTag = "beaver_tops";
+          else if (state.phase === 6) phaseTag = "beaver_results";
+          else if (state.phase === 7) phaseTag = "beaver_give";
+          else if (state.phase === 8) phaseTag = "beaver_lipsync";
+          else if (state.phase === 9) phaseTag = "beaver_elim";
+          else if (state.phase === 10) phaseTag = 7;
+        } else {
+          if (state.phase === 3) phaseTag = "beaver_tops";
+          else if (state.phase === 4) phaseTag = "beaver_results";
+          else if (state.phase === 5) phaseTag = "beaver_give";
+          else if (state.phase === 6) phaseTag = "beaver_lipsync";
+          else if (state.phase === 7) phaseTag = "beaver_elim";
+          else if (state.phase === 8) phaseTag = 7;
+        }
       }
 
       let content = "";
@@ -3561,7 +4096,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                   dq.record.ELIM += 1;
                   dq.eliminated = true;
                   dq.elimOrder = state.episodeNumber;
-                  dq.history[state.episodeNumber - 1] = "DEPT";
+                  dq.history[state.episodeNumber - 1] = getQueenOriginalPlacement(dq, data.placements) + "|DEPT";
                   data.elimination = { isDept: true, deptQueen: dq };
               // DISQ: disqualified queen departs — no one from BTM2 goes home
               } else if (data.isDisq) {
@@ -3569,7 +4104,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                   dq.record.ELIM = (dq.record.ELIM || 0) + 1;
                   dq.eliminated = true;
                   dq.elimOrder = state.episodeNumber;
-                  dq.history[state.episodeNumber - 1] = "DISQ";
+                  dq.history[state.episodeNumber - 1] = getQueenOriginalPlacement(dq, data.placements) + "|DISQ";
                   // Both bottom 2 queens are safe — record BTM2 for both
                   const w = data.lipSync.winner.queen;
                   const l = data.lipSync.loser.queen;
@@ -3811,7 +4346,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                     : ""}
                   <div class="placement-card bg-return" style="font-size: 20px; padding: 16px 32px;">${escapeHtml(data.returnQueen.name)}</div>
                 </div>
-                <p class="muted">Welcome back to the competition. Your journey continues — don't waste this chance!</p>
+                <p class="muted">Welcome back to the competition. Your journey continues, so don't waste this chance!</p>
               </div>
             ` : `
               <div class="section-card flex-col-center">
@@ -3877,6 +4412,146 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                 <p class="muted" style="max-width:480px;text-align:center;font-weight:800;color:var(--ink);">And the decision of who returns is entirely yours.</p>
               </div>
             `;
+            } else if (phaseTag === "beaver_announce") {
+            content = `
+              <div class="section-card flex-col-center">
+                <div class="label-row"><span class="pill" style="background:#d7b45a;color:#14380e;border-color:#d7b45a;">Format Reveal</span></div>
+                <img src="beaver.png" alt="Golden Beaver" style="width:120px;height:auto;margin:16px 0;" />
+                <p class="big-message">Meet the Golden Beaver!</p>
+                <p class="muted" style="max-width:520px;text-align:center;line-height:1.6;">
+                  Each week, the winner of the main challenge will receive the power of the <strong>Golden Beaver</strong>.
+                  They may use it to save one queen from the bottom 3, guaranteeing her safety for another week.
+                  This format continues until 6 queens remain.
+                </p>
+              </div>
+            `;
+          } else if (phaseTag === "beaver_leaving") {
+            content = `
+              <div class="section-card flex-col-center">
+                <div class="label-row"><span class="pill" style="background:#d7b45a;color:#14380e;border-color:#d7b45a;">An Important Announcement</span></div>
+                <img src="beaver.png" alt="Golden Beaver" style="width:100px;height:auto;margin:16px 0;opacity:0.7;" />
+                <p class="big-message">The Beaver Must Leave!</p>
+                <p class="muted" style="max-width:460px;text-align:center;font-style:italic;">${escapeHtml(data.beaverLeaveMsg)}</p>
+                <hr style="width:100%;border:0;border-top:1px solid var(--border);margin:20px 0;">
+                <p class="muted" style="text-align:center;">From this episode onwards the competition returns to its regular format. Good luck to our remaining ${active.length} queens.</p>
+              </div>
+            `;
+          } else if (phaseTag === "beaver_tops") {
+            const _bTops = [...data.placements.winners, ...data.placements.highQueens].sort(() => Math.random() - 0.5);
+            const _bBots = [...data.placements.bottomThree].sort(() => Math.random() - 0.5);
+            const _bSafe = [...data.placements.pureSafe].sort(() => Math.random() - 0.5);
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Judging!</span></div>
+                <p class="muted" style="margin-bottom:16px;">Based on tonight's performances...</p>
+                <div class="flex-col-center">
+                  <div class="flex-center">
+                    ${_bTops.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
+                    ${_bBots.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}
+                  </div>
+                  <p class="muted">You represent the tops and bottoms of the week.</p>
+                  ${_bSafe.length ? `
+                    <hr style="width:100%;border:0;border-top:1px solid var(--border);margin:10px 0;">
+                    <div class="flex-center">${_bSafe.map(q => `<span class="placement-card small bg-safe">${escapeHtml(q.name)}</span>`).join("")}</div>
+                    <p class="muted">You are safe.</p>
+                  ` : ""}
+                </div>
+              </div>
+            `;
+          } else if (phaseTag === "beaver_results") {
+            if (!data.countsApplied) {
+              const _bIdx = state.episodeNumber - 1;
+              data.placements.winners.forEach(q => { q.record.WIN += 1; q.history[_bIdx] = "WIN"; });
+              data.placements.highQueens.forEach(q => { q.record.HIGH += 1; q.history[_bIdx] = "HIGH"; });
+              data.placements.pureSafe.forEach(q => { q.record.SAFE += 1; q.history[_bIdx] = "SAFE"; });
+              data.countsApplied = true;
+            }
+            const _bp = data.placements;
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Results</span></div>
+                <p class="muted" style="margin-bottom:16px;">Ladies, I've made some decisions...</p>
+                <div class="flex-col-center">
+                  <div class="group-row">
+                    <div class="flex-center">${_bp.winners.map(q => `<div class="placement-card bg-win">${escapeHtml(q.name)}</div>`).join("")}</div>
+                    <p class="muted">Condragulations, you're the winner of today's challenge! You now hold the power of the Golden Beaver.</p>
+                  </div>
+                  ${_bp.highQueens.length ? `
+                  <div class="group-row">
+                    <div class="flex-center">${_bp.highQueens.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div>
+                    <p class="muted">Good job this week, you're safe.</p>
+                  </div>` : ""}
+                  <div class="group-row" style="border:none;">
+                    <div class="flex-center">${_bp.bottomThree.map(q => `<div class="placement-card bg-btm">${escapeHtml(q.name)}</div>`).join("")}</div>
+                    <p class="muted">I'm sorry my dears, but you three are the bottom queens of the week and face possible elimination.</p>
+                  </div>
+                </div>
+              </div>
+            `;
+          } else if (phaseTag === "beaver_give") {
+            const _bWinner = data.placements.winners[0];
+            const _bSaved = data.placements.beaverSaved;
+            const _bBtm2 = data.placements.bottomTwo;
+            content = `
+              <div class="section-card flex-col-center">
+                <div class="label-row"><span class="pill" style="background:#d7b45a;color:#14380e;border-color:#d7b45a;">The Golden Beaver</span></div>
+                <img src="beaver.png" alt="Golden Beaver" style="width:90px;height:auto;margin:12px 0;" />
+                <p class="big-message">${escapeHtml(_bWinner.name)} holds the Golden Beaver!</p>
+                <p class="muted" style="text-align:center;max-width:480px;">They must now choose one queen from the bottom 3 to save from elimination.</p>
+                <hr style="width:100%;border:0;border-top:1px solid var(--border);margin:20px 0;">
+                <p class="muted">After careful consideration, <strong>${escapeHtml(_bWinner.name)}</strong> has chosen to save...</p>
+                <div class="placement-card bg-low-b" style="font-size:18px;padding:14px 28px;margin:8px 0;">${escapeHtml(_bSaved.name)}</div>
+                <p class="muted">You are safe. For now.</p>
+                <hr style="width:100%;border:0;border-top:1px solid var(--border);margin:16px 0;">
+                <p class="muted">That means these two queens will lip sync for their lives:</p>
+                <div class="flex-center" style="margin-top:8px;">
+                  ${_bBtm2.map(q => `<div class="placement-card bg-btm">${escapeHtml(q.name)}</div>`).join("")}
+                </div>
+              </div>
+            `;
+          } else if (phaseTag === "beaver_lipsync") {
+            const _bls = data.lipSync;
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Lip Sync For Your Life!</span></div>
+                <p class="muted">Two queens stand before me. Prior to tonight you were each asked to prepare a lip sync performance... for your LIFE! Good luck, and don't f*ck it up.</p>
+                <p class="big-message" style="margin:16px 0;">${escapeHtml(_bls.song)}</p>
+                <div class="flex-center" style="align-items:stretch;gap:16px;">
+                  ${_bls.performances.map(p => `
+                    <div style="text-align:center;width:160px;display:flex;flex-direction:column;">
+                      <div class="placement-card bg-safe" style="flex:1;">${escapeHtml(p.queen.name)}</div>
+                      <p class="muted" style="margin-top:6px;font-size:13px;">${p.event.text}</p>
+                    </div>
+                  `).join("")}
+                </div>
+              </div>
+            `;
+          } else if (phaseTag === "beaver_elim") {
+            if (!data.beaverBtm3Applied) {
+              const _beIdx = state.episodeNumber - 1;
+              const _bSv = data.placements.beaverSaved;
+              const _bLsW = data.lipSync.winner.queen;
+              const _bLsL = data.lipSync.loser.queen;
+              _bSv.record.LOW += 1; _bSv.history[_beIdx] = "LOW_B";
+              _bLsW.record.BTM2 += 1; _bLsW.history[_beIdx] = "BTM2";
+              _bLsL.record.ELIM += 1; _bLsL.eliminated = true; _bLsL.elimOrder = state.episodeNumber; _bLsL.history[_beIdx] = "ELIM";
+              data.beaverBtm3Applied = true;
+            }
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Decisions...</span></div>
+                <div class="flex-col-center" style="margin-top:16px;">
+                  <div class="group-row">
+                    <div class="placement-card bg-shantay">${escapeHtml(data.lipSync.winner.queen.name)}</div>
+                    <p class="muted">Shantay you stay.</p>
+                  </div>
+                  <div class="group-row" style="border:none;">
+                    <div class="placement-card bg-elim">${escapeHtml(data.lipSync.loser.queen.name)}</div>
+                    <p class="muted">Sashay away.</p>
+                  </div>
+                </div>
+              </div>
+            `;
           } else if (phaseTag === "choose_return_pick") {
             el.nextPhaseBtn.classList.add("hidden");
             content = `
@@ -3892,6 +4567,153 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                       <div style="font-size:12px;color:var(--muted);margin-top:4px;">Elim. Ep. ${q.elimOrder}</div>
                     </div>
                   `).join("")}
+                </div>
+              </div>
+            `;
+          } else if (phaseTag === "ca6_alert") {
+            content = `
+              <div class="section-card flex-col-center" style="padding: 48px 24px;">
+                <div class="label-row"><span class="pill" style="background:#ff3c3c;color:#fff;border-color:#ff3c3c;font-size:14px;letter-spacing:.06em;">⚠ ALERT ⚠</span></div>
+                <p class="big-message" style="color:var(--danger); font-size: clamp(24px, 4vw, 40px); margin-top: 20px;">She done already done had herses!</p>
+                <p class="muted" style="max-width:480px; text-align:center; margin-top: 12px;">All queens, report to the main stage immediately.</p>
+              </div>
+            `;
+          } else if (phaseTag === "ca6_announce") {
+            content = `
+              <div class="section-card flex-col-center">
+                <p class="big-message" style="margin-top: 16px;">Welcome to the main stage, queens!</p>
+                <p class="muted" style="max-width:520px; text-align:center; margin-bottom: 20px;">This week's maxi challenge is a...</p>
+                <div class="placement-card bg-win" style="font-size: 26px; padding: 20px 40px; margin: 8px 0;">Rumix!</div>
+              </div>
+            `;
+          } else if (phaseTag === "ca6_rules") {
+            content = `
+              <div class="section-card flex-col-center">
+                <p class="big-message" style="margin-top: 16px;">Now, before you go...</p>
+                <div style="max-width: 560px; text-align: center;">
+                  <p class="muted">I have a very special announcement. No one is going home tonight!</p>
+                  <p class="muted" style="margin-top: 10px;">The 5 queens who do the best in this challenge will be in the top. The winner of the week will get the honour of lip syncing against an amazing lip syncer, Brooke Lynn Hytes. You may all leave the stage and return to the werk room.</p>
+                </div>
+              </div>
+            `;
+          } else if (phaseTag === "ca6_performances") {
+            // Split all queens into 4 tiers from best to worst based on score
+            const _ca6n = data.scores.length;
+            const _t1end = Math.max(1, Math.round(_ca6n * 0.25));
+            const _t2end = Math.max(_t1end + 1, Math.round(_ca6n * 0.50));
+            const _t3end = Math.max(_t2end + 1, Math.round(_ca6n * 0.75));
+            const _ca6tiers = [
+              { queens: data.scores.slice(0, _t1end).map(s => s.queen).sort(() => Math.random() - 0.5),      label: "Gave an incredible performance!", css: "bg-safe" },
+              { queens: data.scores.slice(_t1end, _t2end).map(s => s.queen).sort(() => Math.random() - 0.5), label: "Had a great performance!",         css: "bg-safe" },
+              { queens: data.scores.slice(_t2end, _t3end).map(s => s.queen).sort(() => Math.random() - 0.5), label: "Had a decent performance.",        css: "bg-safe" },
+              { queens: data.scores.slice(_t3end).map(s => s.queen).sort(() => Math.random() - 0.5),         label: "Really struggled on the stage.",   css: "bg-safe" }
+            ].filter(t => t.queens.length > 0);
+            const _lastIdx = _ca6tiers.length - 1;
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Maxi Challenge</span></div>
+                <p class="big-message">Rumix</p>
+                <p class="muted" style="margin-bottom: 20px;">The queens hit the stage...</p>
+                <div class="flex-col-center">
+                  ${_ca6tiers.map((t, i) => `
+                  <div class="group-row" ${i === _lastIdx ? 'style="border:none;"' : ''}>
+                    <p class="muted">${t.label}</p>
+                    <div class="flex-center">${t.queens.map(q => `<div class="placement-card ${t.css}">${escapeHtml(q.name)}</div>`).join("")}</div>
+                  </div>`).join("")}
+                </div>
+              </div>
+            `;
+          } else if (phaseTag === "ca6_tops") {
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Judging!</span></div>
+                <p class="muted" style="margin-bottom: 16px;">Based on tonight's performances...</p>
+                <div class="flex-col-center">
+                  <div class="group-row">
+                    <div class="flex-center">${data.ca6TopsShuffled.map(q => `<div class="placement-card bg-safe">${escapeHtml(q.name)}</div>`).join("")}</div>
+                    <p class="muted">You are the top 5 queens of the week. You'll be critiqued and a winner will be chosen.</p>
+                  </div>
+                  ${data.ca6Safes.length ? `
+                  <hr style="width:100%; border:0; border-top:1px solid var(--border); margin:10px 0;">
+                  <div class="flex-center">
+                    ${data.ca6Safes.map(q => `<span class="placement-card small bg-safe">${escapeHtml(q.name)}</span>`).join("")}
+                  </div>
+                  <p class="muted">You are safe.</p>` : ""}
+                </div>
+              </div>
+            `;
+          } else if (phaseTag === "ca6_winner") {
+            // Apply track record counts here (only once)
+            if (!data.countsApplied) {
+              const epIndex = state.episodeNumber - 1;
+              data.ca6Winner.record.WIN += 1; data.ca6Winner.history[epIndex] = "WIN";
+              data.ca6OtherTops.forEach(q => { q.record.HIGH += 1; q.history[epIndex] = "HIGH"; });
+              data.ca6Safes.forEach(q => { q.record.SAFE += 1; q.history[epIndex] = "SAFE"; });
+              data.countsApplied = true;
+            }
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">The Winner of the Week</span></div>
+                <p class="muted" style="margin-bottom: 16px;">Ladies, I've made my decisions...</p>
+                <div class="flex-col-center">
+                  <div class="group-row">
+                    <div class="flex-center">
+                      <div class="placement-card bg-win">${escapeHtml(data.ca6Winner.name)}</div>
+                    </div>
+                    <p class="muted">Condragulations, you are the winner of this week's Rumix! As your prize, you will get the honour of lip syncing against the legendary Brooke Lynn Hytes!</p>
+                  </div>
+                  ${data.ca6OtherTops.length ? `
+                  <div class="group-row" style="border:none;">
+                    <div class="flex-center">${data.ca6OtherTops.map(q => `<div class="placement-card bg-high">${escapeHtml(q.name)}</div>`).join("")}</div>
+                    <p class="muted">Well done this week. You are also in the top!</p>
+                  </div>` : ""}
+                </div>
+              </div>
+            `;
+          } else if (phaseTag === "ca6_brook") {
+            content = `
+              <div class="section-card flex-col-center">
+                <p class="big-message" style="margin-top: 16px;">Please welcome...</p>
+                <div style="margin: 20px 0; text-align: center;">
+                  <img src="brooke_lynn_hytes_lipsync.webp" alt="Brooke Lynn Hytes" style="width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid #a78bfa; box-shadow: 0 8px 32px rgba(167,139,250,0.35); display: block; margin: 0 auto 16px;" onerror="this.style.display='none'">
+                  <p class="big-message" style="color: #7c3aed; margin: 0;">Brooke Lynn Hytes!</p>
+                </div>
+                <p class="muted" style="max-width: 480px; text-align: center;">${escapeHtml(data.ca6Winner.name)}, you will now lip sync against one of the greatest lip syncers to ever walk the main stage. Good luck!</p>
+              </div>
+            `;
+          } else if (phaseTag === "ca6_lipsync") {
+            const _ca6ls = data.ca6LipSync;
+            content = `
+              <div class="section-card">
+                <div class="label-row"><span class="pill">Lip Sync for the Glory!</span></div>
+                <p class="muted">This one is just for the love of the art!</p>
+                <p class="big-message" style="margin: 16px 0;">${escapeHtml(_ca6ls.song)}</p>
+                <div class="flex-center" style="align-items: stretch; gap: 16px;">
+                  <div style="text-align:center; width: 160px; display: flex; flex-direction: column;">
+                    <div class="placement-card bg-safe" style="flex: 1;">${escapeHtml(_ca6ls.performances[0].queen.name)}</div>
+                    <p class="muted" style="margin-top:6px; font-size:13px;">${_ca6ls.performances[0].event.text}</p>
+                  </div>
+                  <div style="text-align:center; width: 160px; display: flex; flex-direction: column;">
+                    <div class="placement-card bg-safe with-photo" style="flex: 1;">
+                      <img class="pc-img" src="brooke_lynn_hytes_lipsync.webp" alt="Brooke Lynn Hytes" onerror="this.style.display='none'">
+                      Brooke Lynn Hytes
+                    </div>
+                    <p class="muted" style="margin-top:6px; font-size:13px;">${_ca6ls.performances[1].event.text}</p>
+                  </div>
+                </div>
+              </div>
+            `;
+          } else if (phaseTag === "ca6_result") {
+            content = `
+              <div class="section-card flex-col-center">
+                <p class="big-message" style="margin-top: 16px;">Well, that was just for fun!</p>
+                <p class="muted" style="max-width: 500px; text-align: center; margin: 12px 0 24px;">But next week the real competition begins. Good luck, queens!</p>
+                <div class="flex-center" style="gap: 16px;">
+                  <div class="placement-card bg-shantay">${escapeHtml(data.ca6Winner.name)}</div>
+                  <div class="placement-card bg-shantay with-photo">
+                    <img class="pc-img" src="brooke_lynn_hytes_lipsync.webp" alt="Brooke Lynn Hytes" onerror="this.style.display='none'">
+                    Brooke Lynn Hytes
+                  </div>
                 </div>
               </div>
             `;
@@ -3959,6 +4781,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
       }
 
       el.gameContent.innerHTML = content;
+      injectQueenPhotos(el.gameContent);
 
       // Wire tie-breaker card clicks — done here where el is guaranteed in scope
       if (phaseTag === "vote_return_votes" && data && data.returnTieBreakerNeeded) {
@@ -4002,6 +4825,9 @@ if (state.seasonFormat === "tournament-of-all-stars") {
       } else {
         el.nextPhaseBtn.textContent = "Next";
       }
+
+      // Restore the phase offset we applied at the start for premiere intro formats
+      if (introOffset) state.phase += introOffset;
     }
 
     el.nextPhaseBtn.addEventListener("click", () => {
@@ -4019,6 +4845,16 @@ if (state.seasonFormat === "tournament-of-all-stars") {
       if (state.episodeData.isReturn && !state.episodeData.isGirlGroup && !state.episodeData.isLaLaPaRuza && state.seasonFormat !== "all-stars-assassin" && !state.episodeData.isQuit) totalPhases = 9;
       if (state.episodeData.isVoteReturn && !state.episodeData.isGirlGroup && !state.episodeData.isLaLaPaRuza && state.seasonFormat !== "all-stars-assassin" && !state.episodeData.isQuit) totalPhases = 10;
       if (state.episodeData.isChooseReturn && !state.episodeData.isGirlGroup && !state.episodeData.isLaLaPaRuza && state.seasonFormat !== "all-stars-assassin" && !state.episodeData.isQuit) totalPhases = 10;
+      if (state.episodeData.isBeaverEpisode) {
+        const _btPremiere = (state.episodeNumber === 1) || (state.premiereFormat === "ca6-premiere" && state.episodeNumber === 2);
+        const _btLeaving = state.episodeData.isBeaverLeaving;
+        if (_btPremiere && _btLeaving) totalPhases = 10;
+        else if (_btPremiere) totalPhases = 9;
+        else totalPhases = 8;
+      }
+      if (state.episodeData.isCA6Premiere) totalPhases = 10;
+      // Premiere intro screens add 2 phases to episode 1 for eligible formats
+      if (showsPremiereIntro()) totalPhases += 2;
   }
 
   if (state.phase < totalPhases) { state.phase++; renderEpisode(); }
@@ -4077,7 +4913,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
 
           // Miss Congeniality & Guest — all eliminated non-DISQ non-finalist queens attend the finale
           const finalistIds4 = new Set(finalists.map(q => q.id));
-          const misConPool4 = state.queens.filter(q => !finalistIds4.has(q.id) && !Object.values(q.history).includes("DISQ"));
+          const misConPool4 = state.queens.filter(q => !finalistIds4.has(q.id) && !hadDisq(q));
           const missCon4 = misConPool4.length > 0 ? pick(misConPool4) : null;
           misConPool4.forEach(q => { q.history[epIndex] = (missCon4 && q.id === missCon4.id) ? "MISS CON" : "GUEST"; });
           
@@ -4098,7 +4934,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
 
           // Miss Congeniality & Guest
           const finalistIds3 = new Set(finalists.map(q => q.id));
-          const misConPool3 = state.queens.filter(q => !finalistIds3.has(q.id) && !Object.values(q.history).includes("DISQ"));
+          const misConPool3 = state.queens.filter(q => !finalistIds3.has(q.id) && !hadDisq(q));
           const missCon3 = misConPool3.length > 0 ? pick(misConPool3) : null;
           misConPool3.forEach(q => { q.history[epIndex] = (missCon3 && q.id === missCon3.id) ? "MISS CON" : "GUEST"; });
 
@@ -4150,7 +4986,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
           } else if (f.step === 2) {
               content = `
                 <div class="section-card flex-col-center">
-                  <div class="label-row"><span class="pill">Round 1 — Quarter Finals</span></div>
+                  <div class="label-row"><span class="pill">Round 1: Quarter Finals</span></div>
                   <p class="big-message">Round 1 Matchups</p>
                   <div class="flex-col-center" style="width:100%; gap:14px; margin-top:14px;">
                     <div class="group-row">
@@ -4207,7 +5043,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
           } else if (f.step === 4) {
               content = `
                 <div class="section-card flex-col-center">
-                  <div class="label-row"><span class="pill">Round 2 — Semi Finals</span></div>
+                  <div class="label-row"><span class="pill">Round 2: Semi Finals</span></div>
                   <p class="big-message">Round 2 Matchups</p>
                   <p class="muted">The winners advance to the Final!</p>
                   <div class="flex-col-center" style="width:100%; gap:14px; margin-top:14px;">
@@ -4280,11 +5116,11 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                     <div class="spinner"></div>
                   </div>
                   <div id="winnerRevealBox" class="hidden flex-col-center" style="width:100%;">
-                    <div class="placement-card bg-winner" style="padding:24px; font-size:20px; width:100%; max-width:400px; border-radius:24px;">
+                    <div class="placement-card bg-winner" data-queen-id="${f.final.winner.id}" style="padding:24px; font-size:20px; width:100%; max-width:400px; border-radius:24px;">
                       <p style="margin:0 0 8px; font-size:14px; font-weight:600; opacity:0.8;">WINNER</p>
                       <p class="big-message" style="margin:0;">${escapeHtml(f.final.winner.name)}<span class="winner-crown">👑</span></p>
                     </div>
-                    <div class="placement-card bg-runner" style="padding:16px; width:100%; max-width:400px; border-radius:16px; margin-top:12px;">
+                    <div class="placement-card bg-runner" data-queen-id="${f.final.loser.id}" style="padding:16px; width:100%; max-width:400px; border-radius:16px; margin-top:12px;">
                       <p style="margin:0 0 4px; font-size:12px; font-weight:600; opacity:0.8;">RUNNER UP</p>
                       <p style="margin:0; font-weight:800; font-size:16px;">${escapeHtml(f.final.loser.name)}</p>
                     </div>
@@ -4352,7 +5188,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
       } else if (state.finaleFormat === "top4") {
           if (f.step === 1) {
             // Finale intro
-            const allFinaleQueens = state.queens.filter(q => !Object.values(q.history).includes("DISQ"));
+            const allFinaleQueens = state.queens.filter(q => !hadDisq(q));
             content = `
               <div class="section-card flex-col-center">
                 <div class="label-row"><span class="pill">Grand Finale</span></div>
@@ -4379,7 +5215,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                 <p class="big-message" style="color:#00cccc;">Miss Congeniality</p>
                 ${f.missCon ? `
                   <div class="placement-card bg-miss-con" style="font-size:18px; padding:16px 32px; margin-top:12px;">${escapeHtml(f.missCon.name)}</div>
-                  <p class="muted" style="margin-top:12px;">Congratulations — the queens have spoken!</p>
+                  <p class="muted" style="margin-top:12px;">Condragulations! The queens have spoken!</p>
                 ` : `<p class="muted">No eligible queens for this award.</p>`}
               </div>
             `;
@@ -4389,7 +5225,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
               <div class="section-card flex-col-center">
                 <div class="label-row"><span class="pill">Top 4</span></div>
                 <p class="big-message">Tonight's Matchups</p>
-                <p class="muted" style="margin-bottom:16px;">Four queens, two lip syncs — only two will advance to the final!</p>
+                <p class="muted" style="margin-bottom:16px;">Four queens, two lip syncs, and only two will advance to the final!</p>
                 <div class="flex-col-center" style="width:100%; gap:16px;">
                   <div class="group-row">
                     <p class="muted" style="font-weight:800; margin:0;">Lip Sync 1</p>
@@ -4457,11 +5293,11 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                   <div class="spinner"></div>
                 </div>
                 <div id="winnerRevealBox" class="hidden flex-col-center" style="width:100%;">
-                    <div class="placement-card bg-winner" style="padding: 24px; font-size: 20px; width: 100%; max-width: 400px; border-radius: 24px;">
+                    <div class="placement-card bg-winner" data-queen-id="${f.final.winner.id}" style="padding: 24px; font-size: 20px; width: 100%; max-width: 400px; border-radius: 24px;">
                       <p style="margin:0 0 8px; font-size:14px; font-weight:600; opacity:0.8;">WINNER</p>
                       <p class="big-message" style="margin:0;">${escapeHtml(f.final.winner.name)}<span class="winner-crown">👑</span></p>
                     </div>
-                    <div class="placement-card bg-runner" style="padding: 16px; width: 100%; max-width: 400px; border-radius: 16px;">
+                    <div class="placement-card bg-runner" data-queen-id="${f.final.loser.id}" style="padding: 16px; width: 100%; max-width: 400px; border-radius: 16px;">
                       <p style="margin:0 0 4px; font-size:12px; font-weight:600; opacity:0.8;">RUNNER UP</p>
                       <p style="margin:0; font-weight:800; font-size: 16px;">${escapeHtml(f.final.loser.name)}</p>
                     </div>
@@ -4570,7 +5406,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                 <p class="big-message" style="color:#00cccc;">Miss Congeniality</p>
                 ${f.missCon ? `
                   <div class="placement-card bg-miss-con" style="font-size:18px; padding:16px 32px; margin-top:12px;">${escapeHtml(f.missCon.name)}</div>
-                  <p class="muted" style="margin-top:12px;">Congratulations — the queens have spoken!</p>
+                  <p class="muted" style="margin-top:12px;">Congratulations, the queens have spoken!</p>
                 ` : `<p class="muted">No eligible queens for this award.</p>`}
               </div>
             `;
@@ -4623,11 +5459,11 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                   <div class="spinner"></div>
                 </div>
                 <div id="winnerRevealBox" class="hidden flex-col-center" style="width:100%;">
-                    <div class="placement-card bg-winner" style="padding: 24px; font-size: 20px; width: 100%; max-width: 400px; border-radius: 24px;">
+                    <div class="placement-card bg-winner" data-queen-id="${f.final.winner.id}" style="padding: 24px; font-size: 20px; width: 100%; max-width: 400px; border-radius: 24px;">
                       <p style="margin:0 0 8px; font-size:14px; font-weight:600; opacity:0.8;">WINNER</p>
                       <p class="big-message" style="margin:0;">${escapeHtml(f.final.winner.name)}<span class="winner-crown">👑</span></p>
                     </div>
-                    <div class="placement-card bg-runner" style="padding: 16px; width: 100%; max-width: 400px; border-radius: 16px;">
+                    <div class="placement-card bg-runner" data-queen-id="${f.final.loser.id}" style="padding: 16px; width: 100%; max-width: 400px; border-radius: 16px;">
                       <p style="margin:0 0 4px; font-size:12px; font-weight:600; opacity:0.8;">RUNNER UP</p>
                       <p style="margin:0; font-weight:800; font-size: 16px;">${escapeHtml(f.final.loser.name)}</p>
                     </div>
@@ -4707,22 +5543,30 @@ if (state.seasonFormat === "tournament-of-all-stars") {
       }
       
       el.finaleContent.innerHTML = content;
+      injectQueenPhotos(el.finaleContent);
     }
 
     el.finaleBtn.addEventListener("click", () => { state.finaleData.step++; renderFinale(); });
     // --- RIGGORY SYSTEM LOGIC --- //
     // --- RIGGORY SYSTEM LOGIC --- //
     el.rigGameBtn.addEventListener("click", () => {
+        // Use the rig type computed during renderEpisode (with intro-shifted phase),
+        // so this works correctly on ep1 and in Beaver format.
+        const rt = state._currentRigType;
+        if (!rt) return;
+
         const p = state.episodeData.placements;
         let isTop2Format = (state.seasonFormat === "all-stars-legacy" || (state.episodeNumber === 1 && state.premiereFormat === "top2") || state.episodeData.isMidSeasonNonElim);
         let isTop1Format = state.seasonFormat === "all-stars-assassin";
         let html = "";
         const isGG = state.episodeData.isGirlGroup;
         const isLaLa = state.episodeData.isLaLaPaRuza;
-        const isMerge = state.episodeData.isTournamentMerge; // Add this variable
+        const isMerge = state.episodeData.isTournamentMerge;
+        // Beaver judging rig: show winner picker but NOT the save-low picker
+        const isBeaverJudging = (rt === "ep3_beaver");
 
-        // Update the Phase 3 / Phase 4 Judging checks
-        if ((isGG && state.phase === 4) || (isMerge && state.phase === 4) || (!isGG && !isLaLa && !isMerge && state.phase === 3) || (isTop1Format && state.phase === 3)) {
+        // Judging panel (ep3 or ep3_beaver)
+        if (rt === "ep3" || rt === "ep3_beaver") {
             let tops = isTop2Format ? [...p.topTwo, ...p.highQueens] : (isTop1Format ? [...p.topOne, ...p.highQueens] : [...p.winners, ...p.highQueens]);
             let bottoms = p.bottomThree ? [...p.bottomThree] : [...(p.savedLow ? [p.savedLow] : []), ...(p.bottomTwo || [])];
 
@@ -4752,10 +5596,11 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                 }
             }
 
-            // Show saved-low picker only when there are actual bottoms and it's an elimination episode
+            // Show saved-low picker only when there are actual bottoms, it's an elimination episode,
+            // and NOT a Beaver episode (the winner decides who to save there).
             const isTop2Premiere = state.episodeNumber === 1 && state.premiereFormat === "top2";
             const isNoElimPremiere = state.episodeNumber === 1 && state.premiereFormat === "no-elim";
-            const hasBottoms = bottoms.length >= 3 && !state.episodeData.isMidSeasonNonElim && !isTop2Premiere && !isNoElimPremiere;
+            const hasBottoms = bottoms.length >= 3 && !state.episodeData.isMidSeasonNonElim && !isTop2Premiere && !isNoElimPremiere && !isBeaverJudging;
             let bottomHtml = "";
             if (hasBottoms) {
                 let btmOptions = bottoms.map(q =>
@@ -4765,16 +5610,14 @@ if (state.seasonFormat === "tournament-of-all-stars") {
             }
 
             html = winnerHtml + bottomHtml;
-            el.rigModal.dataset.rigType = "ep3";
+            el.rigModal.dataset.rigType = rt; // preserve "ep3" or "ep3_beaver"
             el.rigContent.innerHTML = html;
             el.rigModal.classList.remove("hidden");
 
-        // Update the Phase 5 / Phase 6 Lip Sync checks
-        } else if ((isGG && state.phase === 6) || (isLaLa && state.phase === 6) || (isTop1Format && state.phase === 6) || (isMerge && state.phase === 6) || (!isGG && !isLaLa && !isTop1Format && !isMerge && state.phase === 5)) {
+        // Lip Sync panel (ep5)
+        } else if (rt === "ep5") {
             let p1, p2;
             let canDoubleSashay = false;
-            
-            // ... (Keep the rest of the Lip Sync rigging code inside here exactly the same) ...
             let isTop2LipSyncTrigger = false;
             
             if (isLaLa) {
@@ -4789,7 +5632,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                 p1 = state.episodeData.lipSync.performances[0].queen;
                 p2 = state.episodeData.lipSync.performances[1].queen;
                 isTop2LipSyncTrigger = state.seasonFormat === "all-stars-legacy" || state.episodeData.isMidSeasonNonElim || (state.episodeNumber === 1 && state.premiereFormat === "top2");
-                canDoubleSashay = activeQueens().length > (state.finaleFormat === "top3" ? 4 : 5);
+                canDoubleSashay = !state.episodeData.isBeaverEpisode && activeQueens().length > (state.finaleFormat === "top3" ? 4 : 5);
             }
             
             html = `
@@ -4797,7 +5640,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                     <select id="rigLipSync">
                         <option value="w1">${escapeHtml(p1.name)} Wins</option>
                         <option value="w2">${escapeHtml(p2.name)} Wins</option>
-                        ${!isTop2LipSyncTrigger && state.seasonFormat !== "tournament-of-all-stars" ? `<option value="double_shantay">Double Shantay</option>` : ''}
+                        ${!isTop2LipSyncTrigger && state.seasonFormat !== "tournament-of-all-stars" && !state.episodeData.isBeaverEpisode ? `<option value="double_shantay">Double Shantay</option>` : ''}
                         ${!isTop2LipSyncTrigger && canDoubleSashay && state.seasonFormat !== "tournament-of-all-stars" ? `<option value="double_sashay">Double Sashay</option>` : ''}
                     </select>
                 </label>
@@ -4900,7 +5743,7 @@ if (state.seasonFormat === "tournament-of-all-stars") {
     el.saveRigBtn.addEventListener("click", () => {
         const rt = el.rigModal.dataset.rigType;
         
-        if (rt === "ep3") {
+        if (rt === "ep3" || rt === "ep3_beaver") {
             const p = state.episodeData.placements;
             let isTop2Format = (state.seasonFormat === "all-stars-legacy" || (state.episodeNumber === 1 && state.premiereFormat === "top2") || state.episodeData.isMidSeasonNonElim);
             let isTop1Format = state.seasonFormat === "all-stars-assassin";
@@ -4966,6 +5809,19 @@ if (state.seasonFormat === "tournament-of-all-stars") {
                     state.episodeData.lsaData.tieBreakerNeeded = false;
                 }
                 state.episodeData.elimination = null;
+            }
+            // For Beaver: directly apply the rig to data.lipSync so beaver_elim reads the correct winner
+            if (state.episodeData.isBeaverEpisode && state.episodeData.lipSync) {
+                const _bEv1 = state.episodeData.lipSync.performances[0];
+                const _bEv2 = state.episodeData.lipSync.performances[1];
+                if (rigVal === "w1") {
+                    state.episodeData.lipSync.winner = { queen: _bEv1.queen, event: _bEv1.event };
+                    state.episodeData.lipSync.loser  = { queen: _bEv2.queen, event: _bEv2.event };
+                } else if (rigVal === "w2") {
+                    state.episodeData.lipSync.winner = { queen: _bEv2.queen, event: _bEv2.event };
+                    state.episodeData.lipSync.loser  = { queen: _bEv1.queen, event: _bEv1.event };
+                }
+                state.episodeData.beaverBtm3Applied = false;
             }
             el.rigModal.classList.add("hidden");
             alert("Outcome locked! Click Next to see results.");
@@ -5124,45 +5980,82 @@ if (state.seasonFormat === "tournament-of-all-stars") {
     }
 
     // Toggle the clean overlay when Tournament or Lip Sync Assassin mode is active
-    el.seasonFormatSelect.addEventListener("change", (e) => {
-      const val = e.target.value;
-      const isTournament = val === "tournament-of-all-stars";
-      const isAssassin = val === "all-stars-assassin";
-      const isRegular = val === "regular";
+    // ── FORMAT CARD PICKER ─────────────────────────────────────────────────
+    const formatLabelsMap = {
+      "regular":               "Regular Season",
+      "beaver":                "Beaver (CDR)",
+      "all-stars-legacy":      "All Stars Legacy",
+      "all-stars-assassin":    "All Stars Assassin",
+      "tournament-of-all-stars": "Tournament Of All Stars"
+    };
 
-      const tournamentOverlay = document.getElementById("tournamentOverlay");
-      const assassinOverlay = document.getElementById("assassinOverlay");
-      const extraSelects = document.querySelectorAll("#extraSettingsWrapper select");
-      const premiereSelect = document.getElementById("premiereFormatSelect");
-      const finaleSelect = document.getElementById("finaleFormatSelect");
-      const returnFormatRow = document.getElementById("returnFormatRow");
-      const returnFormatSelect = document.getElementById("returnFormatSelect");
+    function applyFormatUI(format) {
+      // Keep the hidden native select in sync so existing startSeason() code works
+      el.seasonFormatSelect.value = format;
 
-      // Full lock for Tournament
-      tournamentOverlay.classList.toggle("hidden", !isTournament);
-      extraSelects.forEach(sel => {
-        sel.disabled = isTournament;
-        sel.style.opacity = isTournament ? "0.5" : "1";
-      });
+      // Update the label in the "change format" button
+      document.getElementById("chosenFormatLabel").textContent = formatLabelsMap[format] || format;
 
-      // Partial lock for Assassin (premiere only, finale stays free)
-      assassinOverlay.classList.toggle("hidden", !isAssassin);
-      if (!isTournament) {
-        premiereSelect.disabled = isAssassin;
-        premiereSelect.style.opacity = isAssassin ? "0.5" : "1";
-        finaleSelect.disabled = false;
-        finaleSelect.style.opacity = "1";
+      // Swap panels
+      document.getElementById("formatSelectorPanel").classList.add("hidden");
+      document.getElementById("settingsPanel").classList.remove("hidden");
+
+      // Reset all sections to hidden
+      const premiereSection    = document.getElementById("premiereSection");
+      const returnSection      = document.getElementById("returnFormatSection");
+      const extraSection       = document.getElementById("extraOptionsSection");
+      const finaleSection      = document.getElementById("finaleSection");
+      const tournamentMsg      = document.getElementById("tournamentMsg");
+      const premiereSelect     = document.getElementById("premiereFormatSelect");
+
+      [premiereSection, returnSection, extraSection, finaleSection, tournamentMsg].forEach(el => el.classList.add("hidden"));
+
+      if (format === "regular") {
+        premiereSelect.innerHTML = `
+          <option value="regular">Regular Premiere</option>
+          <option value="no-elim">Regular Premiere (No Elimination)</option>
+          <option value="top2">Top 2 Premiere (Lip Sync for the Win)</option>
+        `;
+        premiereSection.classList.remove("hidden");
+        returnSection.classList.remove("hidden");
+        extraSection.classList.remove("hidden");
+        finaleSection.classList.remove("hidden");
+
+      } else if (format === "beaver") {
+        premiereSelect.innerHTML = `
+          <option value="regular">Regular Premiere</option>
+          <option value="ca6-premiere">CA6 Premiere (Rumix + Brooke Lynn Hytes)</option>
+        `;
+        premiereSection.classList.remove("hidden");
+        finaleSection.classList.remove("hidden");
+
+      } else if (format === "all-stars-legacy") {
+        premiereSelect.innerHTML = `
+          <option value="regular">Regular Premiere</option>
+          <option value="no-elim">Regular Premiere (No Elimination)</option>
+        `;
+        premiereSection.classList.remove("hidden");
+        finaleSection.classList.remove("hidden");
+
+      } else if (format === "all-stars-assassin") {
+        finaleSection.classList.remove("hidden");
+
+      } else if (format === "tournament-of-all-stars") {
+        tournamentMsg.classList.remove("hidden");
       }
+    }
 
-      // Returning Format: show blocker overlay for all non-Regular formats, reset select
-      const returnFormatOverlay = document.getElementById("returnFormatOverlay");
-      const returnFormatOverlayActive = !isRegular;
-      returnFormatOverlay.classList.toggle("hidden", !returnFormatOverlayActive);
-      returnFormatSelect.disabled = returnFormatOverlayActive;
-      if (!isRegular) {
-        returnFormatSelect.value = "none";
-        state.returnFormat = "none";
-      }
+    // Format card click handlers
+    document.querySelectorAll(".format-card-btn").forEach(btn => {
+      btn.addEventListener("click", () => applyFormatUI(btn.dataset.format));
+    });
+
+    // "Change Format" button — go back to the selector
+    document.getElementById("changeFormatBtn").addEventListener("click", () => {
+      document.getElementById("formatSelectorPanel").classList.remove("hidden");
+      document.getElementById("settingsPanel").classList.add("hidden");
+      // Reset hidden select to a blank state so startSeason won't fire with stale format
+      el.seasonFormatSelect.value = "regular";
     });
     el.randomizeQueenBtn.addEventListener("click", randomizeQueenForm);
     el.addQueenBtn.addEventListener("click", addQueenFromForm);
@@ -5341,7 +6234,7 @@ window.resolveTournamentTie = function(queenId) {
         panelModal.classList.add("hidden");
         refreshDebugState();
         renderEpisode();
-        alert(`✅ DEPT forced on: ${ed.deptQueen.name}\nPhase rewound to 4 — click Next to proceed through the lip sync.`);
+        alert(`✅ DEPT forced on: ${ed.deptQueen.name}\nPhase rewound to 4, click Next to proceed through the lip sync.`);
       });
 
       // ── Force DEPT on NEXT episode ──
@@ -5401,7 +6294,7 @@ window.resolveTournamentTie = function(queenId) {
         panelModal.classList.add("hidden");
         refreshDebugState();
         renderEpisode();
-        alert(`✅ DISQ forced on: ${ed.disqQueen.name}\nPhase rewound to 4 — click Next to proceed through the lip sync.`);
+        alert(`✅ DISQ forced on: ${ed.disqQueen.name}\nPhase rewound to 4, click Next to proceed through the lip sync.`);
       });
 
       // ── Force DISQ on NEXT episode ──
@@ -5453,7 +6346,7 @@ window.resolveTournamentTie = function(queenId) {
         panelModal.classList.add("hidden");
         refreshDebugState();
         renderEpisode();
-        alert(`✅ QUIT forced on: ${ed.quitQueen.name}\nPhase rewound to 3 — click Next to see the shock announcement.`);
+        alert(`✅ QUIT forced on: ${ed.quitQueen.name}\nPhase rewound to 3, click Next to see the shock announcement.`);
       });
 
       // ── Force QUIT on NEXT episode ──
