@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#9be564">
+<title>Cast Builder — Drag Race Simulator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d1410;
+    --bg-alt:#111a14;
+    --card:#16211a;
+    --card-hover:#1b2921;
+    --border:#28382e;
+    --border-bright:#3a4f40;
+    --accent:#9be564;
+    --accent-dim:#6f9e49;
+    --accent-soft:rgba(155,229,100,0.12);
+    --text:#eef5ea;
+    --text-dim:#9fb097;
+    --text-faint:#6c7d70;
+    --danger:#e5645f;
+    --danger-soft:rgba(229,100,95,0.12);
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 15% 0%, rgba(155,229,100,0.08), transparent 45%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    min-height:100vh;
+  }
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  .topbar{
+    border-bottom:1px solid var(--border);
+    background:var(--bg-alt);
+    padding:14px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .topbar .back{font-size:13px;color:var(--text-dim);}
+  .topbar .back:hover{color:var(--accent);}
+  .brand{font-family:'Poppins',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.03em;color:var(--accent);}
+
+  header.hero{
+    padding:36px 28px 20px;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  header.hero h1{
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:clamp(28px,4vw,40px);
+    margin:0 0 6px;
+    letter-spacing:-0.01em;
+  }
+  header.hero h1 span{color:var(--accent);}
+  header.hero p{
+    color:var(--text-dim);
+    margin:0;
+    font-size:15px;
+    max-width:640px;
+    line-height:1.5;
+  }
+
+  .layout{
+    max-width:1180px;
+    margin:0 auto;
+    padding:10px 28px 80px;
+    display:grid;
+    grid-template-columns:400px 1fr;
+    gap:24px;
+  }
+  @media (max-width:920px){
+    .layout{grid-template-columns:1fr;}
+  }
+
+  .panel{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:22px;
+  }
+  .panel h2{
+    font-family:'Poppins',sans-serif;
+    font-size:15px;
+    font-weight:700;
+    margin:0 0 4px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--accent);
+  }
+  .panel .sub{
+    color:var(--text-faint);
+    font-size:12.5px;
+    margin:0 0 18px;
+    line-height:1.5;
+  }
+
+  label.field-label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--text-dim);
+    margin:18px 0 8px;
+  }
+  label.field-label:first-of-type{margin-top:0;}
+
+  input[type="text"]{
+    width:100%;
+    background:var(--bg-alt);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:11px 12px;
+    color:var(--text);
+    font-size:14.5px;
+    font-family:inherit;
+    outline:none;
+    transition:border-color .15s;
+  }
+  input[type="text"]:focus{border-color:var(--accent-dim);}
+  input[type="text"]::placeholder{color:var(--text-faint);}
+
+  .type-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+  .type-btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--bg-alt);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:10px 11px;
+    color:var(--text-dim);
+    font-size:13px;
+    font-weight:500;
+    cursor:pointer;
+    transition:all .12s;
+    user-select:none;
+  }
+  .type-btn .dot{width:7px;height:7px;border-radius:50%;background:var(--text-faint);flex-shrink:0;}
+  .type-btn:hover{border-color:var(--border-bright);color:var(--text);}
+  .type-btn.disabled{opacity:0.35;cursor:not-allowed;pointer-events:none;}
+
+  .type-btn.strength-on{
+    background:var(--accent-soft);
+    border-color:var(--accent-dim);
+    color:var(--accent);
+  }
+  .type-btn.strength-on .dot{background:var(--accent);}
+  .type-btn.weak-on{
+    background:var(--danger-soft);
+    border-color:#8f3d3a;
+    color:var(--danger);
+  }
+  .type-btn.weak-on .dot{background:var(--danger);}
+
+  .hint{font-size:11.5px;color:var(--text-faint);margin-top:8px;}
+  .hint b{color:var(--text-dim);}
+
+  .toggle-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:20px;
+    padding:12px 13px;
+    background:var(--bg-alt);
+    border:1px solid var(--border);
+    border-radius:8px;
+  }
+  .toggle-row .label{font-size:13px;font-weight:600;}
+  .toggle-row .desc{font-size:11.5px;color:var(--text-faint);margin-top:2px;}
+  .switch{
+    position:relative;width:40px;height:22px;flex-shrink:0;margin-left:14px;
+  }
+  .switch input{opacity:0;width:0;height:0;}
+  .slider{
+    position:absolute;inset:0;background:var(--border);border-radius:22px;
+    cursor:pointer;transition:.15s;
+  }
+  .slider:before{
+    content:"";position:absolute;height:16px;width:16px;left:3px;top:3px;
+    background:var(--text-dim);border-radius:50%;transition:.15s;
+  }
+  input:checked + .slider{background:var(--danger-soft);border:1px solid var(--danger);}
+  input:checked + .slider:before{transform:translateX(18px);background:var(--danger);}
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    border:none;
+    border-radius:8px;
+    padding:12px 16px;
+    font-family:inherit;
+    font-weight:700;
+    font-size:14px;
+    cursor:pointer;
+    transition:filter .12s, opacity .12s;
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:#0d1410;
+    width:100%;
+    margin-top:20px;
+  }
+  .btn-primary:hover{filter:brightness(1.08);}
+  .btn-primary:disabled{opacity:0.4;cursor:not-allowed;filter:none;}
+  .btn-ghost{
+    background:transparent;
+    border:1px solid var(--border-bright);
+    color:var(--text-dim);
+  }
+  .btn-ghost:hover{border-color:var(--accent-dim);color:var(--accent);}
+  .btn-danger-ghost{
+    background:transparent;border:1px solid transparent;color:var(--text-faint);
+    padding:4px 8px;font-size:12px;font-weight:600;
+  }
+  .btn-danger-ghost:hover{color:var(--danger);}
+
+  .error-msg{
+    font-size:12.5px;color:var(--danger);margin-top:10px;min-height:1px;
+  }
+  .roll-msg{
+    font-size:12px;color:var(--accent);margin-top:10px;min-height:1px;
+    line-height:1.5;
+  }
+
+  .roster-head{
+    display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;
+  }
+  .roster-count{color:var(--text-faint);font-size:12.5px;}
+
+  .empty-state{
+    border:1px dashed var(--border-bright);
+    border-radius:8px;
+    padding:40px 20px;
+    text-align:center;
+    color:var(--text-faint);
+    font-size:13.5px;
+  }
+
+  .roster-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+    gap:14px;
+  }
+  .queen-card{
+    background:var(--bg-alt);
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:16px;
+    transition:border-color .12s;
+  }
+  .queen-card:hover{border-color:var(--border-bright);}
+  .queen-card .qhead{
+    display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px;
+  }
+  .queen-card .qname{
+    font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;
+  }
+  .badges{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;}
+  .badge{
+    font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;
+    padding:3px 7px;border-radius:5px;
+  }
+  .badge.s{background:var(--accent-soft);color:var(--accent);}
+  .badge.w{background:var(--danger-soft);color:var(--danger);}
+
+  .stat-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+  .stat-row .stat-label{width:76px;font-size:11px;color:var(--text-faint);flex-shrink:0;}
+  .stat-row .stat-bar{
+    flex:1;height:6px;background:var(--border);border-radius:4px;overflow:hidden;
+  }
+  .stat-row .stat-fill{height:100%;background:var(--accent);border-radius:4px;}
+  .stat-row .stat-val{width:18px;text-align:right;font-size:11.5px;color:var(--text-dim);font-weight:600;flex-shrink:0;}
+
+  .export-bar{
+    display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;
+  }
+  .export-bar .btn{flex:1;min-width:160px;}
+
+  footer{
+    text-align:center;color:var(--text-faint);font-size:12px;padding:20px 0 40px;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="back" href="#">← Back to Sim</a>
+  <span class="brand">DRAG RACE SIMULATOR</span>
+</div>
+
+<header class="hero">
+  <h1>Cast <span>Builder</span></h1>
+  <p>Name a queen, pick what she's known for, pick what holds her back, and she'll roll onto the roster with stats to match. Export when the full cast is ready.</p>
+</header>
+
+<div class="layout">
+
+  <section class="panel" id="form-panel">
+    <h2>Add a queen</h2>
+    <p class="sub">Choose 1–3 strengths and at least 1 weakness. A queen can't be both in the same category.</p>
+
+    <label class="field-label" for="qname">Queen name</label>
+    <input type="text" id="qname" placeholder="e.g. Calico" maxlength="40">
+
+    <label class="field-label">Strengths <span style="color:var(--text-faint);font-weight:500;text-transform:none;">(pick 1–3)</span></label>
+    <div class="type-grid" id="strength-grid"></div>
+
+    <label class="field-label">Weaknesses <span style="color:var(--text-faint);font-weight:500;text-transform:none;">(pick 1+)</span></label>
+    <div class="type-grid" id="weakness-grid"></div>
+
+    <div class="toggle-row">
+      <div>
+        <div class="label">Dramatic spread</div>
+        <div class="desc">Bigger swings — good for a standout star or a disaster queen.</div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="dramatic-toggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <button class="btn btn-primary" id="confirm-btn">Confirm & add to cast</button>
+    <div class="error-msg" id="error-msg"></div>
+    <div class="roll-msg" id="roll-msg"></div>
+  </section>
+
+  <section class="panel">
+    <div class="roster-head">
+      <h2 style="margin:0;">Cast roster</h2>
+      <span class="roster-count" id="roster-count">0 queens</span>
+    </div>
+
+    <div id="roster-empty" class="empty-state">No queens yet. Add your first one on the left.</div>
+    <div class="roster-grid" id="roster-grid"></div>
+
+    <div class="export-bar">
+      <button class="btn btn-ghost" id="clear-btn">Clear cast</button>
+      <button class="btn btn-primary" id="export-btn" style="margin-top:0;">Export JSON</button>
+    </div>
+  </section>
+
+</div>
+
+<footer>Season file compatible with the Greenroom sim JSON format.</footer>
+
+<script>
+(function(){
+  const TYPES = [
+    { id:'sewer',   label:'Sewer',        stat:'design' },
+    { id:'actress', label:'Actress',      stat:'acting' },
+    { id:'performer', label:'Performer',  stat:'performance' },
+    { id:'comedy',  label:'Comedy Queen', stat:'comedy' },
+    { id:'lipsync', label:'Lipsyncer',    stat:'lip_sync' },
+  ];
+  const STAT_ORDER = ['comedy','design','performance','acting','lip_sync'];
+  const STAT_LABELS = { comedy:'Comedy', design:'Design', performance:'Performance', acting:'Acting', lip_sync:'Lip Sync' };
+
+  const NORMAL_RANGE = [1,4];
+  const DRAMATIC_RANGE = [5,8];
+
+  let strengths = new Set();
+  let weaknesses = new Set();
+  let roster = [];
+
+  const strengthGrid = document.getElementById('strength-grid');
+  const weaknessGrid = document.getElementById('weakness-grid');
+  const nameInput = document.getElementById('qname');
+  const dramaticToggle = document.getElementById('dramatic-toggle');
+  const confirmBtn = document.getElementById('confirm-btn');
+  const errorMsg = document.getElementById('error-msg');
+  const rollMsg = document.getElementById('roll-msg');
+  const rosterGrid = document.getElementById('roster-grid');
+  const rosterEmpty = document.getElementById('roster-empty');
+  const rosterCount = document.getElementById('roster-count');
+
+  function renderTypeButtons(){
+    strengthGrid.innerHTML = '';
+    weaknessGrid.innerHTML = '';
+    TYPES.forEach(t => {
+      strengthGrid.appendChild(makeTypeBtn(t, 'strength'));
+      weaknessGrid.appendChild(makeTypeBtn(t, 'weakness'));
+    });
+  }
+
+  function makeTypeBtn(type, mode){
+    const btn = document.createElement('div');
+    btn.className = 'type-btn';
+    btn.dataset.id = type.id;
+    btn.innerHTML = `<span class="dot"></span>${type.label}`;
+
+    const isOn = mode === 'strength' ? strengths.has(type.id) : weaknesses.has(type.id);
+    const isOpposedOn = mode === 'strength' ? weaknesses.has(type.id) : strengths.has(type.id);
+
+    if (isOn) btn.classList.add(mode === 'strength' ? 'strength-on' : 'weak-on');
+    if (isOpposedOn) btn.classList.add('disabled');
+    if (mode === 'strength' && !strengths.has(type.id) && strengths.size >= 3) btn.classList.add('disabled');
+
+    btn.addEventListener('click', () => {
+      if (btn.classList.contains('disabled')) return;
+      const set = mode === 'strength' ? strengths : weaknesses;
+      if (set.has(type.id)) set.delete(type.id);
+      else set.add(type.id);
+      renderTypeButtons();
+      clearMessages();
+    });
+    return btn;
+  }
+
+  function clearMessages(){
+    errorMsg.textContent = '';
+    rollMsg.innerHTML = '';
+  }
+
+  function randInt(lo, hi){
+    return Math.floor(Math.random() * (hi - lo + 1)) + lo;
+  }
+
+  function clamp(v){ return Math.max(1, Math.min(10, v)); }
+
+  function buildQueen(name, dramatic){
+    const range = dramatic ? DRAMATIC_RANGE : NORMAL_RANGE;
+    const stats = { comedy:5, design:5, performance:5, acting:5, lip_sync:5 };
+    const log = [];
+
+    strengths.forEach(id => {
+      const t = TYPES.find(x => x.id === id);
+      const roll = randInt(range[0], range[1]);
+      stats[t.stat] = clamp(stats[t.stat] + roll);
+      log.push(`+${roll} ${STAT_LABELS[t.stat]}`);
+    });
+    weaknesses.forEach(id => {
+      const t = TYPES.find(x => x.id === id);
+      const roll = randInt(range[0], range[1]);
+      stats[t.stat] = clamp(stats[t.stat] - roll);
+      log.push(`-${roll} ${STAT_LABELS[t.stat]}`);
+    });
+
+    return {
+      name,
+      image: null,
+      comedy: stats.comedy,
+      design: stats.design,
+      performance: stats.performance,
+      acting: stats.acting,
+      lip_sync: stats.lip_sync,
+      _strengths: [...strengths],
+      _weaknesses: [...weaknesses],
+      _log: log,
+    };
+  }
+
+  function renderRoster(){
+    rosterGrid.innerHTML = '';
+    rosterCount.textContent = roster.length + (roster.length === 1 ? ' queen' : ' queens');
+    rosterEmpty.style.display = roster.length ? 'none' : 'block';
+
+    roster.forEach((q, idx) => {
+      const card = document.createElement('div');
+      card.className = 'queen-card';
+
+      const badges = [
+        ...q._strengths.map(id => `<span class="badge s">${TYPES.find(t=>t.id===id).label}</span>`),
+        ...q._weaknesses.map(id => `<span class="badge w">${TYPES.find(t=>t.id===id).label}</span>`),
+      ].join('');
+
+      const statRows = STAT_ORDER.map(key => `
+        <div class="stat-row">
+          <span class="stat-label">${STAT_LABELS[key]}</span>
+          <span class="stat-bar"><span class="stat-fill" style="width:${q[key]*10}%"></span></span>
+          <span class="stat-val">${q[key]}</span>
+        </div>`).join('');
+
+      card.innerHTML = `
+        <div class="qhead">
+          <span class="qname">${escapeHtml(q.name)}</span>
+          <button class="btn-danger-ghost" data-idx="${idx}">Remove</button>
+        </div>
+        <div class="badges">${badges}</div>
+        ${statRows}
+      `;
+      card.querySelector('.btn-danger-ghost').addEventListener('click', () => {
+        roster.splice(idx, 1);
+        renderRoster();
+      });
+      rosterGrid.appendChild(card);
+    });
+  }
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  confirmBtn.addEventListener('click', () => {
+    clearMessages();
+    const name = nameInput.value.trim();
+    if (!name){
+      errorMsg.textContent = 'Give her a name first.';
+      return;
+    }
+    if (strengths.size < 1 || strengths.size > 3){
+      errorMsg.textContent = 'Pick 1 to 3 strengths.';
+      return;
+    }
+    if (weaknesses.size < 1){
+      errorMsg.textContent = 'Pick at least 1 weakness.';
+      return;
+    }
+
+    const q = buildQueen(name, dramaticToggle.checked);
+    roster.push(q);
+    renderRoster();
+
+    rollMsg.innerHTML = `<b>${escapeHtml(name)}</b> rolled: ${q._log.join(', ')}`;
+
+    nameInput.value = '';
+    strengths = new Set();
+    weaknesses = new Set();
+    dramaticToggle.checked = false;
+    renderTypeButtons();
+    nameInput.focus();
+  });
+
+  document.getElementById('clear-btn').addEventListener('click', () => {
+    if (!roster.length) return;
+    if (confirm('Clear the whole cast? This can\'t be undone.')){
+      roster = [];
+      renderRoster();
+      clearMessages();
+    }
+  });
+
+  document.getElementById('export-btn').addEventListener('click', () => {
+    if (!roster.length){
+      errorMsg.textContent = 'Add at least one queen before exporting.';
+      return;
+    }
+    const out = {
+      queens: roster.map(q => ({
+        name: q.name,
+        image: q.image,
+        comedy: q.comedy,
+        design: q.design,
+        performance: q.performance,
+        acting: q.acting,
+        lip_sync: q.lip_sync,
+      }))
+    };
+    const blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'cast.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  renderTypeButtons();
+  renderRoster();
+})();
+</script>
+
+</body>
+</html>
